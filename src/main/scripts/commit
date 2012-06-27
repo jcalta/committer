@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+import os
+import sys
+from subprocess import call, check_call
+
+check_call(['git', '--version'])
+
+call(['git', 'pull'])
+
+source_file      = open('build.py', 'r')
+destination_file = open('build.py.new', 'w')
+
+for line in source_file:
+	if 'version = ' in line:
+		start_of_version = line.find('\'') + 1
+		end_of_version = line.rfind('\'')
+		version = line[start_of_version:end_of_version]
+		start_of_subversion = version.rfind('.') + 1
+		subversion = int(version[start_of_subversion:])
+		subversion += 1
+		new_version = version[:start_of_subversion] + str(subversion)
+		print "version: %s -> %s" % (version, new_version)
+		line = line[0:start_of_version] + new_version + line[end_of_version:]
+	destination_file.write(line)
+
+destination_file.close()
+
+os.rename('build.py', 'build.py.orig')
+os.rename('build.py.new', 'build.py')
+
+call(['git', 'commit', '-a', '-m', sys.argv[1]])
+call(['git', 'push'])

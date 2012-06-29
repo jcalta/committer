@@ -11,7 +11,7 @@ use_plugin('python.pylint')
 
 default_task = ['analyze', 'run_integration_tests']
 
-version = '0.0.5'
+version = '0.0.6'
 summary = 'commit - git pull, increase version number in build.py, git commit, git push'
 authors = [
     Author('Michael Gruber', 'aelgru@gmail.com'),

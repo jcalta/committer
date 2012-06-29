@@ -11,14 +11,14 @@ use_plugin('python.pylint')
 
 default_task = ['analyze', 'run_integration_tests']
 
-version = '0.0.7'
-summary = 'commit - git pull, increase version number in build.py, git commit, git push'
+version = '0.0.8'
+summary = 'committer - pull, increase version, commit with message, push'
 authors = [
     Author('Michael Gruber', 'aelgru@gmail.com'),
 ]
 
-url = 'https://github.com/aelgru/commit'
-license = 'GNU GPL v3'
+url = 'https://github.com/aelgru/committer'
+license = 'Apache License, Version 2.0'
 
 @init
 def set_properties (project):

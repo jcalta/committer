@@ -11,7 +11,7 @@ use_plugin('python.pylint')
 
 default_task = ['analyze', 'run_integration_tests']
 
-version = '0.0.6'
+version = '0.0.7'
 summary = 'commit - git pull, increase version number in build.py, git commit, git push'
 authors = [
     Author('Michael Gruber', 'aelgru@gmail.com'),
@@ -22,6 +22,6 @@ license = 'GNU GPL v3'
 
 @init
 def set_properties (project):
-    project.set_property('coverage_break_build', True)
+    project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
     project.set_property('pychecker_args', ['-Q', '-b', 'unittest'])

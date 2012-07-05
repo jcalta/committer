@@ -5,7 +5,7 @@ import subprocess
 from committer.git import Git
 
 
-def increment_version (line):
+def increment_version_string (line):
     start_of_version = line.find('\'') + 1
     end_of_version = line.rfind('\'')
     version = line[start_of_version:end_of_version]
@@ -17,13 +17,13 @@ def increment_version (line):
     line = line[0:start_of_version] + new_version + line[end_of_version:]
     return line
 
-def increment_version_within_build_py ():
+def increment_version ():
     source_file = open('build.py', 'r')
     destination_file = open('build.py.new', 'w')
     
     for line in source_file:
         if line.startswith('version = '):
-            line = increment_version(line)
+            line = increment_version_string(line)
         destination_file.write(line)
     
     source_file.close()
@@ -34,7 +34,7 @@ def increment_version_within_build_py ():
 def handle_repository (repository, message):
     repository.pull()
     
-    increment_version_within_build_py()
+    increment_version()
     
     repository.commit(message)
     repository.push()

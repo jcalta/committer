@@ -11,7 +11,7 @@ use_plugin('python.pylint')
 
 default_task = ['analyze', 'run_integration_tests']
 
-version = '0.0.8'
+version = '0.0.9'
 summary = 'committer - pull, increase version, commit with message, push'
 authors = [
     Author('Michael Gruber', 'aelgru@gmail.com'),

@@ -3,7 +3,7 @@ import subprocess
 
 class Git (object):
     def __init__ (self):
-        self._is_executable()
+        self._ensure_git_is_executable()
         
     def commit (self, message):
         self._git('commit', '-a', '-m', message)
@@ -19,5 +19,5 @@ class Git (object):
         arguments_list.insert(0, 'git')
         subprocess.call(arguments_list)
 
-    def _is_executable (self):
+    def _ensure_git_is_executable (self):
         subprocess.check_call(['git', '--version'])

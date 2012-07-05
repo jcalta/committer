@@ -14,10 +14,11 @@ class Git (object):
     def push (self):
         self._git('push')
     
-    def _git (self, *arguments):
-        arguments_list = list(arguments)
-        arguments_list.insert(0, 'git')
-        subprocess.call(arguments_list)
+    def _git (self, *args):
+        arguments = list(args)
+        arguments.insert(0, 'git')
+        subprocess.call(arguments)
 
     def _ensure_git_is_executable (self):
-        subprocess.check_call(['git', '--version'])
+        arguments = ['git', '--version']
+        subprocess.check_call(arguments)

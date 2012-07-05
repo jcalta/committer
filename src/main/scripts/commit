@@ -3,4 +3,5 @@
 import committer
 import sys
 
-committer.main(sys.argv)
+arguments = sys.argv
+committer.main(arguments)

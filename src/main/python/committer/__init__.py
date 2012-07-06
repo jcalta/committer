@@ -31,10 +31,11 @@ def increment_version ():
     
     os.rename('build.py.new', 'build.py')
 
-def handle_repository (repository, message):
+def handle_repository (repository, message, increment=False):
     repository.pull()
     
-    increment_version()
+    if increment:
+        increment_version()
     
     repository.commit(message)
     repository.push()

@@ -5,7 +5,6 @@ from mock import Mock, call, patch
 import committer
 
 class CommitTests (unittest.TestCase):
-    
     @patch('committer.increment_version')
     def test_should_pull_from_repository (self, incrementor_mock):
         repository_mock = Mock()
@@ -14,11 +13,20 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call(), repository_mock.pull.call_args)
         
-    @patch('committer.increment_version')
-    def test_should_increment_version (self, incrementor_mock):
+    def test_should_not_increment_version (self, incrementor_mock):
         repository_mock = Mock()
         
         committer.handle_repository(repository_mock, 'This is a message.')
+        
+        self.assertEquals(None, incrementor_mock.call_args)
+        
+    @patch('committer.increment_version')
+    def test_should_not_increment_version (self, incrementor_mock):
+        repository_mock = Mock()
+        
+        committer.handle_repository(repository_mock, \
+                                    'This is a message.', \
+                                    increment=True)
         
         self.assertEquals(call(), incrementor_mock.call_args)
         

@@ -5,6 +5,6 @@ committer
 
 python script to do the following steps:
 * pull
-* increase version within (python-builder) build.py
+* if second argument is ++ then increment version within build.py
 * commit
 * push

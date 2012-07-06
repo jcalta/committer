@@ -47,16 +47,15 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call(), repository_mock.push.call_args)
         
-    @patch('committer.repository')
-    def test_should_return_new_git_object (self, repository_mock):
-        repository_mock.git = 'git'
-        
+    @patch('committer.git')
+    def test_should_return_new_git_object (self, git_mock):
         actual_repository = committer.detect_repository()
         
-        self.assertEquals('git', actual_repository)
+        self.assertEquals(git_mock, actual_repository)
 
     @patch('sys.exit')
-    def test_should_exit_when_no_arguments_given (self, exit_mock):
+    @patch('sys.stdout')
+    def test_should_exit_when_no_arguments_given (self, stdout_mock, exit_mock):
         committer.main([])
         
         self.assertEquals(call(1), exit_mock.call_args)

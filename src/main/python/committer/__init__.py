@@ -41,7 +41,7 @@ def handle_repository (repository, message, increment=False):
     repository.push()
     
 def detect_repository ():
-    return repository.Git()
+    return repository.git
 
 def main (arguments):
     if len(arguments) == 0:

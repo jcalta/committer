@@ -5,6 +5,7 @@ from mock import Mock, call, patch
 import committer
 
 class CommitTests (unittest.TestCase):
+    
     @patch('committer.increment_version')
     def test_should_pull_from_repository (self, incrementor_mock):
         repository_mock = Mock()
@@ -43,6 +44,12 @@ class CommitTests (unittest.TestCase):
         committer.detect_repository()
         
         self.assertEquals(call(), git_class_mock())
+
+    @patch('sys.exit')
+    def test_should_exit_when_no_arguments_given (self, exit_mock):
+        committer.main([])
+        
+        self.assertEquals(call(1), exit_mock.call_args)
 
     @patch('committer.handle_repository')    
     @patch('committer.detect_repository')

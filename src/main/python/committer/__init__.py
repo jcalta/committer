@@ -43,6 +43,9 @@ def detect_repository ():
     return Git()
 
 def main (arguments):
+    if len(arguments) == 0:
+        return sys.exit(1)
+    
     repository = detect_repository()
     message = arguments[1]
     handle_repository(repository, message)

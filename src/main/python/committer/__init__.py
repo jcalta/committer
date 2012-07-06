@@ -48,5 +48,12 @@ def main (arguments):
         return sys.exit(1)
     
     repository = detect_repository()
+    
     message = arguments[1]
+    if len(arguments) == 3 and arguments[2] == '++':
+        handle_repository(repository, message, increment=True)
+        return
+        
     handle_repository(repository, message)
+    
+    

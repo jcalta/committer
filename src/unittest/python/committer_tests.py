@@ -81,3 +81,16 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call('repository', 'message'), \
                           handle_repository_mock.call_args)
+
+    @patch('committer.handle_repository')    
+    @patch('committer.detect_repository')
+    def test_should_commit_and_increment_when_second_argument_is_plus_plus ( \
+            self, detect_repository_mock, handle_repository_mock):
+        
+        detect_repository_mock.return_value = 'repository'
+        committer.main(['command', 'message', '++'])
+        
+        self.assertEquals(call('repository', 'message', increment=True), \
+                          handle_repository_mock.call_args)
+
+

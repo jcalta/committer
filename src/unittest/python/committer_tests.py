@@ -47,7 +47,7 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call(), repository_mock.push.call_args)
         
-    @patch('committer.git.Git')
+    @patch('committer.repository.Git')
     def test_should_return_new_git_object (self, git_class_mock):
         committer.detect_repository()
         

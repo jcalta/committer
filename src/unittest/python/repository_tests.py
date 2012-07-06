@@ -2,7 +2,7 @@ import unittest
 
 from mock import Mock, call, patch
 
-from committer.git import Git
+from committer.repository import Git
 
 class GitTests (unittest.TestCase):
     def test_should_test_if_git_is_executable (self):
@@ -13,7 +13,7 @@ class GitTests (unittest.TestCase):
         
         self.assertEquals(call(), git_mock._ensure_git_is_executable.call_args)
     
-    @patch('committer.git.subprocess')        
+    @patch('committer.repository.subprocess')        
     def test_should_call_git_in_subprocess (self, subprocess_mock):
         git_mock = Mock(Git)
         
@@ -21,7 +21,7 @@ class GitTests (unittest.TestCase):
         
         self.assertEquals(call(['git']), subprocess_mock.call.call_args)
 
-    @patch('committer.git.subprocess')        
+    @patch('committer.repository.subprocess')        
     def test_should_call_git_using_given_arguments (self, subprocess_mock):
         git_mock = Mock(Git)
         
@@ -50,7 +50,7 @@ class GitTests (unittest.TestCase):
         
         self.assertEquals(call('push'), git_mock._git.call_args)
 
-    @patch('committer.git.subprocess')        
+    @patch('committer.repository.subprocess')        
     def test_should_execute_check_call_on_git_version (self, subprocess_mock):
         git_mock = Mock(Git)
         

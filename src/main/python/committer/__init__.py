@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 
-from committer.git import Git
+from committer import repository
 
 
 def increment_version_string (line):
@@ -41,7 +41,7 @@ def handle_repository (repository, message, increment=False):
     repository.push()
     
 def detect_repository ():
-    return Git()
+    return repository.Git()
 
 def main (arguments):
     if len(arguments) == 0:

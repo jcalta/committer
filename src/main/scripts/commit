@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+"""
+    Script to support iterative and incremental work with repositories.
+    
+    Michael Gruber, 2012
+    Apache License, Version 2.0
+"""
 
 import committer
 import sys

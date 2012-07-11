@@ -11,3 +11,7 @@ python script to do the following steps:
 * if second argument is ++ then increment version within build.py
 * commit using string in first argument as message
 * push
+
+```bash
+commit "added a new feature" ++
+```

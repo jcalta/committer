@@ -91,5 +91,3 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call('repository', 'message', increment=True), \
                           handle_repository_mock.call_args)
-
-

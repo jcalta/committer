@@ -1,8 +1,8 @@
+#   Copyright 2012, Michael Gruber
+#   Licensed under Apache License, Version 2.0
+
 """
     Commiter main module.
-    
-    Michael Gruber, 2012
-    Apache License, Version 2.0
 """
 
 import os

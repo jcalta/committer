@@ -1,10 +1,12 @@
+#   Copyright 2012, Michael Gruber
+#   Licensed under Apache License, Version 2.0
+
 """
     Git wrapper module.
-
-    Michael Gruber, 2012
-    Apache License, Version 2.0
 """
+
 import subprocess
+
 
 def commit (message):
     """
@@ -16,7 +18,6 @@ def pull ():
     """
         pulls from repository.
     """
-    
     _git('pull')
 
 def push ():

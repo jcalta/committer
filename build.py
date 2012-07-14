@@ -2,10 +2,10 @@
 #   Licensed under Apache License, Version 2.0
 
 from pythonbuilder.core import (
-                            init,
-                            use_plugin,
-                            Author
-                            )
+     init,
+     use_plugin,
+     Author
+     )
 
 use_plugin('python.core')
 use_plugin('python.coverage')

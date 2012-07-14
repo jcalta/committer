@@ -1,10 +1,10 @@
 import unittest
 
 from mock import (
-            call,
-            patch,
-            Mock
-            )
+     call,
+     patch,
+     Mock
+     )
 
 import committer
 

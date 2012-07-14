@@ -1,6 +1,5 @@
 #   Copyright 2012, Michael Gruber
 #   Licensed under Apache License, Version 2.0
-
 """
     Commiter main module.
 """

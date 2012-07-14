@@ -1,4 +1,11 @@
-from pythonbuilder.core import use_plugin, init, Author
+#   Copyright 2012, Michael Gruber
+#   Licensed under Apache License, Version 2.0
+
+from pythonbuilder.core import (
+                            init,
+                            use_plugin,
+                            Author
+                            )
 
 use_plugin('python.core')
 use_plugin('python.coverage')
@@ -12,7 +19,7 @@ use_plugin('python.pylint')
 default_task = ['analyze', 'run_integration_tests']
 
 version = '0.0.15'
-summary = 'committer - pull, increase version, commit with message, push'
+summary = 'committer - supports iterative and incremental work with repositories.'
 authors = [
     Author('Michael Gruber', 'aelgru@gmail.com'),
 ]

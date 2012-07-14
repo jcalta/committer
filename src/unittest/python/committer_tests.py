@@ -1,8 +1,13 @@
 import unittest
 
-from mock import Mock, call, patch
+from mock import (
+            call,
+            patch,
+            Mock
+            )
 
 import committer
+
 
 class CommitTests (unittest.TestCase):
     @patch('committer.increment_version')

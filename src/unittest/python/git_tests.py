@@ -1,8 +1,13 @@
 import unittest
 
-from mock import Mock, call, patch
+from mock import (
+            call,
+            patch,
+            Mock
+            )
 
 from committer.repository import git
+
 
 class GitTests (unittest.TestCase):
     @patch('committer.repository.git.subprocess')        

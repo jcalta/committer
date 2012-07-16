@@ -1,10 +1,7 @@
 #   Copyright 2012, Michael Gruber
 #   Licensed under Apache License, Version 2.0
 
-from pythonbuilder.core import (init,
-                                use_plugin,
-                                Author)
-
+from pythonbuilder.core import Author, init, use_plugin
 
 use_plugin('python.core')
 use_plugin('python.coverage')

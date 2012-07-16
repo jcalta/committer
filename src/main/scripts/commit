@@ -2,6 +2,7 @@
 #
 #   Copyright 2012, Michael Gruber
 #   Licensed under Apache License, Version 2.0
+
 """
     Script to support iterative and incremental work with repositories.
 """

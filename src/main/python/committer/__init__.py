@@ -1,5 +1,6 @@
 #   Copyright 2012, Michael Gruber
 #   Licensed under Apache License, Version 2.0
+
 """
     Commiter main module.
 """
@@ -16,6 +17,7 @@ def increment_version_string (line):
         retrieves the version from line and increments 
         the last number within the version.
     """
+    
     start_of_version = line.find('\'') + 1
     end_of_version = line.rfind('\'')
     version = line[start_of_version:end_of_version]
@@ -32,6 +34,7 @@ def increment_version ():
         opens build.py and increments the last number
         of the version.
     """
+    
     source_file = open('build.py', 'r')
     destination_file = open('build.py.new', 'w')
     
@@ -51,6 +54,7 @@ def handle_repository (repository, message, increment=False):
         increment the version within build.py and commit using the given
         message. Then it will push the changes. 
     """
+    
     repository.pull()
     
     if increment:
@@ -64,6 +68,7 @@ def detect_repository ():
         since detection does not work right now,
         this will simply return a git repository.
     """
+    
     return git
 
 def main (arguments):
@@ -72,6 +77,7 @@ def main (arguments):
         will use first argument as commit message.
         will increment if second argument is ++
     """
+    
     if len(arguments) == 0:
         sys.stdout.write('usage: commit "message" [++]') 
         return sys.exit(1)

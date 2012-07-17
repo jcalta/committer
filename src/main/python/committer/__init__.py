@@ -2,7 +2,7 @@
 #   Licensed under Apache License, Version 2.0
 
 """
-    Commiter main module.
+    Committer main module.
 """
 
 import os

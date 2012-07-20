@@ -23,6 +23,4 @@ default_task = ['analyze', 'run_integration_tests']
 @init
 def set_properties (project):
     project.set_property('coverage_break_build', False)
-    
     project.set_property('pychecker_break_build', True)
-    project.set_property('pychecker_args', ['-Q', '-b', 'unittest'])

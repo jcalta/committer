@@ -2,42 +2,42 @@ import unittest
 
 from mock import Mock, call, patch
 
-from committer.repository import git
+from committer.repositories import git
 
 
 class GitTests (unittest.TestCase):
-    @patch('committer.repository.git.subprocess')        
+    @patch('committer.repositories.git.subprocess')        
     def test_should_call_git_in_subprocess (self, mock_subprocess):
         git._git()
         
         self.assertEquals(call(['git']), mock_subprocess.call.call_args)
 
-    @patch('committer.repository.git.subprocess')        
+    @patch('committer.repositories.git.subprocess')        
     def test_should_call_git_using_given_arguments (self, mock_subprocess):
         git._git('1', '2', '3')
         args = (['git', '1', '2', '3'])
         self.assertEquals(call(args), mock_subprocess.call.call_args)
         
-    @patch('committer.repository.git._git')
+    @patch('committer.repositories.git._git')
     def test_should_prepend_git_to_given_arguments (self, mock_git):
         
         git.commit('This is a commit message.')
         
         self.assertEquals(call('commit', '-a', '-m', 'This is a commit message.'), mock_git.call_args)
 
-    @patch('committer.repository.git._git')
+    @patch('committer.repositories.git._git')
     def test_should_call_git_pull (self, mock_git):
         git.pull()
         
         self.assertEquals(call('pull'), mock_git.call_args)
 
-    @patch('committer.repository.git._git')
+    @patch('committer.repositories.git._git')
     def test_should_call_git_push (self, mock_git):
         git.push()
         
         self.assertEquals(call('push'), mock_git.call_args)
 
-    @patch('committer.repository.git.subprocess')        
+    @patch('committer.repositories.git.subprocess')        
     def test_should_execute_check_call_on_git_version (self, mock_subprocess):
         git._ensure_git_is_executable()
         

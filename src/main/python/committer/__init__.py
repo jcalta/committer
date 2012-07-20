@@ -19,7 +19,7 @@
 import os
 import sys
 
-from committer.repository import git
+from committer import repositories
 
 
 def increment_version_string (line):
@@ -73,13 +73,6 @@ def handle_repository (repository, message, increment=False):
     repository.commit(message)
     repository.push()
     
-def detect_repository ():
-    """
-        since detection does not work right now,
-        this will simply return a git repository.
-    """
-    
-    return git
 
 def main (arguments):
     """
@@ -92,7 +85,7 @@ def main (arguments):
         sys.stdout.write('usage: commit "message" [++]') 
         return sys.exit(1)
     
-    repository = detect_repository()
+    repository = repositories.detect()
     
     message = arguments[1]
     if len(arguments) == 3 and arguments[2] == '++':

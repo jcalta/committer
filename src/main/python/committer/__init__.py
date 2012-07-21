@@ -85,11 +85,19 @@ def main (arguments):
         sys.stdout.write('usage: commit "message" [++]') 
         return sys.exit(1)
     
-    repository = repositories.detect()
+    detected_repositories = repositories.detect()
+    if len(detected_repositories) == 0:
+        sys.stdout.write('Could not detect any repository.')
+        return sys.exit(1)
+    
+    if len(detected_repositories) > 1:
+        sys.stdout.write('More than one repository detected.')
+        return sys.exit(1)
+    
+    repository = detected_repositories[0]
     
     message = arguments[1]
     if len(arguments) == 3 and arguments[2] == '++':
-        handle_repository(repository, message, increment=True)
-        return
+        return handle_repository(repository, message, increment=True)
         
     handle_repository(repository, message)

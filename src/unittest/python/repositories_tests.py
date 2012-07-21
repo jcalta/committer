@@ -1,30 +1,38 @@
 import unittest
 
-from mock import call, patch
+from mock import Mock, call, patch
 
 from committer import repositories
 
 class RepositoriesTests (unittest.TestCase):
-    def test_should_contain_git_repository (self):
+    def test_should_find_git_repository (self):
         actual_repositories = repositories.find()
         
         self.assertTrue(repositories.git in actual_repositories)
     
-    @patch('committer.repositories.git')
-    def test_should_return_git_module (self, mock_git):
-        mock_git.detect.return_value = True
+    @patch('committer.repositories.find')
+    def test_should_return_repository_module_when_detect_returns_true (self, mock_find):
+        mock_repository = self.create_mock_repository()
+        mock_repository.detect.return_value = True
+        mock_find.return_value = [mock_repository]
         
-        actual_repository = repositories.detect()
+        actual_detected_repositories = repositories.detect()
         
-        self.assertEquals(mock_git, actual_repository)
-        self.assertEquals(call(), mock_git.detect.call_args)
+        self.assertEquals([mock_repository], actual_detected_repositories)
+        self.assertEquals(call(), mock_repository.detect.call_args)
 
-    @patch('sys.exit')
-    @patch('committer.repositories.git')
-    def test_should_exit_if_no_repository_detected (self, mock_git, mock_exit):
-        mock_git.detect.return_value = False
+    @patch('committer.repositories.find')
+    def test_should_return_no_repository_module_when_detection_fails (self, mock_find):
+        mock_repository = self.create_mock_repository()
+        mock_repository.detect.return_value = False
+        mock_find.return_value = [mock_repository]
         
-        repositories.detect()
+        actual_detected_repositories = repositories.detect()
         
-        self.assertEquals(call(), mock_git.detect.call_args)
-        self.assertEquals(call(1), mock_exit.call_args)
+        self.assertEquals([], actual_detected_repositories)
+        self.assertEquals(call(), mock_repository.detect.call_args)
+
+    def create_mock_repository (self):
+        mock_repository = Mock()
+        mock_repository.NAME = 'mocked-repository'
+        return mock_repository

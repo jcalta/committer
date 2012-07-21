@@ -37,10 +37,11 @@ def detect ():
         function detect within the repository module.
     """
     
+    detected_repositories = []
     list_of_repositories = find()
+    
     for repository in list_of_repositories:
         if repository.detect():
-            print 'detected %s repository' % (repository.NAME)
-            return repository
+            detected_repositories.append(repository)
     
-    sys.exit(1)
+    return detected_repositories

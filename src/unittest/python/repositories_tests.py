@@ -6,10 +6,12 @@ from committer import repositories
 
 class RepositoriesTests (unittest.TestCase):
     def test_should_contain_git_repository (self):
-        self.assertTrue(repositories.git in repositories.DEFAULT)
+        actual_repositories = repositories.find()
+        
+        self.assertTrue(repositories.git in actual_repositories)
     
     @patch('committer.repositories.git')
-    def test_should_return_new_git_object (self, mock_git):
+    def test_should_return_git_module (self, mock_git):
         mock_git.detect.return_value = True
         
         actual_repository = repositories.detect()

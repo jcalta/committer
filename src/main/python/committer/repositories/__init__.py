@@ -23,16 +23,24 @@ import sys
 from committer.repositories import git
 
 
-DEFAULT = [git]
+def find ():
+    """
+        returns a list of all available repository modules.
+    """
+    
+    return [git]
 
 
 def detect ():
     """
-        detection will return the git repository right now.
+        returns the first repository which is detected by executing the
+        function detect within the repository module.
     """
     
-    if git.detect():
-        print 'Detected git repository.'
-        return git
+    list_of_repositories = find()
+    for repository in list_of_repositories:
+        if repository.detect():
+            print 'detected %s repository' % (repository.NAME)
+            return repository
     
     sys.exit(1)

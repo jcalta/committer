@@ -6,6 +6,9 @@ from committer.repositories import git
 
 
 class GitTests (unittest.TestCase):
+    def test_should_have_name_property (self):
+        self.assertEquals('git', git.NAME)
+        
     @patch('committer.repositories.git.subprocess')        
     def test_should_call_git_in_subprocess (self, mock_subprocess):
         git._git()

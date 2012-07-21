@@ -22,6 +22,9 @@ import subprocess
 from os import path
 
 
+NAME = 'git'
+
+
 def commit (message):
     """
         commits all files.

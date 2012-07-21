@@ -17,11 +17,22 @@
     Submodules of this module are repository wrappers. They are implementing
     the functions pull, commit, push and detect.    
 """
+
+import sys
+
 from committer.repositories import git
+
+
+DEFAULT = [git]
+
 
 def detect ():
     """
         detection will return the git repository right now.
     """
     
-    return git
+    if git.detect():
+        print 'Detected git repository.'
+        return git
+    
+    sys.exit(1)

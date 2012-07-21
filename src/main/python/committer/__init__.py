@@ -16,6 +16,8 @@
     Committer main module.
 """
 
+__author__ = 'Michael Gruber'
+
 import os
 import sys
 

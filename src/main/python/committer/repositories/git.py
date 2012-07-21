@@ -17,6 +17,8 @@
     Git wrapper module.
 """
 
+__author__ = 'Michael Gruber'
+
 import subprocess
 
 from os import path

@@ -18,6 +18,8 @@
     the functions pull, commit, push and detect.    
 """
 
+__author__ = 'Michael Gruber'
+
 import sys
 
 from committer.repositories import git

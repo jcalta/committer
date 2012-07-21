@@ -86,7 +86,7 @@ def main (arguments):
         will increment if second argument is ++
     """
     
-    if len(arguments) == 0:
+    if len(arguments) == 1:
         return error('usage:\n'
                      '    commit "message" [++]\n') 
     

@@ -66,11 +66,11 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(call('Failed.'), mock_stderr.write.call_args)
     
-    @patch('committer.error', return_value=1)
+    @patch('committer.error', return_value=5)
     def test_should_exit_when_no_arguments_given (self, mock_error):
-        actual_return_code = committer.main([])
+        actual_return_code = committer.main(['commit'])
         
-        self.assertEquals(1, actual_return_code)
+        self.assertEquals(5, actual_return_code)
 
     @patch('committer.handle_repository')    
     @patch('committer.repositories.detect')

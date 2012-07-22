@@ -17,7 +17,9 @@
     Handling of repositories, offers function commit.
 """
 
-import committer
+__author__ = 'Michael Gruber'
+
+from committer import incrementor
 
 def commit (repository, message, increment=False):
     """
@@ -29,7 +31,7 @@ def commit (repository, message, increment=False):
     repository.pull()
     
     if increment:
-        committer.increment_version()
+        incrementor.increment_version()
     
     repository.commit(message)
     repository.push()

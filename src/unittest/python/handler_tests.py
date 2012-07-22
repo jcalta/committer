@@ -6,7 +6,7 @@ from committer import  handler
 
 
 class HandlerTests (unittest_support.TestCase):
-    @patch('committer.increment_version')
+    @patch('committer.incrementor.increment_version')
     def test_should_pull_from_repository (self, mock_incrementor):
         mock_repository = self.create_mock_repository()
         
@@ -21,7 +21,7 @@ class HandlerTests (unittest_support.TestCase):
         
         self.assertEquals(None, mock_incrementor.call_args)
         
-    @patch('committer.increment_version')
+    @patch('committer.incrementor.increment_version')
     def test_should_not_increment_version (self, mock_incrementor):
         repository_mock = self.create_mock_repository()
         
@@ -29,7 +29,7 @@ class HandlerTests (unittest_support.TestCase):
         
         self.assertEquals(call(), mock_incrementor.call_args)
         
-    @patch('committer.increment_version')
+    @patch('committer.incrementor.increment_version')
     def test_should_commit_to_repository (self, mock_incrementor):
         repository_mock = self.create_mock_repository()
         
@@ -37,7 +37,7 @@ class HandlerTests (unittest_support.TestCase):
         
         self.assertEquals(call('This is a message.'), repository_mock.commit.call_args)
         
-    @patch('committer.increment_version')
+    @patch('committer.incrementor.increment_version')
     def test_should_push_to_repository (self, mock_incrementor):
         repository_mock = self.create_mock_repository()
         
@@ -45,7 +45,7 @@ class HandlerTests (unittest_support.TestCase):
         
         self.assertEquals(call(), repository_mock.push.call_args)
     
-    @patch('committer.increment_version')
+    @patch('committer.incrementor.increment_version')
     def test_should_return_zero (self, mock_incrementor):
         repository_mock = self.create_mock_repository()
         

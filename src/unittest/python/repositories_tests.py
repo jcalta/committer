@@ -1,10 +1,10 @@
-import unittest
+from mock import call, patch
 
-from mock import Mock, call, patch
+import unittest_support
 
 from committer import repositories
 
-class RepositoriesTests (unittest.TestCase):
+class RepositoriesTests (unittest_support.TestCase):
     def test_should_find_git_repository (self):
         actual_repositories = repositories.find()
         
@@ -31,8 +31,3 @@ class RepositoriesTests (unittest.TestCase):
         
         self.assertEquals([], actual_detected_repositories)
         self.assertEquals(call(), mock_repository.detect.call_args)
-
-    def create_mock_repository (self):
-        mock_repository = Mock()
-        mock_repository.NAME = 'mocked-repository'
-        return mock_repository

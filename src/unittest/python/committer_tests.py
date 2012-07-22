@@ -1,11 +1,11 @@
-import unittest
 
-from mock import Mock, call, patch
+from mock import call, patch
 
 import committer
+import unittest_support
 
 
-class CommitTests (unittest.TestCase):
+class CommitTests (unittest_support.TestCase):
     @patch('committer.increment_version')
     def test_should_pull_from_repository (self, mock_incrementor):
         mock_repository = self.create_mock_repository()
@@ -121,7 +121,3 @@ class CommitTests (unittest.TestCase):
         
         self.assertEquals(3, actual_return_code)
 
-    def create_mock_repository (self):
-        mock_repository = Mock()
-        mock_repository.NAME = 'mocked-repository'
-        return mock_repository

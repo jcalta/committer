@@ -1,3 +1,4 @@
+#   committer
 #   Copyright 2012 Michael Gruber
 #   
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +22,7 @@ __author__ = 'Michael Gruber'
 import os
 import sys
 
-from committer import repositories
-
+from committer import repositories, handler
 
 def increment_version_string (line):
     """
@@ -60,24 +60,12 @@ def increment_version ():
     
     os.rename('build.py.new', 'build.py')
 
-def handle_repository (repository, message, increment=False):
-    """
-        performs a pull on the repository. If increment is True it will
-        increment the version within build.py and commit using the given
-        message. Then it will push the changes. 
-    """
-    
-    repository.pull()
-    
-    if increment:
-        increment_version()
-    
-    repository.commit(message)
-    repository.push()
-    
-    return 0
-
 def error (message):
+    """
+        writes message to stderr and returns 1. The result of this function
+        should be passed to the calling script.
+    """
+    
     sys.stderr.write(message)
     return 1
 
@@ -103,6 +91,6 @@ def main (arguments):
     
     message = arguments[1]
     if len(arguments) == 3 and arguments[2] == '++':
-        return handle_repository(repository, message, increment=True)
+        return handler.commit(repository, message, increment=True)
         
-    return handle_repository(repository, message)
+    return handler.commit(repository, message)

@@ -1,59 +1,10 @@
-
 from mock import call, patch
 
 import committer
 import unittest_support
 
 
-class CommitTests (unittest_support.TestCase):
-    @patch('committer.increment_version')
-    def test_should_pull_from_repository (self, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        
-        committer.handle_repository(mock_repository, 'This is a message.')
-        
-        self.assertEquals(call(), mock_repository.pull.call_args)
-        
-    def test_should_not_increment_version (self, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        
-        committer.handle_repository(mock_repository, 'This is a message.')
-        
-        self.assertEquals(None, mock_incrementor.call_args)
-        
-    @patch('committer.increment_version')
-    def test_should_not_increment_version (self, mock_incrementor):
-        repository_mock = self.create_mock_repository()
-        
-        committer.handle_repository(repository_mock, 'This is a message.', increment=True)
-        
-        self.assertEquals(call(), mock_incrementor.call_args)
-        
-    @patch('committer.increment_version')
-    def test_should_commit_to_repository (self, mock_incrementor):
-        repository_mock = self.create_mock_repository()
-        
-        committer.handle_repository(repository_mock, 'This is a message.')
-        
-        self.assertEquals(call('This is a message.'), repository_mock.commit.call_args)
-        
-    @patch('committer.increment_version')
-    def test_should_push_to_repository (self, mock_incrementor):
-        repository_mock = self.create_mock_repository()
-        
-        committer.handle_repository(repository_mock, 'This is a message.')
-        
-        self.assertEquals(call(), repository_mock.push.call_args)
-    
-    
-    @patch('committer.increment_version')
-    def test_should_return_zero (self, mock_incrementor):
-        repository_mock = self.create_mock_repository()
-        
-        actual_return_code = committer.handle_repository(repository_mock, 'This is a message.')
-        
-        self.assertEquals(0, actual_return_code)
-    
+class CommitterTests (unittest_support.TestCase):
     @patch('sys.stderr')
     def test_should_return_one (self, mock_stderr):
         actual_return_code = committer.error('Something went wrong.')
@@ -72,35 +23,35 @@ class CommitTests (unittest_support.TestCase):
         
         self.assertEquals(5, actual_return_code)
 
-    @patch('committer.handle_repository')    
+    @patch('committer.handler.commit')    
     @patch('committer.repositories.detect')
-    def test_should_detect_repository (self, mock_detect_repository, mock_handle_repository):
+    def test_should_detect_repository (self, mock_detect, mock_commit):
         mock_repository = self.create_mock_repository()
-        mock_detect_repository.return_value = [mock_repository]
+        mock_detect.return_value = [mock_repository]
          
         committer.main(['command', 'message'])
         
-        self.assertEquals(call(), mock_detect_repository.call_args)
+        self.assertEquals(call(), mock_detect.call_args)
         
-    @patch('committer.handle_repository', return_value=0)    
+    @patch('committer.handler.commit', return_value=0)    
     @patch('committer.repositories.detect')
-    def test_should_commit_use_first_argument_as_message (self, mock_detect_repository, mock_handle_repository):
+    def test_should_commit_use_first_argument_as_message (self, mock_detect, mock_commit):
         mock_repository = self.create_mock_repository()
-        mock_detect_repository.return_value = [mock_repository]
+        mock_detect.return_value = [mock_repository]
         actual_return_code = committer.main(['command', 'message'])
         
-        self.assertEquals(call(mock_repository, 'message'), mock_handle_repository.call_args)
+        self.assertEquals(call(mock_repository, 'message'), mock_commit.call_args)
         self.assertEquals(0, actual_return_code)
 
-    @patch('committer.handle_repository', return_value=0)    
+    @patch('committer.handler.commit', return_value=0)    
     @patch('committer.repositories.detect')
-    def test_should_commit_and_increment_when_second_argument_is_plus_plus (self, mock_detect, mock_handle_repository):
+    def test_should_commit_and_increment_when_second_argument_is_plus_plus (self, mock_detect, mock_commit):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
         actual_return_code = committer.main(['command', 'message', '++'])
         
-        self.assertEquals(call(mock_repository, 'message', increment=True), mock_handle_repository.call_args)
+        self.assertEquals(call(mock_repository, 'message', increment=True), mock_commit.call_args)
         self.assertEquals(0, actual_return_code)
     
     @patch('committer.repositories.detect')
@@ -120,4 +71,3 @@ class CommitTests (unittest_support.TestCase):
         actual_return_code = committer.main(['command', 'message', '++'])
         
         self.assertEquals(3, actual_return_code)
-

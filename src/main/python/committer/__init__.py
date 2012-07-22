@@ -19,7 +19,6 @@
 
 __author__ = 'Michael Gruber'
 
-import os
 import sys
 
 from committer import repositories, handler

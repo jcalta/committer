@@ -17,15 +17,17 @@ class CommitterTests (unittest_support.TestCase):
         
         self.assertEquals(call('Failed.'), mock_stderr.write.call_args)
     
+    @patch('sys.stdout')
     @patch('committer.error', return_value=5)
-    def test_should_exit_when_no_arguments_given (self, mock_error):
+    def test_should_exit_when_no_arguments_given (self, mock_error, mock_stdout):
         actual_return_code = committer.main(['commit'])
         
         self.assertEquals(5, actual_return_code)
 
+    @patch('sys.stdout')
     @patch('committer.handler.commit')    
     @patch('committer.repositories.detect')
-    def test_should_detect_repository (self, mock_detect, mock_commit):
+    def test_should_detect_repository (self, mock_detect, mock_commit, mock_stdout):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
          
@@ -33,19 +35,22 @@ class CommitterTests (unittest_support.TestCase):
         
         self.assertEquals(call(), mock_detect.call_args)
         
+    @patch('sys.stdout')
     @patch('committer.handler.commit', return_value=0)    
     @patch('committer.repositories.detect')
-    def test_should_commit_use_first_argument_as_message (self, mock_detect, mock_commit):
+    def test_should_commit_use_first_argument_as_message (self, mock_detect, mock_commit, mock_stdout):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
+        
         actual_return_code = committer.main(['command', 'message'])
         
         self.assertEquals(call(mock_repository, 'message'), mock_commit.call_args)
         self.assertEquals(0, actual_return_code)
 
+    @patch('sys.stdout')
     @patch('committer.handler.commit', return_value=0)    
     @patch('committer.repositories.detect')
-    def test_should_commit_and_increment_when_second_argument_is_plus_plus (self, mock_detect, mock_commit):
+    def test_should_commit_and_increment_when_second_argument_is_plus_plus (self, mock_detect, mock_commit, mock_stdout):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
@@ -54,18 +59,20 @@ class CommitterTests (unittest_support.TestCase):
         self.assertEquals(call(mock_repository, 'message', increment=True), mock_commit.call_args)
         self.assertEquals(0, actual_return_code)
     
+    @patch('sys.stdout')
     @patch('committer.repositories.detect')
     @patch('committer.error', return_value=2)
-    def test_should_exit_when_no_repository_could_be_detected (self, mock_error, mock_detect):
+    def test_should_exit_when_no_repository_could_be_detected (self, mock_error, mock_detect, mock_stdout):
         mock_detect.return_value = []
         
         actual_return_code = committer.main(['command', 'message', '++'])
         
         self.assertEquals(2, actual_return_code)
         
+    @patch('sys.stdout')
     @patch('committer.repositories.detect')
     @patch('committer.error', return_value=3)
-    def test_should_exit_when_more_than_one_repository_have_been_detected (self, mock_error, mock_detect):
+    def test_should_exit_when_more_than_one_repository_have_been_detected (self, mock_error, mock_detect, mock_stdout):
         mock_detect.return_value = [self.create_mock_repository(), self.create_mock_repository()]
         
         actual_return_code = committer.main(['command', 'message', '++'])

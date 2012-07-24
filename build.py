@@ -20,6 +20,8 @@
 
 from pythonbuilder.core import Author, init, use_plugin
 
+use_plugin('filter_resources')
+
 use_plugin('python.core')
 use_plugin('python.coverage')
 use_plugin('python.distutils')
@@ -31,7 +33,7 @@ authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
 summary = 'committer - supports iterative and incremental work with repositories.'
 url     = 'https://github.com/aelgru/committer'
-version = '0.0.24'
+version = '0.0.25'
 
 default_task = ['analyze', 'publish']
 
@@ -40,5 +42,8 @@ def set_properties (project):
     project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
 
-    project.get_property('distutils_commands').append('bdist_egg')
+    project.include_file('committer', 'LICENSE')
+    
+    project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 
+    project.get_property('distutils_commands').append('bdist_egg')

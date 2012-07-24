@@ -23,6 +23,10 @@ import sys
 
 from committer import repositories, handler
 
+
+VERSION = '${version}'
+
+
 def error (message):
     """
         writes message to stderr and returns 1. The result of this function
@@ -38,6 +42,8 @@ def main (arguments):
         will use first argument as commit message.
         will increment if second argument is ++
     """
+    
+    sys.stdout.write('committer version %s\n' % VERSION)
     
     if len(arguments) == 1:
         return error('usage:\n'

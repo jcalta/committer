@@ -15,7 +15,7 @@
 
 """
     Submodules of this module are repository wrappers. They are implementing
-    the functions pull, commit, push and detect.    
+    the functions commit, detect, and update.    
 """
 
 __author__ = 'Michael Gruber'

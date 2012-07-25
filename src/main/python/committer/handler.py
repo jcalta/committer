@@ -29,12 +29,11 @@ def commit (repository, message, increment=False):
         message. Then it will push the changes. 
     """
     
-    repository.pull()
+    repository.update()
     
     if increment:
         incrementor.increment_version()
     
     repository.commit(message)
-    repository.push()
     
     return 0

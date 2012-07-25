@@ -33,6 +33,7 @@ def commit (message):
     """
     
     _git('commit', '-a', '-m', message)
+    _git('push')
 
 
 def detect ():
@@ -44,20 +45,12 @@ def detect ():
     return path.isdir('.git')
 
 
-def pull ():
+def update ():
     """
-        pulls from repository.
+        for git update is equal to a pull.
     """
-    
+
     _git('pull')
-
-
-def push ():
-    """
-        pushes to repository.
-    """
-    
-    _git('push')
 
 
 def _git (*args):

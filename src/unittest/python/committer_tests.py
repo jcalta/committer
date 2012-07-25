@@ -21,10 +21,22 @@ class CommitterTests (unittest_support.TestCase):
 
     @patch('sys.stdout')
     @patch('committer.error', return_value=5)
-    def test_should_exit_when_no_arguments_given (self, mock_error, mock_stdout):
-        actual_return_code = committer.main(['commit'])
+    def test_should_exit_commit_when_no_arguments_given (self, mock_error, mock_stdout):
+        actual_return_code = committer.main(['/usr/local/bin/commit'])
         
         self.assertEquals(5, actual_return_code)
+
+
+    @patch('sys.stdout')
+    @patch('committer.error', return_value=5)
+    @patch('committer.repositories.detect')
+    def test_should_return_with_zero_when_updating (self, mock_detect, mock_error, mmock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+
+        actual_return_code = committer.main(['/usr/local/bin/update'])
+        
+        self.assertEquals(0, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -61,6 +73,7 @@ class CommitterTests (unittest_support.TestCase):
         actual_return_code = committer.main(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(call(), mock_repository.update.call_args)
+        self.assertEquals(0, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -99,6 +112,19 @@ class CommitterTests (unittest_support.TestCase):
         actual_return_code = committer.main(['/usr/local/bin/commit', 'message', '++'])
         
         self.assertEquals(call(), mock_incrementor.increment_version.call_args)
+        self.assertEquals(0, actual_return_code)
+
+
+    @patch('sys.stdout')
+    @patch('committer.incrementor')    
+    @patch('committer.repositories.detect')
+    def test_should_update_on_update (self, mock_detect, mock_incrementor, mock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+        
+        actual_return_code = committer.main(['/usr/local/bin/update'])
+        
+        self.assertEquals(call(), mock_repository.update.call_args)
         self.assertEquals(0, actual_return_code)
 
 

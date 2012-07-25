@@ -46,9 +46,10 @@ def main (arguments):
     
     sys.stdout.write('committer version %s\n' % VERSION)
     
-    if len(arguments) == 1:
+    if len(arguments) == 1 and not arguments[0].endswith('update'):
         return error('usage:\n'
-                     '    commit "message" [++]\n') 
+                     '    commit "message" [++]\n'
+                     '    update') 
     
     detected_repositories = repositories.detect()
     if len(detected_repositories) == 0:

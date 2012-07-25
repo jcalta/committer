@@ -21,7 +21,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import repositories, handler
+from committer import repositories, incrementor
 
 
 VERSION = '${version}'
@@ -57,9 +57,12 @@ def main (arguments):
         return error('More than one repository detected.\n')
     
     repository = detected_repositories[0]
+    repository.update()
     
-    message = arguments[1]
     if len(arguments) == 3 and arguments[2] == '++':
-        return handler.commit(repository, message, increment=True)
+        incrementor.increment_version()
         
-    return handler.commit(repository, message)
+    message = arguments[1]
+    repository.commit(message)
+
+    return 0

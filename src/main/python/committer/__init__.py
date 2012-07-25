@@ -36,6 +36,7 @@ def error (message):
     sys.stderr.write(message)
     return 1
 
+
 def main (arguments):
     """
         will exit with 1 when no arguments are given.
@@ -61,8 +62,9 @@ def main (arguments):
     
     if len(arguments) == 3 and arguments[2] == '++':
         incrementor.increment_version()
-        
-    message = arguments[1]
-    repository.commit(message)
+    
+    if arguments[0].endswith('commit'):
+        message = arguments[1]
+        repository.commit(message)
 
     return 0

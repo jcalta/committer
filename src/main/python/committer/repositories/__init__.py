@@ -15,9 +15,9 @@
 
 """
     The function find returns a list of all repository modules. The function
-    detect returns the module representing the correct wrapper for the current
-    directory. Submodules of this module are repository wrappers. They are
-    implementing the functions commit, detect, and update.    
+    detect returns a list of all deteceted repositories. Submodules of this
+    module are repository wrappers. They are implementing the functions commit,
+    detect, and update.
 """
 
 __author__ = 'Michael Gruber'
@@ -29,8 +29,7 @@ from committer.repositories import git, mercurial
 
 def detect ():
     """
-        returns the first repository which is detected by executing the
-        function detect within the repository module.
+        returns all detected repository modules.
     """
     
     detected_repositories = []

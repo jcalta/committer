@@ -29,7 +29,7 @@ NAME = 'Mercurial'
 
 def commit (message):
     """
-        commits all files.
+        commits all files by executing 'hg commit -m "message"'
     """
     
     _hg('commit', '-m', message)
@@ -39,7 +39,7 @@ def commit (message):
 def detect ():
     """
         returns True if the current directory represents a mercurial repository,
-        otherwise it will return False.
+        otherwise False.
     """
     
     return path.isdir('.hg')
@@ -60,7 +60,7 @@ def is_executable ():
 
 def update ():
     """
-        for hg update is equal to a pull.
+        updates files by executing 'hg pull' and 'hg update'.
     """
 
     _hg('pull')

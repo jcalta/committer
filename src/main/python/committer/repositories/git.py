@@ -29,7 +29,7 @@ NAME = 'git'
 
 def commit (message):
     """
-        commits all files.
+        commits all files by calling 'git commit -a -m "message"'
     """
     
     _git('commit', '-a', '-m', message)
@@ -39,7 +39,7 @@ def commit (message):
 def detect ():
     """
         returns True if the current directory represents a git repository,
-        otherwise it will return False.
+        otherwise False.
     """
     
     return path.isdir('.git')
@@ -60,7 +60,7 @@ def is_executable ():
 
 def update ():
     """
-        for git update is equal to a pull.
+        updates files by executing 'git pull'.
     """
 
     _git('pull')

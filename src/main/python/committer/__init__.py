@@ -42,7 +42,7 @@ def main (arguments):
         This is the main function for committer. It should be called by the
         scripts 'commit' and 'update'. When called by 'commit' it will commit
         all files in the current directory. When called by 'update' it will
-        (pull and) update the repository in the current directory.
+        update the repository in the current directory.
     """
 
     sys.stdout.write('committer version %s\n' % VERSION)

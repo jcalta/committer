@@ -70,10 +70,7 @@ def is_executable ():
     try:
         arguments = ['git', '--version']
         check_call(arguments)
-        
     except CalledProcessError:
         return False
-    except:
-        raise
     
     return True

@@ -33,7 +33,7 @@ authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
 summary = 'committer - supports iterative and incremental work with repositories.'
 url     = 'https://github.com/aelgru/committer'
-version = '0.0.30'
+version = '0.0.31'
 
 default_task = ['analyze', 'publish']
 

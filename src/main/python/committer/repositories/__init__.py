@@ -27,14 +27,6 @@ import sys
 from committer.repositories import git
 
 
-def find ():
-    """
-        returns a list of all available repository modules.
-    """
-    
-    return [git]
-
-
 def detect ():
     """
         returns the first repository which is detected by executing the
@@ -49,3 +41,11 @@ def detect ():
             detected_repositories.append(repository)
     
     return detected_repositories
+
+def find ():
+    """
+        returns a list of all available repository modules.
+    """
+    
+    return [git]
+

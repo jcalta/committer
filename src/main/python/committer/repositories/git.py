@@ -45,6 +45,19 @@ def detect ():
     return path.isdir('.git')
 
 
+def is_executable ():
+    """
+        returns True if 'git --version' is executable, otherwise False. 
+    """
+    try:
+        arguments = ['git', '--version']
+        check_call(arguments)
+    except CalledProcessError:
+        return False
+    
+    return True
+
+
 def update ():
     """
         for git update is equal to a pull.
@@ -61,16 +74,3 @@ def _git (*args):
     arguments = list(args)
     arguments.insert(0, 'git')
     call(arguments)
-
-
-def is_executable ():
-    """
-        returns True if 'git --version' is executable, otherwise False. 
-    """
-    try:
-        arguments = ['git', '--version']
-        check_call(arguments)
-    except CalledProcessError:
-        return False
-    
-    return True

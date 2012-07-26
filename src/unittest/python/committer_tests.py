@@ -16,7 +16,7 @@ class CommitterTests (unittest_support.TestCase):
     def test_should_write_given_message_to_stderr (self, mock_stderr):
         committer.error('Failed.')
         
-        self.assertEquals(call('Failed.'), mock_stderr.write.call_args)
+        self.assertEquals(call('Failed.' + '\n'), mock_stderr.write.call_args)
 
 
     @patch('sys.stdout')

@@ -33,15 +33,16 @@ def error (message):
         should be passed to the calling script.
     """
     
-    sys.stderr.write(message)
+    sys.stderr.write(message + '\n')
     return 1
 
 
 def main (arguments):
     """
-        will exit with 1 when no arguments are given.
-        will use first argument as commit message.
-        will increment if second argument is ++
+        This is the main function for committer. It should be called by the
+        scripts 'commit' and 'update'. When called by 'commit' it will commit
+        all files in the current directory. When called by 'update' it will
+        (pull and) update the repository in the current directory.
     """
     
     sys.stdout.write('committer version %s\n' % VERSION)
@@ -53,10 +54,10 @@ def main (arguments):
     
     detected_repositories = repositories.detect()
     if len(detected_repositories) == 0:
-        return error('Could not detect any repository.\n')
+        return error('Could not detect any repository.')
     
     if len(detected_repositories) > 1:
-        return error('More than one repository detected.\n')
+        return error('More than one repository detected.')
     
     repository = detected_repositories[0]
     repository.update()

@@ -14,8 +14,10 @@
 #   limitations under the License.
 
 """
-    Submodules of this module are repository wrappers. They are implementing
-    the functions commit, detect, and update.    
+    The function find returns a list of all repository modules. The function
+    detect returns the module representing the correct wrapper for the current
+    directory. Submodules of this module are repository wrappers. They are
+    implementing the functions commit, detect, and update.    
 """
 
 __author__ = 'Michael Gruber'
@@ -40,7 +42,7 @@ def detect ():
     """
     
     detected_repositories = []
-    list_of_repositories = find()
+    list_of_repositories  = find()
     
     for repository in list_of_repositories:
         if repository.detect():

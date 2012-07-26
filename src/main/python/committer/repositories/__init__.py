@@ -42,6 +42,7 @@ def detect ():
     
     return detected_repositories
 
+
 def find ():
     """
         returns a list of all available repository modules.

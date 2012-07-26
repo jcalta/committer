@@ -1,12 +1,12 @@
 #   committer
 #   Copyright 2012 Michael Gruber
-#   
+#
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
 #   You may obtain a copy of the License at
-#   
+#
 #       http://www.apache.org/licenses/LICENSE-2.0
-#   
+#
 #   Unless required by applicable law or agreed to in writing, software
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ def error (message):
         writes message to stderr and returns 1. The result of this function
         should be passed to the calling script.
     """
-    
+
     sys.stderr.write(message + '\n')
     return 1
 
@@ -44,13 +44,13 @@ def main (arguments):
         all files in the current directory. When called by 'update' it will
         (pull and) update the repository in the current directory.
     """
-    
+
     sys.stdout.write('committer version %s\n' % VERSION)
-    
+
     if len(arguments) == 1 and not arguments[0].endswith('update'):
         return error('usage:\n'
                      '    commit "message" [++]\n'
-                     '    update') 
+                     '    update')
     
     detected_repositories = repositories.detect()
     if len(detected_repositories) == 0:

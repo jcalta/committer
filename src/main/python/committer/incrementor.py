@@ -21,6 +21,7 @@ __author__ = 'Michael Gruber'
 
 import os
 
+
 def increment_version_string (line):
     """
         retrieves the version from line and increments 
@@ -37,6 +38,7 @@ def increment_version_string (line):
     print "version: %s -> %s" % (version, new_version)
     line = line[0:start_of_version] + new_version + line[end_of_version:]
     return line
+
 
 def increment_version ():
     """

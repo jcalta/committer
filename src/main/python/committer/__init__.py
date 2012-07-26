@@ -54,14 +54,17 @@ def main (arguments):
     
     detected_repositories = repositories.detect()
     if len(detected_repositories) == 0:
-        return error('Could not detect any repository.')
+        return error('No repository detected.')
     
     if len(detected_repositories) > 1:
         return error('More than one repository detected.')
     
     repository = detected_repositories[0]
     if not repository.is_executable():
-        return error('Command for repository is not executable.')
+        return error('Command for repository is not executable.\n'
+                     'Please install a command line client for %s '
+                     'repositories, providing command "%s".' 
+                     % (repository.NAME, repository.COMMAND))
     
     repository.update()
     

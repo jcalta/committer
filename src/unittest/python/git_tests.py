@@ -7,8 +7,12 @@ from committer.repositories import git
 
 
 class GitTests (unittest.TestCase):
+    def test_should_have_command_property (self):
+        self.assertEquals('git', git.COMMAND)
+
+
     def test_should_have_name_property (self):
-        self.assertEquals('git', git.NAME)
+        self.assertEquals('Git', git.NAME)
 
 
     @patch('committer.repositories.git.call')        

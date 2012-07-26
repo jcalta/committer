@@ -24,7 +24,8 @@ from subprocess import CalledProcessError, call, check_call
 from os import path
 
 
-NAME = 'git'
+COMMAND = 'git'
+NAME    = 'Git'
 
 
 def commit (message):

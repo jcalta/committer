@@ -24,8 +24,8 @@ from subprocess import CalledProcessError, call, check_call
 from os import path
 
 
-NAME = 'Mercurial'
-
+COMMAND = 'hg'
+NAME    = 'Mercurial'
 
 def commit (message):
     """
@@ -73,5 +73,5 @@ def _hg (*args):
     """
     
     arguments = list(args)
-    arguments.insert(0, 'hg')
+    arguments.insert(0, COMMAND)
     call(arguments)

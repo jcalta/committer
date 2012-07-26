@@ -5,10 +5,21 @@ import unittest_support
 from committer import repositories
 
 class RepositoriesTests (unittest_support.TestCase):
+    def test_should_find_mercurial_repository (self):
+        actual_repositories = repositories.find()
+        actual_count_of_repositories = len(actual_repositories)
+        
+        self.assertEquals(2, actual_count_of_repositories)
+    
     def test_should_find_git_repository (self):
         actual_repositories = repositories.find()
         
         self.assertTrue(repositories.git in actual_repositories)
+    
+    def test_should_find_mercurial_repository (self):
+        actual_repositories = repositories.find()
+        
+        self.assertTrue(repositories.mercurial in actual_repositories)
     
     @patch('committer.repositories.find')
     def test_should_return_repository_module_when_detect_returns_true (self, mock_find):

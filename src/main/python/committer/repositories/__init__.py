@@ -24,7 +24,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer.repositories import git
+from committer.repositories import git, mercurial
 
 
 def detect ():
@@ -48,5 +48,5 @@ def find ():
         returns a list of all available repository modules.
     """
     
-    return [git]
+    return [git, mercurial]
 

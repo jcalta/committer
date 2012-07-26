@@ -47,7 +47,7 @@ class MercurialTests (unittest.TestCase):
         actual_result = mercurial.is_executable()
         
         self.assertTrue(actual_result)
-        self.assertEquals(call(['hg', '--version']), mock_check_call.call_args)
+        self.assertEquals(call(['hg', '--version', '--quiet']), mock_check_call.call_args)
 
 
     @patch('committer.repositories.mercurial.check_call')        
@@ -57,7 +57,7 @@ class MercurialTests (unittest.TestCase):
         actual_result = mercurial.is_executable()
         
         self.assertFalse(actual_result)
-        self.assertEquals(call(['hg', '--version']), mock_check_call.call_args)
+        self.assertEquals(call(['hg', '--version', '--quiet']), mock_check_call.call_args)
 
 
     @patch('committer.repositories.mercurial.check_call')        

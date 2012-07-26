@@ -47,10 +47,10 @@ def detect ():
 
 def is_executable ():
     """
-        returns True if 'hg --version' is executable, otherwise False. 
+        returns True if 'hg --version --quiet' is executable, otherwise False. 
     """
     try:
-        arguments = ['hg', '--version']
+        arguments = ['hg', '--version', '--quiet']
         check_call(arguments)
     except CalledProcessError:
         return False

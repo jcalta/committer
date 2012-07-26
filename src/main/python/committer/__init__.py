@@ -60,6 +60,9 @@ def main (arguments):
         return error('More than one repository detected.')
     
     repository = detected_repositories[0]
+    if not repository.is_executable():
+        return error('Command for repository is not executable.')
+    
     repository.update()
     
     if len(arguments) == 3 and arguments[2] == '++':

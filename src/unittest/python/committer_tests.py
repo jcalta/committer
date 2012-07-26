@@ -42,6 +42,35 @@ class CommitterTests (unittest_support.TestCase):
     @patch('sys.stdout')
     @patch('committer.incrementor')    
     @patch('committer.repositories.detect')
+    def test_should_check_that_repository_is_executable (self, mock_detect, mock_incrementor, mock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+        mock_repository.is_executable.return_value = True 
+        
+        actual_return_code = committer.main(['/usr/local/bin/commit', 'message'])
+        
+        self.assertEquals(call(), mock_repository.is_executable.call_args)
+        self.assertEquals(0, actual_return_code)
+
+
+    @patch('sys.stdout')
+    @patch('committer.incrementor')    
+    @patch('committer.error', return_value=1)    
+    @patch('committer.repositories.detect')
+    def test_should_return_with_error_when_repository_command_is_not_executable (self, mock_detect, mock_error, mock_incrementor, mock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+        mock_repository.is_executable.return_value = False 
+        
+        actual_return_code = committer.main(['/usr/local/bin/commit', 'message'])
+        
+        self.assertEquals(call(), mock_repository.is_executable.call_args)
+        self.assertEquals(1, actual_return_code)
+
+
+    @patch('sys.stdout')
+    @patch('committer.incrementor')    
+    @patch('committer.repositories.detect')
     def test_should_detect_repository (self, mock_detect, mock_incrementor, mock_stdout):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]

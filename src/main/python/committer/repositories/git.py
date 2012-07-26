@@ -19,7 +19,7 @@
 
 __author__ = 'Michael Gruber'
 
-import subprocess
+from subprocess import CalledProcessError, call, check_call
 
 from os import path
 
@@ -60,14 +60,20 @@ def _git (*args):
     
     arguments = list(args)
     arguments.insert(0, 'git')
-    subprocess.call(arguments)
+    call(arguments)
 
 
-def _ensure_git_is_executable ():
+def is_executable ():
     """
-        checks that 'git --version' can be executed,
-        will raise an exception if not.
+        returns True if 'git --version' is executable, otherwise False. 
     """
+    try:
+        arguments = ['git', '--version']
+        check_call(arguments)
+        
+    except CalledProcessError:
+        return False
+    except:
+        raise
     
-    arguments = ['git', '--version']
-    subprocess.check_call(arguments)
+    return True

@@ -1,4 +1,4 @@
-#   mercurial wrapper module for committer
+#   subversion wrapper module for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Mercurial wrapper module.
+    Subversion wrapper module.
 """
 
 __author__ = 'Michael Gruber'
@@ -24,16 +24,15 @@ from subprocess import CalledProcessError, call, check_call
 from os import path
 
 
-COMMAND = 'hg'
-NAME    = 'Mercurial'
+COMMAND = 'svn'
+NAME    = 'Subversion'
 
 def commit (message):
     """
-        commits all files by executing 'hg commit -m "message"' and 'hg push'.
+        commits all files by executing 'svn commit -m "message"'
     """
     
-    _hg('commit', '-m', message)
-    _hg('push')
+    _svn('commit', '-m', message)
 
 
 def detect ():
@@ -42,15 +41,15 @@ def detect ():
         otherwise False.
     """
     
-    return path.isdir('.hg')
+    return path.isdir('.svn')
 
 
 def is_executable ():
     """
-        returns True if 'hg --version --quiet' is executable, otherwise False. 
+        returns True if 'svn --version --quiet' is executable, otherwise False. 
     """
     try:
-        arguments = ['hg', '--version', '--quiet']
+        arguments = ['svn', '--version', '--quiet']
         check_call(arguments)
     except CalledProcessError:
         return False
@@ -60,16 +59,15 @@ def is_executable ():
 
 def update ():
     """
-        updates files by executing 'hg pull' and 'hg update'.
+        updates files by executing 'svn pull' and 'svn update'.
     """
 
-    _hg('pull')
-    _hg('update')
+    _svn('update')
 
 
-def _hg (*args):
+def _svn (*args):
     """
-        executes hg using the given arguments.
+        executes svn using the given arguments.
     """
     
     arguments = list(args)

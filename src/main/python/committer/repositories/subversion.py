@@ -49,7 +49,7 @@ def is_executable ():
         returns True if 'svn --version --quiet' is executable, otherwise False. 
     """
     try:
-        arguments = ['svn', '--version', '--quiet']
+        arguments = [COMMAND, '--version', '--quiet']
         check_call(arguments)
     except CalledProcessError:
         return False

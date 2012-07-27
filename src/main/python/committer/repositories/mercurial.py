@@ -50,7 +50,7 @@ def is_executable ():
         returns True if 'hg --version --quiet' is executable, otherwise False. 
     """
     try:
-        arguments = ['hg', '--version', '--quiet']
+        arguments = [COMMAND, '--version', '--quiet']
         check_call(arguments)
     except CalledProcessError:
         return False

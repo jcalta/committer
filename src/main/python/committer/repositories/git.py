@@ -51,7 +51,7 @@ def is_executable ():
         returns True if 'git --version' is executable, otherwise False. 
     """
     try:
-        arguments = ['git', '--version']
+        arguments = [COMMAND, '--version']
         check_call(arguments)
     except CalledProcessError:
         return False
@@ -73,5 +73,5 @@ def _git (*args):
     """
     
     arguments = list(args)
-    arguments.insert(0, 'git')
+    arguments.insert(0, COMMAND)
     call(arguments)

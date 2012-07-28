@@ -62,9 +62,9 @@ def update ():
     _hg('update')
 
 
-def _hg (*args):
+def _hg (*arguments):
     """
         executes hg using the given arguments.
     """
     
-    execute_command(COMMAND, *args)
+    execute_command(COMMAND, *arguments)

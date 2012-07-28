@@ -62,9 +62,9 @@ def update ():
     _git('pull')
 
 
-def _git (*args):
+def _git (*arguments):
     """
         executes git using the given arguments.
     """
     
-    execute_command(COMMAND, *args)
+    execute_command(COMMAND, *arguments)

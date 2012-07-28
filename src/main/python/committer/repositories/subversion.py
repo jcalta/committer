@@ -60,9 +60,9 @@ def update ():
     _svn('update')
 
 
-def _svn (*args):
+def _svn (*arguments):
     """
         executes svn using the given arguments.
     """
     
-    execute_command(COMMAND, *args)
+    execute_command(COMMAND, *arguments)

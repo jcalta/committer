@@ -53,6 +53,9 @@ def main (arguments):
                      '    update')
     
     detected_repositories = repositories.detect()
+    for repository in detected_repositories:
+        sys.stdout.write('Detected %s\n' % repository.NAME)
+        
     if len(detected_repositories) == 0:
         return error('No repository detected.')
     
@@ -60,12 +63,18 @@ def main (arguments):
         return error('More than one repository detected.')
     
     repository = detected_repositories[0]
+    
+    sys.stdout.write('Checking command line client "%s" for %s: '
+                     % (repository.COMMAND, repository.NAME))
+    
     if not repository.is_executable():
         return error('Command for repository is not executable.\n'
                      'Please install a command line client for %s '
                      'repositories, providing command "%s".' 
                      % (repository.NAME, repository.COMMAND))
-    
+    else:
+        sys.stdout.write('ok.\n')
+        
     repository.update()
     
     if len(arguments) == 3 and arguments[2] == '++':

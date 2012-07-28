@@ -14,7 +14,6 @@ class SubversionTests (unittest.TestCase):
     def test_should_have_name_property (self):
         self.assertEquals('Subversion', subversion.NAME)
 
-
        
     @patch('committer.repositories.subversion._svn')
     def test_should_prepend_svn_to_given_arguments (self, mock_svn):

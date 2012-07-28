@@ -1,19 +1,39 @@
 committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 =========
 
-Simplified working with repositories.
+Provides a simplified command line interface the version control systems git,
+mercurial, and subversion. 
+
+```bash
+commit "This is a short message about WHY I made this change."
+```
+If you use the *commit* script on a git repository this will:
+* check if the 'git' command is executable, by executing 'git --version'
+* execute 'git pull'
+* execute 'git commit -a -m "This is a short message about WHY I made this change."'
+* execute 'git push'
+
+*Incrementing versions before committing*
 
 ```bash
 commit "added a new feature" ++
 ```
 
-* update (pull)
-* if second argument is ++ then increment version within build.py
-* commit (and push) using string in first argument as message
+The second argument '++' will tell the script to increment the version within
+*build.py*
+
+
+*Updating the repository in the current directory* 
 
 ```bash
 update
 ```
+
+If you are using the 'update' script on a mercurial repository this will:
+* check if the 'hg' command is executable, by executing 'hg --version --quiet'
+* execute 'hg pull'
+* execute 'hg up'
+
 
 License
 =======

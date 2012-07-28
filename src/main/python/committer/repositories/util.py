@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Subversion wrapper module.
+    Utility functions for repository wrappers.
 """
 
 __author__ = 'Michael Gruber'
@@ -32,7 +32,7 @@ def execute_command (command, *args):
 
 def check_if_is_executable (*command_and_arguments):
     """
-        returns True if the given  is executable, otherwise False. 
+        returns True if the given is executable, otherwise False. 
     """
     
     try:

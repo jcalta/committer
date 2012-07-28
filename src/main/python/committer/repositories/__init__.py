@@ -15,10 +15,10 @@
 
 """
     Submodules of this module are vcs command line client wrappers. They are
-    implementing the functions commit, detect, and update. The module itself
-    provides two functions 'find' and 'detect'. The function 'find' returns a
-    list of all available repository modules. The function detect returns a
-    list of all deteceted repositories. 
+    implementing the functions commit, detect, is_executable, and update. The
+    module itself provides two functions 'find' and 'detect'. The function
+    'find' returns a list of all available repository modules. The function
+    detect returns a list of all deteceted repositories. 
 """
 
 __author__ = 'Michael Gruber'

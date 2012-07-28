@@ -22,22 +22,22 @@ __author__ = 'Michael Gruber'
 from subprocess import CalledProcessError, call, check_call
 
 
-def execute_command (command, *args):
+def execute_command (command, *arguments):
     """
-        executes command using the given arguments.
+        executes command using the given command_and_arguments.
     """
-    arguments = [command] + list(args)
-    call(arguments)
+    command_and_arguments = [command] + list(arguments)
+    call(command_and_arguments)
 
 
-def check_if_is_executable (*command_and_arguments):
+def check_if_is_executable (command, *arguments):
     """
         returns True if the given is executable, otherwise False. 
     """
     
     try:
-        popenargs = list(command_and_arguments)
-        check_call(popenargs)
+        command_and_arguments = [command] + list(arguments)
+        check_call(command_and_arguments)
     except CalledProcessError:
         return False
     

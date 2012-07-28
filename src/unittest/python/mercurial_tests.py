@@ -15,20 +15,6 @@ class MercurialTests (unittest.TestCase):
         self.assertEquals('Mercurial', mercurial.NAME)
 
 
-    @patch('committer.repositories.mercurial.call')        
-    def test_should_call_hg_in_subprocess (self, mock_call):
-        mercurial._hg()
-        
-        self.assertEquals(call(['hg']), mock_call.call_args)
-
-
-    @patch('committer.repositories.mercurial.call')        
-    def test_should_call_hg_using_given_arguments (self, mock_call):
-        mercurial._hg('1', '2', '3')
-        args = (['hg', '1', '2', '3'])
-        self.assertEquals(call(args), mock_call.call_args)
-        
-        
     @patch('committer.repositories.mercurial._hg')
     def test_should_prepend_hg_to_given_arguments (self, mock_hg):
         
@@ -44,31 +30,6 @@ class MercurialTests (unittest.TestCase):
         mercurial.update()
         
         self.assertEquals([call('pull'), call('update')], mock_hg.call_args_list)
-        
-
-    @patch('committer.repositories.mercurial.check_call')        
-    def test_should_return_true_when_hg_is_executable (self, mock_check_call):
-        actual_result = mercurial.is_executable()
-        
-        self.assertTrue(actual_result)
-        self.assertEquals(call(['hg', '--version', '--quiet']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.mercurial.check_call')        
-    def test_should_return_false_when_hg_is_not_executable (self, mock_check_call):
-        mock_check_call.side_effect = subprocess.CalledProcessError(127, 'hg')
-        
-        actual_result = mercurial.is_executable()
-        
-        self.assertFalse(actual_result)
-        self.assertEquals(call(['hg', '--version', '--quiet']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.mercurial.check_call')        
-    def test_should_raise_eception_when_during_check_something_unexpected_happens (self, mock_check_call):
-        mock_check_call.side_effect = Exception('Not executable')
-        
-        self.assertRaises(Exception, mercurial.is_executable, ())
         
 
     @patch('os.path.isdir')
@@ -89,4 +50,28 @@ class MercurialTests (unittest.TestCase):
         
         self.assertEquals(True, actual_return_value)
         self.assertEquals(call('.hg'), mock_exists.call_args)
+
+
+    @patch('committer.repositories.mercurial.check_if_is_executable')
+    def test_should_return_value_of_check (self, mock_check):
+        mock_check.return_value = 'value from check'
         
+        actual_return_value = mercurial.is_executable()
+        
+        self.assertEquals('value from check', actual_return_value)
+
+
+    @patch('committer.repositories.mercurial.check_if_is_executable')
+    def test_should_check_using_hg_version_quiet (self, mock_check):
+        mock_check.return_value = 'value from check'
+        
+        mercurial.is_executable()
+        
+        self.assertEquals(call('hg', '--version', '--quiet'), mock_check.call_args)
+
+
+    @patch('committer.repositories.mercurial.execute_command')
+    def test_should_execute_hg_using_arguments (self, mock_execute):
+        mercurial._hg('arg1', 'arg2', 'arg3')
+        
+        self.assertEquals(call('hg', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

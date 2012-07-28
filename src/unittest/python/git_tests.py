@@ -6,7 +6,7 @@ from mock import Mock, call, patch
 from committer.repositories import git
 
 
-class GitTests (unittest.TestCase):
+class GitPropetyTests (unittest.TestCase):
     def test_should_have_command_property (self):
         self.assertEquals('git', git.COMMAND)
 
@@ -15,20 +15,6 @@ class GitTests (unittest.TestCase):
         self.assertEquals('Git', git.NAME)
 
 
-    @patch('committer.repositories.git.call')        
-    def test_should_call_git_in_subprocess (self, mock_call):
-        git._git()
-        
-        self.assertEquals(call(['git']), mock_call.call_args)
-
-
-    @patch('committer.repositories.git.call')        
-    def test_should_call_git_using_given_arguments (self, mock_call):
-        git._git('1', '2', '3')
-        args = (['git', '1', '2', '3'])
-        self.assertEquals(call(args), mock_call.call_args)
-        
-        
     @patch('committer.repositories.git._git')
     def test_should_prepend_git_to_given_arguments (self, mock_git):
         
@@ -44,31 +30,6 @@ class GitTests (unittest.TestCase):
         git.update()
         
         self.assertEquals(call('pull'), mock_git.call_args)
-        
-
-    @patch('committer.repositories.git.check_call')        
-    def test_should_return_true_when_git_is_executable (self, mock_check_call):
-        actual_result = git.is_executable()
-        
-        self.assertTrue(actual_result)
-        self.assertEquals(call(['git', '--version']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.git.check_call')        
-    def test_should_return_false_when_git_is_not_executable (self, mock_check_call):
-        mock_check_call.side_effect = subprocess.CalledProcessError(127, 'git')
-        
-        actual_result = git.is_executable()
-        
-        self.assertFalse(actual_result)
-        self.assertEquals(call(['git', '--version']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.git.check_call')        
-    def test_should_raise_eception_when_during_check_something_unexpected_happens (self, mock_check_call):
-        mock_check_call.side_effect = Exception('Not executable')
-        
-        self.assertRaises(Exception, git.is_executable, ())
         
 
     @patch('os.path.isdir')
@@ -89,4 +50,28 @@ class GitTests (unittest.TestCase):
         
         self.assertEquals(True, actual_return_value)
         self.assertEquals(call('.git'), mock_exists.call_args)
+
+
+    @patch('committer.repositories.git.check_if_is_executable')
+    def test_should_return_value_of_check (self, mock_check):
+        mock_check.return_value = 'value from check'
         
+        actual_return_value = git.is_executable()
+        
+        self.assertEquals('value from check', actual_return_value)
+
+
+    @patch('committer.repositories.git.check_if_is_executable')
+    def test_should_check_using_git_version (self, mock_check):
+        mock_check.return_value = 'value from check'
+        
+        git.is_executable()
+        
+        self.assertEquals(call('git', '--version'), mock_check.call_args)
+
+
+    @patch('committer.repositories.git.execute_command')
+    def test_should_execute_git_using_arguments (self, mock_execute):
+        git._git('arg1', 'arg2', 'arg3')
+        
+        self.assertEquals(call('git', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

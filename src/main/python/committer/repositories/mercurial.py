@@ -19,9 +19,9 @@
 
 __author__ = 'Michael Gruber'
 
-from subprocess import CalledProcessError, call, check_call
-
 from os import path
+
+from committer.repositories.util import check_if_is_executable, execute_command
 
 
 COMMAND = 'hg'
@@ -49,13 +49,8 @@ def is_executable ():
     """
         returns True if 'hg --version --quiet' is executable, otherwise False. 
     """
-    try:
-        arguments = [COMMAND, '--version', '--quiet']
-        check_call(arguments)
-    except CalledProcessError:
-        return False
     
-    return True
+    return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
 def update ():
@@ -72,6 +67,4 @@ def _hg (*args):
         executes hg using the given arguments.
     """
     
-    arguments = list(args)
-    arguments.insert(0, COMMAND)
-    call(arguments)
+    execute_command(COMMAND, *args)

@@ -15,20 +15,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals('Subversion', subversion.NAME)
 
 
-    @patch('committer.repositories.subversion.call')        
-    def test_should_call_svn_in_subprocess (self, mock_call):
-        subversion._svn()
-        
-        self.assertEquals(call(['svn']), mock_call.call_args)
-
-
-    @patch('committer.repositories.subversion.call')        
-    def test_should_call_svn_using_given_arguments (self, mock_call):
-        subversion._svn('1', '2', '3')
-        args = (['svn', '1', '2', '3'])
-        self.assertEquals(call(args), mock_call.call_args)
-        
-        
+       
     @patch('committer.repositories.subversion._svn')
     def test_should_prepend_svn_to_given_arguments (self, mock_svn):
         
@@ -44,30 +31,6 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals(call('update'), mock_svn.call_args)
         
 
-    @patch('committer.repositories.subversion.check_call')        
-    def test_should_return_true_when_svn_is_executable (self, mock_check_call):
-        actual_result = subversion.is_executable()
-        
-        self.assertTrue(actual_result)
-        self.assertEquals(call(['svn', '--version', '--quiet']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.subversion.check_call')        
-    def test_should_return_false_when_svn_is_not_executable (self, mock_check_call):
-        mock_check_call.side_effect = subprocess.CalledProcessError(127, 'svn')
-        
-        actual_result = subversion.is_executable()
-        
-        self.assertFalse(actual_result)
-        self.assertEquals(call(['svn', '--version', '--quiet']), mock_check_call.call_args)
-
-
-    @patch('committer.repositories.subversion.check_call')        
-    def test_should_raise_eception_when_during_check_something_unexpected_happens (self, mock_check_call):
-        mock_check_call.side_effect = Exception('Not executable')
-        
-        self.assertRaises(Exception, subversion.is_executable, ())
-        
 
     @patch('os.path.isdir')
     def test_return_false_if_dot_svn_directory_does_not_exist (self, mock_exists):
@@ -87,4 +50,28 @@ class SubversionTests (unittest.TestCase):
         
         self.assertEquals(True, actual_return_value)
         self.assertEquals(call('.svn'), mock_exists.call_args)
+
+
+    @patch('committer.repositories.subversion.check_if_is_executable')
+    def test_should_return_value_of_check (self, mock_check):
+        mock_check.return_value = 'value from check'
         
+        actual_return_value = subversion.is_executable()
+        
+        self.assertEquals('value from check', actual_return_value)
+
+
+    @patch('committer.repositories.subversion.check_if_is_executable')
+    def test_should_check_using_svn_version_quiet (self, mock_check):
+        mock_check.return_value = 'value from check'
+        
+        subversion.is_executable()
+        
+        self.assertEquals(call('svn', '--version', '--quiet'), mock_check.call_args)
+
+
+    @patch('committer.repositories.subversion.execute_command')
+    def test_should_execute_svn_using_arguments (self, mock_execute):
+        subversion._svn('arg1', 'arg2', 'arg3')
+        
+        self.assertEquals(call('svn', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

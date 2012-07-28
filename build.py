@@ -1,3 +1,4 @@
+#   committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +14,9 @@
 #   limitations under the License.
 
 """
-    Build committer using python-builder.
+    Build committer using pybuilder.
     
-    http://code.google.com/p/python-builder
+    https://github.com/pybuilder/pybuilder
 """
 
 from pythonbuilder.core import Author, init, use_plugin
@@ -31,7 +32,8 @@ use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
-summary = 'committer - supports iterative and incremental work with repositories.'
+summary = 'committer - Provides a simplified command line interface to the ' \
+        + 'version control systems git, mercurial, and subversion.'
 url     = 'https://github.com/aelgru/committer'
 version = '0.0.37'
 

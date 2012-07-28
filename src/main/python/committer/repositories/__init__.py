@@ -14,10 +14,11 @@
 #   limitations under the License.
 
 """
-    The function find returns a list of all repository modules. The function
-    detect returns a list of all deteceted repositories. Submodules of this
-    module are repository wrappers. They are implementing the functions commit,
-    detect, and update.
+    Submodules of this module are vcs command line client wrappers. They are
+    implementing the functions commit, detect, and update. The module itself
+    provides two functions 'find' and 'detect'. The function 'find' returns a
+    list of all available repository modules. The function detect returns a
+    list of all deteceted repositories. 
 """
 
 __author__ = 'Michael Gruber'
@@ -29,7 +30,8 @@ from committer.repositories import git, mercurial, subversion
 
 def detect ():
     """
-        returns all detected repository modules.
+        returns all detected repository modules. The detection will call detect
+        on all found repositories.
     """
     
     detected_repositories = []
@@ -44,7 +46,7 @@ def detect ():
 
 def find ():
     """
-        returns a list of all available repository modules.
+        returns a list of all available vcs command line wrappper modules.
     """
     
     return [git, mercurial, subversion]

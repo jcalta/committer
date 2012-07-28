@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Subversion wrapper module.
+    Subversion command line wrapper module.
 """
 
 __author__ = 'Michael Gruber'

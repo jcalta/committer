@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Git wrapper module.
+    Git command line wrapper module.
 """
 
 __author__ = 'Michael Gruber'

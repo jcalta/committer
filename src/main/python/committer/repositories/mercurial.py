@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Mercurial wrapper module.
+    Mercurial command line wrapper module.
 """
 
 __author__ = 'Michael Gruber'

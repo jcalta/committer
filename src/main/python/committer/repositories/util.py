@@ -36,7 +36,8 @@ def check_if_is_executable (*command_and_arguments):
     """
     
     try:
-        check_call(list(command_and_arguments))
+        popenargs = list(command_and_arguments)
+        check_call(popenargs)
     except CalledProcessError:
         return False
     

@@ -2,7 +2,7 @@ committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?bra
 =========
 
 Provides a simplified command line interface to the version control systems git,
-mercurial, and subversion. 
+mercurial, and subversion.
 
 ```bash
 commit "This is a short message about WHY I made this change."
@@ -13,7 +13,7 @@ If you use the *commit* script on a git repository this will:
 * execute 'git commit -a -m "This is a short message about WHY I made this change."'
 * execute 'git push'
 
-*Incrementing versions before committing*
+*Incrementing the version before committing*
 
 ```bash
 commit "added a new feature" ++
@@ -37,8 +37,13 @@ If you are using the 'update' script on a mercurial repository this will:
 Micro Commits
 =============
 
-Committing more often has benefits:
+Committing more often has advantages.
+
+Blog entry about micro commits:
 http://lucasr.org/2011/01/29/micro-commits/
+
+Discussion about micro commits:
+http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits
 
 
 License

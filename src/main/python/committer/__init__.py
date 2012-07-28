@@ -68,7 +68,7 @@ def main (arguments):
                      % (repository.COMMAND, repository.NAME))
     
     if not repository.is_executable():
-        return error('Command for repository is not executable.\n'
+        return error('not executable!\n'
                      'Please install a command line client for %s '
                      'repositories, providing command "%s".' 
                      % (repository.NAME, repository.COMMAND))

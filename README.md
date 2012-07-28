@@ -13,8 +13,7 @@ If you use the *commit* script on a git repository this will:
 * execute 'git commit -a -m "This is a short message about WHY I made this change."'
 * execute 'git push'
 
-Incrementing the version before committing
-------------------------------------------
+**Incrementing the version before committing:**
 
 ```bash
 commit "added a new feature" ++
@@ -24,8 +23,7 @@ The second argument '++' will tell the script to increment the version within
 *build.py*
 
 
-Updating the repository in the current directory
------------------------------------------------- 
+**Updating the repository in the current directory:**
 
 ```bash
 update
@@ -41,11 +39,9 @@ Micro Commits
 
 Committing more often has advantages.
 
-Blog entry about micro commits:
-http://lucasr.org/2011/01/29/micro-commits/
+[Blog entry](http://lucasr.org/2011/01/29/micro-commits/)
 
-Discussion about micro commits:
-http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits
+[Form Discussion](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
 
 
 License

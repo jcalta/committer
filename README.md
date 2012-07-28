@@ -7,7 +7,7 @@ mercurial, and subversion.
 ```bash
 commit "This is a short message about WHY I made this change."
 ```
-If you use the *commit* script on a git repository this will:
+Using the *commit* script on a git repository will:
 * check if the 'git' command is executable, by executing 'git --version'
 * execute 'git pull'
 * execute 'git commit -a -m "This is a short message about WHY I made this change."'
@@ -19,8 +19,8 @@ If you use the *commit* script on a git repository this will:
 commit "added a new feature" ++
 ```
 
-The second argument '++' will tell the script to increment the version within
-*build.py*
+The second argument '++' tells the script to increment the version within
+*build.py*.
 
 
 **Updating the repository in the current directory:**
@@ -29,7 +29,7 @@ The second argument '++' will tell the script to increment the version within
 update
 ```
 
-If you are using the 'update' script on a mercurial repository this will:
+Using the 'update' script on a mercurial repository will:
 * check if the 'hg' command is executable, by executing 'hg --version --quiet'
 * execute 'hg pull'
 * execute 'hg up'

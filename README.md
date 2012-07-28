@@ -13,7 +13,8 @@ If you use the *commit* script on a git repository this will:
 * execute 'git commit -a -m "This is a short message about WHY I made this change."'
 * execute 'git push'
 
-*Incrementing the version before committing*
+Incrementing the version before committing
+------------------------------------------
 
 ```bash
 commit "added a new feature" ++
@@ -23,7 +24,8 @@ The second argument '++' will tell the script to increment the version within
 *build.py*
 
 
-*Updating the repository in the current directory* 
+Updating the repository in the current directory
+------------------------------------------------ 
 
 ```bash
 update

@@ -43,8 +43,7 @@ class CommitterException (Exception):
 
 def _error (message):
     """
-        writes message to stderr and returns 1. The result of this function
-        should be passed to the calling script.
+        writes message to stderr.
     """
 
     sys.stderr.write(message + '\n')

@@ -39,9 +39,9 @@ Micro Commits
 
 Committing more often has advantages.
 
-[Blog entry](http://lucasr.org/2011/01/29/micro-commits/)
+[Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
 
-[Form Discussion](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
+[Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
 
 
 License

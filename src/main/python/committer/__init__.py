@@ -24,17 +24,61 @@ import sys
 from committer import repositories, incrementor
 
 
-VERSION = '${version}'
+VERSION                          = '${version}'
+
+OK_RETURN_CODE                   = 0
+
+SHOW_USAGE_ERROR_CODE            = 1
+
+NO_REPOSITORY_ERROR_CODE         = 100
+TOO_MANY_REPOSITORIES_ERROR_CODE = 101
+NOT_EXECUTABLE_ERROR_CODE        = 102
 
 
-def error (message):
+class CommitterException (Exception):
+    def __init__ (self, message, error_code):
+        self.message    = message
+        self.error_code = error_code
+
+
+def _error (message):
     """
         writes message to stderr and returns 1. The result of this function
         should be passed to the calling script.
     """
 
     sys.stderr.write(message + '\n')
-    return 1
+
+
+def _detect_repository ():
+    detected_repositories = repositories.detect()
+    
+    for repository in detected_repositories:
+        sys.stdout.write('Detected %s\n' % repository.NAME)
+        
+    if len(detected_repositories) == 0:
+        raise CommitterException('No repository detected.',
+                                 NO_REPOSITORY_ERROR_CODE)
+    
+    if len(detected_repositories) > 1:
+        raise CommitterException('More than one repository detected.',
+                                 TOO_MANY_REPOSITORIES_ERROR_CODE)
+    
+    return detected_repositories[0]
+
+
+def _ensure_command_executable(repository):
+    sys.stdout.write('Checking command line client "%s" for %s: '
+                     % (repository.COMMAND, repository.NAME))
+    
+    if not repository.is_executable():
+        message = 'not executable!\n' \
+                + 'Please install a command line client for %s ' \
+                + 'repositories, providing command "%s".' \
+                % repository.NAME, repository.COMMAND
+        raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
+    
+    sys.stdout.write('ok.\n')
 
 
 def main (arguments):
@@ -48,40 +92,26 @@ def main (arguments):
     sys.stdout.write('committer version %s\n' % VERSION)
 
     if len(arguments) == 1 and not arguments[0].endswith('update'):
-        return error('usage:\n'
-                     '    commit "message" [++]\n'
-                     '    update')
+        _error('usage:\n'
+               '    commit "message" [++]\n'
+               '    update')
+        return SHOW_USAGE_ERROR_CODE
     
-    detected_repositories = repositories.detect()
-    for repository in detected_repositories:
-        sys.stdout.write('Detected %s\n' % repository.NAME)
+    try:
+        repository = _detect_repository()
+        _ensure_command_executable(repository)
         
-    if len(detected_repositories) == 0:
-        return error('No repository detected.')
-    
-    if len(detected_repositories) > 1:
-        return error('More than one repository detected.')
-    
-    repository = detected_repositories[0]
-    
-    sys.stdout.write('Checking command line client "%s" for %s: '
-                     % (repository.COMMAND, repository.NAME))
-    
-    if not repository.is_executable():
-        return error('not executable!\n'
-                     'Please install a command line client for %s '
-                     'repositories, providing command "%s".' 
-                     % (repository.NAME, repository.COMMAND))
-    else:
-        sys.stdout.write('ok.\n')
+        repository.update()
         
-    repository.update()
-    
-    if len(arguments) == 3 and arguments[2] == '++':
-        incrementor.increment_version()
-    
-    if arguments[0].endswith('commit'):
-        message = arguments[1]
-        repository.commit(message)
+        if len(arguments) == 3 and arguments[2] == '++':
+            incrementor.increment_version()
+        
+        if arguments[0].endswith('commit'):
+            message = arguments[1]
+            repository.commit(message)
+            
+    except CommitterException as committer_exception:
+        _error(committer_exception)
+        return committer_exception.error_code
 
-    return 0
+    return OK_RETURN_CODE

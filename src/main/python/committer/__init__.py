@@ -72,9 +72,8 @@ def _ensure_command_executable(repository):
                      % (repository.NAME, repository.COMMAND))
     
     if not repository.is_executable():
-        message = 'not executable!\n' \
-            + 'Please install command line client for %s ' % repository.NAME \
-            + 'repositories, providing command "%s".' % repository.COMMAND
+        sys.stdout.write('not executable!\n')
+        message = 'Please install command line client for %s repositories, providing command "%s".' % (repository.NAME, repository.COMMAND)
         raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
     
     sys.stdout.write('ok.\n')

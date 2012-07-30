@@ -46,7 +46,8 @@ def _error (message):
         writes message to stderr.
     """
 
-    sys.stderr.write(message + '\n')
+    message_and_newline = message + '\n'
+    sys.stderr.write(message_and_newline)
 
 
 def _detect_repository ():
@@ -72,9 +73,8 @@ def _ensure_command_executable(repository):
     
     if not repository.is_executable():
         message = 'not executable!\n' \
-                + 'Please install a command line client for %s ' \
-                + 'repositories, providing command "%s".' \
-                % repository.NAME, repository.COMMAND
+            + 'Please install command line client for %s ' % repository.NAME \
+            + 'repositories, providing command "%s".' % repository.COMMAND
         raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
     
     sys.stdout.write('ok.\n')
@@ -110,7 +110,7 @@ def main (arguments):
             repository.commit(message)
             
     except CommitterException as committer_exception:
-        _error(committer_exception)
+        _error(committer_exception.message)
         return committer_exception.error_code
 
     return OK_RETURN_CODE

@@ -40,5 +40,7 @@ def check_if_is_executable (command, *arguments):
         check_call(command_and_arguments)
     except CalledProcessError:
         return False
+    except OSError:
+        return False
     
     return True

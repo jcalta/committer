@@ -67,8 +67,8 @@ def _detect_repository ():
 
 
 def _ensure_command_executable(repository):
-    sys.stdout.write('Checking command line client "%s" for %s: '
-                     % (repository.COMMAND, repository.NAME))
+    sys.stdout.write('Checking %s command line client "%s": '
+                     % (repository.NAME, repository.COMMAND))
     
     if not repository.is_executable():
         message = 'not executable!\n' \

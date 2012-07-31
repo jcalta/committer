@@ -40,6 +40,16 @@ class CheckIfIsExecutableTests (unittest.TestCase):
 
 
     @patch('committer.repositories.util.check_call')        
+    def test_should_return_false_when_trying_to_execute_command_fails (self, mock_check_call):
+        mock_check_call.side_effect = OSError()
+        
+        actual_result = util.check_if_is_executable('command', '--version', '--quiet')
+        
+        self.assertFalse(actual_result)
+        self.assertEquals(call(['command', '--version', '--quiet']), mock_check_call.call_args)
+
+
+    @patch('committer.repositories.util.check_call')        
     def test_should_raise_eception_when_during_check_something_unexpected_happens (self, mock_check_call):
         mock_check_call.side_effect = Exception('Not executable')
         

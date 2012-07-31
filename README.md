@@ -29,7 +29,7 @@ The second argument '++' tells the script to increment the version within
 update
 ```
 
-Using the 'update' script on a mercurial repository will:
+Using the *update* script on a mercurial repository will:
 * check if the 'hg' command is executable, by executing 'hg --version --quiet'
 * execute 'hg pull'
 * execute 'hg up'

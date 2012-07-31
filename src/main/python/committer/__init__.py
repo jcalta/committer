@@ -36,7 +36,15 @@ NOT_EXECUTABLE_ERROR_CODE        = 102
 
 
 class CommitterException (Exception):
+    """
+        to be raised when an error occured, which should stop the default
+        program flow.
+    """
     def __init__ (self, message, error_code):
+        """
+            will set the given properties.
+        """
+        super(CommitterException, self).__init__()
         self.message    = message
         self.error_code = error_code
 
@@ -51,6 +59,11 @@ def _error (message):
 
 
 def _detect_repository ():
+    """
+        returns the detected repository. Will raise an CommitterException when
+        no or more than one repository is detected.
+    """
+    
     detected_repositories = repositories.detect()
     
     for repository in detected_repositories:
@@ -68,12 +81,20 @@ def _detect_repository ():
 
 
 def _ensure_command_executable(repository):
+    """
+        ensures that the command line client for the given repository is
+        executable. Will Raise an CommiterException when the command line
+        client is not executable.
+    """
+    
     sys.stdout.write('Checking %s command line client "%s": '
                      % (repository.NAME, repository.COMMAND))
     
     if not repository.is_executable():
         sys.stdout.write('not executable!\n')
-        message = 'Please install command line client for %s repositories, providing command "%s".' % (repository.NAME, repository.COMMAND)
+        message = ('Please install command line client for %s repositories, '
+                   'providing command "%s".' ) \
+                  % (repository.NAME, repository.COMMAND)
         raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
     
     sys.stdout.write('ok.\n')

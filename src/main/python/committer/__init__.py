@@ -44,6 +44,7 @@ class CommitterException (Exception):
         """
             will set the given properties.
         """
+        
         super(CommitterException, self).__init__()
         self.message    = message
         self.error_code = error_code
@@ -89,7 +90,6 @@ def _ensure_command_executable(repository):
         raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
     
     sys.stdout.write('ok.\n')
-
 
 
 def _committer(arguments):

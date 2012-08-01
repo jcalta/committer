@@ -86,8 +86,9 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
          
-        main(['/usr/local/bin/commit', 'message'])
+        actual_return_code = main(['/usr/local/bin/commit', 'message'])
         
+        self.assertEquals(OK_RETURN_CODE, actual_return_code)
         self.assertEquals(call(), mock_detect.call_args)
 
 

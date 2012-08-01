@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Git command line wrapper module.
+    Git command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
@@ -30,7 +30,7 @@ NAME    = 'Git'
 
 def commit (message):
     """
-        commits all files by calling 'git commit -a -m "message"'
+        commits all files by calling: git commit -a -m "message"
     """
     
     _git('commit', '-a', '-m', message)
@@ -48,7 +48,7 @@ def detect ():
 
 def is_executable ():
     """
-        returns True if 'git --version' is executable, otherwise False. 
+        returns True if "git --version" is executable, otherwise False. 
     """
     
     return check_if_is_executable(COMMAND, '--version')
@@ -56,7 +56,7 @@ def is_executable ():
 
 def update ():
     """
-        updates files by executing 'git pull'.
+        updates files by executing "git pull".
     """
 
     _git('pull')

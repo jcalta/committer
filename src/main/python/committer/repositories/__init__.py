@@ -14,11 +14,11 @@
 #   limitations under the License.
 
 """
-    Submodules of this module are vcs command line client wrappers. They are
-    implementing the functions commit, detect, is_executable, and update. The
-    module itself provides two functions 'find' and 'detect'. The function
-    'find' returns a list of all available repository modules. The function
-    detect returns a list of all deteceted repositories. 
+    Submodules of this module are version control systems command line client 
+    wrappers. They are implementing the functions commit, detect, is_executable,
+    and update. The module itself provides two functions "find" and "detect".
+    The function "find" returns a list of all available repository modules. The
+    function detect returns a list of all deteceted repositories. 
 """
 
 __author__ = 'Michael Gruber'
@@ -41,8 +41,8 @@ def detect ():
 
 def find ():
     """
-        returns a list of all available vcs command line wrappper modules.
+        returns a list of all available version control systems command line
+        wrappper modules (git, mercurial, and subversion).
     """
     
     return [git, mercurial, subversion]
-

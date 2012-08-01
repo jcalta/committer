@@ -16,7 +16,8 @@
 #   limitations under the License.
 
 """
-    Script to support iterative and incremental work with repositories.
+    Provides a simplified command line interface to the version control systems
+    git, mercurial, and subversion.
     This script updates the current repository.
 """
 

@@ -26,6 +26,7 @@ def execute_command (command, *arguments):
     """
         executes command using the given command_and_arguments.
     """
+    
     command_and_arguments = [command] + list(arguments)
     call(command_and_arguments)
 

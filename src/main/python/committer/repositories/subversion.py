@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Subversion command line wrapper module.
+    Subversion command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
@@ -29,7 +29,7 @@ NAME    = 'Subversion'
 
 def commit (message):
     """
-        commits all files by executing 'svn commit -m "message"'
+        commits all files by calling: svn commit -m "message"
     """
     
     _svn('commit', '-m', message)
@@ -37,7 +37,7 @@ def commit (message):
 
 def detect ():
     """
-        returns True if the current directory represents a mercurial repository,
+        returns True if the current directory represents a subversion repository,
         otherwise False.
     """
     
@@ -46,7 +46,7 @@ def detect ():
 
 def is_executable ():
     """
-        returns True if 'svn --version --quiet' is executable, otherwise False. 
+        returns True if "svn --version --quiet" is executable, otherwise False. 
     """
     
     return check_if_is_executable(COMMAND, '--version', '--quiet')
@@ -54,7 +54,7 @@ def is_executable ():
 
 def update ():
     """
-        updates files by executing 'svn pull' and 'svn update'.
+        updates files by executing "svn pull" and "svn update".
     """
 
     _svn('update')

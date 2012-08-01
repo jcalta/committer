@@ -37,9 +37,10 @@ NOT_EXECUTABLE_ERROR_CODE        = 102
 
 class CommitterException (Exception):
     """
-        to be raised when an error occured, which should stop the default
+        to be raised when an error occurred, which should stop the default
         program flow.
     """
+    
     def __init__ (self, message, error_code):
         """
             will set the given properties.

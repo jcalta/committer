@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Mercurial command line wrapper module.
+    Mercurial command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
@@ -29,7 +29,9 @@ NAME    = 'Mercurial'
 
 def commit (message):
     """
-        commits all files by executing 'hg commit -m "message"' and 'hg push'.
+        commits all files in the current directory
+        by calling: hg commit -m "message"
+        and "hg push"
     """
     
     _hg('commit', '-m', message)
@@ -47,7 +49,7 @@ def detect ():
 
 def is_executable ():
     """
-        returns True if 'hg --version --quiet' is executable, otherwise False. 
+        returns True if "hg --version --quiet" is executable, otherwise False. 
     """
     
     return check_if_is_executable(COMMAND, '--version', '--quiet')
@@ -55,7 +57,7 @@ def is_executable ():
 
 def update ():
     """
-        updates files by executing 'hg pull' and 'hg update'.
+        updates files by calling "hg pull" and "hg update".
     """
 
     _hg('pull')

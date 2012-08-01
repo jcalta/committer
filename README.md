@@ -8,10 +8,10 @@ mercurial, and subversion.
 commit "This is a short message about WHY I made this change."
 ```
 Using the *commit* script on a git repository will:
-* check if the "git" command is executable, by executing: **git --version**
-* execute: **git pull**
-* execute: **git commit -a -m "This is a short message about WHY I made this change."**
-* execute: **git push**
+* check if the "git" command is executable, by executing: *git --version*
+* execute: *git pull*
+* execute: *git commit -a -m "This is a short message about WHY I made this change."*
+* execute: *git push*
 
 **Incrementing the version before committing:**
 
@@ -30,17 +30,17 @@ update
 ```
 
 Using the *update* script on a mercurial repository will:
-* check if the "hg" command is executable, by executing: **hg --version --quiet**
-* execute **hg pull**
-* execute **hg up**
+* check if the "hg" command is executable, by executing: *hg --version --quiet*
+* execute: *hg pull*
+* execute: *hg up*
 
 Micro Commits
 =============
 
 Committing more often has advantages:
-* prevents you from merging.
-* it makes commit/code review easier.
-* commit messages "tell a story" about the development.
+* prevents merging,
+* makes code review easier, and
+* commit messages "tell a story".
 
 [Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
 

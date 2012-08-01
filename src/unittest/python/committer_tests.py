@@ -11,7 +11,7 @@ from committer import (NO_REPOSITORY_ERROR_CODE,
                        main)
 
 
-class CommitterTests (unittest_support.TestCase):
+class CommitterExceptionTests (unittest_support.TestCase):
     def test_should_instantiate_committer_using_given_properties (self):
         actual_committer_exception = CommitterException('Hello world', 123)
         
@@ -19,6 +19,7 @@ class CommitterTests (unittest_support.TestCase):
         self.assertEquals(123, actual_committer_exception.error_code)
     
     
+class CommitterTests (unittest_support.TestCase):
     @patch('sys.stdout')
     @patch('sys.stderr')
     @patch('committer._committer')

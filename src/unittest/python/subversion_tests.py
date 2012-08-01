@@ -6,7 +6,7 @@ from mock import Mock, call, patch
 from committer.repositories import subversion
 
 
-class SubversionTests (unittest.TestCase):
+class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
         self.assertEquals('svn', subversion.COMMAND)
 
@@ -15,6 +15,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals('Subversion', subversion.NAME)
 
        
+class CommitTests (unittest.TestCase):
     @patch('committer.repositories.subversion._svn')
     def test_should_prepend_svn_to_given_arguments (self, mock_svn):
         
@@ -23,6 +24,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals(call('commit', '-m', 'This is a commit message.'), mock_svn.call_args)
         
         
+class UpdateTests (unittest.TestCase):
     @patch('committer.repositories.subversion._svn')
     def test_should_call_pull_and_update (self, mock_svn):
         subversion.update()
@@ -30,7 +32,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals(call('update'), mock_svn.call_args)
         
 
-
+class DetectTests (unittest.TestCase):
     @patch('os.path.isdir')
     def test_return_false_if_dot_svn_directory_does_not_exist (self, mock_exists):
         mock_exists.return_value = False
@@ -51,6 +53,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals(call('.svn'), mock_exists.call_args)
 
 
+class IsExecutableTests (unittest.TestCase):
     @patch('committer.repositories.subversion.check_if_is_executable')
     def test_should_return_value_of_check (self, mock_check):
         mock_check.return_value = 'value from check'
@@ -69,6 +72,7 @@ class SubversionTests (unittest.TestCase):
         self.assertEquals(call('svn', '--version', '--quiet'), mock_check.call_args)
 
 
+class SubversionTests (unittest.TestCase):
     @patch('committer.repositories.subversion.execute_command')
     def test_should_execute_svn_using_arguments (self, mock_execute):
         subversion._svn('arg1', 'arg2', 'arg3')

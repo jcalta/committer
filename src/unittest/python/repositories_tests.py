@@ -4,7 +4,7 @@ import unittest_support
 
 from committer import repositories
 
-class RepositoriesTests (unittest_support.TestCase):
+class FindTests (unittest_support.TestCase):
     def test_should_find_mercurial_repository (self):
         actual_repositories = repositories.find()
         actual_count_of_repositories = len(actual_repositories)
@@ -30,6 +30,7 @@ class RepositoriesTests (unittest_support.TestCase):
         self.assertTrue(repositories.subversion in actual_repositories)
 
     
+class DetectTests (unittest_support.TestCase):
     @patch('committer.repositories.find')
     def test_should_return_repository_module_when_detect_returns_true (self, mock_find):
         mock_repository = self.create_mock_repository()

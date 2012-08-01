@@ -49,15 +49,6 @@ class CommitterException (Exception):
         self.error_code = error_code
 
 
-def _error (message):
-    """
-        writes message to stderr.
-    """
-
-    message_and_newline = message + '\n'
-    sys.stderr.write(message_and_newline)
-
-
 def _detect_repository ():
     """
         returns the detected repository. Will raise an CommitterException when
@@ -142,7 +133,7 @@ def main (arguments):
         _committer(arguments)
         
     except CommitterException as committer_exception:
-        _error(committer_exception.message)
+        sys.stderr.write(committer_exception.message + '\n')
         return committer_exception.error_code
 
     return OK_RETURN_CODE

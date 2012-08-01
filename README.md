@@ -19,7 +19,7 @@ Using the *commit* script on a git repository will:
 commit "added a new feature" ++
 ```
 
-The second argument '++' tells the script to increment the version within
+The second argument "++" tells the script to increment the version within
 *build.py*
 
 
@@ -40,7 +40,7 @@ Micro Commits
 Committing more often has advantages:
 * prevents merging,
 * makes code review easier, and
-* commit messages "tell a story".
+* commit messages for smaller commits "tell a story".
 
 [Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
 

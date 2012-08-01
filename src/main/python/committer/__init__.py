@@ -100,6 +100,34 @@ def _ensure_command_executable(repository):
     sys.stdout.write('ok.\n')
 
 
+
+def _committer(arguments):
+    """
+        1. detect what kind of repository the current directory is.
+        2. ensure the command line client for the repository is executable.
+        3. update the repository.
+        4. optionally execute an incrementor.
+        5. commit all modified files to the repository.
+    """
+    if len(arguments) == 1 and not arguments[0].endswith('update'):
+        raise CommitterException('usage:\n'
+                                 '    commit "message" [++]\n'
+                                 '    update', 
+                                 SHOW_USAGE_ERROR_CODE)
+        
+    repository = _detect_repository()
+    _ensure_command_executable(repository)
+    
+    repository.update()
+    
+    if len(arguments) == 3 and arguments[2] == '++':
+        incrementor.increment_version()
+        
+    if arguments[0].endswith('commit'):
+        message = arguments[1]
+        repository.commit(message)
+
+
 def main (arguments):
     """
         This is the main function for committer. It should be called by the
@@ -110,24 +138,8 @@ def main (arguments):
 
     sys.stdout.write('committer version %s\n' % VERSION)
 
-    if len(arguments) == 1 and not arguments[0].endswith('update'):
-        _error('usage:\n'
-               '    commit "message" [++]\n'
-               '    update')
-        return SHOW_USAGE_ERROR_CODE
-    
     try:
-        repository = _detect_repository()
-        _ensure_command_executable(repository)
-        
-        repository.update()
-        
-        if len(arguments) == 3 and arguments[2] == '++':
-            incrementor.increment_version()
-        
-        if arguments[0].endswith('commit'):
-            message = arguments[1]
-            repository.commit(message)
+        _committer(arguments)
             
     except CommitterException as committer_exception:
         _error(committer_exception.message)

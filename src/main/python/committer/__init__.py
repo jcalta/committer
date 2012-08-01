@@ -140,7 +140,7 @@ def main (arguments):
 
     try:
         _committer(arguments)
-            
+        
     except CommitterException as committer_exception:
         _error(committer_exception.message)
         return committer_exception.error_code

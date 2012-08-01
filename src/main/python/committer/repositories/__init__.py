@@ -34,14 +34,9 @@ def detect ():
         on all found repositories.
     """
     
-    detected_repositories = []
-    list_of_repositories  = find()
+    repositories = find()
     
-    for repository in list_of_repositories:
-        if repository.detect():
-            detected_repositories.append(repository)
-    
-    return detected_repositories
+    return [repository for repository in repositories if repository.detect()]
 
 
 def find ():

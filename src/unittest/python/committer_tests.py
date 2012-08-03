@@ -2,18 +2,19 @@ from mock import call, patch
 
 import unittest_support
 
-from committer import (NO_REPOSITORY_ERROR_CODE,
-                       NOT_EXECUTABLE_ERROR_CODE,
+from committer import (NO_REPOSITORY_ERROR,
+                       NOT_EXECUTABLE_ERROR,
                        OK_RETURN_CODE,
-                       SHOW_USAGE_ERROR_CODE,
-                       TOO_MANY_REPOSITORIES_ERROR_CODE,
+                       NO_ARGUMENTS_ERROR,
+                       TOO_MANY_REPOSITORIES_ERROR,
                        CommitterException,
                        main)
 
 
 class CommitterExceptionTests (unittest_support.TestCase):
     def test_should_instantiate_committer_using_given_properties (self):
-        actual_committer_exception = CommitterException('Hello world', 123)
+        error_tuple = ('Hello world', 123)
+        actual_committer_exception = CommitterException(error_tuple)
         
         self.assertEquals('Hello world', actual_committer_exception.message)
         self.assertEquals(123, actual_committer_exception.error_code)
@@ -24,9 +25,10 @@ class CommitterTests (unittest_support.TestCase):
     @patch('sys.stderr')
     @patch('committer._committer')
     def test_should_write_given_message_to_stderr (self, mock_committer, mock_stderr, mock_stdout):
-        mock_committer.side_effect = CommitterException('Failed.', 13)
+        error_tuple = ('Failed.', 13)
+        mock_committer.side_effect = CommitterException(error_tuple)
         
-        actual_return_code = main(['/usr/local/bin/commit'])
+        actual_return_code = main(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(13, actual_return_code)
         self.assertEquals(call('Failed.' + '\n'), mock_stderr.write.call_args)
@@ -37,7 +39,7 @@ class CommitterTests (unittest_support.TestCase):
     def test_should_exit_commit_when_no_arguments_given (self, mock_stdout, mock_stderr):
         actual_return_code = main(['/usr/local/bin/commit'])
         
-        self.assertEquals(SHOW_USAGE_ERROR_CODE, actual_return_code)
+        self.assertEquals(NO_ARGUMENTS_ERROR[1], actual_return_code)
 
 
     @patch('sys.stdout')
@@ -77,7 +79,7 @@ class CommitterTests (unittest_support.TestCase):
         actual_return_code = main(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(call(), mock_repository.is_executable.call_args)
-        self.assertEquals(NOT_EXECUTABLE_ERROR_CODE, actual_return_code)
+        self.assertEquals(NOT_EXECUTABLE_ERROR[1], actual_return_code)
 
 
     @patch('sys.stdout')
@@ -178,7 +180,7 @@ class CommitterTests (unittest_support.TestCase):
         
         actual_return_code = main(['/usr/local/bin/commit', 'message', '++'])
         
-        self.assertEquals(NO_REPOSITORY_ERROR_CODE, actual_return_code)
+        self.assertEquals(NO_REPOSITORY_ERROR[1], actual_return_code)
 
 
     @patch('sys.stdout')
@@ -189,4 +191,4 @@ class CommitterTests (unittest_support.TestCase):
         
         actual_return_code = main(['/usr/local/bin/commit', 'message', '++'])
         
-        self.assertEquals(TOO_MANY_REPOSITORIES_ERROR_CODE, actual_return_code)
+        self.assertEquals(TOO_MANY_REPOSITORIES_ERROR[1], actual_return_code)

@@ -28,7 +28,7 @@ VERSION                     = '${version}'
 
 OK_RETURN_CODE              = 0
 
-SHOW_USAGE_ERROR            = ('usage:\n'
+NO_ARGUMENTS_ERROR          = ('usage:\n'
                                '    commit "message" [++]\n'
                                '    update', 1)
 
@@ -97,9 +97,7 @@ def _committer(arguments):
         4. optionally execute an incrementor.
         5. commit all modified files to the repository.
     """
-    if len(arguments) == 1 and not arguments[0].endswith('update'):
-        raise CommitterException(SHOW_USAGE_ERROR)
-        
+
     repository = _detect_repository()
     _ensure_command_executable(repository)
     
@@ -124,6 +122,9 @@ def main (arguments):
     sys.stdout.write('committer version %s\n' % VERSION)
 
     try:
+        if len(arguments) == 1 and not arguments[0].endswith('update'):
+            raise CommitterException(NO_ARGUMENTS_ERROR)
+        
         _committer(arguments)
         
     except CommitterException as committer_exception:

@@ -24,16 +24,17 @@ import sys
 from committer import repositories, incrementor
 
 
-VERSION                          = '${version}'
+VERSION                     = '${version}'
 
-OK_RETURN_CODE                   = 0
+OK_RETURN_CODE              = 0
 
-SHOW_USAGE_ERROR_CODE            = 1
+SHOW_USAGE_ERROR            = ('usage:\n'
+                               '    commit "message" [++]\n'
+                               '    update', 1)
 
-NO_REPOSITORY_ERROR_CODE         = 100
-TOO_MANY_REPOSITORIES_ERROR_CODE = 101
-NOT_EXECUTABLE_ERROR_CODE        = 102
-
+NO_REPOSITORY_ERROR         = ('No repository detected.', 100)
+TOO_MANY_REPOSITORIES_ERROR = ('More than one repository detected.', 101)
+NOT_EXECUTABLE_ERROR        = ('Command line client not executable.', 102)
 
 class CommitterException (Exception):
     """
@@ -41,14 +42,14 @@ class CommitterException (Exception):
         program flow.
     """
     
-    def __init__ (self, message, error_code):
+    def __init__ (self, error_tuple):
         """
             will set the given properties.
         """
         
         super(CommitterException, self).__init__()
-        self.message    = message
-        self.error_code = error_code
+        self.message    = error_tuple[0]
+        self.error_code = error_tuple[1]
 
 
 def _detect_repository ():
@@ -63,12 +64,10 @@ def _detect_repository ():
         sys.stdout.write('Detected %s\n' % repository.NAME)
         
     if len(detected_repositories) == 0:
-        raise CommitterException('No repository detected.',
-                                 NO_REPOSITORY_ERROR_CODE)
+        raise CommitterException(NO_REPOSITORY_ERROR)
     
     if len(detected_repositories) > 1:
-        raise CommitterException('More than one repository detected.',
-                                 TOO_MANY_REPOSITORIES_ERROR_CODE)
+        raise CommitterException(TOO_MANY_REPOSITORIES_ERROR)
     
     return detected_repositories[0]
 
@@ -84,11 +83,8 @@ def _ensure_command_executable(repository):
                      % (repository.NAME, repository.COMMAND))
     
     if not repository.is_executable():
-        sys.stdout.write('not executable!\n')
-        message = ('Please install command line client for %s repositories, '
-                   'providing command "%s".' ) \
-                  % (repository.NAME, repository.COMMAND)
-        raise CommitterException(message, NOT_EXECUTABLE_ERROR_CODE)
+        sys.stdout.write('failed!\n')
+        raise CommitterException(NOT_EXECUTABLE_ERROR)
     
     sys.stdout.write('ok.\n')
 
@@ -102,10 +98,7 @@ def _committer(arguments):
         5. commit all modified files to the repository.
     """
     if len(arguments) == 1 and not arguments[0].endswith('update'):
-        raise CommitterException('usage:\n'
-                                 '    commit "message" [++]\n'
-                                 '    update', 
-                                 SHOW_USAGE_ERROR_CODE)
+        raise CommitterException(SHOW_USAGE_ERROR)
         
     repository = _detect_repository()
     _ensure_command_executable(repository)

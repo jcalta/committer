@@ -42,7 +42,7 @@ def _detect_repository ():
         raise errors.NoRepositoryDetectedException()
     
     if len(detected_repositories) > 1:
-        raise errors.TooManyRepositoriesException()
+        raise errors.TooManyRepositoriesException(detected_repositories)
     
     repository = detected_repositories[0]
     return _ensure_command_executable(repository)

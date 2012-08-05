@@ -58,9 +58,13 @@ class TooManyRepositoriesException (CommitterException):
         current directory.
     """
     
-    def __init__ (self):
+    def __init__ (self, detected_repositories):
+        names = [repository.NAME for repository in detected_repositories] 
+        message = 'More than one repository detected: ' \
+                + ', '.join(names)
+            
         super(TooManyRepositoriesException, self) \
-            .__init__('More than one repository detected.', 101)
+            .__init__(message, 101)
 
 
 class NotExecutableException (CommitterException):

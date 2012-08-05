@@ -31,9 +31,10 @@ class ErrorsTests (unittest_support.TestCase):
 
 
     def test_too_many_repositories_detected_should_use_the_given_properties (self):
-        actual_exception = errors.TooManyRepositoriesException()
+        mock_repositories = [self.create_mock_repository(), self.create_mock_repository()]
+        actual_exception = errors.TooManyRepositoriesException(mock_repositories)
         
-        self.assertEquals('More than one repository detected.\n', actual_exception.message)
+        self.assertEquals('More than one repository detected: MockRepository, MockRepository\n', actual_exception.message)
         self.assertEquals(101, actual_exception.error_code)
 
 

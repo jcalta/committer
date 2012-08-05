@@ -23,7 +23,8 @@ import sys
 
 from committer import repositories, incrementor, errors
 
-VERSION                     = '${version}'
+
+VERSION = '${version}'
 
 
 def _detect_repository ():

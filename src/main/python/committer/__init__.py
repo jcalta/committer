@@ -43,7 +43,9 @@ def _detect_repository ():
     if len(detected_repositories) > 1:
         raise errors.TooManyRepositoriesException()
     
-    return detected_repositories[0]
+    repository = detected_repositories[0]
+    _ensure_command_executable(repository)
+    return repository
 
 
 def _ensure_command_executable(repository):
@@ -66,15 +68,12 @@ def _ensure_command_executable(repository):
 def commit(arguments):
     """
         1. detect what kind of repository the current directory is.
-        2. ensure the command line client for the repository is executable.
-        3. update the repository.
-        4. optionally execute an incrementor.
-        5. commit all modified files to the repository.
+        2. update the repository.
+        3. optionally execute an incrementor.
+        4. commit all modified files to the repository.
     """
 
     repository = _detect_repository()
-    _ensure_command_executable(repository)
-    
     repository.update()
     
     if len(arguments) == 3 and arguments[2] == '++':
@@ -86,12 +85,8 @@ def commit(arguments):
 
 def update():
     """
-        Updates the repository in the current directory. At first it detects
-        the repository in the current directory. Then it ensures that command
-        client for the detected repository is executable.
+        Updates the repository in the current directory.
     """
 
     repository = _detect_repository()
-    _ensure_command_executable(repository)
-    
     repository.update()

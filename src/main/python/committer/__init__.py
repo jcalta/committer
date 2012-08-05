@@ -21,35 +21,9 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import repositories, incrementor
-
+from committer import repositories, incrementor, errors
 
 VERSION                     = '${version}'
-
-OK_RETURN_CODE              = 0
-
-NO_ARGUMENTS_ERROR          = ('usage:\n'
-                               '    commit "message" [++]\n'
-                               '    update', 1)
-
-NO_REPOSITORY_ERROR         = ('No repository detected.', 100)
-TOO_MANY_REPOSITORIES_ERROR = ('More than one repository detected.', 101)
-NOT_EXECUTABLE_ERROR        = ('Command line client not executable.', 102)
-
-class CommitterException (Exception):
-    """
-        to be raised when an error occurred, which should stop the default
-        program flow.
-    """
-    
-    def __init__ (self, error_tuple):
-        """
-            will set the given properties.
-        """
-        
-        super(CommitterException, self).__init__()
-        self.message    = error_tuple[0]
-        self.error_code = error_tuple[1]
 
 
 def _detect_repository ():
@@ -61,13 +35,13 @@ def _detect_repository ():
     detected_repositories = repositories.detect()
     
     for repository in detected_repositories:
-        sys.stdout.write('Detected %s\n' % repository.NAME)
+        sys.stdout.write('Detected %s repository.\n' % repository.NAME)
         
     if len(detected_repositories) == 0:
-        raise CommitterException(NO_REPOSITORY_ERROR)
+        raise errors.NoRepositoryDetectedException()
     
     if len(detected_repositories) > 1:
-        raise CommitterException(TOO_MANY_REPOSITORIES_ERROR)
+        raise errors.TooManyRepositoriesException()
     
     return detected_repositories[0]
 
@@ -84,12 +58,12 @@ def _ensure_command_executable(repository):
     
     if not repository.is_executable():
         sys.stdout.write('failed!\n')
-        raise CommitterException(NOT_EXECUTABLE_ERROR)
+        raise errors.NotExecutableException(repository)
     
     sys.stdout.write('ok.\n')
 
 
-def _committer(arguments):
+def commit(arguments):
     """
         1. detect what kind of repository the current directory is.
         2. ensure the command line client for the repository is executable.
@@ -106,29 +80,18 @@ def _committer(arguments):
     if len(arguments) == 3 and arguments[2] == '++':
         incrementor.increment_version()
         
-    if arguments[0].endswith('commit'):
-        message = arguments[1]
-        repository.commit(message)
+    message = arguments[1]
+    repository.commit(message)
 
 
-def main (arguments):
+def update():
     """
-        This is the main function for committer. It should be called by the
-        scripts 'commit' and 'update'. When called by 'commit' it will commit
-        all files in the current directory. When called by 'update' it will
-        update the repository in the current directory.
+        Updates the repository in the current directory. At first it detects
+        the repository in the current directory. Then it ensures that command
+        client for the detected repository is executable.
     """
 
-    sys.stdout.write('committer version %s\n' % VERSION)
-
-    try:
-        if len(arguments) == 1 and not arguments[0].endswith('update'):
-            raise CommitterException(NO_ARGUMENTS_ERROR)
-        
-        _committer(arguments)
-        
-    except CommitterException as committer_exception:
-        sys.stderr.write(committer_exception.message + '\n')
-        return committer_exception.error_code
-
-    return OK_RETURN_CODE
+    repository = _detect_repository()
+    _ensure_command_executable(repository)
+    
+    repository.update()

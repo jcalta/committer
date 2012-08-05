@@ -18,7 +18,7 @@
     wrappers. They are implementing the functions commit, detect, is_executable,
     and update. The module itself provides two functions "find" and "detect".
     The function "find" returns a list of all available repository modules. The
-    function detect returns a list of all deteceted repositories. 
+    function detect returns a list of all detected repositories. 
 """
 
 __author__ = 'Michael Gruber'

@@ -2,57 +2,11 @@ from mock import call, patch
 
 import unittest_support
 
-from committer import (NO_REPOSITORY_ERROR,
-                       NOT_EXECUTABLE_ERROR,
-                       OK_RETURN_CODE,
-                       NO_ARGUMENTS_ERROR,
-                       TOO_MANY_REPOSITORIES_ERROR,
-                       CommitterException,
-                       main)
+
+from committer import commit, errors, update
 
 
-class CommitterExceptionTests (unittest_support.TestCase):
-    def test_should_instantiate_committer_using_given_properties (self):
-        error_tuple = ('Hello world', 123)
-        actual_committer_exception = CommitterException(error_tuple)
-        
-        self.assertEquals('Hello world', actual_committer_exception.message)
-        self.assertEquals(123, actual_committer_exception.error_code)
-    
-    
-class CommitterTests (unittest_support.TestCase):
-    @patch('sys.stdout')
-    @patch('sys.stderr')
-    @patch('committer._committer')
-    def test_should_write_given_message_to_stderr (self, mock_committer, mock_stderr, mock_stdout):
-        error_tuple = ('Failed.', 13)
-        mock_committer.side_effect = CommitterException(error_tuple)
-        
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
-        
-        self.assertEquals(13, actual_return_code)
-        self.assertEquals(call('Failed.' + '\n'), mock_stderr.write.call_args)
-
-
-    @patch('sys.stderr')
-    @patch('sys.stdout')
-    def test_should_exit_commit_when_no_arguments_given (self, mock_stdout, mock_stderr):
-        actual_return_code = main(['/usr/local/bin/commit'])
-        
-        self.assertEquals(NO_ARGUMENTS_ERROR[1], actual_return_code)
-
-
-    @patch('sys.stdout')
-    @patch('committer.repositories.detect')
-    def test_should_return_with_zero_when_updating (self, mock_detect, mock_stdout):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-
-        actual_return_code = main(['/usr/local/bin/update'])
-        
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
-
-
+class CommitTests (unittest_support.TestCase):
     @patch('sys.stdout')
     @patch('committer.incrementor')    
     @patch('committer.repositories.detect')
@@ -61,10 +15,9 @@ class CommitterTests (unittest_support.TestCase):
         mock_detect.return_value = [mock_repository]
         mock_repository.is_executable.return_value = True 
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(call(), mock_repository.is_executable.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -76,11 +29,8 @@ class CommitterTests (unittest_support.TestCase):
         mock_detect.return_value = [mock_repository]
         mock_repository.is_executable.return_value = False 
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
+        self.assertRaises(errors.NotExecutableException, commit, ['/usr/local/bin/commit', 'message'])
         
-        self.assertEquals(call(), mock_repository.is_executable.call_args)
-        self.assertEquals(NOT_EXECUTABLE_ERROR[1], actual_return_code)
-
 
     @patch('sys.stdout')
     @patch('committer.incrementor')    
@@ -89,9 +39,8 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
          
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'])
         
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
         self.assertEquals(call(), mock_detect.call_args)
 
 
@@ -102,9 +51,7 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
-        
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
+        commit(['/usr/local/bin/commit', 'message'])
 
 
     @patch('sys.stdout')
@@ -114,10 +61,9 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(call(), mock_repository.update.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -127,23 +73,9 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'])
         
         self.assertEquals(call('message'), mock_repository.commit.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
-
-
-    @patch('sys.stdout')
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_not_commit_when_called_via_update (self, mock_detect, mock_incrementor, mock_stdout):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-        
-        actual_return_code = main(['/usr/local/bin/update', 'message'])
-        
-        self.assertEquals(None, mock_repository.commit.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -153,23 +85,9 @@ class CommitterTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message', '++'])
+        commit(['/usr/local/bin/commit', 'message', '++'])
         
         self.assertEquals(call(), mock_incrementor.increment_version.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
-
-
-    @patch('sys.stdout')
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_update_on_update (self, mock_detect, mock_incrementor, mock_stdout):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-        
-        actual_return_code = main(['/usr/local/bin/update'])
-        
-        self.assertEquals(call(), mock_repository.update.call_args)
-        self.assertEquals(OK_RETURN_CODE, actual_return_code)
 
 
     @patch('sys.stdout')
@@ -178,10 +96,8 @@ class CommitterTests (unittest_support.TestCase):
     def test_should_exit_when_no_repository_could_be_detected (self, mock_detect, mock_stderr, mock_stdout):
         mock_detect.return_value = []
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message', '++'])
+        self.assertRaises(errors.NoRepositoryDetectedException, commit, ['/usr/local/bin/commit', 'message', '++'])
         
-        self.assertEquals(NO_REPOSITORY_ERROR[1], actual_return_code)
-
 
     @patch('sys.stdout')
     @patch('sys.stderr')
@@ -189,6 +105,26 @@ class CommitterTests (unittest_support.TestCase):
     def test_should_exit_when_more_than_one_repository_have_been_detected (self, mock_detect, mock_stderr, mock_stdout):
         mock_detect.return_value = [self.create_mock_repository(), self.create_mock_repository()]
         
-        actual_return_code = main(['/usr/local/bin/commit', 'message', '++'])
+        self.assertRaises(errors.TooManyRepositoriesException, commit, ['/usr/local/bin/commit', 'message', '++'])
+
+
+class UpdateTests (unittest_support.TestCase):
+    @patch('sys.stdout')
+    @patch('committer.repositories.detect')
+    def test_should_return_with_zero_when_updating (self, mock_detect, mock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+
+        update()
         
-        self.assertEquals(TOO_MANY_REPOSITORIES_ERROR[1], actual_return_code)
+
+    @patch('sys.stdout')
+    @patch('committer.incrementor')    
+    @patch('committer.repositories.detect')
+    def test_should_update_on_update (self, mock_detect, mock_incrementor, mock_stdout):
+        mock_repository = self.create_mock_repository()
+        mock_detect.return_value = [mock_repository]
+        
+        update()
+        
+        self.assertEquals(call(), mock_repository.update.call_args)

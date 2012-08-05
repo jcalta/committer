@@ -16,15 +16,31 @@
 #   limitations under the License.
 
 """
-    Provides a simplified command line interface to the version control systems
-    git, mercurial, and subversion.
-    This script updates the current repository.
+    Committer provides a simplified command line interface to the version
+    control systems git, mercurial, and subversion.
+    By executing this script you will update the repository in the current
+    directory.
+    
+    usage:
+        update
 """
 
-import committer
 import sys
 
+from committer import VERSION, errors, update
 
-arguments   = sys.argv
-return_code = committer.main(arguments)
-sys.exit(return_code)
+sys.stdout.write('update (committer version %s)\n' % VERSION)
+
+try:
+    arguments = sys.argv
+    
+    if len(arguments) != 1:
+        raise errors.CommitterException(__doc__, 1)
+    
+    update()
+    
+except errors.CommitterException as committer_exception:
+    sys.stderr.write(committer_exception.message + '\n')
+    sys.exit(committer_exception.error_code)
+
+sys.exit(0)

@@ -44,8 +44,7 @@ def _detect_repository ():
         raise errors.TooManyRepositoriesException()
     
     repository = detected_repositories[0]
-    _ensure_command_executable(repository)
-    return repository
+    return _ensure_command_executable(repository)
 
 
 def _ensure_command_executable(repository):
@@ -63,6 +62,8 @@ def _ensure_command_executable(repository):
         raise errors.NotExecutableException(repository)
     
     sys.stdout.write('ok.\n')
+    
+    return repository
 
 
 def commit(arguments):

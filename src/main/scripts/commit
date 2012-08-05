@@ -18,8 +18,8 @@
 """
     Committer provides a simplified command line interface to the version 
     control systems git, mercurial, and subversion.
-    By executing this script you will commit all changes in the current
-    directory.
+    By executing the "commit" script you will commit all changes in the current
+    directory. Try "update" if you want to update.
     
     usage:
         commit "message" [++]
@@ -29,7 +29,7 @@ import sys
 
 from committer import VERSION, commit, errors
 
-sys.stdout.write('commit (committer version %s)\n' % VERSION)
+print 'commit (committer version %s)' % VERSION
 
 try:
     arguments = sys.argv
@@ -40,7 +40,7 @@ try:
     commit(arguments)
     
 except errors.CommitterException as committer_exception:
-    sys.stderr.write(committer_exception.message + '\n')
+    sys.stderr.write(committer_exception.message)
     sys.exit(committer_exception.error_code)
 
 sys.exit(0)

@@ -18,8 +18,8 @@
 """
     Committer provides a simplified command line interface to the version
     control systems git, mercurial, and subversion.
-    By executing this script you will update the repository in the current
-    directory.
+    By executing the "update" script you will update the repository in the
+    current directory. Try "commit" if you want to commit.
     
     usage:
         update
@@ -29,18 +29,16 @@ import sys
 
 from committer import VERSION, errors, update
 
-sys.stdout.write('update (committer version %s)\n' % VERSION)
+print 'update (committer version %s)' % VERSION
 
 try:
-    arguments = sys.argv
-    
-    if len(arguments) != 1:
+    if len(sys.argv) != 1:
         raise errors.CommitterException(__doc__, 1)
     
     update()
     
 except errors.CommitterException as committer_exception:
-    sys.stderr.write(committer_exception.message + '\n')
+    sys.stderr.write(committer_exception.message)
     sys.exit(committer_exception.error_code)
 
 sys.exit(0)

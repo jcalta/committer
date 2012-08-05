@@ -37,7 +37,7 @@ class CommitterException (Exception):
             raise Exception('Illegal erro code: should be smaller than 128.')
         
         super(CommitterException, self).__init__()
-        self.message    = message
+        self.message    = message + '\n'
         self.error_code = error_code
 
 

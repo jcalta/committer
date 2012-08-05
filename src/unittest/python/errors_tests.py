@@ -11,7 +11,7 @@ class ErrorsTests (unittest_support.TestCase):
     def test_should_use_the_given_properties (self):
         actual_exception = errors.CommitterException('message', 123)
         
-        self.assertEquals('message', actual_exception.message)
+        self.assertEquals('message\n', actual_exception.message)
         self.assertEquals(123, actual_exception.error_code)
 
 
@@ -26,14 +26,14 @@ class ErrorsTests (unittest_support.TestCase):
     def test_no_repository_detected_should_use_the_given_properties (self):
         actual_exception = errors.NoRepositoryDetectedException()
         
-        self.assertEquals('No repository detected.', actual_exception.message)
+        self.assertEquals('No repository detected.\n', actual_exception.message)
         self.assertEquals(100, actual_exception.error_code)
 
 
     def test_too_many_repositories_detected_should_use_the_given_properties (self):
         actual_exception = errors.TooManyRepositoriesException()
         
-        self.assertEquals('More than one repository detected.', actual_exception.message)
+        self.assertEquals('More than one repository detected.\n', actual_exception.message)
         self.assertEquals(101, actual_exception.error_code)
 
 
@@ -41,5 +41,5 @@ class ErrorsTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         actual_exception = errors.NotExecutableException(mock_repository)
         
-        self.assertEquals('MockRepository command line client "repository-command" not executable.', actual_exception.message)
+        self.assertEquals('MockRepository command line client "repository-command" not executable.\n', actual_exception.message)
         self.assertEquals(102, actual_exception.error_code)

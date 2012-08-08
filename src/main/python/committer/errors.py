@@ -53,7 +53,16 @@ class NoRepositoryDetectedException (CommitterException):
         super(NoRepositoryDetectedException, self) \
             .__init__('No repository detected.', 100)
 
+class ShowUsageInformationException (CommitterException):
+    """
+        to be raised when showing the usage information.
+    """
 
+    def __init__ (self, usage_information):
+        super(ShowUsageInformationException, self) \
+            .__init__(usage_information, 1)
+    
+    
 class TooManyRepositoriesException (CommitterException):
     """
         to be raised when more than one repository could be detected in the

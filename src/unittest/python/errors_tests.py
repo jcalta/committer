@@ -30,6 +30,13 @@ class ErrorsTests (unittest_support.TestCase):
         self.assertEquals(100, actual_exception.error_code)
 
 
+    def test_show_usage_information_should_use_the_given_properties (self):
+        actual_exception = errors.ShowUsageInformationException('usage: mock mock mock ...')
+        
+        self.assertEquals('usage: mock mock mock ...\n', actual_exception.message)
+        self.assertEquals(1, actual_exception.error_code)
+
+
     def test_too_many_repositories_detected_should_use_the_given_properties (self):
         mock_repositories = [self.create_mock_repository(), self.create_mock_repository()]
         actual_exception = errors.TooManyRepositoriesException(mock_repositories)

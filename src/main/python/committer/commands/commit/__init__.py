@@ -33,7 +33,7 @@ def perform(arguments, usage_information):
     """
 
     if len(arguments) == 1:
-        raise errors.CommitterException(usage_information, 1)
+        raise errors.ShowUsageInformationException(usage_information)
         
     repository = repositories.discover_working_repository()
     repository.update()

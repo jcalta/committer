@@ -27,8 +27,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import perform
-from committer.commands import update
+from committer import perform, update
 
 
 perform(update, sys.argv, __doc__)

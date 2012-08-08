@@ -20,8 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
-from committer import errors, repositories
-from committer.commands.commit import incrementor
+from committer import errors, incrementor, repositories
 
 
 def perform(arguments, usage_information):

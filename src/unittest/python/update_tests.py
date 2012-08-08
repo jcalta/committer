@@ -3,8 +3,7 @@ from mock import call, patch
 import unittest_support
 
 
-from committer import errors
-from committer.commands import update
+from committer import errors, update
 
 
 class UpdateTests (unittest_support.TestCase):

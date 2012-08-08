@@ -39,8 +39,6 @@ def perform (command, arguments, usage_information):
     return_code = 0
     
     try:
-        arguments = sys.argv
-        
         command.perform(arguments, __doc__ + usage_information)
         
     except errors.CommitterException as committer_exception:

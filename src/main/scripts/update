@@ -25,20 +25,10 @@
         update
 """
 
+__author__ = 'Michael Gruber'
+
 import sys
 
-from committer import VERSION, errors, update
+from committer import perform, update
 
-print 'update (committer version %s)' % VERSION
-
-try:
-    if len(sys.argv) != 1:
-        raise errors.CommitterException(__doc__, 1)
-    
-    update()
-    
-except errors.CommitterException as committer_exception:
-    sys.stderr.write(committer_exception.message)
-    sys.exit(committer_exception.error_code)
-
-sys.exit(0)
+perform(update, sys.argv, __doc__)

@@ -60,7 +60,7 @@ class TooManyRepositoriesException (CommitterException):
     
     def __init__ (self, detected_repositories):
         names = [repository.NAME for repository in detected_repositories] 
-        message = 'More than one repository detected: ' \
+        message = 'Detected more than one repository: ' \
                 + ', '.join(names)
             
         super(TooManyRepositoriesException, self) \

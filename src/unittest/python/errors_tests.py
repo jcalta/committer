@@ -34,7 +34,7 @@ class ErrorsTests (unittest_support.TestCase):
         mock_repositories = [self.create_mock_repository(), self.create_mock_repository()]
         actual_exception = errors.TooManyRepositoriesException(mock_repositories)
         
-        self.assertEquals('More than one repository detected: MockRepository, MockRepository\n', actual_exception.message)
+        self.assertEquals('Detected more than one repository: MockRepository, MockRepository\n', actual_exception.message)
         self.assertEquals(101, actual_exception.error_code)
 
 

@@ -35,9 +35,6 @@ def _detect_repository ():
     
     detected_repositories = repositories.detect()
     
-    for repository in detected_repositories:
-        sys.stdout.write('Detected %s repository.\n' % repository.NAME)
-        
     if len(detected_repositories) == 0:
         raise errors.NoRepositoryDetectedException()
     
@@ -67,7 +64,7 @@ def _ensure_command_executable(repository):
     return repository
 
 
-def commit(arguments):
+def commit(arguments, usage_information):
     """
         1. detect what kind of repository the current directory is.
         2. update the repository.
@@ -75,6 +72,9 @@ def commit(arguments):
         4. commit all modified files to the repository.
     """
 
+    if len(arguments) == 1:
+        raise errors.CommitterException(usage_information, 1)
+        
     repository = _detect_repository()
     repository.update()
     
@@ -85,10 +85,28 @@ def commit(arguments):
     repository.commit(message)
 
 
-def update():
+def update(arguments, usage_information):
     """
         Updates the repository in the current directory.
     """
 
+    if len(arguments) != 1:
+        raise errors.CommitterException(usage_information, 1)
+        
     repository = _detect_repository()
     repository.update()
+
+
+def perform(command, arguments, usage_information):
+    print 'committer version %s' % VERSION
+    
+    try:
+        arguments = sys.argv
+        
+        command(arguments, usage_information)
+        
+    except errors.CommitterException as committer_exception:
+        sys.stderr.write(committer_exception.message)
+        sys.exit(committer_exception.error_code)
+
+    sys.exit(0)

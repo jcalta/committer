@@ -15,7 +15,7 @@ class CommitTests (unittest_support.TestCase):
         mock_detect.return_value = [mock_repository]
         mock_repository.is_executable.return_value = True 
         
-        commit(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'], 'usage information')
         
         self.assertEquals(call(), mock_repository.is_executable.call_args)
 
@@ -29,7 +29,7 @@ class CommitTests (unittest_support.TestCase):
         mock_detect.return_value = [mock_repository]
         mock_repository.is_executable.return_value = False 
         
-        self.assertRaises(errors.NotExecutableException, commit, ['/usr/local/bin/commit', 'message'])
+        self.assertRaises(errors.NotExecutableException, commit, ['/usr/local/bin/commit', 'message'], 'usage information')
         
 
     @patch('sys.stdout')
@@ -39,7 +39,7 @@ class CommitTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
          
-        commit(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'], 'usage information')
         
         self.assertEquals(call(), mock_detect.call_args)
 
@@ -51,7 +51,7 @@ class CommitTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        commit(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'], 'usage information')
 
 
     @patch('sys.stdout')
@@ -61,7 +61,7 @@ class CommitTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        commit(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'], 'usage information')
         
         self.assertEquals(call(), mock_repository.update.call_args)
 
@@ -73,7 +73,7 @@ class CommitTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        commit(['/usr/local/bin/commit', 'message'])
+        commit(['/usr/local/bin/commit', 'message'], 'usage information')
         
         self.assertEquals(call('message'), mock_repository.commit.call_args)
 
@@ -85,7 +85,7 @@ class CommitTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        commit(['/usr/local/bin/commit', 'message', '++'])
+        commit(['/usr/local/bin/commit', 'message', '++'], 'usage information')
         
         self.assertEquals(call(), mock_incrementor.increment_version.call_args)
 
@@ -96,7 +96,7 @@ class CommitTests (unittest_support.TestCase):
     def test_should_exit_when_no_repository_could_be_detected (self, mock_detect, mock_stderr, mock_stdout):
         mock_detect.return_value = []
         
-        self.assertRaises(errors.NoRepositoryDetectedException, commit, ['/usr/local/bin/commit', 'message', '++'])
+        self.assertRaises(errors.NoRepositoryDetectedException, commit, ['/usr/local/bin/commit', 'message', '++'], 'usage information')
         
 
     @patch('sys.stdout')
@@ -105,7 +105,7 @@ class CommitTests (unittest_support.TestCase):
     def test_should_exit_when_more_than_one_repository_have_been_detected (self, mock_detect, mock_stderr, mock_stdout):
         mock_detect.return_value = [self.create_mock_repository(), self.create_mock_repository()]
         
-        self.assertRaises(errors.TooManyRepositoriesException, commit, ['/usr/local/bin/commit', 'message', '++'])
+        self.assertRaises(errors.TooManyRepositoriesException, commit, ['/usr/local/bin/commit', 'message', '++'], 'usage information')
 
 
 class UpdateTests (unittest_support.TestCase):
@@ -115,7 +115,7 @@ class UpdateTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
 
-        update()
+        update(['/usr/local/bin/update'], 'usage information')
         
 
     @patch('sys.stdout')
@@ -125,6 +125,6 @@ class UpdateTests (unittest_support.TestCase):
         mock_repository = self.create_mock_repository()
         mock_detect.return_value = [mock_repository]
         
-        update()
+        update(['/usr/local/bin/update'], 'usage information')
         
         self.assertEquals(call(), mock_repository.update.call_args)

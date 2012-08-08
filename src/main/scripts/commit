@@ -31,5 +31,4 @@ from committer import perform
 from committer.commands import commit
 
 
-return_code = perform(commit, sys.argv, __doc__)
-sys.exit(return_code)
+perform(commit, sys.argv, __doc__)

@@ -31,5 +31,4 @@ from committer import perform
 from committer.commands import update
 
 
-return_code = perform(update, sys.argv, __doc__)
-sys.exit(return_code)
+perform(update, sys.argv, __doc__)

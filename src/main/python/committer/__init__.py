@@ -36,7 +36,8 @@ def perform (command, arguments, usage_information):
     """
     
     print 'committer version %s' % VERSION
-
+    return_code = 0
+    
     try:
         arguments = sys.argv
         
@@ -44,6 +45,6 @@ def perform (command, arguments, usage_information):
         
     except errors.CommitterException as committer_exception:
         sys.stderr.write(committer_exception.message)
-        return committer_exception.error_code
+        return_code = committer_exception.error_code
 
-    return 0
+    sys.exit(return_code)

@@ -1,4 +1,4 @@
-#   subversion wrapper module for committer
+#   subversion command line client wrapper for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");

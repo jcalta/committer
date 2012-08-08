@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-#
-#   committer
+#   committer commands
 #   Copyright 2012 Michael Gruber
 #   
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +14,7 @@
 #   limitations under the License.
 
 """
-    By executing the "commit" command you will commit all changes in the current
-    directory.
-    
-    usage:
-        commit "message" [++]
+    submodules of this module represent committer commands.
 """
 
 __author__ = 'Michael Gruber'
-
-import sys
-
-from committer import perform
-from committer.commands import commit
-
-
-return_code = perform(commit, sys.argv, __doc__)
-sys.exit(return_code)

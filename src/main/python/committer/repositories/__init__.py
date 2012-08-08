@@ -25,6 +25,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
+from committer import errors
 from committer.repositories import git, mercurial, subversion
 
 
@@ -39,10 +40,41 @@ def detect ():
     return [repository for repository in repositories if repository.detect()]
 
 
+def discover_working_repository ():
+    """
+        returns the detected repository. Will raise an CommitterException when
+        no or more than one repository is detected.
+    """
+    
+    detected_repositories = detect()
+    
+    if len(detected_repositories) == 0:
+        raise errors.NoRepositoryDetectedException()
+    
+    if len(detected_repositories) > 1:
+        raise errors.TooManyRepositoriesException(detected_repositories)
+    
+    repository = detected_repositories[0]
+    return ensure_client_executable(repository)
+
+
+def ensure_client_executable (repository):
+    """
+        ensures that the command line client for the given repository is
+        executable. Will Raise an CommiterException when the command line
+        client is not executable.
+    """
+    
+    if not repository.is_executable():
+        raise errors.NotExecutableException(repository)
+    
+    return repository
+
+
 def find ():
     """
         returns a list of all available version control systems command line
-        wrappper modules (git, mercurial, and subversion).
+        client wrappper modules (git, mercurial, and subversion).
     """
     
     return [git, mercurial, subversion]

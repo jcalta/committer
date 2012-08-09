@@ -14,13 +14,13 @@
 #   limitations under the License.
 
 """
-    Committer provides a simplified command line interface to the
-    version control systems: git, mercurial, and subverion. 
+    provides a simplified command line interface to
+    the version control systems: git, mercurial, and subverion. 
 """
 
 __author__ = 'Michael Gruber'
 
-import sys
+from sys import exit, stdout, stderr
 
 from committer import errors
 
@@ -35,14 +35,23 @@ def perform (command, arguments, usage_information):
         command module.
     """
     
-    print 'committer version %s' % VERSION
+    stdout.write('committer version %s\n' % VERSION)
     return_code = 0
     
+    if len(arguments) > 1 and arguments[1] == '--version':
+        return exit(return_code)
+    
+    complete_usage_information = __doc__ + usage_information + '\n'
+    
+    if len(arguments) > 1 and arguments[1] == 'help':
+        stdout.write(complete_usage_information)
+        return exit(return_code)
+    
     try:
-        command.perform(arguments, __doc__ + usage_information)
+        command.perform(arguments, complete_usage_information)
         
     except errors.CommitterException as committer_exception:
-        sys.stderr.write(committer_exception.message)
+        stderr.write(committer_exception.message)
         return_code = committer_exception.error_code
 
-    sys.exit(return_code)
+    exit(return_code)

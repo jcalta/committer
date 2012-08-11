@@ -6,7 +6,7 @@ mercurial, and subversion.
 
 ## Usage
 
-Committer is used through a set of python-scripts: 
+Committer commands: 
 * **commit** - commit all changes
 * **st** - show all changes
 * **update** - update the current directory
@@ -16,7 +16,7 @@ Committer is used through a set of python-scripts:
 ```bash
 commit "This is a short message about WHY I made this change."
 ```
-Using the *commit* script on a git repository will:
+For example using the `commit` script on a git repository will:
 * check if the "git" command is executable, by executing: *git --version*
 * execute: *git pull*
 * execute: *git commit -a -m "This is a short message about WHY I made this change."*
@@ -47,7 +47,7 @@ This will execute the "status" command known by all version control systems.
 update
 ```
 
-Using the *update* script on a mercurial repository will:
+For example using the `update` script on a mercurial repository will:
 * check if the "hg" command is executable, by executing: *hg --version --quiet*
 * execute: *hg pull*
 * execute: *hg up*

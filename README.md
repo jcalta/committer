@@ -6,6 +6,8 @@ mercurial, and subversion.
 
 ## Usage
 
+Committer provides three commands: *commit, st,* and *update.*
+
 ### Committing all changes in the current directory:
 
 ```bash
@@ -47,6 +49,7 @@ Using the *update* script on a mercurial repository will:
 * execute: *hg pull*
 * execute: *hg up*
 
+
 ## Micro Commits
 
 Committing in a high frequency has advantages:
@@ -57,6 +60,19 @@ Committing in a high frequency has advantages:
 [Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
 
 [Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
+
+
+## Installation
+
+### Using pip 
+```bash
+pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
+```
+
+### Using easy_install
+```
+easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
+```
 
 
 ## License

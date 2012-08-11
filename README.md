@@ -6,7 +6,10 @@ mercurial, and subversion.
 
 ## Usage
 
-Committer provides three commands: *commit, st,* and *update.*
+Committer is used through a set of python-scripts: 
+* **commit** - commit all changes
+* **st** - show all changes
+* **update** - update the current directory
 
 ### Committing all changes in the current directory:
 
@@ -48,6 +51,22 @@ Using the *update* script on a mercurial repository will:
 * check if the "hg" command is executable, by executing: *hg --version --quiet*
 * execute: *hg pull*
 * execute: *hg up*
+
+
+### Display usage information
+
+```bash
+commit help
+```
+The help argument works on all commands.
+
+
+### Display version information
+
+```bash
+update --version
+```
+Displays the committer version information. This works on all commands. 
 
 
 ## Micro Commits

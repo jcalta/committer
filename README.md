@@ -1,8 +1,12 @@
-committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
-=========
+# committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
+
 
 Provides a simplified command line interface to the version control systems git,
 mercurial, and subversion.
+
+## Usage
+
+### Committing all changes in the current directory:
 
 ```bash
 commit "This is a short message about WHY I made this change."
@@ -13,7 +17,7 @@ Using the *commit* script on a git repository will:
 * execute: *git commit -a -m "This is a short message about WHY I made this change."*
 * execute: *git push*
 
-**Incrementing the version before committing:**
+### Incrementing the version before committing:
 
 ```bash
 commit "added a new feature" ++
@@ -23,7 +27,7 @@ The second argument "++" tells the script to increment the version within
 *build.py*
 
 
-**Show changes in the current directory:**
+### Show changes in the current directory:
 
 ```bash
 st
@@ -32,7 +36,7 @@ st
 This will execute the "status" command known by all version control systems.
 
 
-**Updating the repository in the current directory:**
+### Updating the repository in the current directory:
 
 ```bash
 update
@@ -43,8 +47,7 @@ Using the *update* script on a mercurial repository will:
 * execute: *hg pull*
 * execute: *hg up*
 
-Micro Commits
-=============
+## Micro Commits
 
 Committing in a high frequency has advantages:
 * prevents merging,
@@ -56,8 +59,7 @@ Committing in a high frequency has advantages:
 [Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
 
 
-License
-=======
+## License
 
 Copyright 2012 Michael Gruber
 

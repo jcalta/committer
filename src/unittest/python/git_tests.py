@@ -3,7 +3,7 @@ import subprocess
 
 from mock import Mock, call, patch
 
-from committer.repositories import git
+from committer.vcsclients import git
 
 
 class PropertiesTests (unittest.TestCase):
@@ -16,7 +16,7 @@ class PropertiesTests (unittest.TestCase):
 
 
 class CommitTests (unittest.TestCase):
-    @patch('committer.repositories.git._git')
+    @patch('committer.vcsclients.git._git')
     def test_should_prepend_git_to_given_arguments (self, mock_git):
         
         git.commit('This is a commit message.')
@@ -27,7 +27,7 @@ class CommitTests (unittest.TestCase):
         
         
 class UpdateTests (unittest.TestCase):
-    @patch('committer.repositories.git._git')
+    @patch('committer.vcsclients.git._git')
     def test_should_call_pull (self, mock_git):
         git.update()
         
@@ -56,7 +56,7 @@ class DetectTests (unittest.TestCase):
 
 
 class IsExecutableTests (unittest.TestCase):
-    @patch('committer.repositories.git.check_if_is_executable')
+    @patch('committer.vcsclients.git.check_if_is_executable')
     def test_should_return_value_of_check (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -65,7 +65,7 @@ class IsExecutableTests (unittest.TestCase):
         self.assertEquals('value from check', actual_return_value)
 
 
-    @patch('committer.repositories.git.check_if_is_executable')
+    @patch('committer.vcsclients.git.check_if_is_executable')
     def test_should_check_using_git_version (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -75,7 +75,7 @@ class IsExecutableTests (unittest.TestCase):
 
 
 class GitTests (unittest.TestCase):
-    @patch('committer.repositories.git.execute_command')
+    @patch('committer.vcsclients.git.execute_command')
     def test_should_execute_git_using_arguments (self, mock_execute):
         git._git('arg1', 'arg2', 'arg3')
         

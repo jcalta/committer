@@ -1,4 +1,4 @@
-#   git command line client wrapper for committer
+#   mercurial client for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,57 +14,61 @@
 #   limitations under the License.
 
 """
-    Git command line client wrapper module.
+    Mercurial command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.repositories.util import check_if_is_executable, execute_command
+from committer.vcsclients.util import check_if_is_executable, execute_command
 
 
-COMMAND = 'git'
-NAME    = 'Git'
-
+COMMAND = 'hg'
+NAME    = 'Mercurial'
 
 def commit (message):
     """
-        commits all files by calling: git commit -a -m "message"
+        Commits all files in the current directory
+        by calling: hg commit -m "message"
+        and "hg push"
     """
     
-    _git('commit', '-a', '-m', message)
-    _git('push')
+    _hg('commit', '-m', message)
+    _hg('push')
 
 
 def detect ():
     """
-        returns True if the current directory represents a git repository,
-        otherwise False.
+        Checks if the .hg directory exists.
+        
+        @return: True if the current directory represents a mercurial repository,
+                 otherwise False.
     """
     
-    return path.isdir('.git')
+    return path.isdir('.hg')
 
 
 def is_executable ():
     """
-        returns True if "git --version" is executable, otherwise False. 
+        @return: True if "hg --version --quiet" is executable, otherwise False. 
     """
     
-    return check_if_is_executable(COMMAND, '--version')
+    return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
 def update ():
     """
-        updates files by executing "git pull".
+        Updates files by calling "hg pull" and "hg update".
     """
 
-    _git('pull')
+    _hg('pull')
+    _hg('update')
 
 
-def _git (*arguments):
+def _hg (*arguments):
     """
-        executes git using the given arguments.
+        Executes hg using the given arguments.
     """
     
     execute_command(COMMAND, *arguments)

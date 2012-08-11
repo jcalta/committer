@@ -1,4 +1,4 @@
-#   mercurial command line client wrapper for committer
+#   subversion client for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +14,43 @@
 #   limitations under the License.
 
 """
-    Mercurial command line client wrapper module.
+    Subversion command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.repositories.util import check_if_is_executable, execute_command
+from committer.vcsclients.util import check_if_is_executable, execute_command
 
 
-COMMAND = 'hg'
-NAME    = 'Mercurial'
+COMMAND = 'svn'
+NAME    = 'Subversion'
 
 def commit (message):
     """
-        commits all files in the current directory
-        by calling: hg commit -m "message"
-        and "hg push"
+        Commits all files by calling: svn commit -m "message"
     """
     
-    _hg('commit', '-m', message)
-    _hg('push')
+    _svn('commit', '-m', message)
 
 
 def detect ():
     """
-        returns True if the current directory represents a mercurial repository,
-        otherwise False.
+        Checks if the .svn directory exists.
+        
+        @return: True if the current directory represents a subversion repository,
+                 otherwise False.
     """
     
-    return path.isdir('.hg')
+    return path.isdir('.svn')
 
 
 def is_executable ():
     """
-        returns True if "hg --version --quiet" is executable, otherwise False. 
+        Checks if "svn --version --quiet" is executable.
+        
+        @return: True if svn client is executable, otherwise False. 
     """
     
     return check_if_is_executable(COMMAND, '--version', '--quiet')
@@ -57,16 +58,15 @@ def is_executable ():
 
 def update ():
     """
-        updates files by calling "hg pull" and "hg update".
+        Updates files by executing "svn pull" and "svn update".
     """
 
-    _hg('pull')
-    _hg('update')
+    _svn('update')
 
 
-def _hg (*arguments):
+def _svn (*arguments):
     """
-        executes hg using the given arguments.
+        Executes svn using the given arguments.
     """
     
     execute_command(COMMAND, *arguments)

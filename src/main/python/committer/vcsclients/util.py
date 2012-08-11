@@ -1,4 +1,4 @@
-#   utility functions for repository wrappers module for committer
+#   command line utility functions for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Utility functions for repository wrappers.
+    Utility functions for command line wrappers.
 """
 
 __author__ = 'Michael Gruber'
@@ -24,7 +24,7 @@ from subprocess import CalledProcessError, call, check_call
 
 def execute_command (command, *arguments):
     """
-        executes command using the given command_and_arguments.
+        Executes command using the given command_and_arguments.
     """
     
     command_and_arguments = [command] + list(arguments)
@@ -33,7 +33,10 @@ def execute_command (command, *arguments):
 
 def check_if_is_executable (command, *arguments):
     """
-        returns True if the given is executable, otherwise False. 
+        Executes the given command with the given arguments.
+        
+        @return: True if the given command is executable with the given
+                 arguments, otherwise False. 
     """
     
     try:

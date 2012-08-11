@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    provides a simplified command line interface to
+    committer provides a simplified command line interface to
     the version control systems: git, mercurial, and subverion. 
 """
 

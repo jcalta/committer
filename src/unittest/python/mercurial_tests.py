@@ -3,7 +3,7 @@ import subprocess
 
 from mock import Mock, call, patch
 
-from committer.repositories import mercurial
+from committer.vcsclients import mercurial
 
 
 class PropertiesTests (unittest.TestCase):
@@ -16,7 +16,7 @@ class PropertiesTests (unittest.TestCase):
 
 
 class CommitTests (unittest.TestCase):
-    @patch('committer.repositories.mercurial._hg')
+    @patch('committer.vcsclients.mercurial._hg')
     def test_should_prepend_hg_to_given_arguments (self, mock_hg):
         
         mercurial.commit('This is a commit message.')
@@ -27,7 +27,7 @@ class CommitTests (unittest.TestCase):
         
         
 class UpdateTests (unittest.TestCase):
-    @patch('committer.repositories.mercurial._hg')
+    @patch('committer.vcsclients.mercurial._hg')
     def test_should_call_pull_and_update (self, mock_hg):
         mercurial.update()
         
@@ -56,7 +56,7 @@ class DetectTests (unittest.TestCase):
 
 
 class IsExecutableTests (unittest.TestCase):
-    @patch('committer.repositories.mercurial.check_if_is_executable')
+    @patch('committer.vcsclients.mercurial.check_if_is_executable')
     def test_should_return_value_of_check (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -65,7 +65,7 @@ class IsExecutableTests (unittest.TestCase):
         self.assertEquals('value from check', actual_return_value)
 
 
-    @patch('committer.repositories.mercurial.check_if_is_executable')
+    @patch('committer.vcsclients.mercurial.check_if_is_executable')
     def test_should_check_using_hg_version_quiet (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -75,7 +75,7 @@ class IsExecutableTests (unittest.TestCase):
 
 
 class MercurialTests (unittest.TestCase):
-    @patch('committer.repositories.mercurial.execute_command')
+    @patch('committer.vcsclients.mercurial.execute_command')
     def test_should_execute_hg_using_arguments (self, mock_execute):
         mercurial._hg('arg1', 'arg2', 'arg3')
         

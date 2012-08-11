@@ -2,94 +2,63 @@ from mock import call, patch
 
 import unittest_support
 
-from committer import commit, errors
+from committer.commit import perform
+from committer.errors import ShowUsageInformationException
 
 
-class CommitTests (unittest_support.TestCase):
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_check_that_repository_is_executable (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-        mock_repository.is_executable.return_value = True 
+class PerformTests (unittest_support.TestCase):
+    def test_should_show_usage_when_more_than_one_argument (self):
+        self.assertRaises(ShowUsageInformationException, perform, ['/usr/local/bin/commit'], 'usage information')
+
+
+    @patch('committer.commit.discover_working_repository')
+    def test_should_discover_working_repository (self, mock_discover):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
         
-        commit.perform(['/usr/local/bin/commit', 'message'], 'usage information')
+        perform(['/usr/local/bin/commit', 'This is the message'], 'usage information')
         
-        self.assertEquals(call(), mock_repository.is_executable.call_args)
+        self.assertEquals(call(), mock_discover.call_args)
 
 
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_return_with_error_when_repository_command_is_not_executable (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-        mock_repository.is_executable.return_value = False 
+    @patch('committer.commit.discover_working_repository')
+    def test_should_update_before_committing (self, mock_discover):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_vcs_client.commit.side_effect = Exception('commit exception')
+        mock_discover.return_value = mock_vcs_client
         
-        self.assertRaises(errors.NotExecutableException, commit.perform, ['/usr/local/bin/commit', 'message'], 'usage information')
-        
+        self.assertRaises(Exception, perform, ['/usr/local/bin/commit', 'This is the message'], 'usage information')
 
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_detect_repository (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-         
-        commit.perform(['/usr/local/bin/commit', 'message'], 'usage information')
-        
-        self.assertEquals(call(), mock_detect.call_args)
+        self.assertEquals(call(), mock_vcs_client.update.call_args)
 
 
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_return_with_zero (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
+    @patch('committer.commit.discover_working_repository')
+    def test_should_use_first_argument_as_commit_message (self, mock_discover):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
         
-        commit.perform(['/usr/local/bin/commit', 'message'], 'usage information')
+        perform(['/usr/local/bin/commit', 'This is the message'], 'usage information')
+        
+        self.assertEquals(call('This is the message'), mock_vcs_client.commit.call_args)
 
 
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_call_update_on_repository (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
+    @patch('committer.commit.increment_version')
+    @patch('committer.commit.discover_working_repository')
+    def test_should_increment_version_when_second_argument_is_plus_plus (self, mock_discover, mock_increment):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
         
-        commit.perform(['/usr/local/bin/commit', 'message'], 'usage information')
+        perform(['/usr/local/bin/commit', 'This is the message', '++'], 'usage information')
         
-        self.assertEquals(call(), mock_repository.update.call_args)
+        self.assertEquals(call(), mock_increment.call_args)
 
 
-    @patch('committer.incrementor')    
-    @patch('committer.repositories.detect')
-    def test_should_commit_using_first_argument_as_message (self, mock_detect, mock_incrementor):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
+    @patch('committer.commit.increment_version')
+    @patch('committer.commit.discover_working_repository')
+    def test_should_not_increment_version_when_no_second_argument_given (self, mock_discover, mock_increment):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
         
-        commit.perform(['/usr/local/bin/commit', 'message'], 'usage information')
+        perform(['/usr/local/bin/commit', 'This is the message'], 'usage information')
         
-        self.assertEquals(call('message'), mock_repository.commit.call_args)
-
-
-    @patch('committer.incrementor.increment_version')    
-    @patch('committer.repositories.detect')
-    def test_should_increment_when_second_argument_is_plus_plus (self, mock_detect, mock_increment_version):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
-        
-        commit.perform(['/usr/local/bin/commit', 'message', '++'], 'usage information')
-        
-        self.assertEquals(call(), mock_increment_version.call_args)
-
-
-    @patch('committer.repositories.detect')
-    def test_should_exit_when_no_repository_could_be_detected (self, mock_detect):
-        mock_detect.return_value = []
-        
-        self.assertRaises(errors.NoRepositoryDetectedException, commit.perform, ['/usr/local/bin/commit', 'message', '++'], 'usage information')
-        
-
-    @patch('committer.repositories.detect')
-    def test_should_exit_when_more_than_one_repository_have_been_detected (self, mock_detect):
-        mock_detect.return_value = [self.create_mock_repository(), self.create_mock_repository()]
-        
-        self.assertRaises(errors.TooManyRepositoriesException, commit.perform, ['/usr/local/bin/commit', 'message', '++'], 'usage information')
+        self.assertEquals(None, mock_increment.call_args)

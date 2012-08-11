@@ -20,25 +20,27 @@
 
 __author__ = 'Michael Gruber'
 
-import errors, incrementor, repositories
+from errors import ShowUsageInformationException
+from incrementor import increment_version
+from vcsclients import discover_working_repository
 
 
 def perform(arguments, usage_information):
     """
         1. detect what kind of repository the current directory is.
-        2. update the repository.
+        2. perform update using the vcs_client.
         3. optionally execute an incrementor.
-        4. commit all modified files to the repository.
+        4. commit all modified files to the repository using the vcs client.
     """
 
     if len(arguments) == 1:
-        raise errors.ShowUsageInformationException(usage_information)
+        raise ShowUsageInformationException(usage_information)
         
-    repository = repositories.discover_working_repository()
-    repository.update()
+    vcs_client = discover_working_repository()
+    vcs_client.update()
     
     if len(arguments) == 3 and arguments[2] == '++':
-        incrementor.increment_version()
+        increment_version()
         
     message = arguments[1]
-    repository.commit(message)
+    vcs_client.commit(message)

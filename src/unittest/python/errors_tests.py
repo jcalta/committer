@@ -38,7 +38,7 @@ class ErrorsTests (unittest_support.TestCase):
 
 
     def test_too_many_repositories_detected_should_use_the_given_properties (self):
-        mock_repositories = [self.create_mock_repository(), self.create_mock_repository()]
+        mock_repositories = [self.create_mock_vcs_client(), self.create_mock_vcs_client()]
         actual_exception = errors.TooManyRepositoriesException(mock_repositories)
         
         self.assertEquals('Detected more than one repository: MockRepository, MockRepository\n', actual_exception.message)
@@ -46,8 +46,8 @@ class ErrorsTests (unittest_support.TestCase):
 
 
     def test_no_executable_should_use_the_given_properties (self):
-        mock_repository = self.create_mock_repository()
+        mock_repository = self.create_mock_vcs_client()
         actual_exception = errors.NotExecutableException(mock_repository)
         
-        self.assertEquals('MockRepository command line client "repository-command" not executable.\n', actual_exception.message)
+        self.assertEquals('MockRepository command line client "mock-vcs-command" not executable.\n', actual_exception.message)
         self.assertEquals(102, actual_exception.error_code)

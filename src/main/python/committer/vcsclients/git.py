@@ -1,4 +1,4 @@
-#   subversion command line client wrapper for committer
+#   git client for committer
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,55 +14,61 @@
 #   limitations under the License.
 
 """
-    Subversion command line client wrapper module.
+    Git command line client wrapper module.
 """
 
 __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.repositories.util import check_if_is_executable, execute_command
+from committer.vcsclients.util import check_if_is_executable, execute_command
 
 
-COMMAND = 'svn'
-NAME    = 'Subversion'
+COMMAND = 'git'
+NAME    = 'Git'
+
 
 def commit (message):
     """
-        commits all files by calling: svn commit -m "message"
+        commits all files by calling: git commit -a -m "message"
     """
     
-    _svn('commit', '-m', message)
+    _git('commit', '-a', '-m', message)
+    _git('push')
 
 
 def detect ():
     """
-        returns True if the current directory represents a subversion repository,
-        otherwise False.
+        Checks if the .git directory exists.
+        
+        @return: True if the current directory represents a git repository,
+                 otherwise False.
     """
     
-    return path.isdir('.svn')
+    return path.isdir('.git')
 
 
 def is_executable ():
     """
-        returns True if "svn --version --quiet" is executable, otherwise False. 
+        Checks if "git --version" is executable
+         
+        @return: True git command line client executable, otherwise False. 
     """
     
-    return check_if_is_executable(COMMAND, '--version', '--quiet')
+    return check_if_is_executable(COMMAND, '--version')
 
 
 def update ():
     """
-        updates files by executing "svn pull" and "svn update".
+        Updates files by executing "git pull".
     """
 
-    _svn('update')
+    _git('pull')
 
 
-def _svn (*arguments):
+def _git (*arguments):
     """
-        executes svn using the given arguments.
+        Executes git using the given arguments.
     """
     
     execute_command(COMMAND, *arguments)

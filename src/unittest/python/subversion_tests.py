@@ -3,7 +3,7 @@ import subprocess
 
 from mock import Mock, call, patch
 
-from committer.repositories import subversion
+from committer.vcsclients import subversion
 
 
 class PropertiesTests (unittest.TestCase):
@@ -16,7 +16,7 @@ class PropertiesTests (unittest.TestCase):
 
        
 class CommitTests (unittest.TestCase):
-    @patch('committer.repositories.subversion._svn')
+    @patch('committer.vcsclients.subversion._svn')
     def test_should_prepend_svn_to_given_arguments (self, mock_svn):
         
         subversion.commit('This is a commit message.')
@@ -25,7 +25,7 @@ class CommitTests (unittest.TestCase):
         
         
 class UpdateTests (unittest.TestCase):
-    @patch('committer.repositories.subversion._svn')
+    @patch('committer.vcsclients.subversion._svn')
     def test_should_call_pull_and_update (self, mock_svn):
         subversion.update()
         
@@ -54,7 +54,7 @@ class DetectTests (unittest.TestCase):
 
 
 class IsExecutableTests (unittest.TestCase):
-    @patch('committer.repositories.subversion.check_if_is_executable')
+    @patch('committer.vcsclients.subversion.check_if_is_executable')
     def test_should_return_value_of_check (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -63,7 +63,7 @@ class IsExecutableTests (unittest.TestCase):
         self.assertEquals('value from check', actual_return_value)
 
 
-    @patch('committer.repositories.subversion.check_if_is_executable')
+    @patch('committer.vcsclients.subversion.check_if_is_executable')
     def test_should_check_using_svn_version_quiet (self, mock_check):
         mock_check.return_value = 'value from check'
         
@@ -73,7 +73,7 @@ class IsExecutableTests (unittest.TestCase):
 
 
 class SubversionTests (unittest.TestCase):
-    @patch('committer.repositories.subversion.execute_command')
+    @patch('committer.vcsclients.subversion.execute_command')
     def test_should_execute_svn_using_arguments (self, mock_execute):
         subversion._svn('arg1', 'arg2', 'arg3')
         

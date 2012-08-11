@@ -3,23 +3,30 @@ from mock import call, patch
 import unittest_support
 
 
-from committer import errors, update
+from committer.errors import ShowUsageInformationException
+from committer.update import perform
 
 
 class UpdateTests (unittest_support.TestCase):
-    @patch('committer.repositories.detect')
-    def test_should_return_with_zero_when_updating (self, mock_detect):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
+    def test_should_show_usage_when_more_than_one_argument (self):
+        self.assertRaises(ShowUsageInformationException, perform, ['/usr/local/bin/update', '-m'], 'usage information')
 
-        update.perform(['/usr/local/bin/update'], 'usage information')
-        
 
-    @patch('committer.repositories.detect')
-    def test_should_update_on_update (self, mock_detect):
-        mock_repository = self.create_mock_repository()
-        mock_detect.return_value = [mock_repository]
+    @patch('committer.update.discover_working_repository')
+    def test_should_discover_current_working_repository (self, mock_discover):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
         
-        update.perform(['/usr/local/bin/update'], 'usage information')
+        perform(['/usr/local/bin/update'], 'usage information')
         
-        self.assertEquals(call(), mock_repository.update.call_args)
+        self.assertEquals(call(), mock_discover.call_args)
+
+
+    @patch('committer.update.discover_working_repository')
+    def test_should_use_vcs_client_to_update_repository (self, mock_discover):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_discover.return_value = mock_vcs_client
+        
+        perform(['/usr/local/bin/update'], 'usage information')
+        
+        self.assertEquals(call(), mock_vcs_client.update.call_args)

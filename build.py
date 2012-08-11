@@ -43,6 +43,7 @@ default_task = ['analyze', 'publish']
 def set_properties (project):
     project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
+    project.set_property('pylint_options', ['--rcfile=pylintrc']) 
 
     project.include_file('committer', 'LICENSE')
     

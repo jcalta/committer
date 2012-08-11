@@ -58,6 +58,14 @@ def is_executable ():
     return check_if_is_executable(COMMAND, '--version')
 
 
+def status ():
+    """
+        Shows changes in current directory using "git status".
+    """
+
+    _git('status')
+
+
 def update ():
     """
         Updates files by executing "git pull".

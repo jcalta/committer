@@ -57,6 +57,14 @@ def is_executable ():
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
+def status ():
+    """
+        Shows changes in the current directory using "hg status".
+    """
+
+    _hg('status')
+
+
 def update ():
     """
         Updates files by calling "hg pull" and "hg update".

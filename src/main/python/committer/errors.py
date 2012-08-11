@@ -53,13 +53,13 @@ class NoRepositoryDetectedException (CommitterException):
         super(NoRepositoryDetectedException, self) \
             .__init__('No repository detected.', 100)
 
-class ShowUsageInformationException (CommitterException):
+class WrongUsageException (CommitterException):
     """
-        to be raised when showing the usage information.
+        to be raised when user provided wrong arguments.
     """
 
     def __init__ (self, usage_information):
-        super(ShowUsageInformationException, self) \
+        super(WrongUsageException, self) \
             .__init__(usage_information, 1)
     
     

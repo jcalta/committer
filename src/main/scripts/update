@@ -16,8 +16,8 @@
 #   limitations under the License.
 
 """
-    By executing the "update" command you will update the repository in the
-    current directory.
+    The "update" command updates the repository in the current working directory
+    to the most recent commit.
     
     usage:
         update

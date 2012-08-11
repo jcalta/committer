@@ -31,7 +31,7 @@ class ErrorsTests (unittest_support.TestCase):
 
 
     def test_show_usage_information_should_use_the_given_properties (self):
-        actual_exception = errors.ShowUsageInformationException('usage: mock mock mock ...')
+        actual_exception = errors.WrongUsageException('usage: mock mock mock ...')
         
         self.assertEquals('usage: mock mock mock ...\n', actual_exception.message)
         self.assertEquals(1, actual_exception.error_code)

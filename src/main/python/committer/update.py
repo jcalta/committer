@@ -20,17 +20,17 @@
 
 __author__ = 'Michael Gruber'
 
-from committer.errors import ShowUsageInformationException
+from committer.errors import WrongUsageException
 from committer.vcsclients import discover_working_repository
 
 
 def perform(arguments, usage_information):
     """
-        Updates the vcs_client in the current directory.
+        Updates the repository in the current working directory.
     """
 
     if len(arguments) != 1:
-        raise ShowUsageInformationException(usage_information)
+        raise WrongUsageException(usage_information)
         
     vcs_client = discover_working_repository()
     vcs_client.update()

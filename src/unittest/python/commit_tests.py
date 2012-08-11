@@ -3,12 +3,12 @@ from mock import call, patch
 import unittest_support
 
 from committer.commit import perform
-from committer.errors import ShowUsageInformationException
+from committer.errors import WrongUsageException
 
 
 class PerformTests (unittest_support.TestCase):
     def test_should_show_usage_when_more_than_one_argument (self):
-        self.assertRaises(ShowUsageInformationException, perform, ['/usr/local/bin/commit'], 'usage information')
+        self.assertRaises(WrongUsageException, perform, ['/usr/local/bin/commit'], 'usage information')
 
 
     @patch('committer.commit.discover_working_repository')

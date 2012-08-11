@@ -34,6 +34,14 @@ class UpdateTests (unittest.TestCase):
         self.assertEquals([call('pull'), call('update')], mock_hg.call_args_list)
         
 
+class StatusTests (unittest.TestCase):
+    @patch('committer.vcsclients.mercurial._hg')
+    def test_should_call_status (self, mock_hg):
+        mercurial.status()
+        
+        self.assertEquals(call('status'), mock_hg.call_args)
+        
+
 class DetectTests (unittest.TestCase):
     @patch('os.path.isdir')
     def test_return_false_if_dot_hg_directory_does_not_exist (self, mock_exists):

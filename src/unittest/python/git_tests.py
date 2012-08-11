@@ -34,6 +34,14 @@ class UpdateTests (unittest.TestCase):
         self.assertEquals(call('pull'), mock_git.call_args)
         
 
+class StatusTests (unittest.TestCase):
+    @patch('committer.vcsclients.git._git')
+    def test_should_call_status (self, mock_git):
+        git.status()
+        
+        self.assertEquals(call('status'), mock_git.call_args)
+        
+
 class DetectTests (unittest.TestCase):
     @patch('os.path.isdir')
     def test_return_false_if_dot_git_directory_does_not_exist (self, mock_exists):

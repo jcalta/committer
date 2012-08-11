@@ -16,8 +16,8 @@
 #   limitations under the License.
 
 """
-    By executing the "commit" command you will commit all changes in the current
-    directory.
+    The "commit" command commits all changes in the working directory to the
+    "origin" repository.
     
     usage:
         commit "message" [++]

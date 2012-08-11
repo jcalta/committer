@@ -23,6 +23,15 @@ The second argument "++" tells the script to increment the version within
 *build.py*
 
 
+**Show changes in the current directory:**
+
+```bash
+st
+```
+
+This will execute the "status" command known by all version control systems.
+
+
 **Updating the repository in the current directory:**
 
 ```bash
@@ -37,9 +46,9 @@ Using the *update* script on a mercurial repository will:
 Micro Commits
 =============
 
-Committing more often has advantages:
+Committing in a high frequency has advantages:
 * prevents merging,
-* makes code review easier, and
+* makes code reviews easier, and
 * commit messages for smaller commits "tell a story".
 
 [Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)

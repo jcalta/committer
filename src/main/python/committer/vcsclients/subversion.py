@@ -56,6 +56,14 @@ def is_executable ():
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
+def status ():
+    """
+        Shows changes in the current directory using "svn status".
+    """
+
+    _svn('status')
+
+
 def update ():
     """
         Updates files by executing "svn pull" and "svn update".

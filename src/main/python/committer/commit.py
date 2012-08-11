@@ -20,7 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
-from errors import ShowUsageInformationException
+from errors import WrongUsageException
 from incrementor import increment_version
 from vcsclients import discover_working_repository
 
@@ -34,7 +34,7 @@ def perform(arguments, usage_information):
     """
 
     if len(arguments) == 1:
-        raise ShowUsageInformationException(usage_information)
+        raise WrongUsageException(usage_information)
         
     vcs_client = discover_working_repository()
     vcs_client.update()

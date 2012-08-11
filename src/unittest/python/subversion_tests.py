@@ -24,9 +24,17 @@ class CommitTests (unittest.TestCase):
         self.assertEquals(call('commit', '-m', 'This is a commit message.'), mock_svn.call_args)
         
         
+class StatusTests (unittest.TestCase):
+    @patch('committer.vcsclients.subversion._svn')
+    def test_should_call_status (self, mock_svn):
+        subversion.status()
+        
+        self.assertEquals(call('status'), mock_svn.call_args)
+        
+
 class UpdateTests (unittest.TestCase):
     @patch('committer.vcsclients.subversion._svn')
-    def test_should_call_pull_and_update (self, mock_svn):
+    def test_should_call_update (self, mock_svn):
         subversion.update()
         
         self.assertEquals(call('update'), mock_svn.call_args)

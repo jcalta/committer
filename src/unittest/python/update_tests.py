@@ -3,13 +3,13 @@ from mock import call, patch
 import unittest_support
 
 
-from committer.errors import ShowUsageInformationException
+from committer.errors import WrongUsageException
 from committer.update import perform
 
 
 class UpdateTests (unittest_support.TestCase):
     def test_should_show_usage_when_more_than_one_argument (self):
-        self.assertRaises(ShowUsageInformationException, perform, ['/usr/local/bin/update', '-m'], 'usage information')
+        self.assertRaises(WrongUsageException, perform, ['/usr/local/bin/update', '-m'], 'usage information')
 
 
     @patch('committer.update.discover_working_repository')

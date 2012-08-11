@@ -6,7 +6,7 @@ from committer import errors, perform, __doc__ as docstring
 
 class PerformTests (unittest.TestCase):
     @patch('committer.stdout')
-    @patch('committer.exit')
+    @patch('__builtin__.exit')
     def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_stdout):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
@@ -18,7 +18,7 @@ class PerformTests (unittest.TestCase):
         
         
     @patch('committer.stdout')
-    @patch('committer.exit')
+    @patch('__builtin__.exit')
     def test_should_exit_and_print_usage_if_first_argument_is_help (self, mock_exit, mock_stdout):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
@@ -30,7 +30,7 @@ class PerformTests (unittest.TestCase):
         
         
     @patch('committer.stdout')
-    @patch('committer.exit')
+    @patch('__builtin__.exit')
     def test_should_call_perform_on_given_command (self, mock_exit, mock_stdout):
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']
@@ -43,7 +43,7 @@ class PerformTests (unittest.TestCase):
         
     @patch('committer.stdout')
     @patch('committer.stderr')
-    @patch('committer.exit')
+    @patch('__builtin__.exit')
     def test_should_return_with_error_message_and_code (self, mock_exit, mock_stderr, mock_stdout):
         mock_command = Mock()
         mock_command.perform.side_effect = errors.CommitterException('Error message.', 123)

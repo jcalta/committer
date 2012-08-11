@@ -85,7 +85,6 @@ class NotExecutableException (CommitterException):
     """
     
     def __init__ (self, repository):
-        super_class = super(NotExecutableException, self)
         message = ('%s command line client "%s" not executable.' 
                    % (repository.NAME, repository.COMMAND)) 
-        super_class.__init__(message, 102)
+        super(NotExecutableException, self).__init__(message, 102)

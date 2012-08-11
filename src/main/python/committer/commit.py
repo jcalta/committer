@@ -20,9 +20,9 @@
 
 __author__ = 'Michael Gruber'
 
-from errors import WrongUsageException
-from incrementor import increment_version
-from vcsclients import discover_working_repository
+from committer.errors import WrongUsageException
+from committer.incrementor import increment_version
+from committer.vcsclients import discover_working_repository
 
 
 def perform(arguments, usage_information):

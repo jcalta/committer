@@ -20,7 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
-from sys import exit, stdout, stderr
+from sys import stdout, stderr
 
 from committer import errors
 

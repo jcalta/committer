@@ -50,3 +50,10 @@ def set_properties (project):
     project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 
     project.get_property('distutils_commands').append('bdist_egg')
+    project.set_property("distutils_classifiers", [    
+          'Development Status :: 2 - Pre-Alpha',
+          'Environment :: Console',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: Apache Software License',
+          'Programming Language :: Python',
+          'Topic :: Software Development :: Version Control'])

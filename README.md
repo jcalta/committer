@@ -7,9 +7,9 @@ mercurial, and subversion.
 ## Usage
 
 Committer commands: 
-* **commit** - commit all changes
-* **st** - show all changes
-* **update** - update the current directory
+* `commit` - commit all changes
+* `st` - status: show all changes
+* `update` - update the current directory
 
 ### Committing all changes in the current directory:
 
@@ -85,7 +85,13 @@ Committing in a high frequency has advantages:
 
 ### Using pip 
 ```bash
-pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
+sudo pip install committer
+```
+
+or 
+
+```bash
+sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
 ```
 
 ### Using easy_install

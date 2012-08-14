@@ -1,17 +1,16 @@
 # committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
+Unified and simplified command line interface to version control systems.
 
-Provides a simplified command line interface to the version control systems git,
-mercurial, and subversion.
+Supports: Git, Mercurial, and Subversion.
 
 ## Usage
 
-Committer commands: 
 * `commit` - commit all changes
 * `st` - status: show all changes
 * `update` - update the current directory
 
-### Committing all changes in the current directory:
+### Commit all changes in the current directory:
 
 ```bash
 commit "This is a short message about WHY I made this change."
@@ -22,7 +21,7 @@ For example using the `commit` script on a git repository will:
 * execute: *git commit -a -m "This is a short message about WHY I made this change."*
 * execute: *git push*
 
-### Incrementing the version before committing:
+### Increment the version before committing:
 
 ```bash
 commit "added a new feature" ++
@@ -32,7 +31,7 @@ The second argument "++" tells the script to increment the version within
 *build.py*
 
 
-### Show changes in the current directory:
+### Show changes all in the current directory:
 
 ```bash
 st
@@ -41,7 +40,7 @@ st
 This will execute the "status" command known by all version control systems.
 
 
-### Updating the repository in the current directory:
+### Update the repository in the current directory:
 
 ```bash
 update
@@ -99,6 +98,13 @@ sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.
 easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
 ```
 
+
+### Alternatives to committer
+
+If you do *not* like the workflow **committer** implies, maybe you are more
+interested into [hg-git](http://hg-git.github.com/) or [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
+
+(Thank you very much to [Steve Klabnik](http://www.steveklabnik.com/) for the hint)
 
 ## License
 

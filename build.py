@@ -32,10 +32,10 @@ use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
-summary = 'committer - Provides a simplified command line interface to the ' \
+summary = 'committer - a unified and simplified command line interface to the ' \
         + 'version control systems git, mercurial, and subversion.'
 url     = 'https://github.com/aelgru/committer'
-version = '0.0.59'
+version = '0.0.60'
 
 default_task = ['analyze', 'publish']
 

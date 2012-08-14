@@ -4,11 +4,13 @@ Unified and simplified command line interface to version control systems.
 
 Supports: Git, Mercurial, and Subversion.
 
+
 ## Usage
 
 * `commit` - commit all changes
 * `st` - status: show all changes
 * `update` - update the current directory
+
 
 ### Commit all changes in the current directory:
 
@@ -20,6 +22,7 @@ For example using the `commit` script on a git repository will:
 * execute: *git pull*
 * execute: *git commit -a -m "This is a short message about WHY I made this change."*
 * execute: *git push*
+
 
 ### Increment the version before committing:
 
@@ -68,18 +71,6 @@ update --version
 Displays the committer version information. This works on all commands. 
 
 
-## Micro Commits
-
-Committing in a high frequency has advantages:
-* prevents merging,
-* makes code reviews easier, and
-* commit messages for smaller commits "tell a story".
-
-[Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
-
-[Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
-
-
 ## Installation
 
 ### Using pip 
@@ -98,13 +89,25 @@ sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.
 easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
 ```
 
+## Micro Commits
 
-### Alternatives to committer
+Committing in a high frequency has advantages:
+* prevents merging,
+* makes code reviews easier, and
+* commit messages for smaller commits "tell a story".
+
+[Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
+
+[Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
+
+
+## Alternatives to committer
 
 If you do *not* like the workflow **committer** implies, maybe you are more
 interested into [hg-git](http://hg-git.github.com/) or [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
 
 (Thank you very much to [Steve Klabnik](http://www.steveklabnik.com/) for the hint)
+
 
 ## License
 

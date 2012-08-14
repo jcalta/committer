@@ -8,7 +8,9 @@ class Test (unittest.TestCase):
     @patch('__builtin__.exit')
     @patch('committer.vcsclients.util.call')
     @patch('committer.vcsclients.util.check_call')
-    def test (self, mock_check, mock_call, mock_exit):
+    @patch('committer.vcsclients.git.path')
+    def test (self, mock_path, mock_check, mock_call, mock_exit):
+        mock_path.is_dir.return_value = True
         mock_check.return_value = 0
 
         perform(commit, ['/usr/local/bin/commit', 'This is the commit message'], 'usage information')

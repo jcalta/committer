@@ -15,19 +15,19 @@ Supports: Git, Mercurial, and Subversion.
 ### Commit all changes:
 
 ```bash
-commit "This is a short message about WHY I made this change."
+commit "Extracted interface."
 ```
 *Example:* performing `commit` on a git repository will:
 * check if the `git` command is executable, by executing `git --version`
 * execute `git pull`
-* execute `git commit -a -m "This is a short message about WHY I made this change."`
+* execute `git commit -a -m "Extracted interface."`
 * execute `git push`
 
 
 ### Increment the version before committing:
 
 ```bash
-commit "added a new feature" ++
+commit "Added new feature" ++
 ```
 
 The second argument "++" tells the script to increment the version within
@@ -106,7 +106,7 @@ Committing in a high frequency has advantages:
 If you do *not* like the workflow **committer** implies, maybe you are
 interested in [hg-git](http://hg-git.github.com/) or [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
 
-(Thank you very much to [Steve Klabnik](http://www.steveklabnik.com/) for the hint)
+(Thanks to [Steve Klabnik](http://www.steveklabnik.com/) for the hint)
 
 
 ## License

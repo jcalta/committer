@@ -17,11 +17,11 @@ Supports: Git, Mercurial, and Subversion.
 ```bash
 commit "This is a short message about WHY I made this change."
 ```
-For example using the `commit` script on a git repository will:
-* check if the "git" command is executable, by executing: *git --version*
-* execute: *git pull*
-* execute: *git commit -a -m "This is a short message about WHY I made this change."*
-* execute: *git push*
+*Example:* performing `commit` on a git repository will:
+* check if the `git` command is executable, by executing `git --version`
+* execute `git pull`
+* execute `git commit -a -m "This is a short message about WHY I made this change."`
+* execute `git push`
 
 
 ### Increment the version before committing:
@@ -49,10 +49,10 @@ This will execute the "status" command known by all version control systems.
 update
 ```
 
-For example using the `update` script on a mercurial repository will:
-* check if the "hg" command is executable, by executing: *hg --version --quiet*
-* execute: *hg pull*
-* execute: *hg up*
+*Example:* performing `update` on a mercurial repository will:
+* check if the `hg` command is executable, by executing: `hg --version --quiet`
+* execute `hg pull`
+* execute `hg up`
 
 
 ### Help

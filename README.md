@@ -12,7 +12,7 @@ Supports: Git, Mercurial, and Subversion.
 * `update` - update the current directory
 
 
-### Commit all changes in the current directory:
+### Commit all changes:
 
 ```bash
 commit "This is a short message about WHY I made this change."
@@ -34,7 +34,7 @@ The second argument "++" tells the script to increment the version within
 *build.py*
 
 
-### Show changes all in the current directory:
+### Show all changes:
 
 ```bash
 st
@@ -43,7 +43,7 @@ st
 This will execute the "status" command known by all version control systems.
 
 
-### Update the repository in the current directory:
+### Update:
 
 ```bash
 update
@@ -55,7 +55,7 @@ For example using the `update` script on a mercurial repository will:
 * execute: *hg up*
 
 
-### Display usage information
+### Help
 
 ```bash
 commit help
@@ -63,12 +63,12 @@ commit help
 The help argument works on all commands.
 
 
-### Display version information
+### Version Information
 
 ```bash
 update --version
 ```
-Displays the committer version information. This works on all commands. 
+Displays the committer version information. Works on all commands. 
 
 
 ## Installation
@@ -96,15 +96,15 @@ Committing in a high frequency has advantages:
 * makes code reviews easier, and
 * commit messages for smaller commits "tell a story".
 
-[Blog entry by Lucas Rocha: Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
+[Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
 
-[Code Ranch Discussion: Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
+[Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
 
 
-## Alternatives to committer
+## Alternatives
 
-If you do *not* like the workflow **committer** implies, maybe you are more
-interested into [hg-git](http://hg-git.github.com/) or [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
+If you do *not* like the workflow **committer** implies, maybe you are
+interested in [hg-git](http://hg-git.github.com/) or [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
 
 (Thank you very much to [Steve Klabnik](http://www.steveklabnik.com/) for the hint)
 

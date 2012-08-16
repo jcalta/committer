@@ -44,23 +44,6 @@ This will execute the "status" command known by all version control systems.
 update
 ```
 
-
-### Help
-
-```bash
-commit help
-```
-The help argument works on all commands.
-
-
-### Version Information
-
-```bash
-update --version
-```
-Displays the committer version information. Works on all commands. 
-
-
 ## Installation
 
 ### Using pip 

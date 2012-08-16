@@ -18,15 +18,8 @@ Supports: Git, Mercurial, and Subversion.
 commit "Extracted interface."
 ```
 
-
-### Increment the version before committing:
-
-```bash
-commit "Added new feature" ++
-```
-
-The second argument "++" tells the script to increment the version within
-*build.py*
+Commits all changes in the current directory using the given string as commit
+message.
 
 
 ### Show all changes:
@@ -35,10 +28,10 @@ The second argument "++" tells the script to increment the version within
 st
 ```
 
-This will execute the "status" command known by all version control systems.
+Executes the "status" command known by all version control systems.
 
 
-### Update:
+### Update the current directory:
 
 ```bash
 update
@@ -76,7 +69,16 @@ easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.
 * execute `hg pull`
 * execute `hg up`
 
+## Additional Features
 
+### Increment the version before committing:
+
+```bash
+commit "Added new feature" ++
+```
+
+The second argument "++" tells the script to increment the version within
+*build.py*
 
 
 ## Micro Commits

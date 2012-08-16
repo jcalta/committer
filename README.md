@@ -17,11 +17,6 @@ Supports: Git, Mercurial, and Subversion.
 ```bash
 commit "Extracted interface."
 ```
-*Example:* performing `commit` on a git repository will:
-* check if the `git` command is executable, by executing `git --version`
-* execute `git pull`
-* execute `git commit -a -m "Extracted interface."`
-* execute `git push`
 
 
 ### Increment the version before committing:
@@ -48,11 +43,6 @@ This will execute the "status" command known by all version control systems.
 ```bash
 update
 ```
-
-*Example:* performing `update` on a mercurial repository will:
-* check if the `hg` command is executable, by executing: `hg --version --quiet`
-* execute `hg pull`
-* execute `hg up`
 
 
 ### Help
@@ -88,6 +78,23 @@ sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.58.
 ```
 easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.gz
 ```
+
+## How does it work?
+
+*Example 1:* performing `commit` on a git repository will:
+* check if the `git` command is executable, by executing `git --version`
+* execute `git pull`
+* execute `git commit -a -m "Extracted interface."`
+* execute `git push`
+
+
+*Example 2:* performing `update` on a mercurial repository will:
+* check if the `hg` command is executable, by executing: `hg --version --quiet`
+* execute `hg pull`
+* execute `hg up`
+
+
+
 
 ## Micro Commits
 

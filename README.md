@@ -15,7 +15,7 @@ Supports: Git, Mercurial, and Subversion.
 ### Commit all changes:
 
 ```bash
-commit "Extracted interface."
+commit "This is the commit message."
 ```
 
 Commits all changes in the current directory using the given string as commit

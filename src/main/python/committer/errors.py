@@ -50,8 +50,8 @@ class NoRepositoryDetectedException (CommitterException):
     """
     
     def __init__ (self):
-        super(NoRepositoryDetectedException, self) \
-            .__init__('No repository detected.', 100)
+        message = 'No repository detected.'
+        super(NoRepositoryDetectedException, self).__init__(message, 100)
 
 class WrongUsageException (CommitterException):
     """
@@ -59,8 +59,7 @@ class WrongUsageException (CommitterException):
     """
 
     def __init__ (self, usage_information):
-        super(WrongUsageException, self) \
-            .__init__(usage_information, 1)
+        super(WrongUsageException, self).__init__(usage_information, 1)
     
     
 class TooManyRepositoriesException (CommitterException):
@@ -71,11 +70,9 @@ class TooManyRepositoriesException (CommitterException):
     
     def __init__ (self, detected_repositories):
         names = [repository.NAME for repository in detected_repositories] 
-        message = 'Detected more than one repository: ' \
-                + ', '.join(names)
+        message = 'Detected more than one repository: ' + ', '.join(names)
             
-        super(TooManyRepositoriesException, self) \
-            .__init__(message, 101)
+        super(TooManyRepositoriesException, self).__init__(message, 101)
 
 
 class NotExecutableException (CommitterException):

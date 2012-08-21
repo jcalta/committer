@@ -12,7 +12,7 @@ Supports: Git, Mercurial, and Subversion.
 * `update` - update the current directory
 
 
-### Commit all changes:
+### Commit all changes
 
 ```bash
 commit "This is the commit message."
@@ -22,7 +22,7 @@ Commits all changes in the current directory using the given string as commit
 message.
 
 
-### Show all changes:
+### Show all changes
 
 ```bash
 st
@@ -31,7 +31,7 @@ st
 Executes the "status" command known by all version control systems.
 
 
-### Update the current directory:
+### Update the current directory
 
 ```bash
 update
@@ -71,7 +71,7 @@ easy_install https://github.com/downloads/aelgru/committer/committer-0.0.58.tar.
 
 ## Additional Features
 
-### Increment the version before committing:
+### Increment the version before committing
 
 ```bash
 commit "Added new feature" ++

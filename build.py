@@ -36,7 +36,7 @@ license = 'Apache License, Version 2.0'
 summary = 'committer - a unified and simplified command line interface to the ' \
         + 'version control systems git, mercurial, and subversion.'
 url     = 'https://github.com/aelgru/committer'
-version = '0.0.60'
+version = '0.0.61'
 
 default_task = ['analyze', 'publish']
 

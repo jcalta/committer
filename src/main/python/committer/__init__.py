@@ -15,12 +15,12 @@
 
 """
     committer provides a unified and simplified command line interface to
-    the version control systems: git, mercurial, and subverion. 
+    the version control systems: git, mercurial, and subverion.
 """
 
 __author__ = 'Michael Gruber'
 
-from sys import stdout, stderr
+from sys import exit, stdout, stderr
 
 from committer import errors
 
@@ -34,22 +34,22 @@ def perform (command, arguments, usage_information):
         usage_information will be passed to the perform function of the
         command module.
     """
-    
+
     stdout.write('committer version %s\n' % VERSION)
     return_code = 0
-    
+
     if len(arguments) > 1 and arguments[1] == '--version':
         return exit(return_code)
-    
+
     complete_usage_information = __doc__ + usage_information + '\n'
-    
+
     if len(arguments) > 1 and arguments[1] == 'help':
         stdout.write(complete_usage_information)
         return exit(return_code)
-    
+
     try:
         command.perform(arguments, complete_usage_information)
-        
+
     except errors.CommitterException as committer_exception:
         stderr.write(committer_exception.message)
         return_code = committer_exception.error_code

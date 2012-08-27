@@ -15,7 +15,7 @@
 
 """
     Build committer using pybuilder.
-    
+
     https://github.com/pybuilder/pybuilder
 """
 
@@ -33,9 +33,8 @@ use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
-summary = 'committer - a unified and simplified command line interface to the ' \
-        + 'version control systems git, mercurial, and subversion.'
-url     = 'https://github.com/aelgru/committer'
+summary = 'unified command line interface for version control systems. Supports git, mercurial, and subversion.'
+url = 'https://github.com/aelgru/committer'
 version = '0.0.61'
 
 default_task = ['analyze', 'publish']
@@ -44,14 +43,14 @@ default_task = ['analyze', 'publish']
 def set_properties (project):
     project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
-    project.set_property('pylint_options', ['--rcfile=pylintrc']) 
+    project.set_property('pylint_options', ['--rcfile=pylintrc'])
 
     project.include_file('committer', 'LICENSE')
-    
+
     project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 
     project.get_property('distutils_commands').append('bdist_egg')
-    project.set_property("distutils_classifiers", [    
+    project.set_property("distutils_classifiers", [
           'Development Status :: 2 - Pre-Alpha',
           'Environment :: Console',
           'Intended Audience :: Developers',

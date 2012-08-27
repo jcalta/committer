@@ -1,6 +1,6 @@
 # committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
-Unified and simplified command line interface to version control systems.
+Unified command line interface for version control systems.
 
 Supports: Git, Mercurial, and Subversion.
 

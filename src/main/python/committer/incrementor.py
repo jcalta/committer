@@ -20,6 +20,7 @@
 __author__ = 'Michael Gruber'
 
 import os
+from sys import stdout
 
 def increment_version_string (line):
     """
@@ -34,8 +35,7 @@ def increment_version_string (line):
     subversion = int(version[start_of_subversion:])
     subversion += 1
     new_version = version[:start_of_subversion] + str(subversion)
-    message = 'version: %s -> %s' % (version, new_version)
-    print message
+    stdout.write('version: %s -> %s' % (version, new_version))
     line = line[0:start_of_version] + new_version + line[end_of_version:]
     return line
 

@@ -21,12 +21,15 @@
 
 from pythonbuilder.core import Author, init, use_plugin
 
+use_plugin('python.core')
+
+use_plugin('copy_resources')
 use_plugin('filter_resources')
 
-use_plugin('python.core')
 use_plugin('python.coverage')
 use_plugin('python.distutils')
 use_plugin('python.integrationtest')
+use_plugin('python.install_dependencies')
 use_plugin('python.pychecker')
 use_plugin('python.pylint')
 use_plugin('python.unittest')
@@ -37,13 +40,19 @@ summary = 'unified command line interface for version control systems. Supports 
 url = 'https://github.com/aelgru/committer'
 version = '0.0.62'
 
-default_task = ['analyze', 'publish']
+default_task = ['install_dependencies', 'analyze', 'publish']
 
 @init
 def set_properties (project):
+    project.build_depends_on('coverage')
+    project.build_depends_on('mock')
+
     project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
     project.set_property('pylint_options', ['--rcfile=pylintrc'])
+
+    project.set_property('copy_resources_target', '$dir_dist/committer')
+    project.get_property('copy_resources_glob').append('LICENSE')
 
     project.include_file('committer', 'LICENSE')
 

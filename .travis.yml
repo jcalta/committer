@@ -4,8 +4,7 @@ python:
   - "2.7"
   - "3.2"
   - "pypy"
-before_script: sudo apt-get install pychecker pylint pep8
-install: pip install -r requirements.txt --use-mirrors
+before_script: sudo apt-get install pychecker pylint
 script: "pyb --debug"
 notifications:
   email:

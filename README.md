@@ -7,11 +7,6 @@ Supports: Git, Mercurial, and Subversion.
 
 ## Usage
 
-* `commit` - commit all changes
-* `st` - status: show all changes
-* `update` - update the current directory
-
-
 ### Commit all changes
 
 ```bash

@@ -103,4 +103,5 @@ If you do *not* like the workflow **committer** implies, you may be interested i
 ## License
 
 Copyright 2012 Michael Gruber
+
 Committer is licensed under the Apache License, Version 2.0

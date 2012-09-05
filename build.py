@@ -36,7 +36,7 @@ use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
-summary = 'unified command line interface for version control systems. Supports git, mercurial, and subversion.'
+summary = 'Unified command line interface for git, mercurial, and subversion.'
 url = 'https://github.com/aelgru/committer'
 version = '0.0.62'
 

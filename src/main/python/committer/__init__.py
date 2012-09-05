@@ -36,22 +36,20 @@ def perform (command, arguments, usage_information):
     """
 
     stdout.write('committer version %s\n' % VERSION)
-    return_code = 0
 
     if len(arguments) > 1 and arguments[1] == '--version':
-        return exit(return_code)
+        return exit(0)
 
     complete_usage_information = __doc__ + usage_information + '\n'
 
     if len(arguments) > 1 and arguments[1] == 'help':
         stdout.write(complete_usage_information)
-        return exit(return_code)
+        return exit(0)
 
     try:
         command.perform(arguments, complete_usage_information)
+        return exit(0)
 
     except errors.CommitterException as committer_exception:
         stderr.write(committer_exception.message)
-        return_code = committer_exception.error_code
-
-    exit(return_code)
+        return exit(committer_exception.error_code)

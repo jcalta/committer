@@ -17,9 +17,6 @@
 
 """
     The "status" command shows the changed files in the working directory. 
-    
-    usage:
-        st
 """
 
 __author__ = 'Michael Gruber'
@@ -29,4 +26,4 @@ import sys
 from committer import perform, status
 
 
-perform(status, sys.argv, __doc__)
+perform(status, sys.argv)

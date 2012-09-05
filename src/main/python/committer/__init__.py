@@ -28,11 +28,9 @@ from committer import errors
 VERSION = '${version}'
 
 
-def perform (command, arguments, usage_information):
+def perform (command, arguments):
     """
-        performs the given command using the given arguments. The given
-        usage_information will be passed to the perform function of the
-        command module.
+        performs the given command using the given arguments.
     """
 
     stdout.write('committer version %s\n' % VERSION)
@@ -40,14 +38,17 @@ def perform (command, arguments, usage_information):
     if len(arguments) > 1 and arguments[1] == '--version':
         return exit(0)
 
-    complete_usage_information = __doc__ + usage_information + '\n'
-
     if len(arguments) > 1 and arguments[1] == 'help':
-        stdout.write(complete_usage_information)
+        stdout.write("""
+usage:
+    commit "message" [++]    commits all changes
+    st                       shows all changes
+    update                   updates the current directory
+""")
         return exit(0)
 
     try:
-        command.perform(arguments, complete_usage_information)
+        command.perform(arguments)
         return exit(0)
 
     except errors.CommitterException as committer_exception:

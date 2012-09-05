@@ -18,9 +18,6 @@
 """
     The "update" command updates the repository in the current working directory
     to the most recent commit.
-    
-    usage:
-        update
 """
 
 __author__ = 'Michael Gruber'
@@ -30,4 +27,4 @@ import sys
 from committer import perform, update
 
 
-perform(update, sys.argv, __doc__)
+perform(update, sys.argv)

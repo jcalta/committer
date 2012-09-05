@@ -18,9 +18,6 @@
 """
     The "commit" command commits all changes in the working directory to the
     "origin" repository.
-    
-    usage:
-        commit "message" [++]
 """
 
 __author__ = 'Michael Gruber'
@@ -30,4 +27,4 @@ import sys
 from committer import perform, commit
 
 
-perform(commit, sys.argv, __doc__)
+perform(commit, sys.argv)

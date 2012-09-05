@@ -24,13 +24,13 @@ from committer.errors import WrongUsageException
 from committer.vcsclients import discover_working_repository
 
 
-def perform(arguments, usage_information):
+def perform(arguments):
     """
         Updates the repository in the current working directory.
     """
 
     if len(arguments) != 1:
-        raise WrongUsageException(usage_information)
-        
+        raise WrongUsageException()
+
     vcs_client = discover_working_repository()
     vcs_client.update()

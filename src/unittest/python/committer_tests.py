@@ -11,7 +11,7 @@ class PerformTests (unittest.TestCase):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
-        perform(mock_command, ['/usr/local/bin/commit', '--version'], 'usage information')
+        perform(mock_command, ['/usr/local/bin/commit', '--version'])
 
         self.assertEquals(call('committer version ${version}\n'), mock_stdout.write.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
@@ -23,9 +23,14 @@ class PerformTests (unittest.TestCase):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
-        perform(mock_command, ['/usr/local/bin/commit', 'help'], 'usage information')
+        perform(mock_command, ['/usr/local/bin/commit', 'help'])
 
-        self.assertEquals(call(docstring + 'usage information\n'), mock_stdout.write.call_args)
+        self.assertEquals(call("""
+usage:
+    commit "message" [++]    commits all changes
+    st                       shows all changes
+    update                   updates the current directory
+"""), mock_stdout.write.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
 
 
@@ -35,9 +40,9 @@ class PerformTests (unittest.TestCase):
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']
 
-        perform(mock_command, arguments, 'usage information')
+        perform(mock_command, arguments)
 
-        self.assertEquals(call(arguments, docstring + 'usage information\n'), mock_command.perform.call_args)
+        self.assertEquals(call(arguments), mock_command.perform.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
 
 
@@ -48,7 +53,7 @@ class PerformTests (unittest.TestCase):
         mock_command = Mock()
         mock_command.perform.side_effect = errors.CommitterException('Error message.', 123)
 
-        perform(mock_command, ['/usr/local/bin/commit'], 'usage information')
+        perform(mock_command, ['/usr/local/bin/commit'])
 
         self.assertEquals(call('Error message.\n'), mock_stderr.write.call_args)
         self.assertEquals(call(123), mock_exit.call_args)

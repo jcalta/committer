@@ -25,7 +25,7 @@ from committer.incrementor import increment_version
 from committer.vcsclients import discover_working_repository
 
 
-def perform(arguments, usage_information):
+def perform(arguments):
     """
         1. detect what kind of repository the current directory is.
         2. perform update using the vcs_client.
@@ -34,13 +34,13 @@ def perform(arguments, usage_information):
     """
 
     if len(arguments) == 1:
-        raise WrongUsageException(usage_information)
-        
+        raise WrongUsageException()
+
     vcs_client = discover_working_repository()
     vcs_client.update()
-    
+
     if len(arguments) == 3 and arguments[2] == '++':
         increment_version()
-        
+
     message = arguments[1]
     vcs_client.commit(message)

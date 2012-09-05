@@ -81,9 +81,7 @@ Committing in a high frequency has advantages:
 * makes code reviews easier, and
 * commit messages for smaller commits "tell a story".
 
-[Micro Commits](http://lucasr.org/2011/01/29/micro-commits/)
-
-[Macro vs Micro Commits](http://www.coderanch.com/t/106477/vc/Macro-vs-Micro-commits)
+[Read more about micro commits.](http://lucasr.org/2011/01/29/micro-commits/)
 
 
 ## Alternatives
@@ -95,6 +93,4 @@ If you do *not* like the workflow **committer** implies, you may be interested i
 
 ## License
 
-Copyright 2012 Michael Gruber
-
-Committer is licensed under the Apache License, Version 2.0
+Committer is licensed under the [Apache License, Version 2.0](https://github.com/aelgru/committer/blob/master/LICENSE)

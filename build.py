@@ -37,7 +37,7 @@ use_plugin('python.unittest')
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
-url = 'https://github.com/aelgru/committer'
+url     = 'https://github.com/aelgru/committer'
 version = '0.0.62'
 
 default_task = ['install_dependencies', 'analyze', 'publish']

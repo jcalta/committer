@@ -55,7 +55,6 @@ def increment_version ():
     for line in source_file:
         if version_is_contained_in_line:
             line = increment_version_string(line)
-        print "writing line %s " % line
         destination_file.write(line)
 
     source_file.close()

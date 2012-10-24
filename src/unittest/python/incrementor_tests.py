@@ -1,7 +1,10 @@
 import unittest
 
 from mock import Mock, call, patch
-from StringIO import StringIO
+if sys.version_info[0] == 3:
+    from io import StringIO
+else:
+    from StringIO import StringIO
 from committer.incrementor import (increment_version,
                                    increment_version_string,
                                    version_is_contained_in_line)

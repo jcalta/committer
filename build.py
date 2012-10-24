@@ -37,8 +37,8 @@ use_plugin('python.unittest')
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
-url     = 'https://github.com/aelgru/committer'
-version = '0.0.62'
+url = 'https://github.com/aelgru/committer'
+version = '0.0.63'
 
 default_task = ['install_dependencies', 'analyze', 'publish']
 
@@ -47,7 +47,7 @@ def set_properties (project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
 
-    project.set_property('coverage_break_build', False)
+    project.set_property('coverage_break_build', True)
     project.set_property('pychecker_break_build', True)
     project.set_property('pylint_options', ['--rcfile=pylintrc'])
 
@@ -60,7 +60,7 @@ def set_properties (project):
 
     project.get_property('distutils_commands').append('bdist_egg')
     project.set_property("distutils_classifiers", [
-          'Development Status :: 2 - Pre-Alpha',
+          'Development Status :: 3 - Alpha',
           'Environment :: Console',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Apache Software License',

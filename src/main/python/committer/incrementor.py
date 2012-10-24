@@ -20,7 +20,9 @@
 __author__ = 'Michael Gruber'
 
 import os
-from sys import stdout
+import re
+
+_VERSION_STRING_PATTERN = r"^version( )+=( )+"
 
 def increment_version_string (line):
     """
@@ -35,10 +37,11 @@ def increment_version_string (line):
     subversion = int(version[start_of_subversion:])
     subversion += 1
     new_version = version[:start_of_subversion] + str(subversion)
-    stdout.write('version: %s -> %s' % (version, new_version))
     line = line[0:start_of_version] + new_version + line[end_of_version:]
     return line
 
+def version_is_contained_in_line(line):
+    return re.match(_VERSION_STRING_PATTERN, line) is not None
 
 def increment_version ():
     """
@@ -50,8 +53,9 @@ def increment_version ():
     destination_file = open('build.py.new', 'w')
 
     for line in source_file:
-        if line.startswith('version = '):
+        if version_is_contained_in_line:
             line = increment_version_string(line)
+        print "writing line %s " % line
         destination_file.write(line)
 
     source_file.close()

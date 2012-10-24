@@ -19,32 +19,31 @@
 """
 
 __author__ = 'Michael Gruber'
+__version__ = '${version}'
 
 from sys import exit, stdout, stderr
-
 from committer import errors
 
 
-VERSION = '${version}'
-
+_USAGE_INFORMATION = """
+usage:
+    commit "message" [++]    commits all changes
+    st                       shows all changes
+    update                   updates the current directory
+"""
 
 def perform (command, arguments):
     """
         performs the given command using the given arguments.
     """
 
-    stdout.write('committer version %s\n' % VERSION)
+    stdout.write('committer version %s\n' % __version__)
 
     if len(arguments) > 1 and arguments[1] == '--version':
         return exit(0)
 
     if len(arguments) > 1 and arguments[1] == 'help':
-        stdout.write("""
-usage:
-    commit "message" [++]    commits all changes
-    st                       shows all changes
-    update                   updates the current directory
-""")
+        stdout.write(_USAGE_INFORMATION)
         return exit(0)
 
     try:

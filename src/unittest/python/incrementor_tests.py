@@ -1,6 +1,7 @@
 import unittest
 
 from mock import Mock, call, patch
+import sys
 if sys.version_info[0] == 3:
     from io import StringIO
 else:

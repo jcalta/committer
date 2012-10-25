@@ -47,7 +47,7 @@ def set_properties (project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
 
-    project.set_property('coverage_break_build', True)
+    project.set_property('coverage_break_build', False)
     project.set_property('pychecker_break_build', True)
     project.set_property('pylint_options', ['--rcfile=pylintrc'])
 

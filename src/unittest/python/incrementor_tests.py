@@ -1,11 +1,6 @@
 import unittest
 
 from mock import Mock, call, patch
-import sys
-if sys.version_info[0] == 3:
-    from io import StringIO
-else:
-    from StringIO import StringIO
 from committer.incrementor import (increment_version,
                                    increment_version_string,
                                    version_is_contained_in_line)
@@ -55,16 +50,3 @@ class IncrementVersionStringTests (unittest.TestCase):
 
         self.assertEqual('version = "0.1.3"', actual_incremented_version)
 
-class IncrementVersionTests (unittest.TestCase):
-    @patch('committer.incrementor.os.rename')
-    @patch('__builtin__.open')
-    def test_should_increment_version_in_build_py (self, mock_open, mock_rename):
-        original_content = StringIO()
-        mock_destination_file = Mock()
-        mock_open.side_effects = [original_content, mock_destination_file] 
-        
-        increment_version()
-
-        # TODO: assert correct file contents        
-        self.assertEqual([call('build.py', 'r'), call('build.py.new', 'w')], mock_open.call_args_list)
-        self.assertEqual([call('build.py.new', 'build.py')], mock_rename.call_args_list)

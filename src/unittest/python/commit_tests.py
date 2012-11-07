@@ -10,7 +10,6 @@ class PerformTests (unittest_support.TestCase):
     def test_should_show_usage_when_more_than_one_argument (self):
         self.assertRaises(WrongUsageException, perform, ['/usr/local/bin/commit'])
 
-
     @patch('committer.commit.discover_working_repository')
     def test_should_discover_working_repository (self, mock_discover):
         mock_vcs_client = self.create_mock_vcs_client()
@@ -19,7 +18,6 @@ class PerformTests (unittest_support.TestCase):
         perform(['/usr/local/bin/commit', 'This is the message'])
 
         self.assertEquals(call(), mock_discover.call_args)
-
 
     @patch('committer.commit.discover_working_repository')
     def test_should_update_before_committing (self, mock_discover):
@@ -31,7 +29,6 @@ class PerformTests (unittest_support.TestCase):
 
         self.assertEquals(call(), mock_vcs_client.update.call_args)
 
-
     @patch('committer.commit.discover_working_repository')
     def test_should_use_first_argument_as_commit_message (self, mock_discover):
         mock_vcs_client = self.create_mock_vcs_client()
@@ -40,7 +37,6 @@ class PerformTests (unittest_support.TestCase):
         perform(['/usr/local/bin/commit', 'This is the message'])
 
         self.assertEquals(call('This is the message'), mock_vcs_client.commit.call_args)
-
 
     @patch('committer.commit.increment_version')
     @patch('committer.commit.discover_working_repository')
@@ -51,7 +47,6 @@ class PerformTests (unittest_support.TestCase):
         perform(['/usr/local/bin/commit', 'This is the message', '++'])
 
         self.assertEquals(call(), mock_increment.call_args)
-
 
     @patch('committer.commit.increment_version')
     @patch('committer.commit.discover_working_repository')

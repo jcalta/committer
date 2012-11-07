@@ -30,8 +30,8 @@ def increment_version_string (line):
         the last number within the version.
     """
 
-    start_of_version = line.find('\'') + 1
-    end_of_version = line.rfind('\'')
+    start_of_version = line.find("'") + 1
+    end_of_version = line.rfind("'")
     version = line[start_of_version:end_of_version]
     start_of_subversion = version.rfind('.') + 1
     subversion = int(version[start_of_subversion:])

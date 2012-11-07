@@ -13,7 +13,6 @@ class ExecuteCommandTests (unittest.TestCase):
         
         self.assertEquals(call(['command']), mock_call.call_args)
 
-
     @patch('committer.vcsclients.util.call')        
     def test_should_call_command_using_given_arguments (self, mock_call):
         util.execute_command('command', '1', '2', '3')
@@ -28,7 +27,6 @@ class CheckIfIsExecutableTests (unittest.TestCase):
         self.assertTrue(actual_result)
         self.assertEquals(call(['command', '--version', '--quiet']), mock_check_call.call_args)
 
-      
     @patch('committer.vcsclients.util.check_call')        
     def test_should_return_false_when_command_is_not_executable (self, mock_check_call):
         mock_check_call.side_effect = subprocess.CalledProcessError(127, 'command')
@@ -38,7 +36,6 @@ class CheckIfIsExecutableTests (unittest.TestCase):
         self.assertFalse(actual_result)
         self.assertEquals(call(['command', '--version', '--quiet']), mock_check_call.call_args)
 
-
     @patch('committer.vcsclients.util.check_call')        
     def test_should_return_false_when_trying_to_execute_command_fails (self, mock_check_call):
         mock_check_call.side_effect = OSError()
@@ -47,7 +44,6 @@ class CheckIfIsExecutableTests (unittest.TestCase):
         
         self.assertFalse(actual_result)
         self.assertEquals(call(['command', '--version', '--quiet']), mock_check_call.call_args)
-
 
     @patch('committer.vcsclients.util.check_call')        
     def test_should_raise_eception_when_during_check_something_unexpected_happens (self, mock_check_call):

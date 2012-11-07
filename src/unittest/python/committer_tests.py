@@ -16,7 +16,6 @@ class PerformTests (unittest.TestCase):
         self.assertEquals(call('committer version ${version}\n'), mock_stdout.write.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
 
-
     @patch('committer.stdout')
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_first_argument_is_help (self, mock_exit, mock_stdout):
@@ -33,7 +32,6 @@ usage:
 """), mock_stdout.write.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
 
-
     @patch('committer.stdout')
     @patch('committer.exit')
     def test_should_call_perform_on_given_command (self, mock_exit, mock_stdout):
@@ -44,7 +42,6 @@ usage:
 
         self.assertEquals(call(arguments), mock_command.perform.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
-
 
     @patch('committer.stdout')
     @patch('committer.stderr')

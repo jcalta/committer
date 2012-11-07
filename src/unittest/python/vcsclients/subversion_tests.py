@@ -9,7 +9,6 @@ class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
         self.assertEquals('svn', subversion.COMMAND)
 
-
     def test_should_have_name_property (self):
         self.assertEquals('Subversion', subversion.NAME)
 
@@ -49,7 +48,6 @@ class DetectTests (unittest.TestCase):
         self.assertEquals(False, actual_return_value)
         self.assertEquals(call('.svn'), mock_exists.call_args)
 
-        
     @patch('os.path.isdir')
     def test_return_true_if_dot_svn_directory_exists (self, mock_exists):
         mock_exists.return_value = True
@@ -68,7 +66,6 @@ class IsExecutableTests (unittest.TestCase):
         actual_return_value = subversion.is_executable()
         
         self.assertEquals('value from check', actual_return_value)
-
 
     @patch('committer.vcsclients.subversion.check_if_is_executable')
     def test_should_check_using_svn_version_quiet (self, mock_check):

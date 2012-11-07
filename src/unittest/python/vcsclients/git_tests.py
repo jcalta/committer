@@ -9,7 +9,6 @@ class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
         self.assertEquals('git', git.COMMAND)
 
-
     def test_should_have_name_property (self):
         self.assertEquals('Git', git.NAME)
 
@@ -51,7 +50,6 @@ class DetectTests (unittest.TestCase):
         self.assertEquals(False, actual_return_value)
         self.assertEquals(call('.git'), mock_exists.call_args)
 
-        
     @patch('os.path.isdir')
     def test_return_true_if_dot_git_directory_exists (self, mock_exists):
         mock_exists.return_value = True
@@ -70,7 +68,6 @@ class IsExecutableTests (unittest.TestCase):
         actual_return_value = git.is_executable()
         
         self.assertEquals('value from check', actual_return_value)
-
 
     @patch('committer.vcsclients.git.check_if_is_executable')
     def test_should_check_using_git_version (self, mock_check):

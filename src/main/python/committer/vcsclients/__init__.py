@@ -24,8 +24,6 @@
 
 __author__ = 'Michael Gruber'
 
-import sys
-
 from committer import errors
 from committer.vcsclients import git, mercurial, subversion
 

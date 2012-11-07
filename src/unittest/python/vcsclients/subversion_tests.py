@@ -1,7 +1,6 @@
 import unittest
-import subprocess
 
-from mock import Mock, call, patch
+from mock import call, patch
 
 from committer.vcsclients import subversion
 

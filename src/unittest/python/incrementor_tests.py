@@ -1,8 +1,6 @@
 import unittest
 
-from mock import Mock, call, patch
-from committer.incrementor import (increment_version,
-                                   increment_version_string,
+from committer.incrementor import (increment_version_string,
                                    version_is_contained_in_line)
 
 class VersionIsContainedInLineTests (unittest.TestCase):

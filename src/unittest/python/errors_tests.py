@@ -1,7 +1,3 @@
-import unittest
-
-from mock import call, patch
-
 import unittest_support
 
 from committer import errors

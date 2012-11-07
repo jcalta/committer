@@ -25,7 +25,7 @@ from sys import exit, stdout, stderr
 from committer import errors
 
 
-_USAGE_INFORMATION = """
+USAGE_INFORMATION = """
 usage:
     commit "message" [++]    commits all changes
     st                       shows all changes
@@ -43,7 +43,7 @@ def perform (command, arguments):
         return exit(0)
 
     if len(arguments) > 1 and arguments[1] == 'help':
-        stdout.write(_USAGE_INFORMATION)
+        stdout.write(USAGE_INFORMATION)
         return exit(0)
 
     try:

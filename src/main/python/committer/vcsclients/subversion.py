@@ -25,7 +25,7 @@ from committer.vcsclients.util import check_if_is_executable, execute_command
 
 
 COMMAND = 'svn'
-NAME    = 'Subversion'
+NAME = 'Subversion'
 
 def commit (message):
     """

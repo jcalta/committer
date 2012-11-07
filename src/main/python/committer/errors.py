@@ -34,9 +34,7 @@ class CommitterException (Exception):
             raise Exception('Illegal error code "zero".')
 
         if error_code > 127:
-            raise Exception(
-                      'Illegal error code "%s": has to be smaller than 128.',
-                      error_code)
+            raise Exception('Illegal error code "%s": has to be smaller than 128.', error_code)
 
         super(CommitterException, self).__init__()
         self.message = message + '\n'
@@ -89,6 +87,5 @@ class NotExecutableException (CommitterException):
     """
 
     def __init__ (self, repository):
-        message = ('%s command line client "%s" not executable.'
-                   % (repository.NAME, repository.COMMAND))
+        message = ('{0} command line client "{1}" not executable.'.format(repository.NAME, repository.COMMAND))
         super(NotExecutableException, self).__init__(message, 102)

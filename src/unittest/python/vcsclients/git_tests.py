@@ -39,7 +39,7 @@ class StatusTests (unittest.TestCase):
     def test_should_call_status (self, mock_git):
         git.status()
         
-        self.assertEquals(call('status'), mock_git.call_args)
+        self.assertEquals(call('status -sb'), mock_git.call_args)
         
 
 class DetectTests (unittest.TestCase):

@@ -63,7 +63,7 @@ def status ():
         Shows changes in current directory using "git status".
     """
 
-    _git('status')
+    _git('status -sb')
 
 
 def update ():

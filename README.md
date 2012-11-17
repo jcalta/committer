@@ -40,12 +40,12 @@ sudo pip install committer
 or 
 
 ```bash
-sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.60.tar.gz
+sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.63.tar.gz
 ```
 
 ### Using easy_install
 ```
-easy_install https://github.com/downloads/aelgru/committer/committer-0.0.60.tar.gz
+easy_install https://github.com/downloads/aelgru/committer/committer-0.0.63.tar.gz
 ```
 
 ## How does it work?

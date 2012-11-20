@@ -79,6 +79,13 @@ If you do *not* like the workflow **committer** implies, you may be interested i
 [hg-git](http://hg-git.github.com/) or
 [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
 
+Did you know all git repositories are subversion repositories?
+
+```bash
+svn checkout https://github.com/aelgru/committer
+```
+
+(Collaborating on GitHub with Subversion)[https://github.com/blog/1178-collaborating-on-github-with-subversion]
 
 ## License
 

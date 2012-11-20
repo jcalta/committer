@@ -75,7 +75,7 @@ Committing in a high frequency has advantages:
 
 ## Alternatives
 
-Did you know all git repositories are subversion repositories?
+Did you know all git repositories on GitHub are subversion repositories?
 
 ```bash
 svn checkout https://github.com/aelgru/committer

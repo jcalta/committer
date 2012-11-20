@@ -35,10 +35,37 @@ use_plugin('python.pylint')
 use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
+description = """
+
+committer comes with three scripts.
+
+Usage
+=====
+
+Commit all changes::
+
+    commit "This is the commit message."
+
+Commits all changes in the current directory using the first argument as commit
+message.
+
+
+Show all changes::
+
+    st
+
+Executes the "status" command known by all version control systems.
+
+Update the current directory::
+
+    update
+
+Updates the repository in the current working directory.
+"""
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
 url = 'https://github.com/aelgru/committer'
-version = '0.0.64'
+version = '0.0.69'
 
 default_task = ['analyze', 'publish']
 

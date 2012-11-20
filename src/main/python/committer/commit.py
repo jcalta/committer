@@ -39,8 +39,5 @@ def perform(arguments):
     vcs_client = discover_working_repository()
     vcs_client.update()
 
-    if len(arguments) == 3 and arguments[2] == '++':
-        increment_version()
-
     message = arguments[1]
     vcs_client.commit(message)

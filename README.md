@@ -62,17 +62,6 @@ easy_install https://github.com/downloads/aelgru/committer/committer-0.0.63.tar.
 * execute `hg pull`
 * execute `hg up`
 
-## Additional Features
-
-### Increment the version before committing
-
-```bash
-commit "Added new feature" ++
-```
-
-The second argument "++" tells the script to increment the version within
-*build.py*
-
 
 ## Micro Commits
 

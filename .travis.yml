@@ -3,6 +3,7 @@ python:
   - "2.6"
   - "2.7"
   - "3.2"
+  - "3.3"
   - "pypy"
 
 before_script:
@@ -11,8 +12,4 @@ before_script:
 install:
   - pip install pybuilder
 
-script: "pyb --debug"
-
-notifications:
-  email:
-  - aelgru@gmail.com
+script: "pyb install_dependencies analyze publish --debug"

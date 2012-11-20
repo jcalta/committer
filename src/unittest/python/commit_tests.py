@@ -37,13 +37,3 @@ class PerformTests (unittest_support.TestCase):
         perform(['/usr/local/bin/commit', 'This is the message'])
 
         self.assertEquals(call('This is the message'), mock_vcs_client.commit.call_args)
-
-    @patch('committer.commit.increment_version')
-    @patch('committer.commit.discover_working_repository')
-    def test_should_not_increment_version_when_no_second_argument_given (self, mock_discover, mock_increment):
-        mock_vcs_client = self.create_mock_vcs_client()
-        mock_discover.return_value = mock_vcs_client
-
-        perform(['/usr/local/bin/commit', 'This is the message'])
-
-        self.assertEquals(None, mock_increment.call_args)

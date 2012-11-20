@@ -85,7 +85,7 @@ Did you know all git repositories are subversion repositories?
 svn checkout https://github.com/aelgru/committer
 ```
 
-(Collaborating on GitHub with Subversion)[https://github.com/blog/1178-collaborating-on-github-with-subversion]
+[Collaborating on GitHub with Subversion](https://github.com/blog/1178-collaborating-on-github-with-subversion)
 
 ## License
 

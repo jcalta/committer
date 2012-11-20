@@ -40,7 +40,7 @@ summary = 'Unified command line interface for git, mercurial, and subversion.'
 url = 'https://github.com/aelgru/committer'
 version = '0.0.64'
 
-default_task = ['install_dependencies', 'analyze', 'publish']
+default_task = ['analyze', 'publish']
 
 @init
 def set_properties (project):

@@ -11,7 +11,7 @@ Unified command line interface for git, mercurial, and subversion.
 commit "This is the commit message."
 ```
 
-Commits all changes in the current directory using the given string as commit
+Commits all changes in the current directory using the first argument as commit
 message.
 
 

@@ -21,7 +21,6 @@
 __author__ = 'Michael Gruber'
 
 from committer.errors import WrongUsageException
-from committer.incrementor import increment_version
 from committer.vcsclients import discover_working_repository
 
 

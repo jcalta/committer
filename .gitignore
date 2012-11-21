@@ -1,11 +1,11 @@
 *.py[co]
 
-# eclipse
+# ide
 .project
 .pydevproject
 .idea
 
-# python-builder
+# pybuilder
 target
 
 # Packages

@@ -20,3 +20,5 @@ sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.70.
 easy_install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
 ```
 
+### [Build committer Yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
+

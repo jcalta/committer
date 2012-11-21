@@ -9,16 +9,18 @@ sudo pip install committer
 ```
 [Other ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
-## Usage
+## How to Use
 
 ### Commit all changes
+
+How many times did you forget to update before committing your changes?
 
 ```bash
 commit "This is the commit message."
 ```
 
-Commits all changes in the current directory using the first argument as commit
-message.
+Updates the repository in the current working directory.
+Then commits all changes using the first argument as commit message.
 
 
 ### Show all changes
@@ -36,20 +38,11 @@ Executes the "status" command known by all version control systems.
 update
 ```
 
-## How does it work?
+## How to Contribute
 
-*Example 1:* performing `commit` on a git repository will:
-* check if the `git` command is executable, by executing `git --version`
-* execute `git pull`
-* execute `git commit -a -m "Extracted interface."`
-* execute `git push`
+Simply [Fork](https://github.com/aelgru/committer/fork_select) committer.
 
-
-*Example 2:* performing `update` on a mercurial repository will:
-* check if the `hg` command is executable, by executing: `hg --version --quiet`
-* execute `hg pull`
-* execute `hg up`
-
+[How to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
 
 ## Micro Commits
 
@@ -59,7 +52,6 @@ Committing in a high frequency has advantages:
 * commit messages for smaller commits "tell a story".
 
 [Read more about micro commits.](http://lucasr.org/2011/01/29/micro-commits/)
-
 
 ## Alternatives
 

@@ -9,7 +9,7 @@ sudo pip install committer
 ```
 
 If pypi should not be accessible for some reason, you can download the tar-ball from the
-[download section](https://github.com/downloads/aelgru/committer)
+[download section](https://github.com/aelgru/committer/downloads)
 
 ```bash
 sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz

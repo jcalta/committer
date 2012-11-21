@@ -2,6 +2,12 @@
 
 Unified command line interface for *git*, *mercurial*, and *subversion*.
 
+## How to Install
+
+```bash
+sudo pip install committer
+```
+[Other ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
 ## Usage
 
@@ -28,24 +34,6 @@ Executes the "status" command known by all version control systems.
 
 ```bash
 update
-```
-
-## Installation
-
-### Using pip 
-```bash
-sudo pip install committer
-```
-
-or 
-
-```bash
-sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
-```
-
-### Using easy_install
-```
-easy_install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
 ```
 
 ## How does it work?

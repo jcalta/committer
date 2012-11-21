@@ -1,0 +1,22 @@
+## How to install committer
+
+### Using pip 
+
+Since committer is written in python it is available through [pypi](http://pypi.python.org/pypi/committer/)
+
+```bash
+sudo pip install committer
+```
+
+If pypi should not be accessible for some reason, you can download the tar-ball from the
+[download section](https://github.com/downloads/aelgru/committer)
+
+```bash
+sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
+```
+
+### Using easy_install
+```
+easy_install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
+```
+

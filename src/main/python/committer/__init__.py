@@ -27,9 +27,9 @@ from committer import errors
 
 USAGE_INFORMATION = """
 usage:
-    commit "message" [++]    commits all changes
-    st                       shows all changes
-    update                   updates the current directory
+    co "message" [++]    commits all changes
+    st                   shows all changes
+    up                   updates the current directory
 """
 
 def perform (command, arguments):

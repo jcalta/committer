@@ -7,7 +7,7 @@ Unified command line interface for *git*, *mercurial*, and *subversion*.
 ```bash
 sudo pip install committer
 ```
-[Other ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
+[More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
 ## How to Use
 
@@ -40,9 +40,9 @@ up
 
 ## How to Contribute
 
-Simply [Fork](https://github.com/aelgru/committer/fork_select) committer.
+Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
 
-[How to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
+[Read how to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
 
 ## Micro Commits
 

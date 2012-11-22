@@ -16,7 +16,7 @@ sudo pip install committer
 How many times did you forget to update before committing your changes?
 
 ```bash
-commit "This is the commit message."
+co "This is the commit message."
 ```
 
 Updates the repository in the current working directory.
@@ -35,7 +35,7 @@ Executes the "status" command known by all version control systems.
 ### Update the current directory
 
 ```bash
-update
+up
 ```
 
 ## How to Contribute

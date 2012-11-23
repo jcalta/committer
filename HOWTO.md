@@ -1,5 +1,11 @@
 ## How to Build committer Yourself
 
+### Clone the Git repository
+
+```bash
+git clone https://github.com/aelgru/committer
+```
+
 ### Create a virtual environment
 
 To build committer you will have to install dependencies.

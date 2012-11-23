@@ -9,11 +9,9 @@ sudo pip install committer
 ```
 [More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
-## How to Use
+## How to Commit
 
-### Commit all changes
-
-How many times did you forget to update before committing your changes?
+### How many times did you forget to update before committing your changes?
 
 ```bash
 co "This is the commit message."
@@ -38,13 +36,7 @@ Executes the "status" command known by all version control systems.
 up
 ```
 
-## How to Contribute
-
-Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
-
-[Read how to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
-
-## Micro Commits
+### Micro Commits
 
 Committing in a high frequency has advantages:
 * prevents merging,
@@ -52,6 +44,11 @@ Committing in a high frequency has advantages:
 * commit messages for smaller commits "tell a story".
 
 [Read more about micro commits.](http://lucasr.org/2011/01/29/micro-commits/)
+## How to Contribute
+
+Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
+
+[Read how to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
 
 ## Alternatives
 

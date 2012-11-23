@@ -12,12 +12,12 @@ If pypi should not be accessible for some reason, you can download the tar-ball 
 [download section](https://github.com/aelgru/committer/downloads)
 
 ```bash
-sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
+sudo pip install https://github.com/downloads/aelgru/committer/committer-0.0.71.tar.gz
 ```
 
 ### Using easy_install
 ```
-easy_install https://github.com/downloads/aelgru/committer/committer-0.0.70.tar.gz
+easy_install https://github.com/downloads/aelgru/committer/committer-0.0.71.tar.gz
 ```
 
 ### [Build committer Yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)

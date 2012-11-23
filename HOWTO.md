@@ -4,20 +4,20 @@
 
 Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
 
-### Create a virtual environment
+### Create a [virtual environment](http://www.virtualenv.org/)
 
 To build committer you will have to install dependencies.
 This would normally affect your system.
 Instead of installing those dependencies into your system we will install them into a virtual environment.
 
 ```bash
-virtualenv ve
+virtualenv venv
 ```
 
 ### Activate the virtual environment
 
 ```bash
-source ve/bin/activate
+source venv/bin/activate
 ```
 
 ### Install [pybuilder](http://pybuilder.github.com/)
@@ -43,6 +43,12 @@ pyb
 This will execute all unittests and check the coverage.
 
 ### Install and test the built version
+
+Do not forget to leave the virtual environment before installing.
+
+```bash
+deactivate
+```
 
 Within the `target/dist` dir you will find the built artefacts.
 

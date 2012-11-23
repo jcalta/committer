@@ -46,7 +46,7 @@ This will execute all unittests and check the coverage.
 
 Within the `target/dist` dir you will find the built artefacts.
 
-One possibility is to change into the `target/dist/committer-0.0.70` directory.
+Once you changed into the `target/dist/committer-0.0.71` directory you can install committer:
 
 ```bash
 python setup.py install

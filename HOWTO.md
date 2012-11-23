@@ -1,10 +1,8 @@
 ## How to Build committer Yourself
 
-### Clone the Git repository
+### Fork the Git repository
 
-```bash
-git clone https://github.com/aelgru/committer
-```
+Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
 
 ### Create a virtual environment
 

@@ -1,4 +1,4 @@
-#   committer update command
+#   committer actions
 #   Copyright 2012 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +14,11 @@
 #   limitations under the License.
 
 """
+    Using the "commit" command will discover the working repository in
+    the current directory.
+
+    The "status" command discovers all changes in the in the current directory.
+
     Using the "update" command will discover the working repository in
     the current directory.
 """
@@ -22,6 +27,35 @@ __author__ = 'Michael Gruber'
 
 from committer.errors import WrongUsageError
 from committer.vcsclients import discover_working_repository
+
+
+def commit_changes(arguments):
+    """
+        1. detect what kind of repository the current directory is.
+        2. perform update using the vcs_client.
+        3. optionally execute an incrementor.
+        4. commit all modified files to the repository using the vcs client.
+    """
+
+    if len(arguments) == 1:
+        raise WrongUsageError()
+
+    vcs_client = discover_working_repository()
+    vcs_client.update()
+
+    message = arguments[1]
+    vcs_client.commit(message)
+
+def show_status(arguments):
+    """
+        Shows all changes in the current working directory.
+    """
+
+    if len(arguments) != 1:
+        raise WrongUsageError()
+
+    vcs_client = discover_working_repository()
+    vcs_client.status()
 
 
 def perform_update(arguments):

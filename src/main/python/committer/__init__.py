@@ -23,9 +23,9 @@ __version__ = '${version}'
 
 from sys import exit, stdout, stderr
 from committer import errors
-from committer.commit import commit_changes
-from committer.status import show_status
-from committer.update import perform_update
+from committer.actions import commit_changes
+from committer.actions import show_status
+from committer.actions import perform_update
 
 
 USAGE_INFORMATION = """

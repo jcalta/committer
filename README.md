@@ -14,7 +14,7 @@ pip install committer
 ### How many times did you forget to update before committing your changes?
 
 ```bash
-co "This is the commit message."
+ci "This is the commit message."
 ```
 
 Updates the repository in the current working directory.

@@ -20,7 +20,7 @@
 __author__ = 'Michael Gruber'
 
 
-class CommitterException (Exception):
+class CommitterError (Exception):
     """
         to be raised when an error occurred, which should stop the default
         program flow.
@@ -36,12 +36,12 @@ class CommitterException (Exception):
         if error_code > 127:
             raise Exception('Illegal error code "%s": has to be smaller than 128.', error_code)
 
-        super(CommitterException, self).__init__()
+        super(CommitterError, self).__init__()
         self.message = message + '\n'
         self.error_code = error_code
 
 
-class NoRepositoryDetectedException (CommitterException):
+class NoRepositoryDetectedError (CommitterError):
     """
         to be raised when no repository could be detected in the current
         directory.
@@ -49,15 +49,15 @@ class NoRepositoryDetectedException (CommitterException):
 
     def __init__ (self):
         message = 'No repository detected.'
-        super(NoRepositoryDetectedException, self).__init__(message, 100)
+        super(NoRepositoryDetectedError, self).__init__(message, 100)
 
-class WrongUsageException (CommitterException):
+class WrongUsageError (CommitterError):
     """
         to be raised when user provided wrong arguments.
     """
 
     def __init__ (self):
-        super(WrongUsageException, self).__init__("""
+        super(WrongUsageError, self).__init__("""
 Wrong usage, please use the committer commands as expected.
 
 usage:
@@ -67,7 +67,7 @@ usage:
 """, 1)
 
 
-class TooManyRepositoriesException (CommitterException):
+class TooManyRepositoriesError (CommitterError):
     """
         to be raised when more than one repository could be detected in the
         current directory.
@@ -77,10 +77,10 @@ class TooManyRepositoriesException (CommitterException):
         names = [repository.NAME for repository in detected_repositories]
         message = 'Detected more than one repository: ' + ', '.join(names)
 
-        super(TooManyRepositoriesException, self).__init__(message, 101)
+        super(TooManyRepositoriesError, self).__init__(message, 101)
 
 
-class NotExecutableException (CommitterException):
+class NotExecutableError (CommitterError):
     """
         to be raised when the command line client of the repository could not
         be executed.
@@ -88,4 +88,4 @@ class NotExecutableException (CommitterException):
 
     def __init__ (self, repository):
         message = ('{0} command line client "{1}" not executable.'.format(repository.NAME, repository.COMMAND))
-        super(NotExecutableException, self).__init__(message, 102)
+        super(NotExecutableError, self).__init__(message, 102)

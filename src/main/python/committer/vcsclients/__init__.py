@@ -39,10 +39,10 @@ def discover_working_repository ():
     detected_repositories = _detect_repositories()
     
     if not detected_repositories:
-        raise errors.NoRepositoryDetectedException()
+        raise errors.NoRepositoryDetectedError()
     
     if len(detected_repositories) > 1:
-        raise errors.TooManyRepositoriesException(detected_repositories)
+        raise errors.TooManyRepositoriesError(detected_repositories)
     
     vcs_client = detected_repositories[0]
     return ensure_executable(vcs_client)
@@ -57,7 +57,7 @@ def ensure_executable (vcs_client):
     """
     
     if not vcs_client.is_executable():
-        raise errors.NotExecutableException(vcs_client)
+        raise errors.NotExecutableError(vcs_client)
     
     return vcs_client
 

@@ -23,6 +23,9 @@ __version__ = '${version}'
 
 from sys import exit, stdout, stderr
 from committer import errors
+from committer.commit import commit_changes
+from committer.status import show_status
+from committer.update import perform_update
 
 
 USAGE_INFORMATION = """
@@ -32,24 +35,41 @@ usage:
     up                   updates the current directory
 """
 
-def perform (command, arguments):
-    """
-        performs the given command using the given arguments.
-    """
+class ScriptCommand(object):
+    def __init__(self, function):
+        self.function = function
 
-    stdout.write('committer version %s\n' % __version__)
+    def __call__ (self, arguments):
+        """
+            performs the given command using the given arguments.
+        """
 
-    if len(arguments) > 1 and arguments[1] == '--version':
-        return exit(0)
+        stdout.write('committer version %s\n' % __version__)
 
-    if len(arguments) > 1 and arguments[1] == 'help':
-        stdout.write(USAGE_INFORMATION)
-        return exit(0)
+        if len(arguments) > 1 and arguments[1] == '--version':
+            return exit(0)
 
-    try:
-        command.perform(arguments)
-        return exit(0)
+        if len(arguments) > 1 and arguments[1] == 'help':
+            stdout.write(USAGE_INFORMATION)
+            return exit(0)
 
-    except errors.CommitterException as committer_exception:
-        stderr.write(committer_exception.message)
-        return exit(committer_exception.error_code)
+        try:
+            self.function(arguments)
+            return exit(0)
+
+        except errors.CommitterError as committer_exception:
+            stderr.write(committer_exception.message)
+            return exit(committer_exception.error_code)
+
+
+@ScriptCommand
+def commit_all_modified_files(arguments):
+    commit_changes(arguments)
+
+@ScriptCommand
+def show_status_of_the_current_working_directory(arguments):
+    show_status(arguments)
+
+@ScriptCommand
+def update_the_current_working_directory(arguments):
+    perform_update(arguments)

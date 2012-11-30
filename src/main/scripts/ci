@@ -24,7 +24,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import perform, commit
+from committer import commit_all_modified_files
 
 
-perform(commit, sys.argv)
+commit_all_modified_files(sys.argv)

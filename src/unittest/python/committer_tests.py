@@ -2,16 +2,16 @@ import unittest
 
 from mock import Mock, call, patch
 
-from committer import errors, perform, __doc__ as docstring
+from committer import ScriptCommand, errors
 
-class PerformTests (unittest.TestCase):
+class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.stdout')
     @patch('committer.exit')
     def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_stdout):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
-        perform(mock_command, ['/usr/local/bin/commit', '--version'])
+        ScriptCommand(mock_command)(['/usr/local/bin/commit', '--version'])
 
         self.assertEquals(call('committer version ${version}\n'), mock_stdout.write.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
@@ -22,7 +22,7 @@ class PerformTests (unittest.TestCase):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
-        perform(mock_command, ['/usr/local/bin/commit', 'help'])
+        ScriptCommand(mock_command)(['/usr/local/bin/commit', 'help'])
 
         self.assertEquals(call("""
 usage:
@@ -38,9 +38,9 @@ usage:
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']
 
-        perform(mock_command, arguments)
+        ScriptCommand(mock_command)(arguments)
 
-        self.assertEquals(call(arguments), mock_command.perform.call_args)
+        self.assertEquals(call(arguments), mock_command.call_args)
         self.assertEquals(call(0), mock_exit.call_args)
 
     @patch('committer.stdout')
@@ -48,9 +48,9 @@ usage:
     @patch('committer.exit')
     def test_should_return_with_error_message_and_code (self, mock_exit, mock_stderr, mock_stdout):
         mock_command = Mock()
-        mock_command.perform.side_effect = errors.CommitterException('Error message.', 123)
+        mock_command.side_effect = errors.CommitterError('Error message.', 123)
 
-        perform(mock_command, ['/usr/local/bin/commit'])
+        ScriptCommand(mock_command)(['/usr/local/bin/commit'])
 
         self.assertEquals(call('Error message.\n'), mock_stderr.write.call_args)
         self.assertEquals(call(123), mock_exit.call_args)

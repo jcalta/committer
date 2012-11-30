@@ -4,9 +4,9 @@ import unittest
 import unittest_support
 
 from committer import vcsclients
-from committer.errors import (NotExecutableException,
-                              NoRepositoryDetectedException,
-                              TooManyRepositoriesException)
+from committer.errors import (NotExecutableError,
+                              NoRepositoryDetectedError,
+                              TooManyRepositoriesError)
  
 class FindTests (unittest_support.TestCase):
     def test_should_find_mercurial_vcs_client (self):
@@ -36,7 +36,7 @@ class EnsureExecutableTests (unittest.TestCase):
         mock_vcs_client = Mock()
         mock_vcs_client.is_executable.return_value = False
         
-        self.assertRaises(NotExecutableException, vcsclients.ensure_executable, mock_vcs_client)
+        self.assertRaises(NotExecutableError, vcsclients.ensure_executable, mock_vcs_client)
 
     def test_should_return_vcs_client_object_when_executable (self):
         mock_vcs_client = Mock()
@@ -50,13 +50,13 @@ class DiscoverWorkingRepository (unittest_support.TestCase):
     def test_should_raise_exception_when_no_repository_detected (self, mock_detect_repositories):
         mock_detect_repositories.return_value = None
         
-        self.assertRaises(NoRepositoryDetectedException, vcsclients.discover_working_repository)
+        self.assertRaises(NoRepositoryDetectedError, vcsclients.discover_working_repository)
 
     @patch('committer.vcsclients._detect_repositories')
     def test_should_raise_exception_when_more_than_one_repository_detected (self, mock_detect_repositories):
         mock_detect_repositories.return_value = [self.create_mock_vcs_client(), self.create_mock_vcs_client()]
         
-        self.assertRaises(TooManyRepositoriesException, vcsclients.discover_working_repository)
+        self.assertRaises(TooManyRepositoriesError, vcsclients.discover_working_repository)
 
     @patch('committer.vcsclients._detect_repositories')
     def test_should_return_detected_vcs_client (self, mock_detect_repositories):

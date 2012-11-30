@@ -32,7 +32,6 @@ def commit (message):
     """
         commits all files by calling: git commit -a -m "message"
     """
-    
     _git('commit', '-a', '-m', message)
     _git('push')
 
@@ -44,7 +43,6 @@ def detect ():
         @return: True if the current directory represents a git repository,
                  otherwise False.
     """
-    
     return path.isdir('.git')
 
 
@@ -54,7 +52,6 @@ def is_executable ():
          
         @return: True git command line client executable, otherwise False. 
     """
-    
     return check_if_is_executable(COMMAND, '--version')
 
 
@@ -62,7 +59,6 @@ def status ():
     """
         Shows changes in current directory using "git status".
     """
-
     _git('status', '-sb')
 
 
@@ -70,7 +66,6 @@ def update ():
     """
         Updates files by executing "git pull".
     """
-
     _git('pull')
 
 
@@ -78,5 +73,4 @@ def _git (*arguments):
     """
         Executes git using the given arguments.
     """
-    
     execute_command(COMMAND, *arguments)

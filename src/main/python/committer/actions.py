@@ -36,7 +36,6 @@ def commit(arguments):
         3. optionally execute an incrementor.
         4. commit all modified files to the repository using the vcs client.
     """
-
     if len(arguments) == 1:
         raise WrongUsageError()
 
@@ -50,7 +49,6 @@ def status(arguments):
     """
         Shows all changes in the current working directory.
     """
-
     if len(arguments) != 1:
         raise WrongUsageError()
 
@@ -62,7 +60,6 @@ def update(arguments):
     """
         Updates the repository in the current working directory.
     """
-
     if len(arguments) != 1:
         raise WrongUsageError()
 

@@ -33,7 +33,6 @@ def commit (message):
         by calling: hg commit -m "message"
         and "hg push"
     """
-    
     _hg('commit', '-m', message)
     _hg('push')
 
@@ -45,7 +44,6 @@ def detect ():
         @return: True if the current directory represents a mercurial repository,
                  otherwise False.
     """
-    
     return path.isdir('.hg')
 
 
@@ -53,7 +51,6 @@ def is_executable ():
     """
         @return: True if "hg --version --quiet" is executable, otherwise False. 
     """
-    
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
@@ -61,7 +58,6 @@ def status ():
     """
         Shows changes in the current directory using "hg status".
     """
-
     _hg('status')
 
 
@@ -69,7 +65,6 @@ def update ():
     """
         Updates files by calling "hg pull" and "hg update".
     """
-
     _hg('pull')
     _hg('update')
 
@@ -78,5 +73,4 @@ def _hg (*arguments):
     """
         Executes hg using the given arguments.
     """
-    
     execute_command(COMMAND, *arguments)

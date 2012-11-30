@@ -35,7 +35,6 @@ def discover_working_repository ():
         @raise CommitterException: when no or more than one vcs_client detected.
         @return: the vcs client to the vcs_client in the current directory. 
     """
-    
     detected_repositories = _detect_repositories()
     
     if not detected_repositories:
@@ -55,7 +54,6 @@ def ensure_executable (vcs_client):
         @raise CommiterException: when the command line client is not executable.
         @return: the given vcs client
     """
-    
     if not vcs_client.is_executable():
         raise errors.NotExecutableError(vcs_client)
     
@@ -68,7 +66,6 @@ def _detect_repositories ():
         
         @return: list of vcs clients
     """
-    
     vcs_clients = _find()
     
     return [vcs_client for vcs_client in vcs_clients if vcs_client.detect()]
@@ -78,5 +75,4 @@ def _find ():
     """
         @return: list of all available vcs client modules.
     """
-    
     return [git, mercurial, subversion]

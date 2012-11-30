@@ -31,7 +31,6 @@ def commit (message):
     """
         Commits all files by calling: svn commit -m "message"
     """
-    
     _svn('commit', '-m', message)
 
 
@@ -42,7 +41,6 @@ def detect ():
         @return: True if the current directory represents a subversion repository,
                  otherwise False.
     """
-    
     return path.isdir('.svn')
 
 
@@ -52,7 +50,6 @@ def is_executable ():
         
         @return: True if svn client is executable, otherwise False. 
     """
-    
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
@@ -60,7 +57,6 @@ def status ():
     """
         Shows changes in the current directory using "svn status".
     """
-
     _svn('status')
 
 
@@ -68,7 +64,6 @@ def update ():
     """
         Updates files by executing "svn pull" and "svn update".
     """
-
     _svn('update')
 
 
@@ -76,5 +71,4 @@ def _svn (*arguments):
     """
         Executes svn using the given arguments.
     """
-    
     execute_command(COMMAND, *arguments)

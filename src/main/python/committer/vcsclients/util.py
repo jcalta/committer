@@ -26,7 +26,6 @@ def execute_command (command, *arguments):
     """
         Executes command using the given command_and_arguments.
     """
-
     command_and_arguments = [command] + list(arguments)
     call(command_and_arguments)
 
@@ -38,7 +37,6 @@ def check_if_is_executable (command, *arguments):
         @return: True if the given command is executable with the given
                  arguments, otherwise False. 
     """
-
     try:
         command_and_arguments = [command] + list(arguments)
         check_call(command_and_arguments)

@@ -19,6 +19,7 @@
 
 __author__ = 'Michael Gruber'
 
+import committer
 
 class CommitterError (Exception):
     """
@@ -57,14 +58,8 @@ class WrongUsageError (CommitterError):
     """
 
     def __init__ (self):
-        super(WrongUsageError, self).__init__("""
-Wrong usage, please use the committer commands as expected.
-
-usage:
-    co "message" [++]    commits all changes
-    st                   shows all changes
-    up                   updates the current directory
-""", 1)
+        super(WrongUsageError, self).__init__("""\nWrong usage, please use the committer commands as expected.\n{0}"""
+                                              .format(committer.USAGE_INFORMATION), 1)
 
 
 class TooManyRepositoriesError (CommitterError):

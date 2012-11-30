@@ -29,7 +29,7 @@ from committer.errors import WrongUsageError
 from committer.vcsclients import discover_working_repository
 
 
-def commit_changes(arguments):
+def commit(arguments):
     """
         1. detect what kind of repository the current directory is.
         2. perform update using the vcs_client.
@@ -46,7 +46,7 @@ def commit_changes(arguments):
     message = arguments[1]
     vcs_client.commit(message)
 
-def show_status(arguments):
+def status(arguments):
     """
         Shows all changes in the current working directory.
     """
@@ -58,7 +58,7 @@ def show_status(arguments):
     vcs_client.status()
 
 
-def perform_update(arguments):
+def update(arguments):
     """
         Updates the repository in the current working directory.
     """

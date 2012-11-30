@@ -23,9 +23,9 @@ __version__ = '${version}'
 
 from sys import exit, stdout, stderr
 from committer import errors
-from committer.actions import commit_changes
-from committer.actions import show_status
-from committer.actions import perform_update
+from committer.actions import commit
+from committer.actions import status
+from committer.actions import update
 
 
 USAGE_INFORMATION = """
@@ -43,10 +43,8 @@ class ScriptCommand(object):
         """
             performs the given command using the given arguments.
         """
-
-        stdout.write('committer version %s\n' % __version__)
-
         if len(arguments) > 1 and arguments[1] == '--version':
+            stdout.write('committer version %s\n' % __version__)
             return exit(0)
 
         if len(arguments) > 1 and arguments[1] == 'help':
@@ -64,12 +62,12 @@ class ScriptCommand(object):
 
 @ScriptCommand
 def commit_all_modified_files(arguments):
-    commit_changes(arguments)
+    commit(arguments)
 
 @ScriptCommand
 def show_status_of_the_current_working_directory(arguments):
-    show_status(arguments)
+    status(arguments)
 
 @ScriptCommand
 def update_the_current_working_directory(arguments):
-    perform_update(arguments)
+    update(arguments)

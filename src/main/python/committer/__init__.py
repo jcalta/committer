@@ -61,7 +61,7 @@ class ScriptCommand(object):
 
 
 @ScriptCommand
-def commit_all_modified_files(arguments):
+def update_current_working_directory_and_commit_changes(arguments):
     commit(arguments)
 
 @ScriptCommand

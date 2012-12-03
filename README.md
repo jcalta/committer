@@ -5,7 +5,7 @@ Unified command line interface for *git*, *mercurial*, and *subversion*.
 ## How to Install
 
 ```bash
-pip install committer
+sudo pip install committer
 ```
 [More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 

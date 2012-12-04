@@ -33,8 +33,7 @@ def commit(arguments):
     """
         1. detect what kind of repository the current directory is.
         2. perform update using the vcs_client.
-        3. optionally execute an incrementor.
-        4. commit all modified files to the repository using the vcs client.
+        3. commit all modified files to the repository using the vcs client.
     """
     if len(arguments) == 1:
         raise WrongUsageError()

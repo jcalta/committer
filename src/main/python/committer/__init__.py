@@ -36,6 +36,10 @@ usage:
 """
 
 class ScriptCommand(object):
+    """
+        Decorator for functions which are called from scripts.
+    """
+    
     def __init__(self, function):
         self.function = function
 

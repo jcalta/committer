@@ -39,9 +39,9 @@ class ScriptCommand(object):
     """
         Decorator for functions which are called from scripts.
     """
-    
     def __init__(self, function):
         self.function = function
+
 
     def __call__(self, arguments):
         """
@@ -68,9 +68,11 @@ class ScriptCommand(object):
 def update_current_working_directory_and_commit_changes(arguments):
     commit(arguments)
 
+
 @ScriptCommand
 def show_status_of_the_current_working_directory(arguments):
     status(arguments)
+
 
 @ScriptCommand
 def update_the_current_working_directory(arguments):

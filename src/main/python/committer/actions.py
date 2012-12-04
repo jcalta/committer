@@ -45,6 +45,7 @@ def commit(arguments):
     message = arguments[1]
     vcs_client.commit(message)
 
+
 def status(arguments):
     """
         Shows all changes in the current working directory.

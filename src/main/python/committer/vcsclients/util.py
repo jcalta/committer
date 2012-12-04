@@ -22,7 +22,7 @@ __author__ = 'Michael Gruber'
 from subprocess import CalledProcessError, call, check_call
 
 
-def execute_command (command, *arguments):
+def execute_command(command, *arguments):
     """
         Executes command using the given command_and_arguments.
     """
@@ -30,7 +30,7 @@ def execute_command (command, *arguments):
     call(command_and_arguments)
 
 
-def check_if_is_executable (command, *arguments):
+def check_if_is_executable(command, *arguments):
     """
         Executes the given command with the given arguments.
         

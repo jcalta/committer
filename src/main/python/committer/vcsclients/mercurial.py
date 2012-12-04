@@ -27,7 +27,7 @@ from committer.vcsclients.util import check_if_is_executable, execute_command
 COMMAND = 'hg'
 NAME = 'Mercurial'
 
-def commit (message):
+def commit(message):
     """
         Commits all files in the current directory
         by calling: hg commit -m "message"
@@ -37,7 +37,7 @@ def commit (message):
     _hg('push')
 
 
-def detect ():
+def detect():
     """
         Checks if the .hg directory exists.
         
@@ -47,21 +47,21 @@ def detect ():
     return path.isdir('.hg')
 
 
-def is_executable ():
+def is_executable():
     """
         @return: True if "hg --version --quiet" is executable, otherwise False. 
     """
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
-def status ():
+def status():
     """
         Shows changes in the current directory using "hg status".
     """
     _hg('status')
 
 
-def update ():
+def update():
     """
         Updates files by calling "hg pull" and "hg update".
     """
@@ -69,7 +69,7 @@ def update ():
     _hg('update')
 
 
-def _hg (*arguments):
+def _hg(*arguments):
     """
         Executes hg using the given arguments.
     """

@@ -43,7 +43,7 @@ class ScriptCommand(object):
     def __init__(self, function):
         self.function = function
 
-    def __call__ (self, arguments):
+    def __call__(self, arguments):
         """
             performs the given command using the given arguments.
         """

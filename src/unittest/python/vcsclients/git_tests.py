@@ -20,7 +20,7 @@ class CommitTests (unittest.TestCase):
         git.commit('This is a commit message.')
         
         self.assertEqual([call('commit', '-a', '-m', 'This is a commit message.'),
-                           call('push')],
+                          call('push')],
                           mock_git.call_args_list)
         
         

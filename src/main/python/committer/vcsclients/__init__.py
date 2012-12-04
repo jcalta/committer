@@ -28,7 +28,7 @@ from committer import errors
 from committer.vcsclients import git, mercurial, subversion
 
 
-def detect_vcs_client ():
+def detect_vcs_client():
     """
         runs vcs_client detection on the current directory.
         
@@ -47,7 +47,7 @@ def detect_vcs_client ():
     return ensure_executable(vcs_client)
 
 
-def ensure_executable (vcs_client):
+def ensure_executable(vcs_client):
     """
         ensures the given vcs client is executable. 
         
@@ -60,7 +60,7 @@ def ensure_executable (vcs_client):
     return vcs_client
 
 
-def _detect_repositories ():
+def _detect_repositories():
     """
         runs detection on all available vcs clients. 
         
@@ -71,7 +71,7 @@ def _detect_repositories ():
     return [vcs_client for vcs_client in vcs_clients if vcs_client.detect()]
 
 
-def _list_available_vcs_clients ():
+def _list_available_vcs_clients():
     """
         @return: list of all available vcs client modules.
     """

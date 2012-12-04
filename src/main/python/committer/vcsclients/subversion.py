@@ -27,14 +27,14 @@ from committer.vcsclients.util import check_if_is_executable, execute_command
 COMMAND = 'svn'
 NAME = 'Subversion'
 
-def commit (message):
+def commit(message):
     """
         Commits all files by calling: svn commit -m "message"
     """
     _svn('commit', '-m', message)
 
 
-def detect ():
+def detect():
     """
         Checks if the .svn directory exists.
         
@@ -44,7 +44,7 @@ def detect ():
     return path.isdir('.svn')
 
 
-def is_executable ():
+def is_executable():
     """
         Checks if "svn --version --quiet" is executable.
         
@@ -53,21 +53,21 @@ def is_executable ():
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 
 
-def status ():
+def status():
     """
         Shows changes in the current directory using "svn status".
     """
     _svn('status')
 
 
-def update ():
+def update():
     """
         Updates files by executing "svn pull" and "svn update".
     """
     _svn('update')
 
 
-def _svn (*arguments):
+def _svn(*arguments):
     """
         Executes svn using the given arguments.
     """

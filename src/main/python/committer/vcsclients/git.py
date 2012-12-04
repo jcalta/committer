@@ -28,7 +28,7 @@ COMMAND = 'git'
 NAME = 'Git'
 
 
-def commit (message):
+def commit(message):
     """
         commits all files by calling: git commit -a -m "message"
     """
@@ -36,7 +36,7 @@ def commit (message):
     _git('push')
 
 
-def detect ():
+def detect():
     """
         Checks if the .git directory exists.
         
@@ -46,7 +46,7 @@ def detect ():
     return path.isdir('.git')
 
 
-def is_executable ():
+def is_executable():
     """
         Checks if "git --version" is executable
          
@@ -55,21 +55,21 @@ def is_executable ():
     return check_if_is_executable(COMMAND, '--version')
 
 
-def status ():
+def status():
     """
         Shows changes in current directory using "git status".
     """
     _git('status', '-sb')
 
 
-def update ():
+def update():
     """
         Updates files by executing "git pull".
     """
     _git('pull')
 
 
-def _git (*arguments):
+def _git(*arguments):
     """
         Executes git using the given arguments.
     """

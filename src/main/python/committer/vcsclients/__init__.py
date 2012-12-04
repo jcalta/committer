@@ -66,12 +66,12 @@ def _detect_repositories ():
         
         @return: list of vcs clients
     """
-    vcs_clients = _find()
+    vcs_clients = _list_available_vcs_clients()
     
     return [vcs_client for vcs_client in vcs_clients if vcs_client.detect()]
 
 
-def _find ():
+def _list_available_vcs_clients ():
     """
         @return: list of all available vcs client modules.
     """

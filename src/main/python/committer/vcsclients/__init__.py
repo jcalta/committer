@@ -18,7 +18,7 @@
     They are implementing the functions commit, detect, is_executable,
     and update. The module itself provides two functions "find" and "detect".
     The function "find" returns a list of all available vcs client modules. The
-    function "discover_working_repository" returns the vcs client for the
+    function "detect_vcs_client" returns the vcs client for the
     repository in the current directory. 
 """
 
@@ -28,7 +28,7 @@ from committer import errors
 from committer.vcsclients import git, mercurial, subversion
 
 
-def discover_working_repository ():
+def detect_vcs_client ():
     """
         runs vcs_client detection on the current directory.
         

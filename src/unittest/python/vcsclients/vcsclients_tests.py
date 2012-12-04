@@ -45,25 +45,25 @@ class EnsureExecutableTests (unittest.TestCase):
         self.assertEqual(mock_vcs_client, vcsclients.ensure_executable(mock_vcs_client))
 
 
-class DiscoverWorkingRepository (unittest_support.TestCase):
+class DiscoverVcsClientForCurrentDirectoryTests (unittest_support.TestCase):
     @patch('committer.vcsclients._detect_repositories')
     def test_should_raise_exception_when_no_repository_detected (self, mock_detect_repositories):
         mock_detect_repositories.return_value = None
         
-        self.assertRaises(NoRepositoryDetectedError, vcsclients.discover_working_repository)
+        self.assertRaises(NoRepositoryDetectedError, vcsclients.detect_vcs_client)
 
     @patch('committer.vcsclients._detect_repositories')
     def test_should_raise_exception_when_more_than_one_repository_detected (self, mock_detect_repositories):
         mock_detect_repositories.return_value = [self.create_mock_vcs_client(), self.create_mock_vcs_client()]
         
-        self.assertRaises(TooManyRepositoriesError, vcsclients.discover_working_repository)
+        self.assertRaises(TooManyRepositoriesError, vcsclients.detect_vcs_client)
 
     @patch('committer.vcsclients._detect_repositories')
     def test_should_return_detected_vcs_client (self, mock_detect_repositories):
         mock_vcs_client = self.create_mock_vcs_client()
         mock_detect_repositories.return_value = [mock_vcs_client]
         
-        actual_vcs_client = vcsclients.discover_working_repository()
+        actual_vcs_client = vcsclients.detect_vcs_client()
         
         self.assertEqual(actual_vcs_client, mock_vcs_client)
 

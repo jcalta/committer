@@ -26,7 +26,7 @@
 __author__ = 'Michael Gruber'
 
 from committer.errors import WrongUsageError
-from committer.vcsclients import discover_working_repository
+from committer.vcsclients import detect_vcs_client
 
 
 def commit(arguments):
@@ -39,7 +39,7 @@ def commit(arguments):
     if len(arguments) == 1:
         raise WrongUsageError()
 
-    vcs_client = discover_working_repository()
+    vcs_client = detect_vcs_client()
     vcs_client.update()
 
     message = arguments[1]
@@ -52,7 +52,7 @@ def status(arguments):
     if len(arguments) != 1:
         raise WrongUsageError()
 
-    vcs_client = discover_working_repository()
+    vcs_client = detect_vcs_client()
     vcs_client.status()
 
 
@@ -63,5 +63,5 @@ def update(arguments):
     if len(arguments) != 1:
         raise WrongUsageError()
 
-    vcs_client = discover_working_repository()
+    vcs_client = detect_vcs_client()
     vcs_client.update()

@@ -41,7 +41,7 @@ def detect():
         Checks if the .git directory exists.
         
         @return: True if the current directory represents a git repository,
-                 otherwise False.
+                 False otherwise.
     """
     return path.isdir('.git')
 
@@ -50,7 +50,8 @@ def is_executable():
     """
         Checks if "git --version" is executable
          
-        @return: True git command line client executable, otherwise False. 
+        @return: True git command line client executable,
+                 False otherwise. 
     """
     return check_if_is_executable(COMMAND, '--version')
 

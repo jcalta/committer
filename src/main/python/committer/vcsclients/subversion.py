@@ -39,7 +39,7 @@ def detect():
         Checks if the .svn directory exists.
         
         @return: True if the current directory represents a subversion repository,
-                 otherwise False.
+                 False otherwise.
     """
     return path.isdir('.svn')
 
@@ -48,7 +48,8 @@ def is_executable():
     """
         Checks if "svn --version --quiet" is executable.
         
-        @return: True if svn client is executable, otherwise False. 
+        @return: True if svn client is executable,
+                 False otherwise. 
     """
     return check_if_is_executable(COMMAND, '--version', '--quiet')
 

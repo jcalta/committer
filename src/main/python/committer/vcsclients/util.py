@@ -34,8 +34,8 @@ def check_if_is_executable(command, *arguments):
     """
         Executes the given command with the given arguments.
         
-        @return: True if the given command is executable with the given
-                 arguments, otherwise False. 
+        @return: True if the given command is executable with the given arguments,
+                 False otherwise. 
     """
     try:
         command_and_arguments = [command] + list(arguments)

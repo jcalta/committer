@@ -49,12 +49,12 @@ class NoRepositoryDetectedError(CommitterError):
         message = 'No repository detected.'
         super(NoRepositoryDetectedError, self).__init__(message, 100)
 
-class WrongUsageError (CommitterError):
+class WrongUsageError(CommitterError):
     """
         to be raised when user provided wrong arguments.
     """
     def __init__(self):
-        message = """\nWrong usage, please use the committer commands as expected.\n{0}""".format(committer.USAGE_INFORMATION)
+        message = '\nWrong usage, please use the committer commands as expected.\n{0}'.format(committer.USAGE_INFORMATION)
         super(WrongUsageError, self).__init__(message, 1)
 
 

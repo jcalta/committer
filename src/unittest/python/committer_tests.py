@@ -13,8 +13,8 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--version'])
 
-        self.assertEquals(call('committer version ${version}\n'), mock_stdout.write.call_args)
-        self.assertEquals(call(0), mock_exit.call_args)
+        self.assertEqual(call('committer version ${version}\n'), mock_stdout.write.call_args)
+        self.assertEqual(call(0), mock_exit.call_args)
 
     @patch('committer.stdout')
     @patch('committer.exit')
@@ -24,13 +24,13 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'help'])
 
-        self.assertEquals(call("""
+        self.assertEqual(call("""
 usage:
     co "message" [++]    commits all changes
     st                   shows all changes
     up                   updates the current directory
 """), mock_stdout.write.call_args)
-        self.assertEquals(call(0), mock_exit.call_args)
+        self.assertEqual(call(0), mock_exit.call_args)
 
     @patch('committer.stdout')
     @patch('committer.exit')
@@ -40,8 +40,8 @@ usage:
 
         ScriptCommand(mock_command)(arguments)
 
-        self.assertEquals(call(arguments), mock_command.call_args)
-        self.assertEquals(call(0), mock_exit.call_args)
+        self.assertEqual(call(arguments), mock_command.call_args)
+        self.assertEqual(call(0), mock_exit.call_args)
 
     @patch('committer.stdout')
     @patch('committer.stderr')
@@ -52,5 +52,5 @@ usage:
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit'])
 
-        self.assertEquals(call('Error message.\n'), mock_stderr.write.call_args)
-        self.assertEquals(call(123), mock_exit.call_args)
+        self.assertEqual(call('Error message.\n'), mock_stderr.write.call_args)
+        self.assertEqual(call(123), mock_exit.call_args)

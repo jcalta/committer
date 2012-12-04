@@ -7,10 +7,10 @@ from committer.vcsclients import git
 
 class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
-        self.assertEquals('git', git.COMMAND)
+        self.assertEqual('git', git.COMMAND)
 
     def test_should_have_name_property (self):
-        self.assertEquals('Git', git.NAME)
+        self.assertEqual('Git', git.NAME)
 
 
 class CommitTests (unittest.TestCase):
@@ -19,7 +19,7 @@ class CommitTests (unittest.TestCase):
         
         git.commit('This is a commit message.')
         
-        self.assertEquals([call('commit', '-a', '-m', 'This is a commit message.'),
+        self.assertEqual([call('commit', '-a', '-m', 'This is a commit message.'),
                            call('push')],
                           mock_git.call_args_list)
         
@@ -29,7 +29,7 @@ class UpdateTests (unittest.TestCase):
     def test_should_call_pull (self, mock_git):
         git.update()
         
-        self.assertEquals(call('pull'), mock_git.call_args)
+        self.assertEqual(call('pull'), mock_git.call_args)
         
 
 class StatusTests (unittest.TestCase):
@@ -37,7 +37,7 @@ class StatusTests (unittest.TestCase):
     def test_should_call_status (self, mock_git):
         git.status()
         
-        self.assertEquals(call('status', '-sb'), mock_git.call_args)
+        self.assertEqual(call('status', '-sb'), mock_git.call_args)
         
 
 class DetectTests (unittest.TestCase):
@@ -47,8 +47,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = git.detect()
         
-        self.assertEquals(False, actual_return_value)
-        self.assertEquals(call('.git'), mock_exists.call_args)
+        self.assertEqual(False, actual_return_value)
+        self.assertEqual(call('.git'), mock_exists.call_args)
 
     @patch('os.path.isdir')
     def test_return_true_if_dot_git_directory_exists (self, mock_exists):
@@ -56,8 +56,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = git.detect()
         
-        self.assertEquals(True, actual_return_value)
-        self.assertEquals(call('.git'), mock_exists.call_args)
+        self.assertEqual(True, actual_return_value)
+        self.assertEqual(call('.git'), mock_exists.call_args)
 
 
 class IsExecutableTests (unittest.TestCase):
@@ -67,7 +67,7 @@ class IsExecutableTests (unittest.TestCase):
         
         actual_return_value = git.is_executable()
         
-        self.assertEquals('value from check', actual_return_value)
+        self.assertEqual('value from check', actual_return_value)
 
     @patch('committer.vcsclients.git.check_if_is_executable')
     def test_should_check_using_git_version (self, mock_check):
@@ -75,7 +75,7 @@ class IsExecutableTests (unittest.TestCase):
         
         git.is_executable()
         
-        self.assertEquals(call('git', '--version'), mock_check.call_args)
+        self.assertEqual(call('git', '--version'), mock_check.call_args)
 
 
 class GitTests (unittest.TestCase):
@@ -83,4 +83,4 @@ class GitTests (unittest.TestCase):
     def test_should_execute_git_using_arguments (self, mock_execute):
         git._git('arg1', 'arg2', 'arg3')
         
-        self.assertEquals(call('git', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)
+        self.assertEqual(call('git', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

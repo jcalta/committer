@@ -7,10 +7,10 @@ from committer.vcsclients import subversion
 
 class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
-        self.assertEquals('svn', subversion.COMMAND)
+        self.assertEqual('svn', subversion.COMMAND)
 
     def test_should_have_name_property (self):
-        self.assertEquals('Subversion', subversion.NAME)
+        self.assertEqual('Subversion', subversion.NAME)
 
        
 class CommitTests (unittest.TestCase):
@@ -19,7 +19,7 @@ class CommitTests (unittest.TestCase):
         
         subversion.commit('This is a commit message.')
         
-        self.assertEquals(call('commit', '-m', 'This is a commit message.'), mock_svn.call_args)
+        self.assertEqual(call('commit', '-m', 'This is a commit message.'), mock_svn.call_args)
         
         
 class StatusTests (unittest.TestCase):
@@ -27,7 +27,7 @@ class StatusTests (unittest.TestCase):
     def test_should_call_status (self, mock_svn):
         subversion.status()
         
-        self.assertEquals(call('status'), mock_svn.call_args)
+        self.assertEqual(call('status'), mock_svn.call_args)
         
 
 class UpdateTests (unittest.TestCase):
@@ -35,7 +35,7 @@ class UpdateTests (unittest.TestCase):
     def test_should_call_update (self, mock_svn):
         subversion.update()
         
-        self.assertEquals(call('update'), mock_svn.call_args)
+        self.assertEqual(call('update'), mock_svn.call_args)
         
 
 class DetectTests (unittest.TestCase):
@@ -45,8 +45,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = subversion.detect()
         
-        self.assertEquals(False, actual_return_value)
-        self.assertEquals(call('.svn'), mock_exists.call_args)
+        self.assertEqual(False, actual_return_value)
+        self.assertEqual(call('.svn'), mock_exists.call_args)
 
     @patch('os.path.isdir')
     def test_return_true_if_dot_svn_directory_exists (self, mock_exists):
@@ -54,8 +54,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = subversion.detect()
         
-        self.assertEquals(True, actual_return_value)
-        self.assertEquals(call('.svn'), mock_exists.call_args)
+        self.assertEqual(True, actual_return_value)
+        self.assertEqual(call('.svn'), mock_exists.call_args)
 
 
 class IsExecutableTests (unittest.TestCase):
@@ -65,7 +65,7 @@ class IsExecutableTests (unittest.TestCase):
         
         actual_return_value = subversion.is_executable()
         
-        self.assertEquals('value from check', actual_return_value)
+        self.assertEqual('value from check', actual_return_value)
 
     @patch('committer.vcsclients.subversion.check_if_is_executable')
     def test_should_check_using_svn_version_quiet (self, mock_check):
@@ -73,7 +73,7 @@ class IsExecutableTests (unittest.TestCase):
         
         subversion.is_executable()
         
-        self.assertEquals(call('svn', '--version', '--quiet'), mock_check.call_args)
+        self.assertEqual(call('svn', '--version', '--quiet'), mock_check.call_args)
 
 
 class SubversionTests (unittest.TestCase):
@@ -81,4 +81,4 @@ class SubversionTests (unittest.TestCase):
     def test_should_execute_svn_using_arguments (self, mock_execute):
         subversion._svn('arg1', 'arg2', 'arg3')
         
-        self.assertEquals(call('svn', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)
+        self.assertEqual(call('svn', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

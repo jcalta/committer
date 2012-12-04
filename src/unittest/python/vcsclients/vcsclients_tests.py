@@ -13,7 +13,7 @@ class ListAvailableVcsClientsTests (unittest_support.TestCase):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         actual_count_of_repositories = len(actual_vcs_clients)
         
-        self.assertEquals(3, actual_count_of_repositories)
+        self.assertEqual(3, actual_count_of_repositories)
     
     def test_should_find_git_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
@@ -77,8 +77,8 @@ class DetectTests (unittest_support.TestCase):
         
         actual_detected_vcs_clients = vcsclients._detect_repositories()
         
-        self.assertEquals([mock_vcs_client], actual_detected_vcs_clients)
-        self.assertEquals(call(), mock_vcs_client.detect.call_args)
+        self.assertEqual([mock_vcs_client], actual_detected_vcs_clients)
+        self.assertEqual(call(), mock_vcs_client.detect.call_args)
 
     @patch('committer.vcsclients._list_available_vcs_clients')
     def test_should_return_no_vcs_client_module_when_detection_fails (self, mock_find):
@@ -88,5 +88,5 @@ class DetectTests (unittest_support.TestCase):
         
         actual_detected_vcs_clients = vcsclients._detect_repositories()
         
-        self.assertEquals([], actual_detected_vcs_clients)
-        self.assertEquals(call(), mock_vcs_client.detect.call_args)
+        self.assertEqual([], actual_detected_vcs_clients)
+        self.assertEqual(call(), mock_vcs_client.detect.call_args)

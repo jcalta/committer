@@ -7,19 +7,18 @@ from committer.vcsclients import mercurial
 
 class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
-        self.assertEquals('hg', mercurial.COMMAND)
+        self.assertEqual('hg', mercurial.COMMAND)
 
     def test_should_have_name_property (self):
-        self.assertEquals('Mercurial', mercurial.NAME)
+        self.assertEqual('Mercurial', mercurial.NAME)
 
 
 class CommitTests (unittest.TestCase):
     @patch('committer.vcsclients.mercurial._hg')
     def test_should_prepend_hg_to_given_arguments (self, mock_hg):
-        
         mercurial.commit('This is a commit message.')
         
-        self.assertEquals([call('commit', '-m', 'This is a commit message.'),
+        self.assertEqual([call('commit', '-m', 'This is a commit message.'),
                            call('push')],
                           mock_hg.call_args_list)
         
@@ -29,7 +28,7 @@ class UpdateTests (unittest.TestCase):
     def test_should_call_pull_and_update (self, mock_hg):
         mercurial.update()
         
-        self.assertEquals([call('pull'), call('update')], mock_hg.call_args_list)
+        self.assertEqual([call('pull'), call('update')], mock_hg.call_args_list)
         
 
 class StatusTests (unittest.TestCase):
@@ -37,7 +36,7 @@ class StatusTests (unittest.TestCase):
     def test_should_call_status (self, mock_hg):
         mercurial.status()
         
-        self.assertEquals(call('status'), mock_hg.call_args)
+        self.assertEqual(call('status'), mock_hg.call_args)
         
 
 class DetectTests (unittest.TestCase):
@@ -47,8 +46,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = mercurial.detect()
         
-        self.assertEquals(False, actual_return_value)
-        self.assertEquals(call('.hg'), mock_exists.call_args)
+        self.assertEqual(False, actual_return_value)
+        self.assertEqual(call('.hg'), mock_exists.call_args)
 
     @patch('os.path.isdir')
     def test_return_true_if_dot_hg_directory_exists (self, mock_exists):
@@ -56,8 +55,8 @@ class DetectTests (unittest.TestCase):
         
         actual_return_value = mercurial.detect()
         
-        self.assertEquals(True, actual_return_value)
-        self.assertEquals(call('.hg'), mock_exists.call_args)
+        self.assertEqual(True, actual_return_value)
+        self.assertEqual(call('.hg'), mock_exists.call_args)
 
 
 class IsExecutableTests (unittest.TestCase):
@@ -67,7 +66,7 @@ class IsExecutableTests (unittest.TestCase):
         
         actual_return_value = mercurial.is_executable()
         
-        self.assertEquals('value from check', actual_return_value)
+        self.assertEqual('value from check', actual_return_value)
 
     @patch('committer.vcsclients.mercurial.check_if_is_executable')
     def test_should_check_using_hg_version_quiet (self, mock_check):
@@ -75,7 +74,7 @@ class IsExecutableTests (unittest.TestCase):
         
         mercurial.is_executable()
         
-        self.assertEquals(call('hg', '--version', '--quiet'), mock_check.call_args)
+        self.assertEqual(call('hg', '--version', '--quiet'), mock_check.call_args)
 
 
 class MercurialTests (unittest.TestCase):
@@ -83,4 +82,4 @@ class MercurialTests (unittest.TestCase):
     def test_should_execute_hg_using_arguments (self, mock_execute):
         mercurial._hg('arg1', 'arg2', 'arg3')
         
-        self.assertEquals(call('hg', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)
+        self.assertEqual(call('hg', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)

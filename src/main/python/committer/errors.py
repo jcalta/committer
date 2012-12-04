@@ -34,7 +34,7 @@ class CommitterError(Exception):
             raise Exception('Illegal error code "zero".')
 
         if error_code > 127:
-            raise Exception('Illegal error code "%s": has to be smaller than 128.', error_code)
+            raise Exception('Illegal error code {0}: has to be smaller than 128.'.format(error_code))
 
         super(CommitterError, self).__init__()
         self.message = message + '\n'

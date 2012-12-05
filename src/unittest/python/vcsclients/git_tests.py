@@ -1,86 +1,74 @@
 import unittest
 
-from mock import call, patch
+from mockito import when, verify, any as any_value, unstub
+from committer.vcsclients.git import COMMAND, NAME, GitClient
 
-from committer.vcsclients import git
-
+import committer
 
 class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
-        self.assertEqual('git', git.COMMAND)
+        self.assertEqual('git', COMMAND)
 
     def test_should_have_name_property (self):
-        self.assertEqual('Git', git.NAME)
+        self.assertEqual('Git', NAME)
 
 
-class CommitTests (unittest.TestCase):
-    @patch('committer.vcsclients.git._git')
-    def test_should_prepend_git_to_given_arguments (self, mock_git):
+class GitClientTests (unittest.TestCase):
+    def setUp(self):
+        self.git_client = GitClient()
         
-        git.commit('This is a commit message.')
+    def tearDown(self):
+        unstub()
         
-        self.assertEqual([call('commit', '-a', '-m', 'This is a commit message.'),
-                          call('push')],
-                          mock_git.call_args_list)
+    def test_should_prepend_git_to_given_arguments (self):
+        when(self.git_client)._git(any_value()).thenReturn(None)
         
+        self.git_client.commit('This is a commit message.')
         
-class UpdateTests (unittest.TestCase):
-    @patch('committer.vcsclients.git._git')
-    def test_should_call_pull (self, mock_git):
-        git.update()
+        verify(self.git_client)._git('commit', '-a', '-m', 'This is a commit message.')
+        verify(self.git_client)._git('push')
         
-        self.assertEqual(call('pull'), mock_git.call_args)
+    def test_should_call_pull (self):
+        when(self.git_client)._git(any_value()).thenReturn(None)
         
+        self.git_client.update()
+        
+        verify(self.git_client)._git('pull')
 
-class StatusTests (unittest.TestCase):
-    @patch('committer.vcsclients.git._git')
-    def test_should_call_status (self, mock_git):
-        git.status()
+    def test_should_call_status (self):
+        when(self.git_client)._git(any_value()).thenReturn(None)
         
-        self.assertEqual(call('status', '-sb'), mock_git.call_args)
+        self.git_client.status()
         
+        verify(self.git_client)._git('status', '-sb')
 
-class DetectTests (unittest.TestCase):
-    @patch('os.path.isdir')
-    def test_return_false_if_dot_git_directory_does_not_exist (self, mock_exists):
-        mock_exists.return_value = False
+    def test_return_false_if_dot_git_directory_does_not_exist (self):
+        when(committer.vcsclients.git.path).isdir(any_value()).thenReturn(False)
         
-        actual_return_value = git.detect()
+        actual_return_value = self.git_client.detect()
         
         self.assertEqual(False, actual_return_value)
-        self.assertEqual(call('.git'), mock_exists.call_args)
+        verify(committer.vcsclients.git.path).isdir('.git')
 
-    @patch('os.path.isdir')
-    def test_return_true_if_dot_git_directory_exists (self, mock_exists):
-        mock_exists.return_value = True
+    def test_return_true_if_dot_git_directory_exists (self):
+        when(committer.vcsclients.git.path).isdir(any_value()).thenReturn(True)
         
-        actual_return_value = git.detect()
+        actual_return_value = self.git_client.detect()
         
         self.assertEqual(True, actual_return_value)
-        self.assertEqual(call('.git'), mock_exists.call_args)
+        verify(committer.vcsclients.git.path).isdir('.git')
 
-
-class IsExecutableTests (unittest.TestCase):
-    @patch('committer.vcsclients.git.check_if_is_executable')
-    def test_should_return_value_of_check (self, mock_check):
-        mock_check.return_value = 'value from check'
+    def test_should_return_value_of_check (self):
+        when(self.git_client).check_if_is_executable(any_value(), any_value()).thenReturn('value from check')
         
-        actual_return_value = git.is_executable()
+        actual_return_value = self.git_client.is_executable()
         
         self.assertEqual('value from check', actual_return_value)
-
-    @patch('committer.vcsclients.git.check_if_is_executable')
-    def test_should_check_using_git_version (self, mock_check):
-        mock_check.return_value = 'value from check'
+        verify(self.git_client).check_if_is_executable('git', '--version')
         
-        git.is_executable()
+    def test_should_execute_git_using_arguments (self):
+        when(self.git_client).execute_command(any_value()).thenReturn(None)
         
-        self.assertEqual(call('git', '--version'), mock_check.call_args)
-
-
-class GitTests (unittest.TestCase):
-    @patch('committer.vcsclients.git.execute_command')
-    def test_should_execute_git_using_arguments (self, mock_execute):
-        git._git('arg1', 'arg2', 'arg3')
+        self.git_client._git('arg1', 'arg2', 'arg3')
         
-        self.assertEqual(call('git', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)
+        verify(self.git_client).execute_command('git', 'arg1', 'arg2', 'arg3')

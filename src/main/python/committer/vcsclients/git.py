@@ -21,57 +21,59 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import check_if_is_executable, execute_command
+from committer.vcsclients.util import VcsClient
 
 
 COMMAND = 'git'
 NAME = 'Git'
 
-
-def commit(message):
-    """
-        commits all files by calling: git commit -a -m "message"
-    """
-    _git('commit', '-a', '-m', message)
-    _git('push')
-
-
-def detect():
-    """
-        Checks if the .git directory exists.
+class GitClient(VcsClient):
+    def commit(self, message):
+        """
+            commits all files by calling: git commit -a -m "message"
+        """
+        self._git('commit', '-a', '-m', message)
+        self._git('push')
+    
+    
+    def detect(self):
+        """
+            Checks if the .git directory exists.
+            
+            @return: True if the current directory represents a git repository,
+                     False otherwise.
+        """
+        return path.isdir('.git')
+    
+    
+    def is_executable(self):
+        """
+            Checks if "git --version" is executable
+             
+            @return: True git command line client executable,
+                     False otherwise. 
+        """
+        return self.check_if_is_executable(COMMAND, '--version')
+    
+    
+    def status(self):
+        """
+            Shows changes in current directory using "git status".
+        """
+        self._git('status', '-sb')
+    
+    
+    def update(self):
+        """
+            Updates files by executing "git pull".
+        """
+        self._git('pull')
+    
+    
+    def _git(self, *arguments):
+        """
+            Executes git using the given arguments.
+        """
+        self.execute_command(COMMAND, *arguments)
         
-        @return: True if the current directory represents a git repository,
-                 False otherwise.
-    """
-    return path.isdir('.git')
-
-
-def is_executable():
-    """
-        Checks if "git --version" is executable
-         
-        @return: True git command line client executable,
-                 False otherwise. 
-    """
-    return check_if_is_executable(COMMAND, '--version')
-
-
-def status():
-    """
-        Shows changes in current directory using "git status".
-    """
-    _git('status', '-sb')
-
-
-def update():
-    """
-        Updates files by executing "git pull".
-    """
-    _git('pull')
-
-
-def _git(*arguments):
-    """
-        Executes git using the given arguments.
-    """
-    execute_command(COMMAND, *arguments)
+git_client = GitClient()

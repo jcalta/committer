@@ -19,13 +19,14 @@
     and update. The module itself provides two functions "find" and "detect".
     The function "find" returns a list of all available vcs client modules. The
     function "detect_vcs_client" returns the vcs client for the
-    repository in the current directory. 
+    repository in the current directory.
 """
 
 __author__ = 'Michael Gruber'
 
 from committer import errors
-from committer.vcsclients import git, mercurial, subversion
+from committer.vcsclients import mercurial, subversion
+from committer.vcsclients.git import git_client
 
 
 def detect_vcs_client():
@@ -75,4 +76,4 @@ def _list_available_vcs_clients():
     """
         @return: list of all available vcs client modules.
     """
-    return [git, mercurial, subversion]
+    return [git_client, mercurial, subversion]

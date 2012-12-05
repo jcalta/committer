@@ -39,7 +39,7 @@ description = 'Please visit https://github.com/aelgru/committer for more informa
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
 url = 'https://github.com/aelgru/committer'
-version = '0.0.78'
+version = '0.0.79'
 
 default_task = ['analyze', 'publish']
 
@@ -47,6 +47,7 @@ default_task = ['analyze', 'publish']
 def set_properties (project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
+    project.build_depends_on('mockito')
 
     project.set_property('coverage_break_build', True)
     project.set_property('pychecker_break_build', True)

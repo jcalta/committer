@@ -18,7 +18,7 @@ class ListAvailableVcsClientsTests (unittest_support.TestCase):
     def test_should_find_git_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.git in actual_vcs_clients)
+        self.assertTrue(vcsclients.git.git_client in actual_vcs_clients)
     
     def test_should_find_mercurial_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()

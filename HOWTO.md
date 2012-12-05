@@ -44,7 +44,7 @@ This will execute all unittests and check the coverage.
 
 ### Install and test the built version
 
-Do not forget to leave the virtual environment before installing.
+Before installing committer, please leave the virtual environment by executing:
 
 ```bash
 deactivate
@@ -52,9 +52,9 @@ deactivate
 
 Within the `target/dist` dir you will find the built artefacts.
 
-Once you changed into the `target/dist/committer-0.0.71` directory you can install committer:
+Once you changed into the `target/dist/committer-0.0.79` directory you can install committer:
 
 ```bash
-python setup.py install
+sudo python setup.py install
 ```
 

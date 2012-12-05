@@ -21,30 +21,35 @@ __author__ = 'Michael Gruber'
 
 from subprocess import CalledProcessError, call, check_call
 
-
-def execute_command(command, *arguments):
-    """
-        Executes command using the given command_and_arguments.
-    """
-    command_and_arguments = [command] + list(arguments)
-    call(command_and_arguments)
-
-
-def check_if_is_executable(command, *arguments):
-    """
-        Executes the given command with the given arguments.
-        
-        @return: True if the given command is executable with the given arguments,
-                 False otherwise. 
-    """
-    try:
+class VcsClient(object):
+    def execute_command(self, command, *arguments):
+        """
+            Executes command using the given command_and_arguments.
+        """
         command_and_arguments = [command] + list(arguments)
-        check_call(command_and_arguments)
+        call(command_and_arguments)
+    
+    
+    def check_if_is_executable(self, command, *arguments):
+        """
+            Executes the given command with the given arguments.
+            
+            @return: True if the given command is executable with the given arguments,
+                     False otherwise. 
+        """
+        try:
+            command_and_arguments = [command] + list(arguments)
+            check_call(command_and_arguments)
+    
+        except CalledProcessError:
+            return False
+    
+        except OSError:
+            return False
+    
+        return True
 
-    except CalledProcessError:
-        return False
+vcs_client = VcsClient()
 
-    except OSError:
-        return False
-
-    return True
+execute_command = vcs_client.execute_command
+check_if_is_executable = vcs_client.check_if_is_executable

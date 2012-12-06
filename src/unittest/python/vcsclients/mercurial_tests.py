@@ -1,85 +1,79 @@
 import unittest
 
-from mock import call, patch
+from mockito import when, verify, unstub, any as any_value
 
-from committer.vcsclients import mercurial
-
+from committer.vcsclients.mercurial import MercurialClient, COMMAND, NAME
+import committer
 
 class PropertiesTests (unittest.TestCase):
     def test_should_have_command_property (self):
-        self.assertEqual('hg', mercurial.COMMAND)
+        self.assertEqual('hg', COMMAND)
 
     def test_should_have_name_property (self):
-        self.assertEqual('Mercurial', mercurial.NAME)
+        self.assertEqual('Mercurial', NAME)
 
 
-class CommitTests (unittest.TestCase):
-    @patch('committer.vcsclients.mercurial._hg')
-    def test_should_prepend_hg_to_given_arguments (self, mock_hg):
-        mercurial.commit('This is a commit message.')
+class MercurialClientTests (unittest.TestCase):
+    def setUp(self):
+        self.mercurial_client = MercurialClient()
+    
+    def tearDown(self):
+        unstub()
+     
+    def test_should_prepend_hg_to_given_arguments (self):
+        when(self.mercurial_client)._hg(any_value(), any_value(), any_value()).thenReturn(None)
+        when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
-        self.assertEqual([call('commit', '-m', 'This is a commit message.'),
-                           call('push')],
-                          mock_hg.call_args_list)
+        self.mercurial_client.commit('This is a commit message.')
         
+        verify(self.mercurial_client)._hg('commit', '-m', 'This is a commit message.')
+        verify(self.mercurial_client)._hg('push')
         
-class UpdateTests (unittest.TestCase):
-    @patch('committer.vcsclients.mercurial._hg')
-    def test_should_call_pull_and_update (self, mock_hg):
-        mercurial.update()
+    def test_should_call_pull_and_update (self):
+        when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
-        self.assertEqual([call('pull'), call('update')], mock_hg.call_args_list)
+        self.mercurial_client.update()
+        
+        verify(self.mercurial_client)._hg('pull')
+        verify(self.mercurial_client)._hg('update')
+        
+    def test_should_call_status (self):
+        when(self.mercurial_client)._hg(any_value()).thenReturn(None)
+        
+        self.mercurial_client.status()
+        
+        verify(self.mercurial_client)._hg('status')
         
 
-class StatusTests (unittest.TestCase):
-    @patch('committer.vcsclients.mercurial._hg')
-    def test_should_call_status (self, mock_hg):
-        mercurial.status()
+    def test_return_false_if_dot_hg_directory_does_not_exist (self):
+        when(committer.vcsclients.mercurial.path).isdir(any_value()).thenReturn(False)
         
-        self.assertEqual(call('status'), mock_hg.call_args)
-        
-
-class DetectTests (unittest.TestCase):
-    @patch('os.path.isdir')
-    def test_return_false_if_dot_hg_directory_does_not_exist (self, mock_exists):
-        mock_exists.return_value = False
-        
-        actual_return_value = mercurial.detect()
+        actual_return_value = self.mercurial_client.detect()
         
         self.assertEqual(False, actual_return_value)
-        self.assertEqual(call('.hg'), mock_exists.call_args)
+        when(committer.vcsclients.mercurial.path).isdir('.hg')
 
-    @patch('os.path.isdir')
-    def test_return_true_if_dot_hg_directory_exists (self, mock_exists):
-        mock_exists.return_value = True
+    def test_return_true_if_dot_hg_directory_exists (self):
+        when(committer.vcsclients.mercurial.path).isdir(any_value()).thenReturn(True)
         
-        actual_return_value = mercurial.detect()
+        actual_return_value = self.mercurial_client.detect()
         
         self.assertEqual(True, actual_return_value)
-        self.assertEqual(call('.hg'), mock_exists.call_args)
+        when(committer.vcsclients.mercurial.path).isdir('.hg')
 
 
-class IsExecutableTests (unittest.TestCase):
-    @patch('committer.vcsclients.mercurial.check_if_is_executable')
-    def test_should_return_value_of_check (self, mock_check):
-        mock_check.return_value = 'value from check'
+    def test_should_return_value_of_check (self):
+        when(self.mercurial_client).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
         
-        actual_return_value = mercurial.is_executable()
+        actual_return_value = self.mercurial_client.is_executable()
         
         self.assertEqual('value from check', actual_return_value)
-
-    @patch('committer.vcsclients.mercurial.check_if_is_executable')
-    def test_should_check_using_hg_version_quiet (self, mock_check):
-        mock_check.return_value = 'value from check'
-        
-        mercurial.is_executable()
-        
-        self.assertEqual(call('hg', '--version', '--quiet'), mock_check.call_args)
+        verify(self.mercurial_client).check_if_is_executable('hg', '--version', '--quiet')
 
 
-class MercurialTests (unittest.TestCase):
-    @patch('committer.vcsclients.mercurial.execute_command')
-    def test_should_execute_hg_using_arguments (self, mock_execute):
-        mercurial._hg('arg1', 'arg2', 'arg3')
+    def test_should_execute_hg_using_arguments (self):
+        when(self.mercurial_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
         
-        self.assertEqual(call('hg', 'arg1', 'arg2', 'arg3'), mock_execute.call_args)
+        self.mercurial_client._hg('arg1', 'arg2', 'arg3')
+        
+        verify(self.mercurial_client).execute_command('hg', 'arg1', 'arg2', 'arg3')

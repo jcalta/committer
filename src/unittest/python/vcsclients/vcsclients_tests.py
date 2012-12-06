@@ -23,7 +23,7 @@ class ListAvailableVcsClientsTests (unittest_support.TestCase):
     def test_should_find_mercurial_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.mercurial in actual_vcs_clients)
+        self.assertTrue(vcsclients.mercurial.mercurial_client in actual_vcs_clients)
     
     def test_should_find_subversion_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()

@@ -21,57 +21,59 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import check_if_is_executable, execute_command
-
+from committer.vcsclients.util import VcsClient
 
 COMMAND = 'hg'
 NAME = 'Mercurial'
 
-def commit(message):
-    """
-        Commits all files in the current directory by calling: 
-            hg commit -m "message"
-            hg push
-    """
-    _hg('commit', '-m', message)
-    _hg('push')
+class MercurialClient(VcsClient):
+    def commit(self, message):
+        """
+            Commits all files in the current directory by calling: 
+                hg commit -m "message"
+                hg push
+        """
+        self._hg('commit', '-m', message)
+        self._hg('push')
+    
+    
+    def detect(self):
+        """
+            Checks if the .hg directory exists.
+            
+            @return: True if the current directory represents a mercurial repository,
+                     False otherwise.
+        """
+        return path.isdir('.hg')
+    
+    
+    def is_executable(self):
+        """
+            @return: True if "hg --version --quiet" is executable,
+                     False otherwise. 
+        """
+        return self.check_if_is_executable(COMMAND, '--version', '--quiet')
+    
+    
+    def status(self):
+        """
+            Shows changes in the current directory using "hg status".
+        """
+        self._hg('status')
+    
+    
+    def update(self):
+        """
+            Updates files by calling "hg pull" and "hg update".
+        """
+        self._hg('pull')
+        self._hg('update')
+    
+    
+    def _hg(self, *arguments):
+        """
+            Executes hg using the given arguments.
+        """
+        self.execute_command(COMMAND, *arguments)
 
-
-def detect():
-    """
-        Checks if the .hg directory exists.
-        
-        @return: True if the current directory represents a mercurial repository,
-                 False otherwise.
-    """
-    return path.isdir('.hg')
-
-
-def is_executable():
-    """
-        @return: True if "hg --version --quiet" is executable,
-                 False otherwise. 
-    """
-    return check_if_is_executable(COMMAND, '--version', '--quiet')
-
-
-def status():
-    """
-        Shows changes in the current directory using "hg status".
-    """
-    _hg('status')
-
-
-def update():
-    """
-        Updates files by calling "hg pull" and "hg update".
-    """
-    _hg('pull')
-    _hg('update')
-
-
-def _hg(*arguments):
-    """
-        Executes hg using the given arguments.
-    """
-    execute_command(COMMAND, *arguments)
+mercurial_client = MercurialClient()

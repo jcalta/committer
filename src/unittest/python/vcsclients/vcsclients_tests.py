@@ -28,7 +28,7 @@ class ListAvailableVcsClientsTests (unittest_support.TestCase):
     def test_should_find_subversion_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.subversion in actual_vcs_clients)
+        self.assertTrue(vcsclients.subversion.subversion_client in actual_vcs_clients)
 
 
 class EnsureExecutableTests (unittest.TestCase):

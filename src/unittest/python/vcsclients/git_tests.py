@@ -7,7 +7,7 @@ import committer
 
 class GitClientTests (unittest.TestCase):
     def setUp(self):
-        self.git_client = GitClient()
+        self.git_client = GitClient(name='Git', command='git')
         
     def tearDown(self):
         unstub()

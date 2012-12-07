@@ -22,6 +22,7 @@ __author__ = 'Michael Gruber'
 from subprocess import CalledProcessError, call, check_call
 
 class VcsClient(object):
+    
     def execute_command(self, command, *arguments):
         """
             Executes command using the given command_and_arguments.

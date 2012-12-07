@@ -25,8 +25,9 @@ from committer.vcsclients.util import VcsClient
 
 
 class GitClient(VcsClient):
-    COMMAND = 'git'
-    NAME = 'Git'
+    def __init__(self, name, command):
+        self.COMMAND = command
+        self.NAME = name
 
     def commit(self, message):
         """
@@ -76,4 +77,4 @@ class GitClient(VcsClient):
         """
         self.execute_command(self.COMMAND, *arguments)
         
-git_client = GitClient()
+git_client = GitClient(name='Git', command='git')

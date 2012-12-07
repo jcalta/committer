@@ -9,10 +9,22 @@ import committer
 
 class VcsClientTests (unittest.TestCase):
     def setUp(self):
-        self.vcs_client = VcsClient()
+        self.vcs_client = VcsClient('Name', 'command')
         
     def tearDown(self):
         unstub()
+    
+    def test_should_raise_exception_when_argument_name_not_given(self):
+        self.assertRaises(Exception, VcsClient, None, 'command')
+    
+    def test_should_raise_exception_when_argument_name_not_given(self):
+        self.assertRaises(Exception, VcsClient, 'Name')
+    
+    def test_should_have_property_name(self):
+        self.assertEqual('Name', self.vcs_client.name)
+    
+    def test_should_have_property_command(self):
+        self.assertEqual('command', self.vcs_client.command)
     
     def test_should_call_command_in_subprocess (self):
         when(committer.vcsclients.util).call(any_value()).thenReturn(None)

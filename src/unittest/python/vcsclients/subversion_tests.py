@@ -14,10 +14,10 @@ class SubversionClientTests (unittest.TestCase):
         unstub()
     
     def test_should_have_command_property (self):
-        self.assertEqual('svn', self.subversion_client.COMMAND)
+        self.assertEqual('svn', self.subversion_client.command)
 
     def test_should_have_name_property (self):
-        self.assertEqual('Subversion', self.subversion_client.NAME)
+        self.assertEqual('Subversion', self.subversion_client.name)
 
     def test_should_prepend_svn_to_given_arguments (self):
         when(self.subversion_client)._svn(any_value(), any_value(), any_value()).thenReturn(None)

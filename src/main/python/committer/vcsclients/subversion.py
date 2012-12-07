@@ -27,8 +27,7 @@ from committer.vcsclients.util import VcsClient
 class SubversionClient(VcsClient):
     
     def __init__(self):
-        self.COMMAND = 'svn'
-        self.NAME = 'Subversion'
+        super(SubversionClient, self).__init__(name='Subversion', command='svn')
     
     def commit(self, message):
         """
@@ -54,7 +53,7 @@ class SubversionClient(VcsClient):
             @return: True if svn client is executable,
                      False otherwise. 
         """
-        return self.check_if_is_executable(self.COMMAND, '--version', '--quiet')
+        return self.check_if_is_executable(self.command, '--version', '--quiet')
     
     
     def status(self):
@@ -75,6 +74,6 @@ class SubversionClient(VcsClient):
         """
             Executes svn using the given arguments.
         """
-        self.execute_command(self.COMMAND, *arguments)
+        self.execute_command(self.command, *arguments)
 
 subversion_client = SubversionClient()

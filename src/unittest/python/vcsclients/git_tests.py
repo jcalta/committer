@@ -13,10 +13,10 @@ class GitClientTests (unittest.TestCase):
         unstub()
 
     def test_should_have_command_property (self):
-        self.assertEqual('git', self.git_client.COMMAND)
+        self.assertEqual('git', self.git_client.command)
 
     def test_should_have_name_property (self):
-        self.assertEqual('Git', self.git_client.NAME)
+        self.assertEqual('Git', self.git_client.name)
         
     def test_should_prepend_git_to_given_arguments (self):
         when(self.git_client)._git(any_value()).thenReturn(None)

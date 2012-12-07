@@ -63,7 +63,7 @@ class TooManyRepositoriesError(CommitterError):
         to be raised when more than one repository could be detected in the current directory.
     """
     def __init__(self, detected_repositories):
-        names = [repository.NAME for repository in detected_repositories]
+        names = [repository.name for repository in detected_repositories]
         message = 'Detected more than one repository: ' + ', '.join(names)
 
         super(TooManyRepositoriesError, self).__init__(message, 101)
@@ -74,5 +74,5 @@ class NotExecutableError(CommitterError):
         to be raised when the command line client of the repository could not be executed.
     """
     def __init__(self, repository):
-        message = ('{0} command line client "{1}" not executable.'.format(repository.NAME, repository.COMMAND))
+        message = ('{0} command line client "{1}" not executable.'.format(repository.name, repository.command))
         super(NotExecutableError, self).__init__(message, 102)

@@ -23,6 +23,39 @@ from subprocess import CalledProcessError, call, check_call
 
 class VcsClient(object):
     
+    def __init__(self, name, command):
+        if name is None:
+            raise Exception('Missing argument name when creating new vcs client')
+
+        if command is None:
+            raise Exception('Missing argument name when creating new vcs client')
+    
+        self._command = command
+        self._name = name
+    
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def command(self):
+        return self._command
+    
+    def is_executable(self):
+        raise NotImplementedError()
+    
+    def detect(self):
+        raise NotImplementedError()
+    
+    def update(self):
+        raise NotImplementedError()
+    
+    def status(self):
+        raise NotImplementedError()
+    
+    def commit(self, message):
+        raise NotImplementedError(message)
+    
     def execute_command(self, command, *arguments):
         """
             Executes command using the given command_and_arguments.

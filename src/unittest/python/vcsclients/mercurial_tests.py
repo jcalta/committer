@@ -14,10 +14,10 @@ class MercurialClientTests (unittest.TestCase):
         unstub()
      
     def test_should_have_command_property (self):
-        self.assertEqual('hg', self.mercurial_client.COMMAND)
+        self.assertEqual('hg', self.mercurial_client.command)
 
     def test_should_have_name_property (self):
-        self.assertEqual('Mercurial', self.mercurial_client.NAME)
+        self.assertEqual('Mercurial', self.mercurial_client.name)
 
     def test_should_prepend_hg_to_given_arguments (self):
         when(self.mercurial_client)._hg(any_value(), any_value(), any_value()).thenReturn(None)

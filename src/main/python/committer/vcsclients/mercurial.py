@@ -27,9 +27,8 @@ from committer.vcsclients.util import VcsClient
 class MercurialClient(VcsClient):
 
     def __init__(self):
-        self.COMMAND = 'hg'
-        self.NAME = 'Mercurial'
-            
+        super(MercurialClient, self).__init__(name='Mercurial', command='hg')
+    
     def commit(self, message):
         """
             Commits all files in the current directory by calling: 
@@ -55,7 +54,7 @@ class MercurialClient(VcsClient):
             @return: True if "hg --version --quiet" is executable,
                      False otherwise. 
         """
-        return self.check_if_is_executable(self.COMMAND, '--version', '--quiet')
+        return self.check_if_is_executable(self.command, '--version', '--quiet')
     
     
     def status(self):
@@ -77,6 +76,6 @@ class MercurialClient(VcsClient):
         """
             Executes hg using the given arguments.
         """
-        self.execute_command(self.COMMAND, *arguments)
+        self.execute_command(self.command, *arguments)
 
 mercurial_client = MercurialClient()

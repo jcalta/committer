@@ -24,7 +24,6 @@ from os import path
 from committer.vcsclients.util import VcsClient
 
 
-
 class SubversionClient(VcsClient):
     
     def __init__(self):

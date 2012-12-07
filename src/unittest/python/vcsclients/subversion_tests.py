@@ -4,7 +4,8 @@ from mockito import when, verify, unstub, any as any_value
 
 import committer
 from committer.vcsclients.subversion import SubversionClient
-       
+
+
 class SubversionClientTests (unittest.TestCase):
     def setUp(self):
         self.subversion_client = SubversionClient()

@@ -25,6 +25,7 @@ from committer.vcsclients.util import VcsClient
 
 
 class GitClient(VcsClient):
+    
     def __init__(self):
         self.COMMAND = 'git'
         self.NAME = 'Git'

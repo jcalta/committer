@@ -26,8 +26,10 @@ from committer.vcsclients.util import VcsClient
 
 
 class SubversionClient(VcsClient):
-    COMMAND = 'svn'
-    NAME = 'Subversion'
+    
+    def __init__(self):
+        self.COMMAND = 'svn'
+        self.NAME = 'Subversion'
     
     def commit(self, message):
         """

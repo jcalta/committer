@@ -2,15 +2,8 @@ import unittest
 
 from mockito import when, verify, unstub, any as any_value
 
-from committer.vcsclients.mercurial import MercurialClient, COMMAND, NAME
+from committer.vcsclients.mercurial import MercurialClient
 import committer
-
-class PropertiesTests (unittest.TestCase):
-    def test_should_have_command_property (self):
-        self.assertEqual('hg', COMMAND)
-
-    def test_should_have_name_property (self):
-        self.assertEqual('Mercurial', NAME)
 
 
 class MercurialClientTests (unittest.TestCase):
@@ -20,6 +13,12 @@ class MercurialClientTests (unittest.TestCase):
     def tearDown(self):
         unstub()
      
+    def test_should_have_command_property (self):
+        self.assertEqual('hg', self.mercurial_client.COMMAND)
+
+    def test_should_have_name_property (self):
+        self.assertEqual('Mercurial', self.mercurial_client.NAME)
+
     def test_should_prepend_hg_to_given_arguments (self):
         when(self.mercurial_client)._hg(any_value(), any_value(), any_value()).thenReturn(None)
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)

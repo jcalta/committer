@@ -24,10 +24,10 @@ from os import path
 from committer.vcsclients.util import VcsClient
 
 
-COMMAND = 'git'
-NAME = 'Git'
-
 class GitClient(VcsClient):
+    COMMAND = 'git'
+    NAME = 'Git'
+
     def commit(self, message):
         """
             commits all files by calling: git commit -a -m "message"
@@ -53,7 +53,7 @@ class GitClient(VcsClient):
             @return: True git command line client executable,
                      False otherwise. 
         """
-        return self.check_if_is_executable(COMMAND, '--version')
+        return self.check_if_is_executable(self.COMMAND, '--version')
     
     
     def status(self):
@@ -74,6 +74,6 @@ class GitClient(VcsClient):
         """
             Executes git using the given arguments.
         """
-        self.execute_command(COMMAND, *arguments)
+        self.execute_command(self.COMMAND, *arguments)
         
 git_client = GitClient()

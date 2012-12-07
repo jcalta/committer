@@ -3,15 +3,7 @@ import unittest
 from mockito import when, verify, unstub, any as any_value
 
 import committer
-from committer.vcsclients.subversion import SubversionClient, COMMAND, NAME
-
-class PropertiesTests (unittest.TestCase):
-    def test_should_have_command_property (self):
-        self.assertEqual('svn', COMMAND)
-
-    def test_should_have_name_property (self):
-        self.assertEqual('Subversion', NAME)
-
+from committer.vcsclients.subversion import SubversionClient
        
 class SubversionClientTests (unittest.TestCase):
     def setUp(self):
@@ -20,6 +12,12 @@ class SubversionClientTests (unittest.TestCase):
     def tearDown(self):
         unstub()
     
+    def test_should_have_command_property (self):
+        self.assertEqual('svn', self.subversion_client.COMMAND)
+
+    def test_should_have_name_property (self):
+        self.assertEqual('Subversion', self.subversion_client.NAME)
+
     def test_should_prepend_svn_to_given_arguments (self):
         when(self.subversion_client)._svn(any_value(), any_value(), any_value()).thenReturn(None)
         

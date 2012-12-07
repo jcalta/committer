@@ -23,10 +23,11 @@ from os import path
 
 from committer.vcsclients.util import VcsClient
 
-COMMAND = 'hg'
-NAME = 'Mercurial'
 
 class MercurialClient(VcsClient):
+    COMMAND = 'hg'
+    NAME = 'Mercurial'
+    
     def commit(self, message):
         """
             Commits all files in the current directory by calling: 
@@ -52,7 +53,7 @@ class MercurialClient(VcsClient):
             @return: True if "hg --version --quiet" is executable,
                      False otherwise. 
         """
-        return self.check_if_is_executable(COMMAND, '--version', '--quiet')
+        return self.check_if_is_executable(self.COMMAND, '--version', '--quiet')
     
     
     def status(self):
@@ -74,6 +75,6 @@ class MercurialClient(VcsClient):
         """
             Executes hg using the given arguments.
         """
-        self.execute_command(COMMAND, *arguments)
+        self.execute_command(self.COMMAND, *arguments)
 
 mercurial_client = MercurialClient()

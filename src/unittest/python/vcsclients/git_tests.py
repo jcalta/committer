@@ -1,17 +1,9 @@
 import unittest
 
 from mockito import when, verify, any as any_value, unstub
-from committer.vcsclients.git import COMMAND, NAME, GitClient
+from committer.vcsclients.git import GitClient
 
 import committer
-
-class PropertiesTests (unittest.TestCase):
-    def test_should_have_command_property (self):
-        self.assertEqual('git', COMMAND)
-
-    def test_should_have_name_property (self):
-        self.assertEqual('Git', NAME)
-
 
 class GitClientTests (unittest.TestCase):
     def setUp(self):
@@ -19,6 +11,12 @@ class GitClientTests (unittest.TestCase):
         
     def tearDown(self):
         unstub()
+
+    def test_should_have_command_property (self):
+        self.assertEqual('git', self.git_client.COMMAND)
+
+    def test_should_have_name_property (self):
+        self.assertEqual('Git', self.git_client.NAME)
         
     def test_should_prepend_git_to_given_arguments (self):
         when(self.git_client)._git(any_value()).thenReturn(None)

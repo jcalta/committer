@@ -25,9 +25,11 @@ from committer.vcsclients.util import VcsClient
 
 
 class MercurialClient(VcsClient):
-    COMMAND = 'hg'
-    NAME = 'Mercurial'
-    
+
+    def __init__(self):
+        self.COMMAND = 'hg'
+        self.NAME = 'Mercurial'
+            
     def commit(self, message):
         """
             Commits all files in the current directory by calling: 

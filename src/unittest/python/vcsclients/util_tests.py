@@ -13,7 +13,7 @@ class VcsClientTests (unittest.TestCase):
         
     def tearDown(self):
         unstub()
-        
+    
     def test_should_call_command_in_subprocess (self):
         when(committer.vcsclients.util).call(any_value()).thenReturn(None)
         

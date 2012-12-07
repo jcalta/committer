@@ -48,8 +48,3 @@ class VcsClient(object):
             return False
     
         return True
-
-vcs_client = VcsClient()
-
-execute_command = vcs_client.execute_command
-check_if_is_executable = vcs_client.check_if_is_executable

@@ -78,4 +78,3 @@ class MercurialClient(VcsClient):
         """
         self.execute_command(self.command, *arguments)
 
-mercurial_client = MercurialClient()

@@ -76,5 +76,3 @@ class GitClient(VcsClient):
             Executes git using the given arguments.
         """
         self.execute_command(self.command, *arguments)
-        
-git_client = GitClient()

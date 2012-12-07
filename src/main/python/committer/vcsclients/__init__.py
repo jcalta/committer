@@ -25,9 +25,9 @@
 __author__ = 'Michael Gruber'
 
 from committer import errors
-from committer.vcsclients.git import git_client
-from committer.vcsclients.mercurial import mercurial_client
-from committer.vcsclients.subversion import subversion_client
+from committer.vcsclients.git import GitClient
+from committer.vcsclients.mercurial import MercurialClient
+from committer.vcsclients.subversion import SubversionClient
 
 
 def detect_vcs_client():
@@ -75,6 +75,6 @@ def _detect_repositories():
 
 def _list_available_vcs_clients():
     """
-        @return: list of all available vcs clients.
+        @return: list of all available vcs clients classes.
     """
-    return [git_client, mercurial_client, subversion_client]
+    return [GitClient(), MercurialClient(), SubversionClient()]

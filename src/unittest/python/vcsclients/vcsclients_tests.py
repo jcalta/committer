@@ -4,6 +4,9 @@ import unittest
 import unittest_support
 
 from committer import vcsclients
+from committer.vcsclients.git import GitClient
+from committer.vcsclients.mercurial import MercurialClient
+from committer.vcsclients.subversion import SubversionClient
 from committer.errors import (NotExecutableError,
                               NoRepositoryDetectedError,
                               TooManyRepositoriesError)
@@ -18,18 +21,18 @@ class ListAvailableVcsClientsTests (unittest_support.TestCase):
     def test_should_find_git_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.git.git_client in actual_vcs_clients)
+        self.assertEqual('Git', actual_vcs_clients[0].name)
     
     def test_should_find_mercurial_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.mercurial.mercurial_client in actual_vcs_clients)
+        self.assertEqual('Mercurial', actual_vcs_clients[1].name)
     
     def test_should_find_subversion_vcs_client (self):
         actual_vcs_clients = vcsclients._list_available_vcs_clients()
         
-        self.assertTrue(vcsclients.subversion.subversion_client in actual_vcs_clients)
-
+        self.assertEqual('Subversion', actual_vcs_clients[2].name)
+        
 
 class EnsureExecutableTests (unittest.TestCase):
     def test_should_raise_exception_if_vcs_client_not_executable(self):

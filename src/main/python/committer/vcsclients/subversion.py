@@ -75,5 +75,3 @@ class SubversionClient(VcsClient):
             Executes svn using the given arguments.
         """
         self.execute_command(self.command, *arguments)
-
-subversion_client = SubversionClient()

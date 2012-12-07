@@ -37,15 +37,15 @@ def detect_vcs_client():
         @raise CommitterException: when no or more than one vcs_client detected.
         @return: the vcs client to the vcs_client in the current directory. 
     """
-    detected_repositories = _detect_repositories()
+    detected_vcs_clients = _detect_all_vcs_clients()
     
-    if not detected_repositories:
+    if not detected_vcs_clients:
         raise errors.NoRepositoryDetectedError()
     
-    if len(detected_repositories) > 1:
-        raise errors.TooManyRepositoriesError(detected_repositories)
+    if len(detected_vcs_clients) > 1:
+        raise errors.TooManyRepositoriesError(detected_vcs_clients)
     
-    vcs_client = detected_repositories[0]
+    vcs_client = detected_vcs_clients[0]
     return ensure_executable(vcs_client)
 
 
@@ -62,7 +62,7 @@ def ensure_executable(vcs_client):
     return vcs_client
 
 
-def _detect_repositories():
+def _detect_all_vcs_clients():
     """
         runs detection on all available vcs clients. 
         
@@ -75,6 +75,6 @@ def _detect_repositories():
 
 def _list_available_vcs_clients():
     """
-        @return: list of all available vcs clients classes.
+        @return: list of all available vcs clients.
     """
     return [GitClient(), MercurialClient(), SubversionClient()]

@@ -49,22 +49,22 @@ class EnsureExecutableTests (unittest.TestCase):
 
 
 class DiscoverVcsClientForCurrentDirectoryTests (unittest_support.TestCase):
-    @patch('committer.vcsclients._detect_repositories')
-    def test_should_raise_exception_when_no_repository_detected (self, mock_detect_repositories):
-        mock_detect_repositories.return_value = None
+    @patch('committer.vcsclients._detect_all_vcs_clients')
+    def test_should_raise_exception_when_no_repository_detected (self, mock_detect_all_vcs_clients):
+        mock_detect_all_vcs_clients.return_value = None
         
         self.assertRaises(NoRepositoryDetectedError, vcsclients.detect_vcs_client)
 
-    @patch('committer.vcsclients._detect_repositories')
-    def test_should_raise_exception_when_more_than_one_repository_detected (self, mock_detect_repositories):
-        mock_detect_repositories.return_value = [self.create_mock_vcs_client(), self.create_mock_vcs_client()]
+    @patch('committer.vcsclients._detect_all_vcs_clients')
+    def test_should_raise_exception_when_more_than_one_repository_detected (self, mock_detect_all_vcs_clients):
+        mock_detect_all_vcs_clients.return_value = [self.create_mock_vcs_client(), self.create_mock_vcs_client()]
         
         self.assertRaises(TooManyRepositoriesError, vcsclients.detect_vcs_client)
 
-    @patch('committer.vcsclients._detect_repositories')
-    def test_should_return_detected_vcs_client (self, mock_detect_repositories):
+    @patch('committer.vcsclients._detect_all_vcs_clients')
+    def test_should_return_detected_vcs_client (self, mock_detect_all_vcs_clients):
         mock_vcs_client = self.create_mock_vcs_client()
-        mock_detect_repositories.return_value = [mock_vcs_client]
+        mock_detect_all_vcs_clients.return_value = [mock_vcs_client]
         
         actual_vcs_client = vcsclients.detect_vcs_client()
         
@@ -78,7 +78,7 @@ class DetectTests (unittest_support.TestCase):
         mock_vcs_client.detect.return_value = True
         mock_find.return_value = [mock_vcs_client]
         
-        actual_detected_vcs_clients = vcsclients._detect_repositories()
+        actual_detected_vcs_clients = vcsclients._detect_all_vcs_clients()
         
         self.assertEqual([mock_vcs_client], actual_detected_vcs_clients)
         self.assertEqual(call(), mock_vcs_client.detect.call_args)
@@ -89,7 +89,7 @@ class DetectTests (unittest_support.TestCase):
         mock_vcs_client.detect.return_value = False
         mock_find.return_value = [mock_vcs_client]
         
-        actual_detected_vcs_clients = vcsclients._detect_repositories()
+        actual_detected_vcs_clients = vcsclients._detect_all_vcs_clients()
         
         self.assertEqual([], actual_detected_vcs_clients)
         self.assertEqual(call(), mock_vcs_client.detect.call_args)

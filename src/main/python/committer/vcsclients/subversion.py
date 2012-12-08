@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Subversion command line client wrapper module.
+    Subversion command line client wrapper.
 """
 
 __author__ = 'Michael Gruber'
@@ -38,9 +38,9 @@ class SubversionClient(AbstractVcsClient):
     
     def detect(self):
         """
-            Checks if the .svn directory exists.
+            Checks if the current directory represents a subversion repository.
             
-            @return: True if the current directory represents a subversion repository,
+            @return: True if the ".svn" directory exists,
                      False otherwise.
         """
         return path.isdir('.svn')
@@ -48,9 +48,9 @@ class SubversionClient(AbstractVcsClient):
     
     def is_executable(self):
         """
-            Checks if "svn --version --quiet" is executable.
+            Checks if svn client is executable.
             
-            @return: True if svn client is executable,
+            @return: True if "svn --version --quiet" is executable,
                      False otherwise. 
         """
         return self.check_if_is_executable(self.command, '--version', '--quiet')

@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Git command line client wrapper module.
+    Git command line client wrapper.
 """
 
 __author__ = 'Michael Gruber'
@@ -32,6 +32,7 @@ class GitClient(AbstractVcsClient):
     def commit(self, message):
         """
             commits all files by calling: git commit -a -m "message"
+            followed by a "git push"
         """
         self._git('commit', '-a', '-m', message)
         self._git('push')
@@ -39,9 +40,9 @@ class GitClient(AbstractVcsClient):
     
     def detect(self):
         """
-            Checks if the .git directory exists.
+            Checks if the current directory represents a git repository.
             
-            @return: True if the current directory represents a git repository,
+            @return: True if the ".git" directory exists,
                      False otherwise.
         """
         return path.isdir('.git')
@@ -49,9 +50,9 @@ class GitClient(AbstractVcsClient):
     
     def is_executable(self):
         """
-            Checks if "git --version" is executable
+            Checks if the git command line client is executable.
              
-            @return: True git command line client executable,
+            @return: True if "git --version" is executable,
                      False otherwise. 
         """
         return self.check_if_is_executable(self.command, '--version')
@@ -59,7 +60,7 @@ class GitClient(AbstractVcsClient):
     
     def status(self):
         """
-            Shows changes in current directory using "git status".
+            Shows changes in current directory using "git status -sb".
         """
         self._git('status', '-sb')
     

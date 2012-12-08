@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Contains exceptions.
+    Exceptions and Errors
 """
 
 __author__ = 'Michael Gruber'

@@ -14,13 +14,13 @@
 #   limitations under the License.
 
 """
-    Using the "commit" command will discover the working repository in
-    the current directory.
+    Using the "commit" command will update the repository in the current working
+    directory and commit all changes.
 
-    The "status" command discovers all changes in the in the current directory.
+    The "status" command displays all changes in the in the current directory.
 
-    Using the "update" command will discover the working repository in
-    the current directory.
+    Using the "update" command will update the repository in the current working
+    directory.
 """
 
 __author__ = 'Michael Gruber'
@@ -32,7 +32,7 @@ from committer.vcsclients import detect_vcs_client
 def commit(arguments):
     """
         1. detect what kind of repository the current directory is.
-        2. perform update using the vcs_client.
+        2. perform update using the corresponding vcs client.
         3. commit all modified files to the repository using the vcs client.
     """
     if len(arguments) == 1:

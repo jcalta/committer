@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Mercurial command line client wrapper module.
+    Mercurial command line client wrapper.
 """
 
 __author__ = 'Michael Gruber'
@@ -41,9 +41,9 @@ class MercurialClient(AbstractVcsClient):
     
     def detect(self):
         """
-            Checks if the .hg directory exists.
+            Checks if the current directory represents a mercurial repository.
             
-            @return: True if the current directory represents a mercurial repository,
+            @return: True if the ".hg" directory exists,
                      False otherwise.
         """
         return path.isdir('.hg')

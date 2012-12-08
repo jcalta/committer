@@ -14,12 +14,11 @@
 #   limitations under the License.
 
 """
-    Submodules of this module are version control systems clients.
-    They are implementing the functions commit, detect, is_executable,
-    and update. The module itself provides two functions "find" and "detect".
-    The function "find" returns a list of all available vcs client modules. The
-    function "detect_vcs_client" returns the vcs client for the
-    repository in the current directory.
+    Provides function "detect_vcs_client" which detects the corresponding
+    version control system client for the current working directory.
+    
+    Submodules of this module contain version control systems clients.
+    They are implementing the AbstractVcsClient.
 """
 
 __author__ = 'Michael Gruber'
@@ -32,10 +31,10 @@ from committer.vcsclients.subversion import SubversionClient
 
 def detect_vcs_client():
     """
-        runs vcs_client detection on the current directory.
+        runs vcs client detection on the current directory.
         
-        @raise CommitterException: when no or more than one vcs_client detected.
-        @return: the vcs client to the vcs_client in the current directory. 
+        @raise CommitterException: when no or more than one vcs client detected.
+        @return: the vcs client for the current working directory. 
     """
     detected_vcs_clients = _detect_all_vcs_clients()
     

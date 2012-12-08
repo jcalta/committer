@@ -3,9 +3,9 @@ import subprocess
 
 from mockito import when, verify, unstub, any as any_value
 
-from committer.vcsclients.util import AbstractVcsClient
-
 import committer
+
+from committer.vcsclients.util import AbstractVcsClient
 
 class AbstractVcsClientTests (unittest.TestCase):
     def setUp(self):
@@ -64,7 +64,22 @@ class AbstractVcsClientTests (unittest.TestCase):
         self.assertFalse(actual_result)
         verify(committer.vcsclients.util).check_call(['command', '--version', '--quiet'])
 
-    def test_should_raise_eception_when_during_check_something_unexpected_happens (self):
+    def test_should_raise_exception_when_during_check_something_unexpected_happens (self):
         when(committer.vcsclients.util).check_call(any_value()).thenRaise(Exception('Not executable'))
         
         self.assertRaises(Exception, self.vcs_client.check_if_is_executable, (['command', '--version', '--quiet']))
+
+    def test_should_raise_not_implemented_error_when_trying_to_check_if_is_executable(self):
+        self.assertRaises(NotImplementedError, self.vcs_client.is_executable)
+    
+    def test_should_raise_not_implemented_error_when_trying_to_detect(self):
+        self.assertRaises(NotImplementedError, self.vcs_client.detect)
+    
+    def test_should_raise_not_implemented_error_when_trying_to_update(self):
+        self.assertRaises(NotImplementedError, self.vcs_client.update)
+    
+    def test_should_raise_not_implemented_error_when_trying_to_get_status(self):
+        self.assertRaises(NotImplementedError, self.vcs_client.status)
+    
+    def test_should_raise_not_implemented_error_when_trying_to_commit(self):
+        self.assertRaises(NotImplementedError, self.vcs_client.commit, 'message')

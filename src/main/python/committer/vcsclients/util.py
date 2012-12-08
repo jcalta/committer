@@ -34,21 +34,13 @@ class AbstractVcsClient(object):
         self._name = name
     
     @property
-    def name(self):
-        return self._name
-
-    @property
     def command(self):
         return self._command
     
-    def execute_command(self, command, *arguments):
-        """
-            Executes command using the given command_and_arguments.
-        """
-        command_and_arguments = [command] + list(arguments)
-        call(command_and_arguments)
-    
-    
+    @property
+    def name(self):
+        return self._name
+
     def check_if_is_executable(self, command, *arguments):
         """
             Executes the given command with the given arguments.
@@ -68,6 +60,14 @@ class AbstractVcsClient(object):
     
         return True
 
+    def execute_command(self, command, *arguments):
+        """
+            Executes command using the given command_and_arguments.
+        """
+        command_and_arguments = [command] + list(arguments)
+        call(command_and_arguments)
+    
+    
     def is_executable(self):
         raise NotImplementedError()
     
@@ -81,5 +81,4 @@ class AbstractVcsClient(object):
         raise NotImplementedError()
     
     def commit(self, message):
-        raise NotImplementedError(message)
-    
+        raise NotImplementedError('Commit method has been called with argument message="{0}" '.format(message))

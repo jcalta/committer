@@ -21,14 +21,14 @@ __author__ = 'Michael Gruber'
 
 from subprocess import CalledProcessError, call, check_call
 
-class VcsClient(object):
+class AbstractVcsClient(object):
     
     def __init__(self, name, command):
         if name is None:
             raise Exception('Missing argument name when creating new vcs client')
 
         if command is None:
-            raise Exception('Missing argument name when creating new vcs client')
+            raise Exception('Missing argument command when creating {0} vcs client'.format(name))
     
         self._command = command
         self._name = name
@@ -40,21 +40,6 @@ class VcsClient(object):
     @property
     def command(self):
         return self._command
-    
-    def is_executable(self):
-        raise NotImplementedError()
-    
-    def detect(self):
-        raise NotImplementedError()
-    
-    def update(self):
-        raise NotImplementedError()
-    
-    def status(self):
-        raise NotImplementedError()
-    
-    def commit(self, message):
-        raise NotImplementedError(message)
     
     def execute_command(self, command, *arguments):
         """
@@ -82,3 +67,19 @@ class VcsClient(object):
             return False
     
         return True
+
+    def is_executable(self):
+        raise NotImplementedError()
+    
+    def detect(self):
+        raise NotImplementedError()
+    
+    def update(self):
+        raise NotImplementedError()
+    
+    def status(self):
+        raise NotImplementedError()
+    
+    def commit(self, message):
+        raise NotImplementedError(message)
+    

@@ -3,22 +3,22 @@ import subprocess
 
 from mockito import when, verify, unstub, any as any_value
 
-from committer.vcsclients.util import VcsClient
+from committer.vcsclients.util import AbstractVcsClient
 
 import committer
 
-class VcsClientTests (unittest.TestCase):
+class AbstractVcsClientTests (unittest.TestCase):
     def setUp(self):
-        self.vcs_client = VcsClient('Name', 'command')
+        self.vcs_client = AbstractVcsClient('Name', 'command')
         
     def tearDown(self):
         unstub()
     
     def test_should_raise_exception_when_argument_name_not_given(self):
-        self.assertRaises(Exception, VcsClient, None, 'command')
+        self.assertRaises(Exception, AbstractVcsClient, None, 'command')
     
-    def test_should_raise_exception_when_argument_name_not_given(self):
-        self.assertRaises(Exception, VcsClient, 'Name')
+    def test_should_raise_exception_when_argument_command_not_given(self):
+        self.assertRaises(Exception, AbstractVcsClient, 'Name', None)
     
     def test_should_have_property_name(self):
         self.assertEqual('Name', self.vcs_client.name)

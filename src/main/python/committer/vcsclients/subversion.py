@@ -21,10 +21,10 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import VcsClient
+from committer.vcsclients.util import AbstractVcsClient
 
 
-class SubversionClient(VcsClient):
+class SubversionClient(AbstractVcsClient):
     
     def __init__(self):
         super(SubversionClient, self).__init__(name='Subversion', command='svn')

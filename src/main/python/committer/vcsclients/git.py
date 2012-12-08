@@ -21,10 +21,10 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import VcsClient
+from committer.vcsclients.util import AbstractVcsClient
 
 
-class GitClient(VcsClient):
+class GitClient(AbstractVcsClient):
     
     def __init__(self):
         super(GitClient, self).__init__(name='Git', command='git')

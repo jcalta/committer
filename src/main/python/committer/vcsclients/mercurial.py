@@ -21,10 +21,10 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import VcsClient
+from committer.vcsclients.util import AbstractVcsClient
 
 
-class MercurialClient(VcsClient):
+class MercurialClient(AbstractVcsClient):
 
     def __init__(self):
         super(MercurialClient, self).__init__(name='Mercurial', command='hg')

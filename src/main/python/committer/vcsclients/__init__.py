@@ -50,8 +50,8 @@ class AbstractVcsClient(object):
                      False otherwise. 
         """
         try:
-            command_and_arguments = [command] + list(arguments)
-            check_call(command_and_arguments)
+            command_with_arguments = [command] + list(arguments)
+            check_call(command_with_arguments)
     
         except CalledProcessError:
             return False
@@ -63,10 +63,10 @@ class AbstractVcsClient(object):
 
     def execute_command(self, command, *arguments):
         """
-            Executes command using the given command_and_arguments.
+            Executes command using the given arguments.
         """
-        command_and_arguments = [command] + list(arguments)
-        call(command_and_arguments)
+        command_with_arguments = [command] + list(arguments)
+        call(command_with_arguments)
     
     
     def is_executable(self):

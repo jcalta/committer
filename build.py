@@ -30,7 +30,6 @@ use_plugin('python.coverage')
 use_plugin('python.distutils')
 use_plugin('python.integrationtest')
 use_plugin('python.install_dependencies')
-use_plugin('python.pychecker')
 use_plugin('python.pylint')
 use_plugin('python.unittest')
 
@@ -39,7 +38,7 @@ description = 'Please visit https://github.com/aelgru/committer for more informa
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
 url = 'https://github.com/aelgru/committer'
-version = '0.0.82'
+version = '0.0.83'
 
 default_task = ['analyze', 'publish']
 
@@ -50,7 +49,6 @@ def set_properties (project):
     project.build_depends_on('mockito')
 
     project.set_property('coverage_break_build', True)
-    project.set_property('pychecker_break_build', True)
     project.set_property('pylint_options', ['--rcfile=pylintrc'])
 
     project.set_property('copy_resources_target', '$dir_dist/committer')

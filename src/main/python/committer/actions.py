@@ -26,7 +26,7 @@
 __author__ = 'Michael Gruber'
 
 from committer.errors import WrongUsageError
-from committer.vcsclients import detect_vcs_client
+from committer.vcsclients.detection import detect_vcs_client
 
 
 def commit(arguments):

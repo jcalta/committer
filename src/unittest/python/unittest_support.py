@@ -1,7 +1,7 @@
 import unittest
 
 from mock import Mock
-from committer.vcsclients.util import AbstractVcsClient
+from committer.vcsclients import AbstractVcsClient
 
 class TestCase (unittest.TestCase):
     def create_mock_vcs_client (self):

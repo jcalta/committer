@@ -14,66 +14,72 @@
 #   limitations under the License.
 
 """
-    Provides function "detect_vcs_client" which detects the corresponding
-    version control system client for the current working directory.
-    
-    Submodules of this module contain version control systems clients.
-    They are implementing the AbstractVcsClient.
+    Submodules of this module contain version control systems clients which
+    implement the AbstractVcsClient provided by this module.
 """
 
 __author__ = 'Michael Gruber'
 
-from committer import errors
-from committer.vcsclients.git import GitClient
-from committer.vcsclients.mercurial import MercurialClient
-from committer.vcsclients.subversion import SubversionClient
+from subprocess import CalledProcessError, call, check_call
 
-
-def detect_vcs_client():
-    """
-        runs vcs client detection on the current directory.
-        
-        @raise CommitterException: when no or more than one vcs client detected.
-        @return: the vcs client for the current working directory. 
-    """
-    detected_vcs_clients = _detect_all_vcs_clients()
+class AbstractVcsClient(object):
     
-    if not detected_vcs_clients:
-        raise errors.NoRepositoryDetectedError()
+    def __init__(self, name, command):
+        if name is None:
+            raise Exception('Missing argument name when creating new vcs client')
+
+        if command is None:
+            raise Exception('Missing argument command when creating {0} vcs client'.format(name))
     
-    if len(detected_vcs_clients) > 1:
-        raise errors.TooManyRepositoriesError(detected_vcs_clients)
+        self._command = command
+        self._name = name
     
-    vcs_client = detected_vcs_clients[0]
-    return ensure_executable(vcs_client)
-
-
-def ensure_executable(vcs_client):
-    """
-        ensures the given vcs client is executable. 
-        
-        @raise CommiterException: when the command line client is not executable.
-        @return: the given vcs client
-    """
-    if not vcs_client.is_executable():
-        raise errors.NotExecutableError(vcs_client)
+    @property
+    def command(self):
+        return self._command
     
-    return vcs_client
+    @property
+    def name(self):
+        return self._name
 
-
-def _detect_all_vcs_clients():
-    """
-        runs detection on all available vcs clients. 
-        
-        @return: list of vcs clients
-    """
-    vcs_clients = _list_available_vcs_clients()
+    def check_if_is_executable(self, command, *arguments):
+        """
+            Executes the given command with the given arguments.
+            
+            @return: True if the given command is executable with the given arguments,
+                     False otherwise. 
+        """
+        try:
+            command_and_arguments = [command] + list(arguments)
+            check_call(command_and_arguments)
     
-    return [vcs_client for vcs_client in vcs_clients if vcs_client.detect()]
+        except CalledProcessError:
+            return False
+    
+        except OSError:
+            return False
+    
+        return True
 
-
-def _list_available_vcs_clients():
-    """
-        @return: list of all available vcs clients.
-    """
-    return [GitClient(), MercurialClient(), SubversionClient()]
+    def execute_command(self, command, *arguments):
+        """
+            Executes command using the given command_and_arguments.
+        """
+        command_and_arguments = [command] + list(arguments)
+        call(command_and_arguments)
+    
+    
+    def is_executable(self):
+        raise NotImplementedError()
+    
+    def detect(self):
+        raise NotImplementedError()
+    
+    def update(self):
+        raise NotImplementedError()
+    
+    def status(self):
+        raise NotImplementedError()
+    
+    def commit(self, message):
+        raise NotImplementedError('Commit method has been called with argument message="{0}" '.format(message))

@@ -21,7 +21,7 @@ __author__ = 'Michael Gruber'
 
 from os import path
 
-from committer.vcsclients.util import AbstractVcsClient
+from committer.vcsclients import AbstractVcsClient
 
 
 class SubversionClient(AbstractVcsClient):

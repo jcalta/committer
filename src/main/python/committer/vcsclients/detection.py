@@ -42,10 +42,10 @@ def detect_vcs_client():
         raise errors.TooManyRepositoriesError(detected_vcs_clients)
     
     vcs_client = detected_vcs_clients[0]
-    return ensure_executable(vcs_client)
+    return _ensure_executable(vcs_client)
 
 
-def ensure_executable(vcs_client):
+def _ensure_executable(vcs_client):
     """
         ensures the given vcs client is executable. 
         

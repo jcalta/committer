@@ -39,13 +39,13 @@ class EnsureExecutableTests (unittest.TestCase):
         mock_vcs_client = Mock()
         mock_vcs_client.is_executable.return_value = False
         
-        self.assertRaises(NotExecutableError, detection.ensure_executable, mock_vcs_client)
+        self.assertRaises(NotExecutableError, detection._ensure_executable, mock_vcs_client)
 
     def test_should_return_vcs_client_object_when_executable (self):
         mock_vcs_client = Mock()
         mock_vcs_client.is_executable.return_value = True
         
-        self.assertEqual(mock_vcs_client, detection.ensure_executable(mock_vcs_client))
+        self.assertEqual(mock_vcs_client, detection._ensure_executable(mock_vcs_client))
 
 
 class DiscoverVcsClientForCurrentDirectoryTests (unittest_support.TestCase):

@@ -26,10 +26,10 @@ class AbstractVcsClient(object):
     
     def __init__(self, name, command):
         if name is None:
-            raise Exception('Missing argument name when creating new vcs client')
+            raise Exception('Missing argument "name" when creating new vcs client')
 
         if command is None:
-            raise Exception('Missing argument command when creating {0} vcs client'.format(name))
+            raise Exception('Missing argument "command" when creating {0} vcs client'.format(name))
     
         self._command = command
         self._name = name

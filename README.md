@@ -54,7 +54,7 @@ Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
 
 ## Alternatives
 
-Did you know all Git repositories on GitHub are subversion repositories?
+Did you know all Git repositories on GitHub can be handled using a subversion client?
 
 ```bash
 svn checkout https://github.com/aelgru/committer

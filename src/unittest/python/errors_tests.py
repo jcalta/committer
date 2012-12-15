@@ -29,9 +29,9 @@ class ErrorsTests (unittest_support.TestCase):
 Wrong usage, please use the committer commands as expected.
 
 usage:
-    co "message" [++]    commits all changes
-    st                   shows all changes
-    up                   updates the current directory
+    ci "message"     commits all changes
+    st               shows all changes
+    up               updates the current directory
 
 """, actual_exception.message)
         self.assertEqual(1, actual_exception.error_code)

@@ -30,9 +30,9 @@ from committer.actions import update
 
 USAGE_INFORMATION = """
 usage:
-    co "message" [++]    commits all changes
-    st                   shows all changes
-    up                   updates the current directory
+    ci "message"     commits all changes
+    st               shows all changes
+    up               updates the current directory
 """
 
 class ScriptCommand(object):

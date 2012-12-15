@@ -26,9 +26,9 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         self.assertEqual(call("""
 usage:
-    co "message" [++]    commits all changes
-    st                   shows all changes
-    up                   updates the current directory
+    ci "message"     commits all changes
+    st               shows all changes
+    up               updates the current directory
 """), mock_stdout.write.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 

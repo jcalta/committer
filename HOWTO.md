@@ -52,7 +52,7 @@ deactivate
 
 Within the `target/dist` dir you will find the built artefacts.
 
-Once you changed into the `target/dist/committer-0.0.79` directory you can install committer:
+Once you changed into the `target/dist/committer-x.x.x` directory you can install committer:
 
 ```bash
 sudo python setup.py install

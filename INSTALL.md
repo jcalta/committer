@@ -10,7 +10,7 @@ sudo pip install committer
 
 ### Using easy_install
 ```
-easy_install committer
+sudo easy_install committer
 ```
 
 ### [Build committer Yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)

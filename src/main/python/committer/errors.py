@@ -1,5 +1,5 @@
 #   committer errors and exceptions
-#   Copyright 2012 Michael Gruber
+#   Copyright 2012-2013 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.

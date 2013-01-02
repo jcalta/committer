@@ -4,9 +4,6 @@ import unittest
 import unittest_support
 
 from committer.vcsclients import detection
-from committer.vcsclients.git import GitClient
-from committer.vcsclients.mercurial import MercurialClient
-from committer.vcsclients.subversion import SubversionClient
 from committer.errors import (NotExecutableError,
                               NoRepositoryDetectedError,
                               TooManyRepositoriesError)

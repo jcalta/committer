@@ -4,9 +4,7 @@ import unittest
 import unittest_support
 
 from committer.vcsclients import detection
-from committer.errors import (NotExecutableError,
-                              NoRepositoryDetectedError,
-                              TooManyRepositoriesError)
+from committer.errors import NotExecutableError, NoRepositoryDetectedError, TooManyRepositoriesError
  
 class ListAvailableVcsClientsTests (unittest_support.TestCase):
     def test_should_find_mercurial_vcs_client (self):

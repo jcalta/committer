@@ -35,5 +35,4 @@ pip-log.txt
 .mr.developer.cfg
 
 # virtual environment
-ve
-venv
+ve*

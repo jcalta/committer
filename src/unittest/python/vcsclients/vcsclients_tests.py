@@ -7,6 +7,7 @@ import committer
 
 from committer.vcsclients import AbstractVcsClient
 
+
 class AbstractVcsClientTests (unittest.TestCase):
     def setUp(self):
         self.vcs_client = AbstractVcsClient('Name', 'command')

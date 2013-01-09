@@ -2,7 +2,6 @@ from mock import call, patch
 
 import unittest_support
 
-
 from committer.errors import WrongUsageError
 from committer.actions import update
 

@@ -1,4 +1,4 @@
-# committer
+# committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
 Unified command line interface for *git*, *mercurial*, and *subversion*.
 
@@ -49,8 +49,6 @@ Committing in a high frequency has advantages:
 Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
 
 [Read how to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
-
-[![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
 ## Alternatives
 

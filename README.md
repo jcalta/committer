@@ -7,6 +7,7 @@ Unified command line interface for *git*, *mercurial*, and *subversion*.
 ```bash
 sudo pip install committer
 ```
+
 [More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
 ## How to Commit
@@ -44,6 +45,7 @@ Committing in a high frequency has advantages:
 * commit messages for smaller commits "tell a story".
 
 [Read more about micro commits.](http://lucasr.org/2011/01/29/micro-commits/)
+
 ## How to Contribute
 
 Simply [fork](https://github.com/aelgru/committer/fork_select) committer.

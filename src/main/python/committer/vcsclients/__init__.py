@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Submodules of this module contain version control systems clients which
+    Submodules of this module contain version control system clients which
     implement the AbstractVcsClient provided by this module.
 """
 
@@ -23,8 +23,14 @@ __author__ = 'Michael Gruber'
 from subprocess import CalledProcessError, call, check_call
 
 class AbstractVcsClient(object):
+    """
+        VCS Clients need to implement this class and override commit, detect, is_executable, status, and update.
+    """
     
     def __init__(self, name, command):
+        """
+            Asserts that the arguments name and command are set and will set the corresponding private properties.
+        """
         if name is None:
             raise Exception('Missing argument "name" when creating new vcs client')
 
@@ -36,10 +42,16 @@ class AbstractVcsClient(object):
     
     @property
     def command(self):
+        """
+            name of command line client.
+        """
         return self._command
     
     @property
     def name(self):
+        """
+            Name of version control system.
+        """
         return self._name
 
     def check_if_is_executable(self, command, *arguments):
@@ -70,16 +82,37 @@ class AbstractVcsClient(object):
     
     
     def is_executable(self):
+        """
+            Override this method with a check if the vcs command line client is executable.
+
+            @return: True if client is executable,
+                     False otherwise.
+        """
         raise NotImplementedError()
     
     def detect(self):
+        """
+            Override this method with a check if the current directory represents a working directory of this client.
+
+            @return: True if the directory is a working directory handled by this client,
+                     False otherwise.
+        """
         raise NotImplementedError()
     
     def update(self):
+        """
+            Override this method with a update function.
+        """
         raise NotImplementedError()
     
     def status(self):
+        """
+            Override this method with a function which shows changes in current working directory.
+        """
         raise NotImplementedError()
     
     def commit(self, message):
+        """
+            Override this method with a function which commits all files.
+        """
         raise NotImplementedError('Commit method has been called with argument message="{0}" '.format(message))

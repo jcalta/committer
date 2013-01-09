@@ -25,6 +25,9 @@ from committer.vcsclients import AbstractVcsClient
 
 
 class MercurialClient(AbstractVcsClient):
+    """
+        Mercurial dvcs client.
+    """
 
     def __init__(self):
         super(MercurialClient, self).__init__(name='Mercurial', command='hg')

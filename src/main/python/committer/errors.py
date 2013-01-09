@@ -1,4 +1,4 @@
-#   committer errors and exceptions
+#   committer errors
 #   Copyright 2012-2013 Michael Gruber
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 """
-    Exceptions and Errors
+    Errors
 """
 
 __author__ = 'Michael Gruber'
@@ -25,7 +25,6 @@ class CommitterError(Exception):
     """
         to be raised when an error occurred, which should stop the default program flow.
     """
-    
     def __init__(self, message, error_code):
         """
             will set the given properties.

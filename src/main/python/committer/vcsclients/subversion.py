@@ -25,6 +25,9 @@ from committer.vcsclients import AbstractVcsClient
 
 
 class SubversionClient(AbstractVcsClient):
+    """
+        Subversion vcs client.
+    """
     
     def __init__(self):
         super(SubversionClient, self).__init__(name='Subversion', command='svn')

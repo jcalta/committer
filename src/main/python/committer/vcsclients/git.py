@@ -25,6 +25,9 @@ from committer.vcsclients import AbstractVcsClient
 
 
 class GitClient(AbstractVcsClient):
+    """
+        Git dvcs client.
+    """
     
     def __init__(self):
         super(GitClient, self).__init__(name='Git', command='git')

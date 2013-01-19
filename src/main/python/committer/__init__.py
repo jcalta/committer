@@ -51,7 +51,7 @@ class ScriptCommand(object):
             stdout.write('committer version %s\n' % __version__)
             return exit(0)
 
-        if len(arguments) > 1 and arguments[1] == 'help':
+        if len(arguments) > 1 and arguments[1] in ['help', '--help', '-h']:
             stdout.write(USAGE_INFORMATION)
             return exit(0)
 

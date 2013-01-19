@@ -42,20 +42,32 @@ class ScriptCommand(object):
     def __init__(self, function):
         self.function = function
 
+    def _handle_version_argument(self, arguments):
+        """
+            Shows the version and exits the program, if arguments contains --version.
+        """
+        if '--version' in arguments:
+            stdout.write('{0} version {1}\n'.format(__name__, __version__))
+            return exit(0)
+
+    def _handle_help_argument(self, arguments):
+        """
+            Shows the usage information and exits the program, if arguments contains 
+            help, --help, or -h.
+        """
+        for help_option in ['help', '--help', '-h']:
+            if help_option in arguments:
+                stdout.write(USAGE_INFORMATION)
+                return exit(0)
 
     def __call__(self, arguments):
         """
             performs the given command using the given arguments.
         """
         if len(arguments) > 1:
-            if arguments[1] == '--version':
-                stdout.write('{0} version {1}\n'.format(__name__, __version__))
-                return exit(0)
-
-            if arguments[1] in ['help', '--help', '-h']:
-                stdout.write(USAGE_INFORMATION)
-                return exit(0)
-
+            self._handle_version_argument(arguments)
+            self._handle_help_argument(arguments)
+        
         try:
             self.function(arguments)
             return exit(0)

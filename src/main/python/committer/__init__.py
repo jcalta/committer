@@ -49,7 +49,7 @@ class ScriptCommand(object):
         """
         if len(arguments) > 1:
             if arguments[1] == '--version':
-                stdout.write('committer version %s\n' % __version__)
+                stdout.write('{0} version {1}\n'.format(__name__, __version__))
                 return exit(0)
 
             if arguments[1] in ['help', '--help', '-h']:

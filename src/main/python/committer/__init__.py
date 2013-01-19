@@ -47,13 +47,14 @@ class ScriptCommand(object):
         """
             performs the given command using the given arguments.
         """
-        if len(arguments) > 1 and arguments[1] == '--version':
-            stdout.write('committer version %s\n' % __version__)
-            return exit(0)
+        if len(arguments) > 1:
+            if arguments[1] == '--version':
+                stdout.write('committer version %s\n' % __version__)
+                return exit(0)
 
-        if len(arguments) > 1 and arguments[1] in ['help', '--help', '-h']:
-            stdout.write(USAGE_INFORMATION)
-            return exit(0)
+            if arguments[1] in ['help', '--help', '-h']:
+                stdout.write(USAGE_INFORMATION)
+                return exit(0)
 
         try:
             self.function(arguments)

@@ -23,7 +23,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import show_status_of_the_current_working_directory
+from committer import show_status
 
 
-show_status_of_the_current_working_directory(sys.argv)
+show_status(sys.argv)

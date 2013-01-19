@@ -65,15 +65,15 @@ class ScriptCommand(object):
 
 
 @ScriptCommand
-def update_current_working_directory_and_commit_changes(arguments):
+def commit_changes(arguments):
     commit(arguments)
 
 
 @ScriptCommand
-def show_status_of_the_current_working_directory(arguments):
+def show_status(arguments):
     status(arguments)
 
 
 @ScriptCommand
-def update_the_current_working_directory(arguments):
+def update_files(arguments):
     update(arguments)

@@ -24,7 +24,7 @@ __author__ = 'Michael Gruber'
 
 import sys
 
-from committer import update_the_current_working_directory
+from committer import update_files
 
 
-update_the_current_working_directory(sys.argv)
+update_files(sys.argv)

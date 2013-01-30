@@ -31,7 +31,7 @@ st
 Executes the "status" command known by all version control systems.
 
 
-### Update the current directory
+### Update the current working directory
 
 ```bash
 up

@@ -31,7 +31,6 @@ use_plugin('python.distutils')
 use_plugin('python.flake8')
 use_plugin('python.integrationtest')
 use_plugin('python.install_dependencies')
-use_plugin('python.pylint')
 use_plugin('python.unittest')
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
@@ -51,7 +50,6 @@ def set_properties (project):
     project.build_depends_on('flake8')
 
     project.set_property('coverage_break_build', True)
-    project.set_property('pylint_options', ['--rcfile=pylintrc'])
 
     project.set_property('copy_resources_target', '$dir_dist/committer')
     project.get_property('copy_resources_glob').append('LICENSE')

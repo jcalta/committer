@@ -6,10 +6,7 @@ python:
   - "3.2"
   - "pypy"
 
-before_script:
-  - sudo apt-get install pychecker pylint
-
 install:
   - pip install pybuilder
 
-script: "pyb install_dependencies analyze publish --debug"
+script: "pyb install_dependencies analyze publish --verbose"

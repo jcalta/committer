@@ -28,6 +28,7 @@ use_plugin('filter_resources')
 
 use_plugin('python.coverage')
 use_plugin('python.distutils')
+use_plugin('python.flake8')
 use_plugin('python.integrationtest')
 use_plugin('python.install_dependencies')
 use_plugin('python.pylint')
@@ -57,6 +58,10 @@ def set_properties (project):
     project.include_file('committer', 'LICENSE')
 
     project.get_property('filter_resources_glob').append('**/committer/__init__.py')
+
+    project.set_property("flake8_verbose_output", True)
+    project.set_property("flake8_break_build", True)
+    project.set_property("flake8_ignore", "E211,E302,E303,E501,W291,W292,W293,W391,W801")
 
     project.get_property('distutils_commands').append('bdist_egg')
     project.set_property("distutils_classifiers", [

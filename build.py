@@ -48,6 +48,7 @@ def set_properties (project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
     project.build_depends_on('mockito')
+    project.build_depends_on('flake8')
 
     project.set_property('coverage_break_build', True)
     project.set_property('pylint_options', ['--rcfile=pylintrc'])

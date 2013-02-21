@@ -19,7 +19,7 @@
     https://github.com/pybuilder/pybuilder
 """
 
-from pythonbuilder.core import Author, init, use_plugin
+from pybuilder.core import Author, init, use_plugin
 
 use_plugin('python.core')
 

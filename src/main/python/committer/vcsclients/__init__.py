@@ -22,11 +22,11 @@ __author__ = 'Michael Gruber'
 
 from subprocess import CalledProcessError, call, check_call
 
+
 class AbstractVcsClient(object):
     """
         VCS Clients need to implement this class and override commit, detect, is_executable, status, and update.
     """
-    
     def __init__(self, name, command):
         """
             Asserts that the arguments name and command are set and will set the corresponding private properties.
@@ -36,17 +36,17 @@ class AbstractVcsClient(object):
 
         if command is None:
             raise Exception('Missing argument "command" when creating {0} vcs client'.format(name))
-    
+
         self._command = command
         self._name = name
-    
+
     @property
     def command(self):
         """
             name of command line client.
         """
         return self._command
-    
+
     @property
     def name(self):
         """
@@ -57,20 +57,20 @@ class AbstractVcsClient(object):
     def check_if_is_executable(self, command, *arguments):
         """
             Executes the given command with the given arguments.
-            
+
             @return: True if the given command is executable with the given arguments,
                      False otherwise. 
         """
         try:
             command_with_arguments = [command] + list(arguments)
             check_call(command_with_arguments)
-    
+
         except CalledProcessError:
             return False
-    
+
         except OSError:
             return False
-    
+
         return True
 
     def execute_command(self, command, *arguments):
@@ -79,8 +79,8 @@ class AbstractVcsClient(object):
         """
         command_with_arguments = [command] + list(arguments)
         call(command_with_arguments)
-    
-    
+
+
     def is_executable(self):
         """
             Override this method with a check if the vcs command line client is executable.
@@ -89,7 +89,8 @@ class AbstractVcsClient(object):
                      False otherwise.
         """
         raise NotImplementedError()
-    
+
+
     def detect(self):
         """
             Override this method with a check if the current directory represents a working directory of this client.
@@ -98,19 +99,22 @@ class AbstractVcsClient(object):
                      False otherwise.
         """
         raise NotImplementedError()
-    
+
+
     def update(self):
         """
             Override this method with a update function.
         """
         raise NotImplementedError()
-    
+
+
     def status(self):
         """
             Override this method with a function which shows changes in current working directory.
         """
         raise NotImplementedError()
-    
+
+
     def commit(self, message):
         """
             Override this method with a function which commits all files.

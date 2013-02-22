@@ -21,6 +21,7 @@ __author__ = 'Michael Gruber'
 
 import committer
 
+
 class CommitterError(Exception):
     """
         to be raised when an error occurred, which should stop the default program flow.
@@ -47,6 +48,7 @@ class NoRepositoryDetectedError(CommitterError):
     def __init__(self):
         message = 'No repository detected.'
         super(NoRepositoryDetectedError, self).__init__(message, 100)
+
 
 class WrongUsageError(CommitterError):
     """

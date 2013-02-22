@@ -35,6 +35,7 @@ usage:
     up               updates the current directory
 """
 
+
 class ScriptCommand(object):
     """
         Decorator for functions which are called from scripts.
@@ -67,7 +68,7 @@ class ScriptCommand(object):
         if len(arguments) > 1:
             self._handle_version_argument(arguments)
             self._handle_help_argument(arguments)
-        
+
         try:
             self.function(arguments)
             return exit(0)

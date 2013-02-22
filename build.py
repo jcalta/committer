@@ -58,12 +58,12 @@ def set_properties (project):
 
     project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 
-    project.set_property("flake8_verbose_output", True)
-    project.set_property("flake8_break_build", True)
-    project.set_property("flake8_ignore", "E501,W801")
+    project.set_property('flake8_verbose_output', True)
+    project.set_property('flake8_break_build', True)
+    project.set_property('flake8_ignore', 'E501,W801')
 
     project.get_property('distutils_commands').append('bdist_egg')
-    project.set_property("distutils_classifiers", [
+    project.set_property('distutils_classifiers', [
           'Development Status :: 3 - Alpha',
           'Environment :: Console',
           'Intended Audience :: Developers',

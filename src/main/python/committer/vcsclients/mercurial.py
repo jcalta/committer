@@ -75,4 +75,3 @@ class MercurialClient(AbstractVcsClient):
             Executes hg using the given arguments.
         """
         self.execute_command(self.command, *arguments)
-

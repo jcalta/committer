@@ -28,51 +28,45 @@ class SubversionClient(AbstractVcsClient):
     """
         Subversion vcs client.
     """
-    
     def __init__(self):
         super(SubversionClient, self).__init__(name='Subversion', command='svn')
-    
+
     def commit(self, message):
         """
             Commits all files by calling: svn commit -m "message"
         """
         self._svn('commit', '-m', message)
-    
-    
+
     def detect(self):
         """
             Checks if the current directory represents a subversion repository.
-            
+
             @return: True if the ".svn" directory exists,
                      False otherwise.
         """
         return path.isdir('.svn')
-    
-    
+
     def is_executable(self):
         """
             Checks if svn client is executable.
-            
+
             @return: True if "svn --version --quiet" is executable,
                      False otherwise. 
         """
         return self.check_if_is_executable(self.command, '--version', '--quiet')
-    
-    
+
     def status(self):
         """
             Shows changes in the current directory using "svn status".
         """
         self._svn('status')
-    
-    
+
     def update(self):
         """
             Updates files by executing "svn pull" and "svn update".
         """
         self._svn('update')
-    
-    
+
     def _svn(self, *arguments):
         """
             Executes svn using the given arguments.

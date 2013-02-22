@@ -31,7 +31,7 @@ class MercurialClient(AbstractVcsClient):
 
     def __init__(self):
         super(MercurialClient, self).__init__(name='Mercurial', command='hg')
-    
+
     def commit(self, message):
         """
             Commits all files in the current directory by calling: 
@@ -40,41 +40,36 @@ class MercurialClient(AbstractVcsClient):
         """
         self._hg('commit', '-m', message)
         self._hg('push')
-    
-    
+
     def detect(self):
         """
             Checks if the current directory represents a mercurial repository.
-            
+
             @return: True if the ".hg" directory exists,
                      False otherwise.
         """
         return path.isdir('.hg')
-    
-    
+
     def is_executable(self):
         """
             @return: True if "hg --version --quiet" is executable,
                      False otherwise. 
         """
         return self.check_if_is_executable(self.command, '--version', '--quiet')
-    
-    
+
     def status(self):
         """
             Shows changes in the current directory using "hg status".
         """
         self._hg('status')
-    
-    
+
     def update(self):
         """
             Updates files by calling "hg pull" and "hg update".
         """
         self._hg('pull')
         self._hg('update')
-    
-    
+
     def _hg(self, *arguments):
         """
             Executes hg using the given arguments.

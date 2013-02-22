@@ -28,7 +28,7 @@ class GitClient(AbstractVcsClient):
     """
         Git dvcs client.
     """
-    
+
     def __init__(self):
         super(GitClient, self).__init__(name='Git', command='git')
 
@@ -39,42 +39,37 @@ class GitClient(AbstractVcsClient):
         """
         self._git('commit', '-a', '-m', message)
         self._git('push')
-    
-    
+
     def detect(self):
         """
             Checks if the current directory represents a git repository.
-            
+
             @return: True if the ".git" directory exists,
                      False otherwise.
         """
         return path.isdir('.git')
-    
-    
+
     def is_executable(self):
         """
             Checks if the git command line client is executable.
-             
+
             @return: True if "git --version" is executable,
                      False otherwise. 
         """
         return self.check_if_is_executable(self.command, '--version')
-    
-    
+
     def status(self):
         """
             Shows changes in current directory using "git status -sb".
         """
         self._git('status', '-sb')
-    
-    
+
     def update(self):
         """
             Updates files by executing "git pull".
         """
         self._git('pull')
-    
-    
+
     def _git(self, *arguments):
         """
             Executes git using the given arguments.

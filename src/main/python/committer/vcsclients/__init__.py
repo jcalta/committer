@@ -80,7 +80,6 @@ class AbstractVcsClient(object):
         command_with_arguments = [command] + list(arguments)
         call(command_with_arguments)
 
-
     def is_executable(self):
         """
             Override this method with a check if the vcs command line client is executable.
@@ -89,7 +88,6 @@ class AbstractVcsClient(object):
                      False otherwise.
         """
         raise NotImplementedError()
-
 
     def detect(self):
         """
@@ -100,20 +98,17 @@ class AbstractVcsClient(object):
         """
         raise NotImplementedError()
 
-
     def update(self):
         """
             Override this method with a update function.
         """
         raise NotImplementedError()
 
-
     def status(self):
         """
             Override this method with a function which shows changes in current working directory.
         """
         raise NotImplementedError()
-
 
     def commit(self, message):
         """

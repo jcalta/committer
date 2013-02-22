@@ -34,7 +34,7 @@ class MercurialClient(AbstractVcsClient):
 
     def commit(self, message):
         """
-            Commits all files in the current directory by calling: 
+            Commits all files in the current directory by calling:
                 hg commit -m "message"
                 hg push
         """
@@ -53,7 +53,7 @@ class MercurialClient(AbstractVcsClient):
     def is_executable(self):
         """
             @return: True if "hg --version --quiet" is executable,
-                     False otherwise. 
+                     False otherwise.
         """
         return self.check_if_is_executable(self.command, '--version', '--quiet')
 

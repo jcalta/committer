@@ -59,7 +59,7 @@ class AbstractVcsClient(object):
             Executes the given command with the given arguments.
 
             @return: True if the given command is executable with the given arguments,
-                     False otherwise. 
+                     False otherwise.
         """
         try:
             command_with_arguments = [command] + list(arguments)

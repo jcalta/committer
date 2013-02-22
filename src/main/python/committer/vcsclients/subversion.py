@@ -51,7 +51,7 @@ class SubversionClient(AbstractVcsClient):
             Checks if svn client is executable.
 
             @return: True if "svn --version --quiet" is executable,
-                     False otherwise. 
+                     False otherwise.
         """
         return self.check_if_is_executable(self.command, '--version', '--quiet')
 

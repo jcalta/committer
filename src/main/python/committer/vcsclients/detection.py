@@ -29,43 +29,43 @@ from committer.vcsclients.subversion import SubversionClient
 def detect_vcs_client():
     """
         runs vcs client detection on the current directory.
-        
+
         @raise CommitterException: when no or more than one vcs client detected.
-        @return: the vcs client for the current working directory. 
+        @return: the vcs client for the current working directory.
     """
     detected_vcs_clients = _detect_all_vcs_clients()
-    
+
     if not detected_vcs_clients:
         raise errors.NoRepositoryDetectedError()
-    
+
     if len(detected_vcs_clients) > 1:
         raise errors.TooManyRepositoriesError(detected_vcs_clients)
-    
+
     vcs_client = detected_vcs_clients[0]
     return _ensure_executable(vcs_client)
 
 
 def _ensure_executable(vcs_client):
     """
-        ensures the given vcs client is executable. 
-        
+        ensures the given vcs client is executable.
+
         @raise CommiterException: when the command line client is not executable.
         @return: the given vcs client
     """
     if not vcs_client.is_executable():
         raise errors.NotExecutableError(vcs_client)
-    
+
     return vcs_client
 
 
 def _detect_all_vcs_clients():
     """
-        runs detection on all available vcs clients. 
-        
+        runs detection on all available vcs clients.
+
         @return: list of vcs clients
     """
     vcs_clients = _list_available_vcs_clients()
-    
+
     return [vcs_client for vcs_client in vcs_clients if vcs_client.detect()]
 
 

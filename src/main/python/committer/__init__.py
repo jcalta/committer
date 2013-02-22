@@ -53,7 +53,7 @@ class ScriptCommand(object):
 
     def _handle_help_argument(self, arguments):
         """
-            Shows the usage information and exits the program, if arguments contains 
+            Shows the usage information and exits the program, if arguments contains
             help, --help, or -h.
         """
         for help_option in ['help', '--help', '-h']:

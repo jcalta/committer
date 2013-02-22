@@ -54,7 +54,7 @@ class GitClient(AbstractVcsClient):
             Checks if the git command line client is executable.
 
             @return: True if "git --version" is executable,
-                     False otherwise. 
+                     False otherwise.
         """
         return self.check_if_is_executable(self.command, '--version')
 

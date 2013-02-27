@@ -20,7 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
-from subprocess import CalledProcessError, call, check_call
+from subprocess import CalledProcessError, Popen, check_call
 
 
 class AbstractVcsClient(object):
@@ -78,7 +78,7 @@ class AbstractVcsClient(object):
             Executes command using the given arguments.
         """
         command_with_arguments = [command] + list(arguments)
-        call(command_with_arguments)
+        Popen(command_with_arguments).wait()
 
     def is_executable(self):
         """

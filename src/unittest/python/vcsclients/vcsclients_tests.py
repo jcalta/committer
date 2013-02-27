@@ -1,7 +1,7 @@
 import unittest
 import subprocess
 
-from mockito import mock, when, verify, unstub, any as any_value
+from mockito import mock, when, verify, unstub, never, any as any_value
 
 import committer
 
@@ -29,20 +29,26 @@ class AbstractVcsClientTests (unittest.TestCase):
 
     def test_should_call_command_in_subprocess(self):
         process_mock = mock()
-        when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
+        when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command')
 
-        verify(committer.vcsclients).Popen(['command'])
+        verify(committer.vcsclients).Popen(['command'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_call_command_using_given_arguments(self):
         process_mock = mock()
-        when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
+        when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
-        verify(committer.vcsclients).Popen(['command', '1', '2', '3'])
+        verify(committer.vcsclients).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_return_stdout_and_stderr_when_executing_command(self):
@@ -50,12 +56,66 @@ class AbstractVcsClientTests (unittest.TestCase):
         stderr = 'stderr'
         process_mock = mock()
         when(process_mock).communicate().thenReturn((stdout, stderr))
-        when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
 
         actual_stdout, actual_stderr = self.vcs_client.execute_command('command', '1', '2', '3')
 
         self.assertEqual(stdout, actual_stdout)
         self.assertEqual(stderr, actual_stderr)
+
+    def test_should_print_stdout_when_stdout_is_not_empty_string(self):
+        stdout = 'stdout'
+        stderr = 'stderr'
+        process_mock = mock()
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+
+        self.vcs_client.execute_command('command', '1', '2', '3')
+
+        verify(committer.vcsclients).print_text(stdout)
+
+    def test_should_not_print_stdout_when_stdout_is_empty_string(self):
+        stdout = ''
+        stderr = 'stderr'
+        process_mock = mock()
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+
+        self.vcs_client.execute_command('command', '1', '2', '3')
+
+        verify(committer.vcsclients, never).print_text(stdout)
+
+    def test_should_print_stderr_when_stderr_is_not_empty_string(self):
+        stdout = 'stdout'
+        stderr = 'stderr'
+        process_mock = mock()
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+
+        self.vcs_client.execute_command('command', '1', '2', '3')
+
+        verify(committer.vcsclients).print_error(stderr)
+
+    def test_should_not_print_stderr_when_stderr_is_empty_string(self):
+        stdout = 'stdout'
+        stderr = ''
+        process_mock = mock()
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients).print_text(any_value).thenReturn(None)
+        when(committer.vcsclients).print_error(any_value).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+
+        self.vcs_client.execute_command('command', '1', '2', '3')
+
+        verify(committer.vcsclients, never).print_error(stderr)
 
     def test_should_return_true_when_command_is_executable (self):
         when(committer.vcsclients).check_call(any_value()).thenReturn(None)

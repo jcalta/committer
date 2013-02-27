@@ -20,7 +20,16 @@
 
 __author__ = 'Michael Gruber'
 
-from subprocess import CalledProcessError, Popen, check_call
+import sys
+from subprocess import PIPE, CalledProcessError, Popen, check_call
+
+
+def print_text(text):
+    sys.stdout.write(text)
+
+
+def print_error(error_text):
+    sys.stderr.write(error_text)
 
 
 class AbstractVcsClient(object):
@@ -78,8 +87,16 @@ class AbstractVcsClient(object):
             Executes command using the given arguments.
         """
         command_with_arguments = [command] + list(arguments)
-        process = Popen(command_with_arguments)
-        return process.communicate()
+        process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = process.communicate()
+
+        if stdout != '':
+            print_text(stdout)
+
+        if stderr != '':
+            print_error(stderr)
+
+        return stdout, stderr
 
     def is_executable(self):
         """

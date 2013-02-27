@@ -78,7 +78,8 @@ class AbstractVcsClient(object):
             Executes command using the given arguments.
         """
         command_with_arguments = [command] + list(arguments)
-        Popen(command_with_arguments).communicate()
+        process = Popen(command_with_arguments)
+        return process.communicate()
 
     def is_executable(self):
         """

@@ -27,7 +27,7 @@ class AbstractVcsClientTests (unittest.TestCase):
     def test_should_have_property_command(self):
         self.assertEqual('command', self.vcs_client.command)
 
-    def test_should_call_command_in_subprocess (self):
+    def test_should_call_command_in_subprocess(self):
         process_mock = mock()
         when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
 
@@ -36,7 +36,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         verify(committer.vcsclients).Popen(['command'])
         verify(process_mock).communicate()
 
-    def test_should_call_command_using_given_arguments (self):
+    def test_should_call_command_using_given_arguments(self):
         process_mock = mock()
         when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
 
@@ -44,6 +44,18 @@ class AbstractVcsClientTests (unittest.TestCase):
 
         verify(committer.vcsclients).Popen(['command', '1', '2', '3'])
         verify(process_mock).communicate()
+
+    def test_should_return_stdout_and_stderr_when_executing_command(self):
+        stdout = 'stdout'
+        stderr = 'stderr'
+        process_mock = mock()
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients).Popen(any_value()).thenReturn(process_mock)
+
+        actual_stdout, actual_stderr = self.vcs_client.execute_command('command', '1', '2', '3')
+
+        self.assertEqual(stdout, actual_stdout)
+        self.assertEqual(stderr, actual_stderr)
 
     def test_should_return_true_when_command_is_executable (self):
         when(committer.vcsclients).check_call(any_value()).thenReturn(None)

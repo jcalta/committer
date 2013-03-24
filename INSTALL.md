@@ -2,7 +2,7 @@
 
 ### Using pip 
 
-Since committer is written in python it is available through [pypi](http://pypi.python.org/pypi/committer/)
+Since committer is written in python it is available on [pypi](http://pypi.python.org/pypi/committer/)
 
 ```bash
 sudo pip install committer

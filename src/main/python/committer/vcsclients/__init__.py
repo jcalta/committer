@@ -98,7 +98,7 @@ class AbstractVcsClient(object):
 
         returncode = process.returncode
 
-        return stdout, stderr, returncode
+        return {'stdout': stdout, 'stderr': stderr, 'returncode': returncode}
 
     def is_executable(self):
         """

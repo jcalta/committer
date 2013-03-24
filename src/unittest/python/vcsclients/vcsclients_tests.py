@@ -62,11 +62,11 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
         when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
 
-        actual_stdout, actual_stderr, actual_returncode = self.vcs_client.execute_command('command', '1', '2', '3')
+        actual = self.vcs_client.execute_command('command', '1', '2', '3')
 
-        self.assertEqual(stdout, actual_stdout)
-        self.assertEqual(stderr, actual_stderr)
-        self.assertEqual(returncode, actual_returncode)
+        self.assertEqual(stdout, actual['stdout'])
+        self.assertEqual(stderr, actual['stderr'])
+        self.assertEqual(returncode, actual['returncode'])
 
     def test_should_print_stdout_when_stdout_is_not_empty_string(self):
         stdout = 'stdout'

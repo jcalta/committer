@@ -68,7 +68,7 @@ class GitClient(AbstractVcsClient):
         """
             Updates files by executing "git pull".
         """
-        self._git('pull')
+        self.update_result = self._git('pull')
 
     def _git(self, *arguments):
         """

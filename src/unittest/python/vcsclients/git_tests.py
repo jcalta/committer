@@ -34,6 +34,15 @@ class GitClientTests (unittest.TestCase):
 
         verify(self.git_client)._git('pull')
 
+    def test_should_save_result(self):
+        update_result = {'stdout': 'abc', 'stderr': 'err', 'returncode': 123}
+        when(self.git_client)._git(any_value()).thenReturn(update_result)
+
+        self.git_client.update()
+
+        verify(self.git_client)._git('pull')
+        self.assertEqual(update_result, self.git_client.update_result)
+
     def test_should_call_status(self):
         when(self.git_client)._git(any_value()).thenReturn(None)
 

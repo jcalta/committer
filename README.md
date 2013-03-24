@@ -48,8 +48,6 @@ Committing in a high frequency has advantages:
 
 ## How to Contribute
 
-Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
-
 [Read how to build committer yourself](https://github.com/aelgru/committer/blob/master/HOWTO.md)
 
 ## Alternatives

@@ -41,7 +41,7 @@ class GitClientTests (unittest.TestCase):
         self.git_client.update()
 
         verify(self.git_client)._git('pull')
-        self.assertEqual(update_result, self.git_client.update_result)
+        self.assertEqual(update_result, self.git_client._update_result)
 
     def test_should_call_status(self):
         when(self.git_client)._git(any_value()).thenReturn(None)

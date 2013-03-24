@@ -104,8 +104,10 @@ class AbstractVcsClient(object):
         """
             Override this method with a check if the vcs command line client is executable.
 
-            @return: True if client is executable,
-                     False otherwise.
+            should return: True if client is executable,
+                           False otherwise.
+
+            @return: raises NotImplementedError
         """
         raise NotImplementedError()
 
@@ -113,10 +115,24 @@ class AbstractVcsClient(object):
         """
             Override this method with a check if the current directory represents a working directory of this client.
 
-            @return: True if the directory is a working directory handled by this client,
-                     False otherwise.
+            should return: True if the directory is a working directory handled by this client,
+                           False otherwise.
+
+            @return: raises NotImplementedError
         """
         raise NotImplementedError()
+
+    @property
+    def everything_was_up_to_date(self):
+        """
+            Override this property with a check if the last update found changes.
+
+            should return: True if no updates have been found,
+                           False otherwise.
+
+            @return: True
+        """
+        return True
 
     def update(self):
         """

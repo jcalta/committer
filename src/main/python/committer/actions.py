@@ -41,8 +41,9 @@ def commit(arguments):
     vcs_client = detect_vcs_client()
     vcs_client.update()
 
-    message = arguments[1]
-    vcs_client.commit(message)
+    if vcs_client.everything_was_up_to_date:
+        message = arguments[1]
+        vcs_client.commit(message)
 
 
 def status(arguments):

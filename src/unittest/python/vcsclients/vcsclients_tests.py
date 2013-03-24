@@ -155,6 +155,9 @@ class AbstractVcsClientTests (unittest.TestCase):
     def test_should_raise_not_implemented_error_when_trying_to_detect(self):
         self.assertRaises(NotImplementedError, self.vcs_client.detect)
 
+    def test_should_return_true_by_default(self):
+        self.assertTrue(self.vcs_client.everything_was_up_to_date)
+
     def test_should_raise_not_implemented_error_when_trying_to_update(self):
         self.assertRaises(NotImplementedError, self.vcs_client.update)
 

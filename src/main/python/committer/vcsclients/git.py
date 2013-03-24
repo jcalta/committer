@@ -49,6 +49,16 @@ class GitClient(AbstractVcsClient):
         """
         return path.isdir('.git')
 
+    def everything_was_up_to_date(self):
+        """
+            Checks if the last update found changes or not.
+
+            @return: True if no changes have been found,
+                     False otherwise.
+        """
+        stdout = self._update_result['stdout']
+        return stdout == 'Already up-to-date.'
+
     def is_executable(self):
         """
             Checks if the git command line client is executable.

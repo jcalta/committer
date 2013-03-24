@@ -38,8 +38,9 @@ class CommitTests (unittest_support.TestCase):
 
         self.assertEqual(None, mock_vcs_client.commit.call_args)
 
+    @patch('committer.actions.print_error')
     @patch('committer.actions.detect_vcs_client')
-    def test_should_commit_if_no_changes_found(self, mock_discover):
+    def test_should_commit_if_no_changes_found(self, mock_discover, mock_print_error):
         mock_vcs_client = self.create_mock_vcs_client()
         mock_vcs_client.everything_was_up_to_date = True
         mock_discover.return_value = mock_vcs_client
@@ -47,6 +48,17 @@ class CommitTests (unittest_support.TestCase):
         commit(['/usr/local/bin/commit', 'This is the message'])
 
         self.assertEqual(call('This is the message'), mock_vcs_client.commit.call_args)
+
+    @patch('committer.actions.print_error')
+    @patch('committer.actions.detect_vcs_client')
+    def test_should_print_error_message_if_found_changes(self, mock_discover, mock_print_error):
+        mock_vcs_client = self.create_mock_vcs_client()
+        mock_vcs_client.everything_was_up_to_date = False
+        mock_discover.return_value = mock_vcs_client
+
+        commit(['/usr/local/bin/commit', 'This is the message'])
+
+        self.assertEqual(call('Commit interrupted: "update" found changes.\n'), mock_print_error.call_args)
 
     @patch('committer.actions.detect_vcs_client')
     def test_should_use_first_argument_as_commit_message_when_committing(self, mock_discover):

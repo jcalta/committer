@@ -27,6 +27,7 @@ __author__ = 'Michael Gruber'
 
 from committer.errors import WrongUsageError
 from committer.vcsclients.detection import detect_vcs_client
+from committer.terminal import print_error
 
 
 def commit(arguments):
@@ -44,6 +45,8 @@ def commit(arguments):
     if vcs_client.everything_was_up_to_date:
         message = arguments[1]
         vcs_client.commit(message)
+    else:
+        print_error('Commit interrupted: "update" found changes.\n')
 
 
 def status(arguments):

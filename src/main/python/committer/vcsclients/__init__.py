@@ -20,16 +20,9 @@
 
 __author__ = 'Michael Gruber'
 
-import sys
 from subprocess import PIPE, CalledProcessError, Popen, check_call
 
-
-def print_text(text):
-    sys.stdout.write(text)
-
-
-def print_error(error_text):
-    sys.stderr.write(error_text)
+from committer.terminal import print_error, print_text
 
 
 class AbstractVcsClient(object):

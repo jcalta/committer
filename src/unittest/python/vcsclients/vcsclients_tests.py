@@ -51,19 +51,22 @@ class AbstractVcsClientTests (unittest.TestCase):
         verify(committer.vcsclients).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         verify(process_mock).communicate()
 
-    def test_should_return_stdout_and_stderr_when_executing_command(self):
+    def test_should_return_stdout_and_stderr_and_returncode_when_executing_command(self):
         stdout = 'stdout'
         stderr = 'stderr'
+        returncode = 123
         process_mock = mock()
+        process_mock.returncode = returncode
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
         when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
 
-        actual_stdout, actual_stderr = self.vcs_client.execute_command('command', '1', '2', '3')
+        actual_stdout, actual_stderr, actual_returncode = self.vcs_client.execute_command('command', '1', '2', '3')
 
         self.assertEqual(stdout, actual_stdout)
         self.assertEqual(stderr, actual_stderr)
+        self.assertEqual(returncode, actual_returncode)
 
     def test_should_print_stdout_when_stdout_is_not_empty_string(self):
         stdout = 'stdout'

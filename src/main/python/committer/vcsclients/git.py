@@ -49,6 +49,7 @@ class GitClient(AbstractVcsClient):
         """
         return path.isdir('.git')
 
+    @property
     def everything_was_up_to_date(self):
         """
             Checks if the last update found changes or not.
@@ -57,7 +58,7 @@ class GitClient(AbstractVcsClient):
                      False otherwise.
         """
         stdout = self._update_result['stdout']
-        return stdout == 'Already up-to-date.'
+        return stdout == 'Already up-to-date.\n'
 
     def is_executable(self):
         """

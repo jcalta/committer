@@ -1,8 +1,6 @@
 ## How to Build committer Yourself
 
-### Fork the Git repository
-
-Simply [fork](https://github.com/aelgru/committer/fork_select) committer.
+[Fork the Git repository](https://github.com/aelgru/committer/fork_select) and clone it.
 
 ### Create a [virtual environment](http://www.virtualenv.org/)
 

@@ -58,7 +58,7 @@ class CommitTests (unittest_support.TestCase):
 
         commit(['/usr/local/bin/commit', 'This is the message'])
 
-        self.assertEqual(call('Commit interrupted: "update" found changes.\n'), mock_print_error.call_args)
+        self.assertEqual(call('Commit interrupted: unexpected "update" result or "update" found changes.\n'), mock_print_error.call_args)
 
     @patch('committer.actions.detect_vcs_client')
     def test_should_use_first_argument_as_commit_message_when_committing(self, mock_discover):

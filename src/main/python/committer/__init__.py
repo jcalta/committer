@@ -21,12 +21,12 @@
 __author__ = 'Michael Gruber'
 __version__ = '${version}'
 
-from sys import exit, stdout, stderr
+from sys import exit
 from committer import errors
 from committer.actions import commit
 from committer.actions import status
 from committer.actions import update
-
+from committer.terminal import print_error, print_text
 
 USAGE_INFORMATION = """
 usage:
@@ -48,7 +48,7 @@ class ScriptCommand(object):
             Shows the version and exits the program, if arguments contains --version.
         """
         if '--version' in arguments:
-            stdout.write('{0} version {1}\n'.format(__name__, __version__))
+            print_text('{0} version {1}\n'.format(__name__, __version__))
             return exit(0)
 
     def _handle_help_argument(self, arguments):
@@ -58,7 +58,7 @@ class ScriptCommand(object):
         """
         for help_option in ['help', '--help', '-h']:
             if help_option in arguments:
-                stdout.write(USAGE_INFORMATION)
+                print_text(USAGE_INFORMATION)
                 return exit(0)
 
     def __call__(self, arguments):
@@ -74,7 +74,7 @@ class ScriptCommand(object):
             return exit(0)
 
         except errors.CommitterError as committer_exception:
-            stderr.write(committer_exception.message)
+            print_error(committer_exception.message)
             return exit(committer_exception.error_code)
 
 

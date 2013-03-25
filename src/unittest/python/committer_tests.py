@@ -12,97 +12,97 @@ usage:
 """
 
 class ScriptCommandWrapperTests (unittest.TestCase):
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_stdout):
+    def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--version'])
 
-        self.assertEqual(call('committer version ${version}\n'), mock_stdout.write.call_args)
+        self.assertEqual(call('committer version ${version}\n'), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_directly_if_one_argument_is_version (self, mock_exit, mock_stdout):
+    def test_should_exit_directly_if_one_argument_is_version (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '--version'])
 
-        self.assertEqual(call('committer version ${version}\n'), mock_stdout.write.call_args)
+        self.assertEqual(call('committer version ${version}\n'), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_first_argument_is_help (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_first_argument_is_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'help'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_one_argument_is_help (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_one_argument_is_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', 'help'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_first_argument_is_dashdash_help (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_first_argument_is_dashdash_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--help'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_one_argument_is_dashdash_help (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_one_argument_is_dashdash_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '--help'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_first_argument_is_dash_h (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_first_argument_is_dash_h (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '-h'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_exit_and_print_usage_if_one_argument_is_dash_h (self, mock_exit, mock_stdout):
+    def test_should_exit_and_print_usage_if_one_argument_is_dash_h (self, mock_exit, mock_print_text):
         mock_command = Mock()
         mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '-h'])
 
-        self.assertEqual(call(USAGE_INFORMATION), mock_stdout.write.call_args)
+        self.assertEqual(call(USAGE_INFORMATION), mock_print_text.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
+    @patch('committer.print_text')
     @patch('committer.exit')
-    def test_should_call_perform_on_given_command (self, mock_exit, mock_stdout):
+    def test_should_call_perform_on_given_command (self, mock_exit, mock_print_text):
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']
 
@@ -111,14 +111,14 @@ class ScriptCommandWrapperTests (unittest.TestCase):
         self.assertEqual(call(arguments), mock_command.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
-    @patch('committer.stdout')
-    @patch('committer.stderr')
+    @patch('committer.print_text')
+    @patch('committer.print_error')
     @patch('committer.exit')
-    def test_should_return_with_error_message_and_code (self, mock_exit, mock_stderr, mock_stdout):
+    def test_should_return_with_error_message_and_code (self, mock_exit, mock_print_error, mock_print_text):
         mock_command = Mock()
         mock_command.side_effect = errors.CommitterError('Error message.', 123)
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit'])
 
-        self.assertEqual(call('Error message.\n'), mock_stderr.write.call_args)
+        self.assertEqual(call('Error message.\n'), mock_print_error.call_args)
         self.assertEqual(call(123), mock_exit.call_args)

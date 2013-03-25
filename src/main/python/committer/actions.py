@@ -46,7 +46,7 @@ def commit(arguments):
         message = arguments[1]
         vcs_client.commit(message)
     else:
-        print_error('Commit interrupted: "update" found changes.\n')
+        print_error('Commit interrupted: unexpected "update" result or "update" found changes.\n')
 
 
 def status(arguments):

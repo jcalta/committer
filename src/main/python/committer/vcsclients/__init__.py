@@ -80,7 +80,7 @@ class AbstractVcsClient(object):
             Executes command using the given arguments.
         """
         command_with_arguments = [command] + list(arguments)
-        process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE)
+        process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
         stdout, stderr = process.communicate()
 
         if stdout != '':

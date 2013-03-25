@@ -32,11 +32,11 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command')
 
-        verify(committer.vcsclients).Popen(['command'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        verify(committer.vcsclients).Popen(['command'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_call_command_using_given_arguments(self):
@@ -44,11 +44,11 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
-        verify(committer.vcsclients).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        verify(committer.vcsclients).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_return_stdout_and_stderr_and_returncode_when_executing_command(self):
@@ -60,7 +60,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         actual = self.vcs_client.execute_command('command', '1', '2', '3')
 
@@ -75,7 +75,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
@@ -88,7 +88,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
@@ -101,7 +101,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
@@ -114,7 +114,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients).print_text(any_value).thenReturn(None)
         when(committer.vcsclients).print_error(any_value).thenReturn(None)
-        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 

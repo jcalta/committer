@@ -28,8 +28,9 @@ class CommitTests (unittest_support.TestCase):
 
         self.assertEqual(call(), mock_vcs_client.update.call_args)
 
+    @patch('committer.actions.print_error')
     @patch('committer.actions.detect_vcs_client')
-    def test_should_not_commit_if_update_found_changes(self, mock_discover):
+    def test_should_not_commit_if_update_found_changes(self, mock_discover, mock_print_error):
         mock_vcs_client = self.create_mock_vcs_client()
         mock_vcs_client.everything_was_up_to_date = False
         mock_discover.return_value = mock_vcs_client

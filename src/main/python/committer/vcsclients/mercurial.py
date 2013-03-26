@@ -50,6 +50,15 @@ class MercurialClient(AbstractVcsClient):
         """
         return path.isdir('.hg')
 
+    @property
+    def everything_was_up_to_date(self):
+        """
+            @return: True if no updates found,
+                     False otherwise.
+        """
+        return self._update_result['stdout'] == """resolving manifests
+0 files updated, 0 files merged, 0 files removed, 0 files unresolved\n"""
+
     def is_executable(self):
         """
             @return: True if "hg --version --quiet" is executable,
@@ -68,7 +77,7 @@ class MercurialClient(AbstractVcsClient):
             Updates files by calling "hg pull" and "hg update".
         """
         self._hg('pull')
-        self._hg('update')
+        self._update_result = self._hg('update')
 
     def _hg(self, *arguments):
         """

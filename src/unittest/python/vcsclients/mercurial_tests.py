@@ -36,6 +36,14 @@ class MercurialClientTests (unittest.TestCase):
         verify(self.mercurial_client)._hg('pull')
         verify(self.mercurial_client)._hg('update')
         
+    def test_should_store_update_result (self):
+        when(self.mercurial_client)._hg(any_value()).thenReturn(None)
+        when(self.mercurial_client)._hg('update').thenReturn('update result')
+        
+        self.mercurial_client.update()
+
+        self.assertEqual('update result', self.mercurial_client._update_result)
+        
     def test_should_call_status (self):
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
@@ -76,3 +84,19 @@ class MercurialClientTests (unittest.TestCase):
         self.mercurial_client._hg('arg1', 'arg2', 'arg3')
         
         verify(self.mercurial_client).execute_command('hg', 'arg1', 'arg2', 'arg3')
+
+    def test_should_return_false_if_last_update_found_updates(self):
+        self.mercurial_client._update_result = {'stdout': 'Found updates ... blabla'}
+        
+        actual = self.mercurial_client.everything_was_up_to_date
+        
+        self.assertFalse(actual)
+        
+    def test_should_return_true_if_everything_is_up_to_date(self):
+        self.mercurial_client._update_result = {'stdout': """resolving manifests
+0 files updated, 0 files merged, 0 files removed, 0 files unresolved\n"""}
+
+        actual = self.mercurial_client.everything_was_up_to_date
+        
+        self.assertTrue(actual)
+

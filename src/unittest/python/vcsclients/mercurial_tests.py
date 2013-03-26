@@ -85,6 +85,13 @@ class MercurialClientTests (unittest.TestCase):
         
         verify(self.mercurial_client).execute_command('hg', 'arg1', 'arg2', 'arg3')
 
+    def test_should_return_execution_result (self):
+        when(self.mercurial_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+
+        actual_result = self.mercurial_client._hg('arg1', 'arg2', 'arg3')
+
+        self.assertEqual({'stdout': 'abc', 'stderr': 'err', 'returncode': 123}, actual_result)
+
     def test_should_return_false_if_last_update_found_updates(self):
         self.mercurial_client._update_result = {'stdout': 'Found updates ... blabla'}
         

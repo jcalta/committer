@@ -22,10 +22,9 @@ __author__ = 'Michael Gruber'
 __version__ = '${version}'
 
 from sys import exit
+
 from committer import errors
-from committer.actions import commit
-from committer.actions import status
-from committer.actions import update
+from committer.actions import commit, status, update
 from committer.terminal import print_error, print_text
 
 USAGE_INFORMATION = """

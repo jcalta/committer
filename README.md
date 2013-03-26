@@ -18,9 +18,8 @@ sudo pip install committer
 ci "This is the commit message."
 ```
 
-Updates the repository in the current working directory.
-Then commits all changes using the first argument as commit message.
-
+At first updates the repository in the current working directory.
+Only commits your changes when no changes have been found.
 
 ### Show all changes
 

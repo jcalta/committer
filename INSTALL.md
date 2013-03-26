@@ -1,14 +1,14 @@
 ## How to install committer
 
-### Using pip 
+Of course *committer* is available on [pypi](http://pypi.python.org/pypi/committer/).
 
-Since committer is written in python it is available on [pypi](http://pypi.python.org/pypi/committer/)
+### Install Using pip 
 
 ```bash
 sudo pip install committer
 ```
 
-### Using easy_install
+### Install Using easy_install
 ```
 sudo easy_install committer
 ```

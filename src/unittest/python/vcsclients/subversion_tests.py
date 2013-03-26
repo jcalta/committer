@@ -40,6 +40,13 @@ class SubversionClientTests (unittest.TestCase):
         
         verify(self.subversion_client)._svn('update')
         
+    def test_should_store_update_result (self):
+        when(self.subversion_client)._svn(any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+
+        self.subversion_client.update()
+        
+        self.assertEqual({'stdout': 'abc', 'stderr': 'err', 'returncode': 123}, self.subversion_client._update_result)
+        
     def test_return_false_if_dot_svn_directory_does_not_exist (self):
         when(committer.vcsclients.subversion.path).isdir(any_value()).thenReturn(False)
         
@@ -71,3 +78,24 @@ class SubversionClientTests (unittest.TestCase):
         self.subversion_client._svn('arg1', 'arg2', 'arg3')
         
         verify(self.subversion_client).execute_command('svn', 'arg1', 'arg2', 'arg3')
+
+    def test_should_return_execution_result (self):
+        when(self.subversion_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+        
+        actual_result = self.subversion_client._svn('arg1', 'arg2', 'arg3')
+        
+        self.assertEqual({'stdout': 'abc', 'stderr': 'err', 'returncode': 123}, actual_result)
+
+    def test_should_return_false_if_last_update_found_updates(self):
+        self.subversion_client._update_result = {'stdout': 'Found updates ... blabla'}
+        
+        actual = self.subversion_client.everything_was_up_to_date
+        
+        self.assertFalse(actual)
+        
+    def test_should_return_true_if_everything_is_up_to_date(self):
+        self.subversion_client._update_result = {'stdout': "At revision 333."}
+
+        actual = self.subversion_client.everything_was_up_to_date
+        
+        self.assertTrue(actual)

@@ -46,6 +46,14 @@ class SubversionClient(AbstractVcsClient):
         """
         return path.isdir('.svn')
 
+    @property
+    def everything_was_up_to_date(self):
+        """
+            @return: True if no updates found,
+                     False otherwise.
+        """
+        return self._update_result['stdout'].startswith("At revision ")
+
     def is_executable(self):
         """
             Checks if svn client is executable.
@@ -65,10 +73,12 @@ class SubversionClient(AbstractVcsClient):
         """
             Updates files by executing "svn pull" and "svn update".
         """
-        self._svn('update')
+        self._update_result = self._svn('update')
 
     def _svn(self, *arguments):
         """
             Executes svn using the given arguments.
+
+            @return: execution result
         """
-        self.execute_command(self.command, *arguments)
+        return self.execute_command(self.command, *arguments)

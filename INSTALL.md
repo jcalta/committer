@@ -1,6 +1,6 @@
 ## How to install committer
 
-Of course *committer* is available on [pypi](http://pypi.python.org/pypi/committer/).
+*committer* is available on [PyPI - the Python Package Index](http://pypi.python.org/pypi/committer/).
 
 ### Install Using pip 
 

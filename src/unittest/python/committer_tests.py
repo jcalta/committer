@@ -27,7 +27,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--version'])
 
@@ -38,7 +37,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_directly_if_one_argument_is_version (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '--version'])
 
@@ -49,7 +47,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_first_argument_is_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'help'])
 
@@ -60,7 +57,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_one_argument_is_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', 'help'])
 
@@ -71,7 +67,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_first_argument_is_dashdash_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--help'])
 
@@ -82,7 +77,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_one_argument_is_dashdash_help (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '--help'])
 
@@ -93,7 +87,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_first_argument_is_dash_h (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', 'hello world', '-h'])
 
@@ -104,7 +97,6 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.exit')
     def test_should_exit_and_print_usage_if_one_argument_is_dash_h (self, mock_exit, mock_print_text):
         mock_command = Mock()
-        mock_command.perform.side_effect = Exception('Perform should never be called.')
 
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '-h'])
 

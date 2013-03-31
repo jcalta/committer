@@ -76,6 +76,10 @@ class ScriptCommand(object):
             print_error(committer_exception.message)
             return exit(committer_exception.error_code)
 
+        except KeyboardInterrupt:
+            print_error('Interrupted by user.\n')
+            return exit(-1)
+
 
 @ScriptCommand
 def commit_changes(arguments):

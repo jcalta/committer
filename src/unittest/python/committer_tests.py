@@ -12,6 +12,17 @@ usage:
 """
 
 class ScriptCommandWrapperTests (unittest.TestCase):
+    @patch('committer.print_error')
+    @patch('committer.exit')
+    def test_should_exit_directly_if_interrupted_by_user (self, mock_exit, mock_print_error):
+        mock_command = Mock()
+        mock_command.side_effect = KeyboardInterrupt()
+
+        ScriptCommand(mock_command)(['/usr/local/bin/commit'])
+
+        self.assertEqual(call('Interrupted by user.\n'), mock_print_error.call_args)
+        self.assertEqual(call(-1), mock_exit.call_args)
+
     @patch('committer.print_text')
     @patch('committer.exit')
     def test_should_exit_directly_if_first_argument_is_version (self, mock_exit, mock_print_text):

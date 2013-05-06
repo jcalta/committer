@@ -1,4 +1,4 @@
-# committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
+# committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer) [![PyPi version](https://pypip.in/v/committer/badge.png)](https://crate.io/packages/committer/) [![PyPi downloads](https://pypip.in/d/committer/badge.png)](https://crate.io/packages/committer/) 
 
 Unified command line interface for *git*, *mercurial*, and *subversion*.
 

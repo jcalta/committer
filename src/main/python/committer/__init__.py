@@ -64,11 +64,7 @@ class ScriptCommand(object):
         """
             Returns a list which equals the given one, but removes the string '-m' from it.
         """
-        filtered_arguments = []
-        for argument in arguments:
-            if argument != '-m':
-                filtered_arguments.append(argument)
-        return filtered_arguments
+        return [argument for argument in arguments if argument != '-m']
 
     def __call__(self, arguments):
         """

@@ -1,6 +1,6 @@
 ## How to Build committer Yourself
 
-## Checkout the source code
+### Checkout the source code
 
 [Fork the Git repository](https://github.com/aelgru/committer/fork_select) and clone it.
 

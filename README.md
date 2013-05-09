@@ -1,6 +1,10 @@
-# committer [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer) [![PyPi version](https://pypip.in/v/committer/badge.png)](https://crate.io/packages/committer/) [![PyPi downloads](https://pypip.in/d/committer/badge.png)](https://crate.io/packages/committer/) 
+# committer
 
 Unified command line interface for *git*, *mercurial*, and *subversion*.
+
+[![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
+[![PyPi version](https://pypip.in/v/committer/badge.png)](https://crate.io/packages/committer/)
+[![PyPi downloads](https://pypip.in/d/committer/badge.png)](https://crate.io/packages/committer/) 
 
 ## How to Install
 
@@ -18,8 +22,8 @@ sudo pip install committer
 ci "This is the commit message."
 ```
 
-At first updates the repository in the current working directory.
-Only commits your changes when no changes have been found.
+Updates the repository in the current working directory.
+Only commits your changes when no update-changes have been found.
 
 ### Show all changes
 

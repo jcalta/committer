@@ -33,11 +33,12 @@ use_plugin('python.integrationtest')
 use_plugin('python.install_dependencies')
 use_plugin('python.unittest')
 
+url = 'https://github.com/aelgru/committer'
+description = 'Please visit {0} for more information!'.format(url)
+
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
-description = 'Please visit https://github.com/aelgru/committer for more information!'
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial, and subversion.'
-url = 'https://github.com/aelgru/committer'
 version = '0.0.89'
 
 default_task = ['analyze', 'publish']

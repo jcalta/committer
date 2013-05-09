@@ -60,16 +60,28 @@ class ScriptCommand(object):
                 print_text(USAGE_INFORMATION)
                 return exit(0)
 
+    def _filter_unused_argument_dash_m(self, arguments):
+        """
+            Returns a list which equals the given one, but removes the string '-m' from it.
+        """
+        filtered_arguments = []
+        for argument in arguments:
+            if argument != '-m':
+                filtered_arguments.append(argument)
+        return filtered_arguments
+
     def __call__(self, arguments):
         """
             performs the given command using the given arguments.
         """
-        if len(arguments) > 1:
-            self._handle_version_argument(arguments)
-            self._handle_help_argument(arguments)
+        filtered_arguments = self._filter_unused_argument_dash_m(arguments)
+
+        if len(filtered_arguments) > 1:
+            self._handle_version_argument(filtered_arguments)
+            self._handle_help_argument(filtered_arguments)
 
         try:
-            self.function(arguments)
+            self.function(filtered_arguments)
             return exit(0)
 
         except errors.CommitterError as committer_exception:

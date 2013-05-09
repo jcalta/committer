@@ -105,6 +105,16 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
     @patch('committer.print_text')
     @patch('committer.exit')
+    def test_should_filter_dash_m_argument (self, mock_exit, mock_print_text):
+        mock_command = Mock()
+        arguments = ['/usr/local/bin/commit', '-m', 'Hello world']
+
+        ScriptCommand(mock_command)(arguments)
+
+        self.assertEqual(call(['/usr/local/bin/commit', 'Hello world']), mock_command.call_args)
+
+    @patch('committer.print_text')
+    @patch('committer.exit')
     def test_should_call_perform_on_given_command (self, mock_exit, mock_print_text):
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']

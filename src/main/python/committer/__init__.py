@@ -25,7 +25,28 @@ from sys import exit
 
 from committer import errors
 from committer.actions import commit, status, update
-from committer.terminal import print_error, print_text
+from logging import INFO, Formatter, StreamHandler, getLogger
+
+LOGGING_FORMAT = '%(message)s'
+ROOT_LOGGER_NAME = 'committer'
+
+
+def initialiaze_root_logger(log_level=INFO):
+    """ Returnes a root_logger which logs to the console using the given log_level. """
+    formatter = Formatter(LOGGING_FORMAT)
+
+    console_handler = StreamHandler()
+    console_handler.setFormatter(formatter)
+    console_handler.setLevel(log_level)
+
+    root_logger = getLogger(ROOT_LOGGER_NAME)
+    root_logger.setLevel(log_level)
+    root_logger.addHandler(console_handler)
+
+    return root_logger
+
+LOGGER = initialiaze_root_logger(INFO)
+
 
 USAGE_INFORMATION = """
 usage:
@@ -47,7 +68,7 @@ class ScriptCommand(object):
             Shows the version and exits the program, if arguments contains --version.
         """
         if '--version' in arguments:
-            print_text('{0} version {1}\n'.format(__name__, __version__))
+            LOGGER.info('%s version %s', __name__, __version__)
             return exit(0)
 
     def _handle_help_argument(self, arguments):
@@ -57,7 +78,7 @@ class ScriptCommand(object):
         """
         for help_option in ['help', '--help', '-h']:
             if help_option in arguments:
-                print_text(USAGE_INFORMATION)
+                LOGGER.info(USAGE_INFORMATION)
                 return exit(0)
 
     def _filter_unused_argument_dash_m(self, arguments):
@@ -81,11 +102,11 @@ class ScriptCommand(object):
             return exit(0)
 
         except errors.CommitterError as committer_exception:
-            print_error(committer_exception.message)
+            LOGGER.error(committer_exception.message)
             return exit(committer_exception.error_code)
 
         except KeyboardInterrupt:
-            print_error('Interrupted by user.\n')
+            LOGGER.error('Interrupted by user.\n')
             return exit(-1)
 
 

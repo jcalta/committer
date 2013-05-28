@@ -22,7 +22,9 @@ __author__ = 'Michael Gruber'
 
 from subprocess import PIPE, CalledProcessError, Popen, check_call
 
-from committer.terminal import print_error, print_text
+from logging import getLogger
+
+LOGGER = getLogger('committer.vcsclients')
 
 
 class AbstractVcsClient(object):
@@ -84,10 +86,10 @@ class AbstractVcsClient(object):
         stdout, stderr = process.communicate()
 
         if stdout != '':
-            print_text(stdout)
+            LOGGER.info(stdout)
 
         if stderr != '':
-            print_error(stderr)
+            LOGGER.error(stderr)
 
         returncode = process.returncode
 

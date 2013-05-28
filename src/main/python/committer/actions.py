@@ -25,9 +25,10 @@
 
 __author__ = 'Michael Gruber'
 
+from logging import getLogger
+
 from committer.errors import WrongUsageError
 from committer.vcsclients.detection import detect_vcs_client
-from logging import getLogger
 
 LOGGER = getLogger('committer.actions')
 

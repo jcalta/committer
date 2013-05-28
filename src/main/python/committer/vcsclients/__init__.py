@@ -20,9 +20,8 @@
 
 __author__ = 'Michael Gruber'
 
-from subprocess import PIPE, CalledProcessError, Popen, check_call
-
 from logging import getLogger
+from subprocess import PIPE, CalledProcessError, Popen, check_call
 
 LOGGER = getLogger('committer.vcsclients')
 

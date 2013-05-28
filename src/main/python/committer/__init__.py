@@ -21,11 +21,11 @@
 __author__ = 'Michael Gruber'
 __version__ = '${version}'
 
+from logging import INFO, Formatter, StreamHandler, getLogger
 from sys import exit
 
 from committer import errors
 from committer.actions import commit, status, update
-from logging import INFO, Formatter, StreamHandler, getLogger
 
 LOGGING_FORMAT = '%(message)s'
 ROOT_LOGGER_NAME = 'committer'

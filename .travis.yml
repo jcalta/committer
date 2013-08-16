@@ -7,6 +7,11 @@ python:
   - "pypy"
 
 install:
-  - pip install pybuilder
+  - pip install pybuilder coveralls
 
-script: "pyb install_dependencies analyze publish --verbose"
+script:
+  - pyb install_dependencies analyze publish --verbose
+  - coverage run --source=src/main/python/committer `which pyb` run_unit_tests
+
+after_success:
+  - coveralls --verbose

@@ -23,6 +23,9 @@ from os import path
 
 from committer.vcsclients import AbstractVcsClient
 
+NO_UPDATES_FOUND_OUTPUT = """resolving manifests
+0 files updated, 0 files merged, 0 files removed, 0 files unresolved\n"""
+
 
 class MercurialClient(AbstractVcsClient):
     """
@@ -56,8 +59,7 @@ class MercurialClient(AbstractVcsClient):
             @return: True if no updates found,
                      False otherwise.
         """
-        return self._update_result['stdout'] == """resolving manifests
-0 files updated, 0 files merged, 0 files removed, 0 files unresolved\n"""
+        return self._update_result['stdout'] == NO_UPDATES_FOUND_OUTPUT
 
     def is_executable(self):
         """

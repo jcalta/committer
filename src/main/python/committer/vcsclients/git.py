@@ -23,6 +23,8 @@ from os import path
 
 from committer.vcsclients import AbstractVcsClient
 
+ALREADY_UP_TO_DATE = 'Already up-to-date.\n'
+
 
 class GitClient(AbstractVcsClient):
     """
@@ -58,7 +60,7 @@ class GitClient(AbstractVcsClient):
                      False otherwise.
         """
         stdout = self._update_result['stdout']
-        return stdout == 'Already up-to-date.\n'
+        return stdout == ALREADY_UP_TO_DATE
 
     def is_executable(self):
         """

@@ -20,6 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
+from sys import exit
 from logging import getLogger
 from subprocess import PIPE, CalledProcessError, Popen, check_call
 
@@ -91,6 +92,9 @@ class AbstractVcsClient(object):
             LOGGER.error(stderr)
 
         returncode = process.returncode
+
+        if returncode != 0:
+            return exit(-1)
 
         return {'stdout': stdout, 'stderr': stderr, 'returncode': returncode}
 

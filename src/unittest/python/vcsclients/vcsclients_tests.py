@@ -29,6 +29,7 @@ class AbstractVcsClientTests (unittest.TestCase):
 
     def test_should_call_command_in_subprocess(self):
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -41,6 +42,7 @@ class AbstractVcsClientTests (unittest.TestCase):
 
     def test_should_call_command_using_given_arguments(self):
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn(('stdout', 'stderr'))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -54,9 +56,8 @@ class AbstractVcsClientTests (unittest.TestCase):
     def test_should_return_stdout_and_stderr_and_returncode_when_executing_command(self):
         stdout = 'stdout'
         stderr = 'stderr'
-        returncode = 123
         process_mock = mock()
-        process_mock.returncode = returncode
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -66,12 +67,13 @@ class AbstractVcsClientTests (unittest.TestCase):
 
         self.assertEqual(stdout, actual['stdout'])
         self.assertEqual(stderr, actual['stderr'])
-        self.assertEqual(returncode, actual['returncode'])
+        self.assertEqual(0, actual['returncode'])
 
     def test_should_print_stdout_when_stdout_is_not_empty_string(self):
         stdout = 'stdout'
         stderr = 'stderr'
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -85,6 +87,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         stdout = ''
         stderr = 'stderr'
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -98,6 +101,7 @@ class AbstractVcsClientTests (unittest.TestCase):
         stdout = 'stdout'
         stderr = 'stderr'
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -108,9 +112,11 @@ class AbstractVcsClientTests (unittest.TestCase):
         verify(committer.vcsclients.LOGGER).error(stderr)
 
     def test_should_not_print_stderr_when_stderr_is_empty_string(self):
+
         stdout = 'stdout'
         stderr = ''
         process_mock = mock()
+        process_mock.returncode = 0
         when(process_mock).communicate().thenReturn((stdout, stderr))
         when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
         when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
@@ -119,6 +125,22 @@ class AbstractVcsClientTests (unittest.TestCase):
         self.vcs_client.execute_command('command', '1', '2', '3')
 
         verify(committer.vcsclients, never).print_error(stderr)
+
+    def test_should_exit_when_execution_of_command_failed(self):
+
+        stdout = 'stdout'
+        stderr = ''
+        process_mock = mock()
+        process_mock.returncode = 123
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.vcsclients.LOGGER).info(any_value()).thenReturn(None)
+        when(committer.vcsclients.LOGGER).error(any_value()).thenReturn(None)
+        when(committer.vcsclients).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenReturn(process_mock)
+        when(committer.vcsclients).exit(any_value()).thenReturn(None)
+
+        self.vcs_client.execute_command('command', '1', '2', '3')
+
+        verify(committer.vcsclients).exit(-1)
 
     def test_should_return_true_when_command_is_executable (self):
         when(committer.vcsclients).check_call(any_value()).thenReturn(None)

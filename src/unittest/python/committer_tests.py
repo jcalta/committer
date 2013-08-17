@@ -21,7 +21,7 @@ class ScriptCommandWrapperTests (unittest.TestCase):
         ScriptCommand(mock_command)(['/usr/local/bin/commit'])
 
         self.assertEqual(call('Interrupted by user.\n'), mock_logger.error.call_args)
-        self.assertEqual(call(-1), mock_exit.call_args)
+        self.assertEqual(call(1), mock_exit.call_args)
 
     @patch('committer.LOGGER')
     @patch('committer.exit')

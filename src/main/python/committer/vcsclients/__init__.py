@@ -94,7 +94,7 @@ class AbstractVcsClient(object):
         returncode = process.returncode
 
         if returncode != 0:
-            return exit(-1)
+            return exit(1)
 
         return {'stdout': stdout, 'stderr': stderr, 'returncode': returncode}
 

@@ -107,7 +107,7 @@ class ScriptCommand(object):
 
         except KeyboardInterrupt:
             LOGGER.error('Interrupted by user.\n')
-            return exit(-1)
+            return exit(1)
 
 
 @ScriptCommand

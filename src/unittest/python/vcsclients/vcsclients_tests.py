@@ -140,7 +140,7 @@ class AbstractVcsClientTests (unittest.TestCase):
 
         self.vcs_client.execute_command('command', '1', '2', '3')
 
-        verify(committer.vcsclients).exit(-1)
+        verify(committer.vcsclients).exit(1)
 
     def test_should_return_true_when_command_is_executable (self):
         when(committer.vcsclients).check_call(any_value()).thenReturn(None)

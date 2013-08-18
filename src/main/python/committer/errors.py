@@ -55,8 +55,10 @@ class WrongUsageError(CommitterError):
         to be raised when user provided wrong arguments.
     """
     def __init__(self):
-        message = '\nWrong usage, please use the committer commands as expected.\n{0}'.format(committer.USAGE_INFORMATION)
-        super(WrongUsageError, self).__init__(message, 1)
+        WRONG_USAGE_MESSAGE = """
+Wrong usage, please use the committer commands as expected.
+{0}""".format(committer.USAGE_INFORMATION)
+        super(WrongUsageError, self).__init__(WRONG_USAGE_MESSAGE, 1)
 
 
 class TooManyRepositoriesError(CommitterError):

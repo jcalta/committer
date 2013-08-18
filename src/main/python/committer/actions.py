@@ -26,6 +26,7 @@
 __author__ = 'Michael Gruber'
 
 from logging import getLogger
+from sys import exit
 
 from committer.errors import WrongUsageError
 from committer.vcsclients.detection import detect_vcs_client
@@ -45,11 +46,12 @@ def commit(arguments):
     vcs_client = detect_vcs_client()
     vcs_client.update()
 
-    if vcs_client.everything_was_up_to_date:
-        message = arguments[1]
-        vcs_client.commit(message)
-    else:
+    if not vcs_client.everything_was_up_to_date:
         LOGGER.error('Commit interrupted: unexpected "update" result or "update" found changes.')
+        return exit(1)
+
+    message = arguments[1]
+    vcs_client.commit(message)
 
 
 def status(arguments):

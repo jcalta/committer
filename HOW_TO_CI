@@ -1,3 +1,0 @@
-Do not use a script to bootstrap the commit command, since bash will split the commit message.
-
-PYTHONPATH=src/main/python src/main/scripts/ci

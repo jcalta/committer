@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
 PYTHONPATH=src/main/python src/main/scripts/st $@
-

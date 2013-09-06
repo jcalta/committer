@@ -22,6 +22,7 @@ __author__ = 'Michael Gruber'
 from os import path
 
 from committer.vcsclients import AbstractVcsClient
+from committer.execution import check_if_is_executable, execute_command
 
 
 class SubversionClient(AbstractVcsClient):
@@ -61,7 +62,7 @@ class SubversionClient(AbstractVcsClient):
             @return: True if "svn --version --quiet" is executable,
                      False otherwise.
         """
-        return self.check_if_is_executable(self.command, '--version', '--quiet')
+        return check_if_is_executable(self.command, '--version', '--quiet')
 
     def status(self):
         """
@@ -81,4 +82,4 @@ class SubversionClient(AbstractVcsClient):
 
             @return: execution result
         """
-        return self.execute_command(self.command, *arguments)
+        return execute_command(self.command, *arguments)

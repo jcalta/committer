@@ -67,24 +67,24 @@ class GitClientTests (unittest.TestCase):
         verify(committer.vcsclients.git.path).isdir('.git')
 
     def test_should_return_value_of_check(self):
-        when(self.git_client).check_if_is_executable(any_value(), any_value()).thenReturn('value from check')
+        when(committer.vcsclients.git).check_if_is_executable(any_value(), any_value()).thenReturn('value from check')
 
         actual_return_value = self.git_client.is_executable()
 
         self.assertEqual('value from check', actual_return_value)
-        verify(self.git_client).check_if_is_executable('git', '--version')
+        verify(committer.vcsclients.git).check_if_is_executable('git', '--version')
 
     def test_should_execute_git_using_arguments(self):
-        when(self.git_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
+        when(committer.vcsclients.git).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
 
         self.git_client._git('arg1', 'arg2', 'arg3')
 
-        verify(self.git_client).execute_command('git', 'arg1', 'arg2', 'arg3')
+        verify(committer.vcsclients.git).execute_command('git', 'arg1', 'arg2', 'arg3')
 
     def test_should_return_stdout_and_stderr_from_execution(self):
         stdout = 'stdout'
         stderr = 'stderr'
-        when(self.git_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn((stdout, stderr))
+        when(committer.vcsclients.git).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn((stdout, stderr))
 
         actual_stdout, actual_stderr = self.git_client._git('arg1', 'arg2', 'arg3')
 

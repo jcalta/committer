@@ -22,6 +22,7 @@ __author__ = 'Michael Gruber'
 from os import path
 
 from committer.vcsclients import AbstractVcsClient
+from committer.execution import check_if_is_executable, execute_command
 
 NO_UPDATES_FOUND_OUTPUT = """resolving manifests
 0 files updated, 0 files merged, 0 files removed, 0 files unresolved\n"""
@@ -66,7 +67,7 @@ class MercurialClient(AbstractVcsClient):
             @return: True if "hg --version --quiet" is executable,
                      False otherwise.
         """
-        return self.check_if_is_executable(self.command, '--version', '--quiet')
+        return check_if_is_executable(self.command, '--version', '--quiet')
 
     def status(self):
         """
@@ -87,4 +88,4 @@ class MercurialClient(AbstractVcsClient):
 
             @return: the execution result
         """
-        return self.execute_command(self.command, *arguments)
+        return execute_command(self.command, *arguments)

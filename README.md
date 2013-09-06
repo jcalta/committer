@@ -15,7 +15,7 @@ sudo pip install committer
 
 [More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
-## How to Commit
+## Commit
 
 ### How many times did you forget to update before committing your changes?
 
@@ -26,7 +26,7 @@ ci "This is the commit message."
 Updates the repository in the current working directory.
 Only commits your changes when no update-changes have been found.
 
-### Show all changes
+### Status
 
 ```bash
 st

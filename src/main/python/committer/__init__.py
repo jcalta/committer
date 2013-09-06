@@ -21,14 +21,24 @@
 __author__ = 'Michael Gruber'
 __version__ = '${version}'
 
+try:
+    from ConfigParser import ConfigParser
+except:
+    from configparser import ConfigParser
+
 from logging import INFO, Formatter, StreamHandler, getLogger
+from os.path import exists
 from sys import exit
 
 from committer import errors
 from committer.actions import commit, status, update
+from committer.execution import execute_command
 
 LOGGING_FORMAT = '%(message)s'
 ROOT_LOGGER_NAME = 'committer'
+CONFIGURATION_FILE_NAME = '.committerrc'
+SECTION_DEFAULT = "DEFAULT"
+OPTION_EXECUTE_BEFORE = "execute_before"
 
 
 def initialiaze_root_logger(log_level=INFO):
@@ -54,6 +64,12 @@ usage:
     st               shows all changes
     up               updates the current directory
 """
+
+
+class Configuration():
+    """ Committer configration """
+    def __init__(self):
+        self.execute_before = None
 
 
 class ScriptCommand(object):
@@ -87,11 +103,31 @@ class ScriptCommand(object):
         """
         return [argument for argument in arguments if argument != '-m']
 
+    def _read_configuration_file(self):
+        """
+            Returns a configuration object
+        """
+        configuration = Configuration()
+        if not exists(CONFIGURATION_FILE_NAME):
+            return configuration
+
+        config_parser = ConfigParser()
+        config_parser.read(CONFIGURATION_FILE_NAME)
+
+        if config_parser.has_option(SECTION_DEFAULT, OPTION_EXECUTE_BEFORE):
+            configuration.execute_before = config_parser.get(SECTION_DEFAULT, OPTION_EXECUTE_BEFORE)
+
+        return configuration
+
     def __call__(self, arguments):
         """
             performs the given command using the given arguments.
         """
         filtered_arguments = self._filter_unused_argument_dash_m(arguments)
+        configuration = self._read_configuration_file()
+
+        if configuration.execute_before:
+            execute_command(configuration.execute_before)
 
         if len(filtered_arguments) > 1:
             self._handle_version_argument(filtered_arguments)

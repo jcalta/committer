@@ -20,9 +20,7 @@
 
 __author__ = 'Michael Gruber'
 
-from sys import exit
 from logging import getLogger
-from subprocess import PIPE, CalledProcessError, Popen, check_call
 
 LOGGER = getLogger('committer.vcsclients')
 
@@ -57,46 +55,6 @@ class AbstractVcsClient(object):
             Name of version control system.
         """
         return self._name
-
-    def check_if_is_executable(self, command, *arguments):
-        """
-            Executes the given command with the given arguments.
-
-            @return: True if the given command is executable with the given arguments,
-                     False otherwise.
-        """
-        try:
-            command_with_arguments = [command] + list(arguments)
-            check_call(command_with_arguments)
-
-        except CalledProcessError:
-            return False
-
-        except OSError:
-            return False
-
-        return True
-
-    def execute_command(self, command, *arguments):
-        """
-            Executes command using the given arguments.
-        """
-        command_with_arguments = [command] + list(arguments)
-        process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
-        stdout, stderr = process.communicate()
-
-        if stdout != '':
-            LOGGER.info(stdout)
-
-        if stderr != '':
-            LOGGER.error(stderr)
-
-        returncode = process.returncode
-
-        if returncode != 0:
-            return exit(1)
-
-        return {'stdout': stdout, 'stderr': stderr, 'returncode': returncode}
 
     def is_executable(self):
         """

@@ -64,23 +64,23 @@ class SubversionClientTests (unittest.TestCase):
         verify(committer.vcsclients.subversion.path).isdir('.svn')
 
     def test_should_return_value_of_check (self):
-        when(self.subversion_client).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
+        when(committer.vcsclients.subversion).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
         
         actual_return_value = self.subversion_client.is_executable()
         
         self.assertEqual('value from check', actual_return_value)
-        verify(self.subversion_client).check_if_is_executable('svn', '--version', '--quiet')
+        verify(committer.vcsclients.subversion).check_if_is_executable('svn', '--version', '--quiet')
 
 
     def test_should_execute_svn_using_arguments (self):
-        when(self.subversion_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
+        when(committer.vcsclients.subversion).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
         
         self.subversion_client._svn('arg1', 'arg2', 'arg3')
         
-        verify(self.subversion_client).execute_command('svn', 'arg1', 'arg2', 'arg3')
+        verify(committer.vcsclients.subversion).execute_command('svn', 'arg1', 'arg2', 'arg3')
 
     def test_should_return_execution_result (self):
-        when(self.subversion_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+        when(committer.vcsclients.subversion).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
         
         actual_result = self.subversion_client._svn('arg1', 'arg2', 'arg3')
         

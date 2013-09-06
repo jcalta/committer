@@ -70,23 +70,23 @@ class MercurialClientTests (unittest.TestCase):
 
 
     def test_should_return_value_of_check (self):
-        when(self.mercurial_client).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
+        when(committer.vcsclients.mercurial).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
         
         actual_return_value = self.mercurial_client.is_executable()
         
         self.assertEqual('value from check', actual_return_value)
-        verify(self.mercurial_client).check_if_is_executable('hg', '--version', '--quiet')
+        verify(committer.vcsclients.mercurial).check_if_is_executable('hg', '--version', '--quiet')
 
 
     def test_should_execute_hg_using_arguments (self):
-        when(self.mercurial_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
+        when(committer.vcsclients.mercurial).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
         
         self.mercurial_client._hg('arg1', 'arg2', 'arg3')
         
-        verify(self.mercurial_client).execute_command('hg', 'arg1', 'arg2', 'arg3')
+        verify(committer.vcsclients.mercurial).execute_command('hg', 'arg1', 'arg2', 'arg3')
 
     def test_should_return_execution_result (self):
-        when(self.mercurial_client).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+        when(committer.vcsclients.mercurial).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
 
         actual_result = self.mercurial_client._hg('arg1', 'arg2', 'arg3')
 

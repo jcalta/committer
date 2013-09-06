@@ -1,0 +1,68 @@
+#   subprocess exection for committer
+#   Copyright 2012-2013 Michael Gruber
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+"""
+    This module offers utility functions for execution within sub processes.
+"""
+
+__author__ = 'Michael Gruber'
+
+from sys import exit
+from logging import getLogger
+from subprocess import PIPE, CalledProcessError, Popen, check_call
+
+LOGGER = getLogger('committer.execution')
+
+
+def check_if_is_executable(command, *arguments):
+    """
+        Executes the given command with the given arguments.
+
+        @return: True if the given command is executable with the given arguments,
+                 False otherwise.
+    """
+    try:
+        command_with_arguments = [command] + list(arguments)
+        check_call(command_with_arguments)
+
+    except CalledProcessError:
+        return False
+
+    except OSError:
+        return False
+
+    return True
+
+
+def execute_command(command, *arguments):
+    """
+        Executes command using the given arguments.
+    """
+    command_with_arguments = [command] + list(arguments)
+    process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+    stdout, stderr = process.communicate()
+
+    if stdout != '':
+        LOGGER.info(stdout)
+
+    if stderr != '':
+        LOGGER.error(stderr)
+
+    returncode = process.returncode
+
+    if returncode != 0:
+        return exit(1)
+
+    return {'stdout': stdout, 'stderr': stderr, 'returncode': returncode}

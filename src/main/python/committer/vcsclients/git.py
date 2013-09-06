@@ -22,7 +22,7 @@ __author__ = 'Michael Gruber'
 from os import path
 
 from committer.vcsclients import AbstractVcsClient
-
+from committer.execution import check_if_is_executable, execute_command
 ALREADY_UP_TO_DATE = 'Already up-to-date.\n'
 
 
@@ -69,7 +69,7 @@ class GitClient(AbstractVcsClient):
             @return: True if "git --version" is executable,
                      False otherwise.
         """
-        return self.check_if_is_executable(self.command, '--version')
+        return check_if_is_executable(self.command, '--version')
 
     def status(self):
         """
@@ -87,4 +87,4 @@ class GitClient(AbstractVcsClient):
         """
             Executes git using the given arguments.
         """
-        return self.execute_command(self.command, *arguments)
+        return execute_command(self.command, *arguments)

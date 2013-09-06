@@ -40,8 +40,19 @@ Executes the "status" command known by all version control systems.
 ```bash
 up
 ```
+## Configuration
 
-### Micro Commits
+It is possible to force committer to execute a command (without arguments)
+before performing any other action. Put a INI file called `.committerrc` in your current
+working directory. Example configuration to execute flake8:
+
+```
+[DEFAULT]
+execute_before=flake8
+```
+
+
+## Micro Commits
 
 Committing in a high frequency has advantages:
 * prevents merging,

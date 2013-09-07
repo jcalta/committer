@@ -134,7 +134,7 @@ class ScriptCommand(object):
             self._handle_help_argument(filtered_arguments)
 
         try:
-            self.function(filtered_arguments)
+            self.function(filtered_arguments, configuration)
             return exit(0)
 
         except errors.CommitterError as committer_exception:
@@ -147,15 +147,15 @@ class ScriptCommand(object):
 
 
 @ScriptCommand
-def commit_changes(arguments):
+def commit_changes(arguments, configuration=None):
     commit(arguments)
 
 
 @ScriptCommand
-def show_status(arguments):
+def show_status(arguments, configuration=None):
     status(arguments)
 
 
 @ScriptCommand
-def update_files(arguments):
+def update_files(arguments, configuration=None):
     update(arguments)

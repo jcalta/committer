@@ -115,13 +115,16 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.LOGGER')
     @patch('committer.exit')
     @patch('committer.execute_command')
-    def test_should_filter_dash_m_argument (self, mock_execute_command, mock_exit, mock_logger):
+    @patch('committer.Configuration')
+    def test_should_filter_dash_m_argument (self, mock_configuration_class, mock_execute_command, mock_exit, mock_logger):
+        mock_configuration = Mock()
+        mock_configuration_class.return_value = mock_configuration
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit', '-m', 'Hello world']
 
         ScriptCommand(mock_command)(arguments)
 
-        self.assertEqual(call(['/usr/local/bin/commit', 'Hello world']), mock_command.call_args)
+        self.assertEqual(call(['/usr/local/bin/commit', 'Hello world'], mock_configuration), mock_command.call_args)
 
     @patch('committer.LOGGER')
     @patch('committer.exit')
@@ -217,13 +220,16 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.LOGGER')
     @patch('committer.exit')
     @patch('committer.execute_command')
-    def test_should_call_perform_on_given_command (self, mock_execute_command, mock_exit, mock_logger):
+    @patch('committer.Configuration')
+    def test_should_execute_given_command_function (self, mock_configuration_class, mock_execute_command, mock_exit, mock_logger):
+        mock_configuration = Mock()
+        mock_configuration_class.return_value = mock_configuration
         mock_command = Mock()
         arguments = ['/usr/local/bin/commit']
 
         ScriptCommand(mock_command)(arguments)
 
-        self.assertEqual(call(arguments), mock_command.call_args)
+        self.assertEqual(call(arguments, mock_configuration), mock_command.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
 
     @patch('committer.LOGGER')

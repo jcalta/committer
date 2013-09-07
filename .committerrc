@@ -1,2 +1,2 @@
-[DEFAULT]
+[COMMIT]
 execute_before=pyb

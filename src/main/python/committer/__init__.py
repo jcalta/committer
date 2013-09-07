@@ -38,6 +38,7 @@ LOGGING_FORMAT = '%(message)s'
 ROOT_LOGGER_NAME = 'committer'
 CONFIGURATION_FILE_NAME = '.committerrc'
 SECTION_DEFAULT = "DEFAULT"
+SECTION_COMMIT = "COMMIT"
 OPTION_EXECUTE_BEFORE = "execute_before"
 
 
@@ -70,6 +71,7 @@ class Configuration():
     """ Committer configration """
     def __init__(self):
         self.execute_before = None
+        self.execute_before_commit = None
 
 
 class ScriptCommand(object):
@@ -117,6 +119,9 @@ class ScriptCommand(object):
         if config_parser.has_option(SECTION_DEFAULT, OPTION_EXECUTE_BEFORE):
             configuration.execute_before = config_parser.get(SECTION_DEFAULT, OPTION_EXECUTE_BEFORE)
 
+        if config_parser.has_option(SECTION_COMMIT, OPTION_EXECUTE_BEFORE):
+            configuration.execute_before_commit = config_parser.get(SECTION_COMMIT, OPTION_EXECUTE_BEFORE)
+
         return configuration
 
     def __call__(self, arguments):
@@ -148,6 +153,8 @@ class ScriptCommand(object):
 
 @ScriptCommand
 def commit_changes(arguments, configuration=None):
+    if configuration.execute_before_commit:
+        execute_command(configuration.execute_before_commit)
     commit(arguments)
 
 

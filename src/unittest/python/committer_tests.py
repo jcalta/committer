@@ -2,7 +2,7 @@ import unittest
 
 from mock import Mock, call, patch
 
-from committer import Configuration, ScriptCommand, errors
+from committer import Configuration, ScriptCommand, commit_changes, errors
 
 USAGE_INFORMATION = """
 usage:
@@ -173,7 +173,9 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         ScriptCommand(mock_command)(arguments)
 
-        self.assertEqual(call("DEFAULT", "execute_before"), mock_config_parser.has_option.call_args)
+        self.assertEqual([call("DEFAULT", "execute_before"),
+                          call("COMMIT", "execute_before")],
+                         mock_config_parser.has_option.call_args_list)
 
     @patch('committer.LOGGER')
     @patch('committer.exit')
@@ -182,6 +184,7 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.execute_command')
     def test_should_get_execute_before_option_from_configuration_file (self, mock_execute_command, mock_config_parser_class, mock_exists, mock_exit, mock_logger):
         mock_config_parser = Mock()
+        mock_config_parser.has_option.return_value = True
         mock_config_parser_class.return_value = mock_config_parser
         mock_exists.return_value = True
         mock_command = Mock()
@@ -189,7 +192,9 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         ScriptCommand(mock_command)(arguments)
 
-        self.assertEqual(call("DEFAULT", "execute_before"), mock_config_parser.get.call_args)
+        self.assertEqual([call("DEFAULT", "execute_before"),
+                          call("COMMIT", "execute_before")],
+                         mock_config_parser.get.call_args_list)
 
     @patch('committer.LOGGER')
     @patch('committer.exit')
@@ -243,3 +248,54 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         self.assertEqual(call('Error message.\n'), mock_logger.error.call_args)
         self.assertEqual(call(123), mock_exit.call_args)
+
+
+class CommitTests (unittest.TestCase):
+
+    @patch('committer.exit')
+    @patch('committer.exists')
+    @patch('committer.commit')
+    @patch('committer.execute_command')
+    def skip_test_should_call_commit_with_arguments (self, mock_execute_command, mock_commit, mock_exists, mock_exit):
+
+        commit_changes(['/usr/local/bin/commit'])
+
+        self.assertEqual(call(['/usr/local/bin/commit']), mock_commit.call_args)
+
+    @patch('committer.exit')
+    @patch('committer.exists')
+    @patch('committer.commit')
+    @patch('committer.execute_command')
+    def skip_test_should_not_call_anything_when_no_option_configured (self, mock_execute_command, mock_commit, mock_exists, mock_exit):
+        mock_exists.return_value = False
+
+        commit_changes(['/usr/local/bin/commit'])
+
+        self.assertEqual(None, mock_execute_command.call_args)
+
+    @patch('committer.exit')
+    @patch('committer.exists')
+    @patch('committer.commit')
+    @patch('committer.ConfigParser')
+    @patch('committer.execute_command')
+    def test_should_not_call_anything_when_no_option_configured (self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exit, mock_exists):
+        mock_exists.return_value = True
+        mock_config_parser = Mock()
+        
+        def has_side_effect(section, option):
+            if section == "COMMIT" and option == "execute_before":
+                return True
+            return False
+        
+        mock_config_parser.has_option.return_value = True
+        
+        def get_side_effect(section, option):
+            if section == "COMMIT" and option == "execute_before":
+                return "the command"
+        mock_config_parser.get.side_effect = get_side_effect
+        mock_config_parser_class.return_value = mock_config_parser
+        
+        commit_changes(['/usr/local/bin/commit'])
+
+        self.assertEqual(call('the command'), mock_execute_command.call_args)
+

@@ -48,9 +48,14 @@ working directory. Example configuration to execute flake8:
 
 ```
 [DEFAULT]
-execute_before=flake8
+execute_before = flake8
 ```
 
+If you want to execute a command only before commit please create a section called commit like this:
+```
+[COMMIT]
+execute_before = pyb
+```
 
 ## Micro Commits
 

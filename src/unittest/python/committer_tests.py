@@ -266,7 +266,7 @@ class CommitTests (unittest.TestCase):
     @patch('committer.exists')
     @patch('committer.commit')
     @patch('committer.execute_command')
-    def skip_test_should_not_call_anything_when_no_option_configured (self, mock_execute_command, mock_commit, mock_exists, mock_exit):
+    def skip_test_should_not_call_anything_when_no_execution_option_configured (self, mock_execute_command, mock_commit, mock_exists, mock_exit):
         mock_exists.return_value = False
 
         commit_changes(['/usr/local/bin/commit'])
@@ -278,7 +278,7 @@ class CommitTests (unittest.TestCase):
     @patch('committer.commit')
     @patch('committer.ConfigParser')
     @patch('committer.execute_command')
-    def test_should_not_call_anything_when_no_option_configured (self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exit, mock_exists):
+    def test_should_call_command_when_execute_before_commit_option_is_configured (self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exists, mock_exit):
         mock_exists.return_value = True
         mock_config_parser = Mock()
         
@@ -286,16 +286,16 @@ class CommitTests (unittest.TestCase):
             if section == "COMMIT" and option == "execute_before":
                 return True
             return False
-
-        mock_config_parser.has_option.return_value = True
+        mock_config_parser.has.side_effect = has_side_effect
 
         def get_side_effect(section, option):
             if section == "COMMIT" and option == "execute_before":
-                return "the command"
+                return "command --with --arguments"
         mock_config_parser.get.side_effect = get_side_effect
+
         mock_config_parser_class.return_value = mock_config_parser
 
         commit_changes(['/usr/local/bin/commit'])
 
-        self.assertEqual(call('the', 'command'), mock_execute_command.call_args)
+        self.assertEqual(call('command', '--with', '--arguments'), mock_execute_command.call_args)
 

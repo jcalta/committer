@@ -1,2 +1,2 @@
 [COMMIT]
-execute_before = pyb -v
+execute_before = pyb

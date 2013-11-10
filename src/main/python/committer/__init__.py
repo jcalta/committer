@@ -154,7 +154,9 @@ class ScriptCommand(object):
 @ScriptCommand
 def commit_changes(arguments, configuration=None):
     if configuration.execute_before_commit:
-        execute_command(configuration.execute_before_commit)
+        command_and_arguments = configuration.execute_before_commit.split()
+        execute_command(command_and_arguments[0], *command_and_arguments[1:])
+
     commit(arguments)
 
 

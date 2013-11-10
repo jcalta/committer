@@ -51,6 +51,8 @@ def execute_command(command, *arguments):
         Executes command using the given arguments.
     """
     command_with_arguments = [command] + list(arguments)
+    LOGGER.debug('Executing command with arguments: %s', command_with_arguments)
+
     process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
     stdout, stderr = process.communicate()
 

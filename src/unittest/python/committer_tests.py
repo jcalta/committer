@@ -286,16 +286,16 @@ class CommitTests (unittest.TestCase):
             if section == "COMMIT" and option == "execute_before":
                 return True
             return False
-        
+
         mock_config_parser.has_option.return_value = True
-        
+
         def get_side_effect(section, option):
             if section == "COMMIT" and option == "execute_before":
                 return "the command"
         mock_config_parser.get.side_effect = get_side_effect
         mock_config_parser_class.return_value = mock_config_parser
-        
+
         commit_changes(['/usr/local/bin/commit'])
 
-        self.assertEqual(call('the command'), mock_execute_command.call_args)
+        self.assertEqual(call('the', 'command'), mock_execute_command.call_args)
 

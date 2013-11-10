@@ -57,6 +57,8 @@ If you want to execute a command only before commit please create a section call
 execute_before = pyb -v
 ```
 
+[See `.committerrc` in the committer repository.](https://github.com/aelgru/committer/blob/master/.committerrc)
+
 ## Micro Commits
 
 Committing in a high frequency has advantages:

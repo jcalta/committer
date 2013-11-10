@@ -42,7 +42,7 @@ up
 ```
 ## Configuration
 
-It is possible to force committer to execute a command (without arguments)
+It is possible to force committer to execute a command (with arguments)
 before performing any other action. Put a INI file called `.committerrc` in your current
 working directory. Example configuration to execute flake8:
 
@@ -54,7 +54,7 @@ execute_before = flake8
 If you want to execute a command only before commit please create a section called commit like this:
 ```
 [COMMIT]
-execute_before = pyb
+execute_before = pyb -v
 ```
 
 ## Micro Commits

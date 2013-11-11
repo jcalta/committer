@@ -22,7 +22,9 @@ sudo pip install committer
 
 [More ways to install committer](https://github.com/aelgru/committer/blob/master/INSTALL.md)
 
-## Commit
+## Features
+
+### Commit
 
 ### How many times did you forget to update before committing your changes?
 

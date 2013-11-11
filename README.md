@@ -26,7 +26,7 @@ sudo pip install committer
 
 ### Commit
 
-### How many times did you forget to update before committing your changes?
+How many times did you forget to update before committing your changes?
 
 ```bash
 ci "This is the commit message."

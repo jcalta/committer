@@ -148,12 +148,11 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.execute_command')
     def test_should_read_configuration_file (self, mock_execute_command, mock_config_parser_class, mock_exists, mock_exit, mock_logger):
         mock_config_parser = Mock()
+        mock_config_parser.has_option.return_value = False
         mock_config_parser_class.return_value = mock_config_parser
         mock_exists.return_value = True
-        mock_command = Mock()
-        arguments = ['/usr/local/bin/commit', '-m', 'Hello world']
 
-        ScriptCommand(mock_command)(arguments)
+        ScriptCommand(Mock())(['/usr/local/bin/commit', '-m', 'Hello world'])
 
         self.assertEqual(call(".committerrc"), mock_exists.call_args)
         self.assertEqual(call(), mock_config_parser_class.call_args)
@@ -166,12 +165,11 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.execute_command')
     def test_should_check_if_execute_before_option_in_configuration_file (self, mock_execute_command, mock_config_parser_class, mock_exists, mock_exit, mock_logger):
         mock_config_parser = Mock()
+        mock_config_parser.has_option.return_value = False
         mock_config_parser_class.return_value = mock_config_parser
         mock_exists.return_value = True
-        mock_command = Mock()
-        arguments = ['/usr/local/bin/commit', '-m', 'Hello world']
 
-        ScriptCommand(mock_command)(arguments)
+        ScriptCommand(Mock())(['/usr/local/bin/commit', '-m', 'Hello world'])
 
         self.assertEqual([call("DEFAULT", "execute_before"),
                           call("COMMIT", "execute_before")],
@@ -185,12 +183,11 @@ class ScriptCommandWrapperTests (unittest.TestCase):
     def test_should_get_execute_before_option_from_configuration_file (self, mock_execute_command, mock_config_parser_class, mock_exists, mock_exit, mock_logger):
         mock_config_parser = Mock()
         mock_config_parser.has_option.return_value = True
+        mock_config_parser.get.return_value = "pyb -v"
         mock_config_parser_class.return_value = mock_config_parser
         mock_exists.return_value = True
-        mock_command = Mock()
-        arguments = ['/usr/local/bin/commit', '-m', 'Hello world']
 
-        ScriptCommand(mock_command)(arguments)
+        ScriptCommand(Mock())(['/usr/local/bin/commit', '-m', 'Hello world'])
 
         self.assertEqual([call("DEFAULT", "execute_before"),
                           call("COMMIT", "execute_before")],

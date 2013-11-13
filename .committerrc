@@ -1,2 +1,4 @@
+[DEFAULT]
+execute_before = flake8 src --ignore=E501
 [COMMIT]
 execute_before = pyb -v

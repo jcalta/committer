@@ -6,4 +6,4 @@ execute_before = /bin/true
 
 [COMMIT]
 # This command will be executed before perfoming a commit
-execute_before = pyb -v
+execute_before = venv/bin/pyb -v

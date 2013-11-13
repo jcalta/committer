@@ -44,11 +44,14 @@ st
 Executes the "status" command known by all version control systems.
 
 
-### Update the current working directory
+### Update
 
 ```bash
 up
 ```
+
+Updates the current working directory.
+
 ## Configuration
 
 It is possible to force committer to execute a command (with arguments)

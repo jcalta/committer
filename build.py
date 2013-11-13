@@ -67,4 +67,6 @@ def set_properties (project):
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Apache Software License',
           'Programming Language :: Python',
-          'Topic :: Software Development :: Version Control'])
+          'Topic :: Software Development :: User Interfaces',
+          'Topic :: Software Development :: Version Control',
+          'Topic :: Utilities'])

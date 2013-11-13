@@ -2,7 +2,7 @@
 
 [DEFAULT]
 # This command will be executed before anything else will be done
-execute_before = flake8 src --ignore=E501
+execute_before = /bin/true
 
 [COMMIT]
 # This command will be executed before perfoming a commit

@@ -1,4 +1,9 @@
+# committer configuration file
+
 [DEFAULT]
+# This command will be executed before anything else will be done
 execute_before = flake8 src --ignore=E501
+
 [COMMIT]
+# This command will be executed before perfoming a commit
 execute_before = pyb -v

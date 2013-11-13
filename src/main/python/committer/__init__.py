@@ -132,7 +132,7 @@ class ScriptCommand(object):
         configuration = self._read_configuration_file()
 
         if configuration.execute_before:
-            command_and_arguments = configuration.execute_before_commit.split()
+            command_and_arguments = configuration.execute_before.split()
             execute_command(command_and_arguments[0], *command_and_arguments[1:])
 
         if len(filtered_arguments) > 1:

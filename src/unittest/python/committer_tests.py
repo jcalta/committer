@@ -206,6 +206,32 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         self.assertEqual(None, mock_execute_command.call_args)
 
+    @patch('committer.exit')
+    @patch('committer.exists')
+    @patch('committer.commit')
+    @patch('committer.ConfigParser')
+    @patch('committer.execute_command')
+    def test_should_call_command_with_arguments_when_execute_before_option_is_configured (self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exists, mock_exit):
+        mock_exists.return_value = True
+        mock_config_parser = Mock()
+        
+        def has_side_effect(section, option):
+            if section == "DEFAULT" and option == "execute_before":
+                return True
+            return False
+        mock_config_parser.has.side_effect = has_side_effect
+
+        def get_side_effect(section, option):
+            if section == "DEFAULT" and option == "execute_before":
+                return "command --with --arguments"
+        mock_config_parser.get.side_effect = get_side_effect
+
+        mock_config_parser_class.return_value = mock_config_parser
+
+        commit_changes(['/usr/local/bin/commit'])
+
+        self.assertEqual(call('command', '--with', '--arguments'), mock_execute_command.call_args)
+
     @patch('committer.LOGGER')
     @patch('committer.exit')
     @patch('committer.ScriptCommand._read_configuration_file')

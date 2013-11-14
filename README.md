@@ -2,11 +2,15 @@
 
 Unified command line interface for *git*, *mercurial*, and *subversion*.
 
-```bash
-usage:
+```
+Usage:
     ci "message"     commits all changes
     st               shows all changes
     up               updates the current directory
+
+Options:
+    -h --help        show this help screen
+    --version        show version information
 ```
 
 [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)

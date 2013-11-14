@@ -48,6 +48,8 @@ def set_properties (project):
     project.build_depends_on('mock')
     project.build_depends_on('mockito')
 
+    # TODO: remove this quickfix for pybuilder 0.9.15
+    project.set_property('dir_source_integrationtest_python', 'src/tests/unittest')
     project.set_property('coverage_break_build', True)
 
     project.set_property('copy_resources_target', '$dir_dist/committer')
@@ -59,6 +61,8 @@ def set_properties (project):
 
     project.set_property('flake8_verbose_output', True)
     project.set_property('flake8_break_build', True)
+    project.set_property('flake8_include_test_sources', True)
+    project.set_property('flake8_ignore', 'E211,E302,E303,F401,F811,E501,W291,W293,W391')
 
     project.get_property('distutils_commands').append('bdist_egg')
     project.set_property('distutils_classifiers', [

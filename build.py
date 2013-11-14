@@ -53,9 +53,9 @@ def set_properties (project):
     project.set_property('coverage_break_build', True)
 
     project.set_property('copy_resources_target', '$dir_dist/committer')
-    project.get_property('copy_resources_glob').append('LICENSE')
+    project.get_property('copy_resources_glob').append('LICENSE.txt')
 
-    project.include_file('committer', 'LICENSE')
+    project.include_file('committer', 'LICENSE.txt')
 
     project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 

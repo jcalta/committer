@@ -31,7 +31,7 @@ from sys import exit
 from committer.errors import WrongUsageError
 from committer.vcsclients.detection import detect_vcs_client
 
-LOGGER = getLogger('committer.actions')
+LOGGER = getLogger(__name__)
 
 
 def commit(arguments):

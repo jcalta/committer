@@ -22,7 +22,7 @@ __author__ = 'Michael Gruber'
 
 from logging import getLogger
 
-LOGGER = getLogger('committer.vcsclients')
+LOGGER = getLogger(__name__)
 
 
 class AbstractVcsClient(object):

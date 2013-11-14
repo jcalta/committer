@@ -35,7 +35,6 @@ from committer.actions import commit, status, update
 from committer.execution import execute_command
 
 LOGGING_FORMAT = '%(message)s'
-ROOT_LOGGER_NAME = 'committer'
 CONFIGURATION_FILE_NAME = '.committerrc'
 SECTION_DEFAULT = "DEFAULT"
 SECTION_COMMIT = "COMMIT"
@@ -62,7 +61,7 @@ def initialiaze_root_logger(log_level=INFO):
     console_handler.setFormatter(formatter)
     console_handler.setLevel(log_level)
 
-    root_logger = getLogger(ROOT_LOGGER_NAME)
+    root_logger = getLogger(__name__)
     root_logger.setLevel(log_level)
     root_logger.addHandler(console_handler)
 

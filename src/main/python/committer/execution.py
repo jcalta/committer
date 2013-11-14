@@ -23,7 +23,7 @@ from sys import exit
 from logging import getLogger
 from subprocess import PIPE, CalledProcessError, Popen, check_call
 
-LOGGER = getLogger('committer.execution')
+LOGGER = getLogger(__name__)
 
 
 def check_if_is_executable(command, *arguments):

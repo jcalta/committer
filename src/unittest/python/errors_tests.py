@@ -1,6 +1,6 @@
 import unittest_support
 
-from committer import errors
+from committer import USAGE_INFORMATION, errors
 
 
 class ErrorsTests (unittest_support.TestCase):
@@ -25,15 +25,7 @@ class ErrorsTests (unittest_support.TestCase):
     def test_show_usage_information_should_use_the_given_properties (self):
         actual_exception = errors.WrongUsageError()
 
-        self.assertEqual("""
-Wrong usage, please use the committer commands as expected.
-
-usage:
-    ci "message"     commits all changes
-    st               shows all changes
-    up               updates the current directory
-
-""", actual_exception.message)
+        self.assertEqual(USAGE_INFORMATION + '\n', actual_exception.message)
         self.assertEqual(1, actual_exception.error_code)
 
     def test_too_many_repositories_detected_should_use_the_given_properties (self):

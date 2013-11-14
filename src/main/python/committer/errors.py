@@ -55,9 +55,7 @@ class WrongUsageError(CommitterError):
         to be raised when user provided wrong arguments.
     """
     def __init__(self):
-        WRONG_USAGE_MESSAGE = """
-Wrong usage, please use the committer commands as expected.
-{0}""".format(committer.USAGE_INFORMATION)
+        WRONG_USAGE_MESSAGE = committer.USAGE_INFORMATION
         super(WrongUsageError, self).__init__(WRONG_USAGE_MESSAGE, 1)
 
 

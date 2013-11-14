@@ -2,14 +2,8 @@ import unittest
 
 from mock import Mock, call, patch
 
-from committer import Configuration, ScriptCommand, commit_changes, errors
+from committer import USAGE_INFORMATION, Configuration, ScriptCommand, commit_changes, errors
 
-USAGE_INFORMATION = """
-usage:
-    ci "message"     commits all changes
-    st               shows all changes
-    up               updates the current directory
-"""
 
 class ScriptCommandWrapperTests (unittest.TestCase):
     @patch('committer.LOGGER')

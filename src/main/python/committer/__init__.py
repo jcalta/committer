@@ -42,6 +42,18 @@ SECTION_COMMIT = "COMMIT"
 OPTION_EXECUTE_BEFORE = "execute_before"
 
 
+USAGE_INFORMATION = """
+Usage:
+    ci "message"     commits all changes
+    st               shows all changes
+    up               updates the current directory
+
+Options:
+    -h --help        show this help screen
+    --version        show version information
+"""
+
+
 def initialiaze_root_logger(log_level=INFO):
     """ Returnes a root_logger which logs to the console using the given log_level. """
     formatter = Formatter(LOGGING_FORMAT)
@@ -57,14 +69,6 @@ def initialiaze_root_logger(log_level=INFO):
     return root_logger
 
 LOGGER = initialiaze_root_logger(INFO)
-
-
-USAGE_INFORMATION = """
-usage:
-    ci "message"     commits all changes
-    st               shows all changes
-    up               updates the current directory
-"""
 
 
 class Configuration():

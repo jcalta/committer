@@ -21,7 +21,7 @@ from committer.actions import commit
 from committer.errors import WrongUsageError
 
 
-class CommitTests (unittest_support.TestCase):
+class CommitTests(unittest_support.TestCase):
     def test_should_show_usage_information_when_exactly_one_argument(self):
         self.assertRaises(WrongUsageError, commit, ['/usr/local/bin/commit'])
 
@@ -35,7 +35,7 @@ class CommitTests (unittest_support.TestCase):
         self.assertEqual(call(), mock_detect.call_args)
 
     @patch('committer.actions.detect_vcs_client')
-    def test_should_update_before_committing (self, mock_detect):
+    def test_should_update_before_committing(self, mock_detect):
         mock_vcs_client = self.create_mock_vcs_client()
         mock_detect.return_value = mock_vcs_client
 

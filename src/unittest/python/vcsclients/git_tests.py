@@ -21,7 +21,7 @@ from committer.vcsclients.git import GitClient
 import committer
 
 
-class GitClientTests (unittest.TestCase):
+class GitClientTests(unittest.TestCase):
     def setUp(self):
         self.git_client = GitClient()
 
@@ -34,7 +34,7 @@ class GitClientTests (unittest.TestCase):
     def test_should_have_name_property(self):
         self.assertEqual('Git', self.git_client.name)
 
-    def test_should_prepend_git_to_given_arguments (self):
+    def test_should_prepend_git_to_given_arguments(self):
         when(self.git_client)._git(any_value()).thenReturn(None)
 
         self.git_client.commit('This is a commit message.')

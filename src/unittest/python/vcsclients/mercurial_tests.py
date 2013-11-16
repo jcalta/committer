@@ -21,20 +21,20 @@ from committer.vcsclients.mercurial import MercurialClient
 import committer
 
 
-class MercurialClientTests (unittest.TestCase):
+class MercurialClientTests(unittest.TestCase):
     def setUp(self):
         self.mercurial_client = MercurialClient()
     
     def tearDown(self):
         unstub()
      
-    def test_should_have_command_property (self):
+    def test_should_have_command_property(self):
         self.assertEqual('hg', self.mercurial_client.command)
 
-    def test_should_have_name_property (self):
+    def test_should_have_name_property(self):
         self.assertEqual('Mercurial', self.mercurial_client.name)
 
-    def test_should_prepend_hg_to_given_arguments (self):
+    def test_should_prepend_hg_to_given_arguments(self):
         when(self.mercurial_client)._hg(any_value(), any_value(), any_value()).thenReturn(None)
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
@@ -43,7 +43,7 @@ class MercurialClientTests (unittest.TestCase):
         verify(self.mercurial_client)._hg('commit', '-m', 'This is a commit message.')
         verify(self.mercurial_client)._hg('push')
         
-    def test_should_call_pull_and_update (self):
+    def test_should_call_pull_and_update(self):
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
         self.mercurial_client.update()
@@ -51,7 +51,7 @@ class MercurialClientTests (unittest.TestCase):
         verify(self.mercurial_client)._hg('pull')
         verify(self.mercurial_client)._hg('update')
         
-    def test_should_store_update_result (self):
+    def test_should_store_update_result(self):
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         when(self.mercurial_client)._hg('update').thenReturn('update result')
         
@@ -59,7 +59,7 @@ class MercurialClientTests (unittest.TestCase):
 
         self.assertEqual('update result', self.mercurial_client._update_result)
         
-    def test_should_call_status (self):
+    def test_should_call_status(self):
         when(self.mercurial_client)._hg(any_value()).thenReturn(None)
         
         self.mercurial_client.status()
@@ -67,7 +67,7 @@ class MercurialClientTests (unittest.TestCase):
         verify(self.mercurial_client)._hg('status')
         
 
-    def test_return_false_if_dot_hg_directory_does_not_exist (self):
+    def test_return_false_if_dot_hg_directory_does_not_exist(self):
         when(committer.vcsclients.mercurial.path).isdir(any_value()).thenReturn(False)
         
         actual_return_value = self.mercurial_client.detect()
@@ -75,7 +75,7 @@ class MercurialClientTests (unittest.TestCase):
         self.assertEqual(False, actual_return_value)
         when(committer.vcsclients.mercurial.path).isdir('.hg')
 
-    def test_return_true_if_dot_hg_directory_exists (self):
+    def test_return_true_if_dot_hg_directory_exists(self):
         when(committer.vcsclients.mercurial.path).isdir(any_value()).thenReturn(True)
         
         actual_return_value = self.mercurial_client.detect()
@@ -84,7 +84,7 @@ class MercurialClientTests (unittest.TestCase):
         when(committer.vcsclients.mercurial.path).isdir('.hg')
 
 
-    def test_should_return_value_of_check (self):
+    def test_should_return_value_of_check(self):
         when(committer.vcsclients.mercurial).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
         
         actual_return_value = self.mercurial_client.is_executable()
@@ -93,14 +93,14 @@ class MercurialClientTests (unittest.TestCase):
         verify(committer.vcsclients.mercurial).check_if_is_executable('hg', '--version', '--quiet')
 
 
-    def test_should_execute_hg_using_arguments (self):
+    def test_should_execute_hg_using_arguments(self):
         when(committer.vcsclients.mercurial).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
         
         self.mercurial_client._hg('arg1', 'arg2', 'arg3')
         
         verify(committer.vcsclients.mercurial).execute_command('hg', 'arg1', 'arg2', 'arg3')
 
-    def test_should_return_execution_result (self):
+    def test_should_return_execution_result(self):
         when(committer.vcsclients.mercurial).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
 
         actual_result = self.mercurial_client._hg('arg1', 'arg2', 'arg3')

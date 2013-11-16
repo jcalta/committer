@@ -23,7 +23,7 @@ import committer
 from committer.execution import check_if_is_executable, execute_command
 
 
-class ExecutionTests (unittest.TestCase):
+class ExecutionTests(unittest.TestCase):
 
     def tearDown(self):
         unstub()
@@ -143,7 +143,7 @@ class ExecutionTests (unittest.TestCase):
 
         verify(committer.execution).exit(1)
 
-    def test_should_return_true_when_command_is_executable (self):
+    def test_should_return_true_when_command_is_executable(self):
         when(committer.execution).check_call(any_value()).thenReturn(None)
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
@@ -151,7 +151,7 @@ class ExecutionTests (unittest.TestCase):
         self.assertTrue(actual_result)
         verify(committer.execution).check_call(['command', '--version', '--quiet'])
 
-    def test_should_return_false_when_command_is_not_executable (self):
+    def test_should_return_false_when_command_is_not_executable(self):
         when(committer.execution).check_call(any_value()).thenRaise(subprocess.CalledProcessError(127, 'command'))
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
@@ -159,7 +159,7 @@ class ExecutionTests (unittest.TestCase):
         self.assertFalse(actual_result)
         verify(committer.execution).check_call(['command', '--version', '--quiet'])
 
-    def test_should_return_false_when_trying_to_execute_command_fails (self):
+    def test_should_return_false_when_trying_to_execute_command_fails(self):
         when(committer.execution).check_call(any_value()).thenRaise(OSError())
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
@@ -167,7 +167,7 @@ class ExecutionTests (unittest.TestCase):
         self.assertFalse(actual_result)
         verify(committer.execution).check_call(['command', '--version', '--quiet'])
 
-    def test_should_raise_exception_when_during_check_something_unexpected_happens (self):
+    def test_should_raise_exception_when_during_check_something_unexpected_happens(self):
         when(committer.execution).check_call(any_value()).thenRaise(Exception('Not executable'))
 
         self.assertRaises(Exception, check_if_is_executable, (['command', '--version', '--quiet']))

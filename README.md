@@ -10,6 +10,7 @@ Usage:
 
 Options:
     -h --help        show this help screen
+    --debug          enable logging of debug messages
     --version        show version information
 ```
 

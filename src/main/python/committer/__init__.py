@@ -26,7 +26,7 @@ try:
 except:
     from configparser import ConfigParser
 
-from logging import INFO, Formatter, StreamHandler, getLogger
+from logging import DEBUG, INFO, Formatter, StreamHandler, getLogger
 from os.path import exists
 from sys import exit
 
@@ -49,6 +49,7 @@ Usage:
 
 Options:
     -h --help        show this help screen
+    --debug          enable logging of debug messages
     --version        show version information
 """
 
@@ -59,7 +60,6 @@ def initialiaze_root_logger(log_level=INFO):
 
     console_handler = StreamHandler()
     console_handler.setFormatter(formatter)
-    console_handler.setLevel(log_level)
 
     root_logger = getLogger(__name__)
     root_logger.setLevel(log_level)
@@ -83,6 +83,16 @@ class ScriptCommand(object):
     """
     def __init__(self, function):
         self.function = function
+
+    def _handle_debug_argument(self, arguments):
+        """
+            Sets the log level to DEBUG, if arguments contains --debug.
+        """
+        if '--debug' in arguments:
+            LOGGER.setLevel(DEBUG)
+            LOGGER.debug('Logging of debug messages enabled.')
+            return [argument for argument in arguments if argument != '--debug']
+        return arguments
 
     def _handle_version_argument(self, arguments):
         """
@@ -139,6 +149,7 @@ class ScriptCommand(object):
             execute_command(command_and_arguments[0], *command_and_arguments[1:])
 
         if len(filtered_arguments) > 1:
+            filtered_arguments = self._handle_debug_argument(filtered_arguments)
             self._handle_version_argument(filtered_arguments)
             self._handle_help_argument(filtered_arguments)
 

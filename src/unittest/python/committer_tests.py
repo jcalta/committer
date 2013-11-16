@@ -15,6 +15,7 @@
 
 import unittest
 
+from logging import DEBUG
 from mock import Mock, call, patch
 
 from committer import USAGE_INFORMATION, Configuration, ScriptCommand, commit_changes, errors
@@ -54,6 +55,30 @@ class ScriptCommandWrapperTests (unittest.TestCase):
 
         self.assertEqual(call('%s version %s', 'committer', '${version}'), mock_logger.info.call_args)
         self.assertEqual(call(0), mock_exit.call_args)
+
+    @patch('committer.LOGGER')
+    @patch('committer.exit')
+    @patch('committer.execute_command')
+    def test_should_enable_debug_logging_when_debug_option_given (self, mock_execute_command, mock_exit, mock_logger):
+        mock_command = Mock()
+
+        ScriptCommand(mock_command)(['/usr/local/bin/commit', '--debug'])
+
+        self.assertEqual(call(DEBUG), mock_logger.setLevel.call_args)
+        self.assertEqual(call('Logging of debug messages enabled.'), mock_logger.debug.call_args)
+
+    @patch('committer.LOGGER')
+    @patch('committer.exit')
+    @patch('committer.execute_command')
+    @patch('committer.Configuration')
+    def test_should_not_pass_debug_to_command_when_debug_option_is_given (self, mock_configuration_class, mock_execute_command, mock_exit, mock_logger):
+        mock_configuration = Mock()
+        mock_configuration_class.return_value = mock_configuration
+        mock_command = Mock()
+
+        ScriptCommand(mock_command)(['/usr/local/bin/commit', 'Committing spree ...', '--debug'])
+
+        self.assertEqual(call(['/usr/local/bin/commit', 'Committing spree ...'], mock_configuration), mock_command.call_args)
 
     @patch('committer.LOGGER')
     @patch('committer.exit')

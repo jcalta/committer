@@ -1,6 +1,6 @@
 # committer
 
-Unified command line interface for *git*, *mercurial*, and *subversion*.
+Unified command line interface for *git*, *mercurial* and *subversion*.
 
 ```
 Usage:

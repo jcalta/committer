@@ -37,7 +37,7 @@ description = 'Please visit {0} for more information!'.format(url)
 
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
-summary = 'Unified command line interface for git, mercurial, and subversion.'
+summary = 'Unified command line interface for git, mercurial and subversion.'
 version = '0.1.5'
 
 default_task = ['analyze', 'publish']

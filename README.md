@@ -105,4 +105,5 @@ If you do *not* like the workflow **committer** implies, you may be interested i
 
 ## License
 
-Committer is licensed under the [Apache License, Version 2.0](https://github.com/aelgru/committer/blob/master/LICENSE)
+Committer is licensed under the
+[Apache License, Version 2.0](https://raw.github.com/aelgru/committer/master/src/main/python/committer/LICENSE.txt)

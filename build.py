@@ -47,6 +47,7 @@ def set_properties (project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
     project.build_depends_on('mockito')
+    project.build_depends_on('wheel')
 
     # TODO: remove this quickfix for pybuilder 0.9.15
     project.set_property('dir_source_integrationtest_python', 'src/tests/unittest')
@@ -65,7 +66,7 @@ def set_properties (project):
     project.set_property('flake8_include_test_sources', True)
     project.set_property('flake8_ignore', 'E302,E303,F401,F811,E501,W291,W293,W391')
 
-    project.get_property('distutils_commands').append('bdist_egg')
+    project.get_property('distutils_commands').append('bdist_wheel')
     project.set_property('distutils_classifiers', [
           'Development Status :: 3 - Alpha',
           'Environment :: Console',

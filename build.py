@@ -42,6 +42,7 @@ version = '0.1.5'
 
 default_task = ['analyze', 'publish']
 
+
 @init
 def set_properties (project):
     project.build_depends_on('coverage')
@@ -68,11 +69,11 @@ def set_properties (project):
 
     project.get_property('distutils_commands').append('bdist_wheel')
     project.set_property('distutils_classifiers', [
-          'Development Status :: 3 - Alpha',
-          'Environment :: Console',
-          'Intended Audience :: Developers',
-          'License :: OSI Approved :: Apache Software License',
-          'Programming Language :: Python',
-          'Topic :: Software Development :: User Interfaces',
-          'Topic :: Software Development :: Version Control',
-          'Topic :: Utilities'])
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
+        'Topic :: Software Development :: User Interfaces',
+        'Topic :: Software Development :: Version Control',
+        'Topic :: Utilities'])

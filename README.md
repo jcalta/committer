@@ -74,6 +74,12 @@ If you want to execute a command only before commit please create a section call
 execute_before = pyb -v
 ```
 
+Another good example of the usage of this is to pull from upstream master when you are working in a fork
+```
+[COMMIT]
+execute_before = git pull upstream master
+```
+
 [See `.committerrc` in the committer repository.](https://github.com/aelgru/committer/blob/master/.committerrc)
 
 ## Micro Commits

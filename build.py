@@ -50,8 +50,6 @@ def set_properties (project):
     project.build_depends_on('mockito')
     project.build_depends_on('wheel')
 
-    # TODO: remove this quickfix for pybuilder 0.9.15
-    project.set_property('dir_source_integrationtest_python', 'src/tests/unittest')
     project.set_property('coverage_break_build', True)
 
     project.set_property('copy_resources_target', '$dir_dist')

@@ -23,7 +23,9 @@ from committer.errors import NotExecutableError, NoRepositoryDetectedError, TooM
 
 
 class ListAvailableVcsClientsTests(unittest_support.TestCase):
-    def test_should_find_mercurial_vcs_client(self):
+
+    def test_should_return_three_vcs_clients(self):
+
         actual_vcs_clients = detection._list_available_vcs_clients()
         actual_count_of_repositories = len(actual_vcs_clients)
 

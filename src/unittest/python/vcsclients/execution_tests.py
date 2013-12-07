@@ -171,4 +171,3 @@ class ExecutionTests(unittest.TestCase):
         when(committer.execution).check_call(any_value()).thenRaise(Exception('Not executable'))
 
         self.assertRaises(Exception, check_if_is_executable, (['command', '--version', '--quiet']))
-

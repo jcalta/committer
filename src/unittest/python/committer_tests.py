@@ -248,7 +248,7 @@ class ScriptCommandWrapperTests(unittest.TestCase):
     def test_should_call_command_with_arguments_when_execute_before_option_is_configured(self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exists, mock_exit):
         mock_exists.return_value = True
         mock_config_parser = Mock()
-        
+
         def has_side_effect(section, option):
             if section == "DEFAULT" and option == "execute_before":
                 return True
@@ -338,7 +338,7 @@ class CommitTests(unittest.TestCase):
     def test_should_call_command_with_arguments_when_execute_before_commit_option_is_configured(self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exists, mock_exit):
         mock_exists.return_value = True
         mock_config_parser = Mock()
-        
+
         def has_side_effect(section, option):
             if section == "COMMIT" and option == "execute_before":
                 return True
@@ -364,7 +364,7 @@ class CommitTests(unittest.TestCase):
     def test_should_call_command_when_execute_before_commit_option_is_configured(self, mock_execute_command, mock_config_parser_class, mock_commit, mock_exists, mock_exit):
         mock_exists.return_value = True
         mock_config_parser = Mock()
-        
+
         def has_side_effect(section, option):
             if section == "COMMIT" and option == "execute_before":
                 return True
@@ -381,4 +381,3 @@ class CommitTests(unittest.TestCase):
         commit_changes(['/usr/local/bin/commit'])
 
         self.assertEqual(call('command'), mock_execute_command.call_args)
-

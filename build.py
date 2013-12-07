@@ -63,7 +63,7 @@ def set_properties (project):
     project.set_property('flake8_verbose_output', True)
     project.set_property('flake8_break_build', True)
     project.set_property('flake8_include_test_sources', True)
-    project.set_property('flake8_ignore', 'E302,E303,F401,F811,E501,W291')
+    project.set_property('flake8_ignore', 'E302,E303,F401,F811,E501')
 
     project.get_property('distutils_commands').append('bdist_wheel')
     project.set_property('distutils_classifiers', [

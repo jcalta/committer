@@ -14,11 +14,6 @@
 #   limitations under the License.
 
 import unittest
-import subprocess
-
-from mockito import mock, when, verify, unstub, never, any as any_value
-
-import committer
 
 from committer.vcsclients import AbstractVcsClient
 
@@ -26,9 +21,6 @@ from committer.vcsclients import AbstractVcsClient
 class AbstractVcsClientTests (unittest.TestCase):
     def setUp(self):
         self.vcs_client = AbstractVcsClient('Name', 'command')
-
-    def tearDown(self):
-        unstub()
 
     def test_should_raise_exception_when_argument_name_not_given(self):
         self.assertRaises(Exception, AbstractVcsClient, None, 'command')

@@ -22,6 +22,7 @@ import committer
 
 
 class GitClientTests(unittest.TestCase):
+
     def setUp(self):
         self.git_client = GitClient()
 
@@ -105,17 +106,17 @@ class GitClientTests(unittest.TestCase):
 
         self.assertEqual(stdout, actual_stdout)
         self.assertEqual(stderr, actual_stderr)
-    
+
     def test_should_return_false_if_last_update_found_updates(self):
         self.git_client._update_result = {'stdout': 'Found updates ... blabla'}
-        
+
         actual = self.git_client.everything_was_up_to_date
-        
+
         self.assertFalse(actual)
-        
+
     def test_should_return_true_if_everything_is_up_to_date(self):
         self.git_client._update_result = {'stdout': 'Already up-to-date.\n'}
 
         actual = self.git_client.everything_was_up_to_date
-        
+
         self.assertTrue(actual)

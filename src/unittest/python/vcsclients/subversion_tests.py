@@ -87,7 +87,6 @@ class SubversionClientTests(unittest.TestCase):
         self.assertEqual('value from check', actual_return_value)
         verify(committer.vcsclients.subversion).check_if_is_executable('svn', '--version', '--quiet')
 
-
     def test_should_execute_svn_using_arguments(self):
         when(committer.vcsclients.subversion).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)
 

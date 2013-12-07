@@ -22,6 +22,7 @@ import committer
 
 
 class MercurialClientTests(unittest.TestCase):
+
     def setUp(self):
         self.mercurial_client = MercurialClient()
 
@@ -66,7 +67,6 @@ class MercurialClientTests(unittest.TestCase):
 
         verify(self.mercurial_client)._hg('status')
 
-
     def test_return_false_if_dot_hg_directory_does_not_exist(self):
         when(committer.vcsclients.mercurial.path).isdir(any_value()).thenReturn(False)
 
@@ -83,7 +83,6 @@ class MercurialClientTests(unittest.TestCase):
         self.assertEqual(True, actual_return_value)
         when(committer.vcsclients.mercurial.path).isdir('.hg')
 
-
     def test_should_return_value_of_check(self):
         when(committer.vcsclients.mercurial).check_if_is_executable(any_value(), any_value(), any_value()).thenReturn('value from check')
 
@@ -91,7 +90,6 @@ class MercurialClientTests(unittest.TestCase):
 
         self.assertEqual('value from check', actual_return_value)
         verify(committer.vcsclients.mercurial).check_if_is_executable('hg', '--version', '--quiet')
-
 
     def test_should_execute_hg_using_arguments(self):
         when(committer.vcsclients.mercurial).execute_command(any_value(), any_value(), any_value(), any_value()).thenReturn(None)

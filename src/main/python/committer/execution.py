@@ -53,8 +53,12 @@ def execute_command(command, *arguments):
     command_with_arguments = [command] + list(arguments)
     LOGGER.debug('Executing command with arguments: %s', command_with_arguments)
 
-    process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
-    stdout, stderr = process.communicate()
+    try:
+        process = Popen(command_with_arguments, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+        stdout, stderr = process.communicate()
+    except OSError as os_error:
+        LOGGER.error('Execution of "%s" failed: %s', " ".join(command_with_arguments), str(os_error))
+        return exit(1)
 
     if stdout != '':
         LOGGER.info(stdout)

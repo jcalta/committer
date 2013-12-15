@@ -143,6 +143,21 @@ class ExecuteCommandTests(unittest.TestCase):
 
         verify(committer.execution).exit(1)
 
+    def test_should_catch_os_error_and_exit_when_popen_raises_exception(self):
+        stdout = 'stdout'
+        stderr = ''
+        process_mock = mock()
+        process_mock.returncode = 123
+        when(process_mock).communicate().thenReturn((stdout, stderr))
+        when(committer.execution.LOGGER).info(any_value()).thenReturn(None)
+        when(committer.execution.LOGGER).error(any_value()).thenReturn(None)
+        when(committer.execution).Popen(any_value(), stdout=any_value(), stderr=any_value(), stdin=any_value()).thenRaise(OSError("[Errno 2] No such file or directory"))
+        when(committer.execution).exit(any_value()).thenReturn(None)
+
+        execute_command('command', '1', '2', '3')
+
+        verify(committer.execution).exit(1)
+
 
 class CheckIfIsExecutableTests(unittest.TestCase):
 

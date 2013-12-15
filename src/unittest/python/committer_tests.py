@@ -48,6 +48,46 @@ class ScriptCommandWrapperTests(unittest.TestCase):
     @patch('committer.LOGGER')
     @patch('committer.exit')
     @patch('committer.execute_command')
+    def test_should_not_execute_command_before_when_display_version_since_version_exits(self, mock_execute_command, mock_exit, mock_logger):
+        mock_command = Mock()
+        mock_configuration = Mock()
+        mock_configuration.execute_before = '/usr/bin/true'
+        mock_script_command = Mock(ScriptCommand)
+        mock_script_command.function = mock_command
+        mock_script_command._read_configuration_file.return_value = mock_configuration
+        mock_script_command._filter_unused_argument_dash_m.return_value = ['/usr/local/bin/commit', '--version']
+        mock_script_command._handle_version_argument.side_effect = SystemExit(123)
+
+        try:
+            ScriptCommand.__call__(mock_script_command, ['/usr/local/bin/commit', '--version'])
+        except SystemExit as system_exit:
+            self.assertEqual(system_exit.code, 123)
+
+        self.assertEqual(0, mock_execute_command.call_count)
+
+    @patch('committer.LOGGER')
+    @patch('committer.exit')
+    @patch('committer.execute_command')
+    def test_should_not_execute_command_before_when_displaying_help_since_help_exits(self, mock_execute_command, mock_exit, mock_logger):
+        mock_command = Mock()
+        mock_configuration = Mock()
+        mock_configuration.execute_before = '/usr/bin/true'
+        mock_script_command = Mock(ScriptCommand)
+        mock_script_command.function = mock_command
+        mock_script_command._read_configuration_file.return_value = mock_configuration
+        mock_script_command._filter_unused_argument_dash_m.return_value = ['/usr/local/bin/commit', '--version']
+        mock_script_command._handle_help_argument.side_effect = SystemExit(123)
+
+        try:
+            ScriptCommand.__call__(mock_script_command, ['/usr/local/bin/commit', '--version'])
+        except SystemExit as system_exit:
+            self.assertEqual(system_exit.code, 123)
+
+        self.assertEqual(0, mock_execute_command.call_count)
+
+    @patch('committer.LOGGER')
+    @patch('committer.exit')
+    @patch('committer.execute_command')
     def test_should_exit_directly_if_one_argument_is_version(self, mock_execute_command, mock_exit, mock_logger):
         mock_command = Mock()
 
@@ -65,7 +105,7 @@ class ScriptCommandWrapperTests(unittest.TestCase):
         ScriptCommand(mock_command)(['/usr/local/bin/commit', '--debug'])
 
         self.assertEqual(call(DEBUG), mock_logger.setLevel.call_args)
-        self.assertEqual(call('Logging of debug messages enabled.'), mock_logger.debug.call_args)
+        mock_logger.debug.assert_any_call('Logging of debug messages enabled.')
 
     @patch('committer.LOGGER')
     @patch('committer.exit')

@@ -144,14 +144,15 @@ class ScriptCommand(object):
         filtered_arguments = self._filter_unused_argument_dash_m(arguments)
         configuration = self._read_configuration_file()
 
-        if configuration.execute_before:
-            command_and_arguments = configuration.execute_before.split()
-            execute_command(command_and_arguments[0], *command_and_arguments[1:])
-
         if len(filtered_arguments) > 1:
             filtered_arguments = self._handle_debug_argument(filtered_arguments)
             self._handle_version_argument(filtered_arguments)
             self._handle_help_argument(filtered_arguments)
+
+        if configuration.execute_before:
+            LOGGER.debug('Executing command "%s" before doing anything else.', configuration.execute_before)
+            command_and_arguments = configuration.execute_before.split()
+            execute_command(command_and_arguments[0], *command_and_arguments[1:])
 
         try:
             self.function(filtered_arguments, configuration)

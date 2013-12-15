@@ -38,7 +38,7 @@ description = 'Please visit {0} for more information!'.format(url)
 authors = [Author('Michael Gruber', 'aelgru@gmail.com')]
 license = 'Apache License, Version 2.0'
 summary = 'Unified command line interface for git, mercurial and subversion.'
-version = '0.1.6'
+version = '0.2.0'
 
 default_task = ['analyze', 'publish']
 
@@ -67,7 +67,7 @@ def set_properties (project):
 
     project.get_property('distutils_commands').append('bdist_wheel')
     project.set_property('distutils_classifiers', [
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',

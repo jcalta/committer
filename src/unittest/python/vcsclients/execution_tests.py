@@ -23,7 +23,7 @@ import committer
 from committer.execution import check_if_is_executable, execute_command
 
 
-class ExecutionTests(unittest.TestCase):
+class ExecuteCommandTests(unittest.TestCase):
 
     def tearDown(self):
         unstub()
@@ -142,6 +142,12 @@ class ExecutionTests(unittest.TestCase):
         execute_command('command', '1', '2', '3')
 
         verify(committer.execution).exit(1)
+
+
+class CheckIfIsExecutableTests(unittest.TestCase):
+
+    def tearDown(self):
+        unstub()
 
     def test_should_return_true_when_command_is_executable(self):
         when(committer.execution).check_call(any_value()).thenReturn(None)

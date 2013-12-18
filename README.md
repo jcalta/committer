@@ -16,8 +16,7 @@ Options:
 
 [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 [![Coverage](https://coveralls.io/repos/aelgru/committer/badge.png?branch=master)](https://coveralls.io/r/aelgru/committer)
-[![PyPi version](https://pypip.in/v/committer/badge.png)](https://crate.io/packages/committer/)
-[![PyPi downloads](https://pypip.in/d/committer/badge.png)](https://crate.io/packages/committer/) 
+[![PyPI version](https://badge.fury.io/py/committer.png)](http://badge.fury.io/py/committer)
 
 ## How to Install
 

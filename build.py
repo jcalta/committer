@@ -44,10 +44,10 @@ default_task = ['analyze', 'publish']
 
 
 @init
-def set_properties (project):
+def set_properties(project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
-    project.build_depends_on('mockito')
+    project.build_depends_on('mockito-without-hardcoded-distribute-version')
     project.build_depends_on('wheel')
 
     project.set_property('coverage_break_build', True)
@@ -58,7 +58,8 @@ def set_properties (project):
 
     project.include_file('committer', 'LICENSE.txt')
 
-    project.get_property('filter_resources_glob').append('**/committer/__init__.py')
+    project.get_property('filter_resources_glob').append(
+        '**/committer/__init__.py')
 
     project.set_property('flake8_verbose_output', True)
     project.set_property('flake8_break_build', True)

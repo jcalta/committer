@@ -88,7 +88,10 @@ Committing in a high frequency has advantages:
 * makes code reviews easier, and
 * commit messages for smaller commits "tell a story".
 
-[Read more about micro commits.](http://lucasr.org/2011/01/29/micro-commits/)
+Read more on best practices:
+* [Micro commits](http://lucasr.org/2011/01/29/micro-commits/)
+* [A note about git commit messages](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+* [Should I use past or present tense in git commit messages?](http://stackoverflow.com/questions/3580013/should-i-use-past-or-present-tense-in-git-commit-messages)
 
 ## How to Contribute
 
@@ -104,7 +107,7 @@ svn checkout https://github.com/aelgru/committer
 
 [Collaborating on GitHub with Subversion](https://github.com/blog/1178-collaborating-on-github-with-subversion)
 
-If you do *not* like the workflow **committer** implies, you may be interested in 
+If you do *not* like the workflow **committer** implies, you may be interested in
 [hg-git](http://hg-git.github.com/) or
 [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
 

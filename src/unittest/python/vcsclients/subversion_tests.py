@@ -15,8 +15,7 @@
 
 from fluentmock import UnitTests, when, verify
 
-import committer
-from committer.vcsclients.subversion import SubversionClient
+from committer.vcsclients import subversion
 
 ANY_VALUE = 'any value'
 
@@ -24,7 +23,7 @@ ANY_VALUE = 'any value'
 class SubversionClientTests(UnitTests):
 
     def set_up(self):
-        self.subversion_client = SubversionClient()
+        self.subversion_client = subversion.SubversionClient()
 
     def test_should_have_command_property(self):
         self.assertEqual('svn', self.subversion_client.command)
@@ -61,38 +60,38 @@ class SubversionClientTests(UnitTests):
         self.assertEqual({'stdout': 'abc', 'stderr': 'err', 'returncode': 123}, self.subversion_client._update_result)
 
     def test_return_false_if_dot_svn_directory_does_not_exist(self):
-        when(committer.vcsclients.subversion.path).isdir('.svn').then_return(False)
+        when(subversion.path).isdir('.svn').then_return(False)
 
         actual_return_value = self.subversion_client.detect()
 
         self.assertEqual(False, actual_return_value)
-        verify(committer.vcsclients.subversion.path).isdir('.svn')
+        verify(subversion.path).isdir('.svn')
 
     def test_return_true_if_dot_svn_directory_exists(self):
-        when(committer.vcsclients.subversion.path).isdir('.svn').then_return(True)
+        when(subversion.path).isdir('.svn').then_return(True)
 
         actual_return_value = self.subversion_client.detect()
 
         self.assertEqual(True, actual_return_value)
-        verify(committer.vcsclients.subversion.path).isdir('.svn')
+        verify(subversion.path).isdir('.svn')
 
     def test_should_return_value_of_check(self):
-        when(committer.vcsclients.subversion).check_if_is_executable('svn', '--version', '--quiet').then_return('value from check')
+        when(subversion).check_if_is_executable('svn', '--version', '--quiet').then_return('value from check')
 
         actual_return_value = self.subversion_client.is_executable()
 
         self.assertEqual('value from check', actual_return_value)
-        verify(committer.vcsclients.subversion).check_if_is_executable('svn', '--version', '--quiet')
+        verify(subversion).check_if_is_executable('svn', '--version', '--quiet')
 
     def test_should_execute_svn_using_arguments(self):
-        when(committer.vcsclients.subversion).execute_command(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE).then_return(None)
+        when(subversion).execute_command(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE).then_return(None)
 
         self.subversion_client._svn('arg1', 'arg2', 'arg3')
 
-        verify(committer.vcsclients.subversion).execute_command('svn', 'arg1', 'arg2', 'arg3')
+        verify(subversion).execute_command('svn', 'arg1', 'arg2', 'arg3')
 
     def test_should_return_execution_result(self):
-        when(committer.vcsclients.subversion).execute_command('svn', 'arg1', 'arg2', 'arg3').then_return({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
+        when(subversion).execute_command('svn', 'arg1', 'arg2', 'arg3').then_return({'stdout': 'abc', 'stderr': 'err', 'returncode': 123})
 
         actual_result = self.subversion_client._svn('arg1', 'arg2', 'arg3')
 

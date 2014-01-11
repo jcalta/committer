@@ -13,11 +13,9 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from fluentmock import UnitTests, when, verify
+from fluentmock import ANY_ARGUMENTS, UnitTests, when, verify
 
 from committer.vcsclients import subversion
-
-ANY_VALUE = 'any value'
 
 
 class SubversionClientTests(UnitTests):
@@ -32,21 +30,21 @@ class SubversionClientTests(UnitTests):
         self.assertEqual('Subversion', self.subversion_client.name)
 
     def test_should_prepend_svn_to_given_arguments(self):
-        when(self.subversion_client)._svn(ANY_VALUE, ANY_VALUE, ANY_VALUE).then_return(None)
+        when(self.subversion_client)._svn(ANY_ARGUMENTS).then_return(None)
 
         self.subversion_client.commit('This is a commit message.')
 
         verify(self.subversion_client)._svn('commit', '-m', 'This is a commit message.')
 
     def test_should_call_status(self):
-        when(self.subversion_client)._svn(ANY_VALUE).then_return(None)
+        when(self.subversion_client)._svn(ANY_ARGUMENTS).then_return(None)
 
         self.subversion_client.status()
 
         verify(self.subversion_client)._svn('status')
 
     def test_should_call_update(self):
-        when(self.subversion_client)._svn(ANY_VALUE).then_return(None)
+        when(self.subversion_client)._svn(ANY_ARGUMENTS).then_return(None)
 
         self.subversion_client.update()
 
@@ -84,7 +82,7 @@ class SubversionClientTests(UnitTests):
         verify(subversion).check_if_is_executable('svn', '--version', '--quiet')
 
     def test_should_execute_svn_using_arguments(self):
-        when(subversion).execute_command(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE).then_return(None)
+        when(subversion).execute_command(ANY_ARGUMENTS).then_return(None)
 
         self.subversion_client._svn('arg1', 'arg2', 'arg3')
 

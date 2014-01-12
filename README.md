@@ -1,4 +1,4 @@
-# committer
+# _committer_
 
 Unified command line interface for *git*, *mercurial* and *subversion*.
 
@@ -14,7 +14,7 @@ Options:
     --version        show version information
 ```
 
-Committer is best used in combination with [ssh keys](https://help.github.com/articles/generating-ssh-keys) or [credential-cache](http://git-scm.com/docs/git-credential-cache).
+_committer_ is best used in combination with [ssh keys](https://help.github.com/articles/generating-ssh-keys) or [credential-cache](http://git-scm.com/docs/git-credential-cache).
 
 [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 [![Coverage](https://coveralls.io/repos/aelgru/committer/badge.png?branch=master)](https://coveralls.io/r/aelgru/committer)
@@ -115,7 +115,7 @@ If you do *not* like the workflow **committer** implies, you may be interested i
 
 ## License
 
-Committer is licensed under the
+_committer_ is licensed under the
 [Apache License, Version 2.0](https://raw.github.com/aelgru/committer/master/src/main/python/committer/LICENSE.txt)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/aelgru/committer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

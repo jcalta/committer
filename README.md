@@ -14,6 +14,8 @@ Options:
     --version        show version information
 ```
 
+Committer is best used in combination with [ssh keys](https://help.github.com/articles/generating-ssh-keys) or [credential-cache](http://git-scm.com/docs/git-credential-cache).
+
 [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 [![Coverage](https://coveralls.io/repos/aelgru/committer/badge.png?branch=master)](https://coveralls.io/r/aelgru/committer)
 [![PyPI version](https://badge.fury.io/py/committer.png)](http://badge.fury.io/py/committer)

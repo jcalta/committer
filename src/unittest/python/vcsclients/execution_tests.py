@@ -96,7 +96,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution, never).print_text(stdout)
+        verify(committer.execution.LOGGER, never).info(stdout)
 
     def test_should_print_stderr_when_stderr_is_not_empty_string(self):
         stdout = 'stdout'
@@ -125,7 +125,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution, never).print_error(stderr)
+        verify(committer.execution.LOGGER, never).error(stderr)
 
     def test_should_exit_when_execution_of_command_failed(self):
 

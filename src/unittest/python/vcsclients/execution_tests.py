@@ -70,7 +70,7 @@ class ExecuteCommandTests(unittest.TestCase):
         self.assertEqual(stderr, actual['stderr'])
         self.assertEqual(0, actual['returncode'])
 
-    def test_should_print_stdout_when_stdout_is_not_empty_string(self):
+    def test_should_log_stdout_when_stdout_is_not_empty_string(self):
         stdout = 'stdout'
         stderr = 'stderr'
         process_mock = mock()
@@ -84,7 +84,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
         verify(committer.execution.LOGGER).info(stdout)
 
-    def test_should_not_print_stdout_when_stdout_is_empty_string(self):
+    def test_should_not_log_stdout_when_stdout_is_empty_string(self):
         stdout = ''
         stderr = 'stderr'
         process_mock = mock()
@@ -98,7 +98,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
         verify(committer.execution.LOGGER, never).info(stdout)
 
-    def test_should_print_stderr_when_stderr_is_not_empty_string(self):
+    def test_should_log_stderr_when_stderr_is_not_empty_string(self):
         stdout = 'stdout'
         stderr = 'stderr'
         process_mock = mock()
@@ -112,7 +112,7 @@ class ExecuteCommandTests(unittest.TestCase):
 
         verify(committer.execution.LOGGER).error(stderr)
 
-    def test_should_not_print_stderr_when_stderr_is_empty_string(self):
+    def test_should_not_log_stderr_when_stderr_is_empty_string(self):
 
         stdout = 'stdout'
         stderr = ''

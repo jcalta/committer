@@ -25,12 +25,14 @@ from committer.execution import check_if_is_executable, execute_command
 
 class ExecuteCommandTests(UnitTests):
 
+    def set_up(self):
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+
     def test_should_call_command_in_subprocess(self):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command')
@@ -42,8 +44,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -57,8 +57,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         actual = execute_command('command', '1', '2', '3')
@@ -73,8 +71,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -87,8 +83,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -101,8 +95,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -116,8 +108,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -131,8 +121,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 123
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
@@ -146,8 +134,6 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 123
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
         when(execution).Popen(ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 

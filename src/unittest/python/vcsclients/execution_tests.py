@@ -31,7 +31,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command')
 
@@ -44,7 +44,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
@@ -59,7 +59,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         actual = execute_command('command', '1', '2', '3')
 
@@ -75,7 +75,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
@@ -89,7 +89,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
@@ -103,7 +103,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
@@ -118,7 +118,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
@@ -133,7 +133,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).Popen(ANY_ARGUMENTS).then_return(process_mock)
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
         execute_command('command', '1', '2', '3')
@@ -148,7 +148,7 @@ class ExecuteCommandTests(UnitTests):
         when(process_mock).communicate().then_return((stdout, stderr))
         when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
         when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
+        when(execution).Popen(ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
         execute_command('command', '1', '2', '3')

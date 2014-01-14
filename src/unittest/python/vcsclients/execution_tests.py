@@ -18,7 +18,7 @@ import subprocess
 from mock import Mock
 from fluentmock import ANY_ARGUMENTS, NEVER, UnitTests, when, verify
 
-import committer
+from committer import execution
 
 from committer.execution import check_if_is_executable, execute_command
 
@@ -29,26 +29,26 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command')
 
-        verify(committer.execution).Popen(['command'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        verify(execution).Popen(['command'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_call_command_using_given_arguments(self):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return(('stdout', 'stderr'))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        verify(execution).Popen(['command', '1', '2', '3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         verify(process_mock).communicate()
 
     def test_should_return_stdout_and_stderr_and_returncode_when_executing_command(self):
@@ -57,9 +57,9 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         actual = execute_command('command', '1', '2', '3')
 
@@ -73,13 +73,13 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution.LOGGER).info(stdout)
+        verify(execution.LOGGER).info(stdout)
 
     def test_should_not_log_stdout_when_stdout_is_empty_string(self):
         stdout = ''
@@ -87,13 +87,13 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution.LOGGER, NEVER).info(stdout)
+        verify(execution.LOGGER, NEVER).info(stdout)
 
     def test_should_log_stderr_when_stderr_is_not_empty_string(self):
         stdout = 'stdout'
@@ -101,13 +101,13 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution.LOGGER).error(stderr)
+        verify(execution.LOGGER).error(stderr)
 
     def test_should_not_log_stderr_when_stderr_is_empty_string(self):
 
@@ -116,13 +116,13 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 0
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution.LOGGER, NEVER).error(stderr)
+        verify(execution.LOGGER, NEVER).error(stderr)
 
     def test_should_exit_when_execution_of_command_failed(self):
 
@@ -131,14 +131,14 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 123
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
-        when(committer.execution).exit(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_return(process_mock)
+        when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution).exit(1)
+        verify(execution).exit(1)
 
     def test_should_catch_os_error_and_exit_when_popen_raises_exception(self):
         stdout = 'stdout'
@@ -146,43 +146,43 @@ class ExecuteCommandTests(UnitTests):
         process_mock = Mock()
         process_mock.returncode = 123
         when(process_mock).communicate().then_return((stdout, stderr))
-        when(committer.execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
-        when(committer.execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
-        when(committer.execution).exit(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).info(ANY_ARGUMENTS).then_return(None)
+        when(execution.LOGGER).error(ANY_ARGUMENTS).then_return(None)
+        when(execution).Popen(ANY_ARGUMENTS, stdout=ANY_ARGUMENTS, stderr=ANY_ARGUMENTS, stdin=ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
+        when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
         execute_command('command', '1', '2', '3')
 
-        verify(committer.execution).exit(1)
+        verify(execution).exit(1)
 
 
 class CheckIfIsExecutableTests(UnitTests):
 
     def test_should_return_true_when_command_is_executable(self):
-        when(committer.execution).check_call(ANY_ARGUMENTS).then_return(None)
+        when(execution).check_call(ANY_ARGUMENTS).then_return(None)
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
 
         self.assertTrue(actual_result)
-        verify(committer.execution).check_call(['command', '--version', '--quiet'])
+        verify(execution).check_call(['command', '--version', '--quiet'])
 
     def test_should_return_false_when_command_is_not_executable(self):
-        when(committer.execution).check_call(ANY_ARGUMENTS).then_raise(subprocess.CalledProcessError(127, 'command'))
+        when(execution).check_call(ANY_ARGUMENTS).then_raise(subprocess.CalledProcessError(127, 'command'))
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
 
         self.assertFalse(actual_result)
-        verify(committer.execution).check_call(['command', '--version', '--quiet'])
+        verify(execution).check_call(['command', '--version', '--quiet'])
 
     def test_should_return_false_when_trying_to_execute_command_fails(self):
-        when(committer.execution).check_call(ANY_ARGUMENTS).then_raise(OSError())
+        when(execution).check_call(ANY_ARGUMENTS).then_raise(OSError())
 
         actual_result = check_if_is_executable('command', '--version', '--quiet')
 
         self.assertFalse(actual_result)
-        verify(committer.execution).check_call(['command', '--version', '--quiet'])
+        verify(execution).check_call(['command', '--version', '--quiet'])
 
     def test_should_raise_exception_when_during_check_something_unexpected_happens(self):
-        when(committer.execution).check_call(ANY_ARGUMENTS).then_raise(Exception('Not executable'))
+        when(execution).check_call(ANY_ARGUMENTS).then_raise(Exception('Not executable'))
 
         self.assertRaises(Exception, check_if_is_executable, (['command', '--version', '--quiet']))

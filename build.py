@@ -47,7 +47,6 @@ default_task = ['analyze', 'publish']
 def set_properties(project):
     project.build_depends_on('coverage')
     project.build_depends_on('mock')
-    project.build_depends_on('mockito-without-hardcoded-distribute-version')
     project.build_depends_on('fluentmock')
     project.build_depends_on('wheel')
 

@@ -58,8 +58,7 @@ def set_properties(project):
 
     project.include_file('committer', 'LICENSE.txt')
 
-    project.get_property('filter_resources_glob').append(
-        '**/committer/__init__.py')
+    project.get_property('filter_resources_glob').append('**/committer/__init__.py')
 
     project.set_property('flake8_verbose_output', True)
     project.set_property('flake8_break_build', True)

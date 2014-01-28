@@ -114,8 +114,3 @@ svn checkout https://github.com/aelgru/committer
 If you do *not* like the workflow **committer** implies, you may be interested in
 [hg-git](http://hg-git.github.com/) or
 [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
-
-## License
-
-_committer_ is licensed under the
-[Apache License, Version 2.0](https://raw.github.com/aelgru/committer/master/src/main/python/committer/LICENSE.txt)

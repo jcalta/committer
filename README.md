@@ -19,6 +19,7 @@ _committer_ is best used in combination with [ssh keys](https://help.github.com/
 [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 [![Coverage](https://coveralls.io/repos/aelgru/committer/badge.png?branch=master)](https://coveralls.io/r/aelgru/committer)
 [![PyPI version](https://badge.fury.io/py/committer.png)](http://badge.fury.io/py/committer)
+[![Downloads](https://pypip.in/d/committer/badge.png)](https://pypi.python.org/pypi/committer)
 [![License](https://pypip.in/license/committer/badge.png)](https://raw.github.com/aelgru/committer/master/src/main/python/committer/LICENSE.txt)
 
 ## How to Install

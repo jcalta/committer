@@ -1,4 +1,4 @@
-# _committer_
+# _committer_ [![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
 Unified command line interface for *git*, *mercurial* and *subversion*.
 
@@ -16,7 +16,6 @@ Options:
 
 _committer_ is best used in combination with [ssh keys](https://help.github.com/articles/generating-ssh-keys) or [credential-cache](http://git-scm.com/docs/git-credential-cache).
 
-[![Build Status](https://secure.travis-ci.org/aelgru/committer.png?branch=master)](http://travis-ci.org/aelgru/committer)
 
 
 ## How to Install
@@ -111,8 +110,3 @@ svn checkout https://github.com/aelgru/committer
 If you do *not* like the workflow **committer** implies, you may be interested in
 [hg-git](http://hg-git.github.com/) or
 [git-svn](http://www.kernel.org/pub/software/scm/git/docs/git-svn.html).
-
-
-## License
-
-_committer_ is license under the [Apache License](https://raw.github.com/aelgru/committer/master/src/main/python/committer/LICENSE.txt)

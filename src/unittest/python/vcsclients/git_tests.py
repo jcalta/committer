@@ -77,7 +77,7 @@ class GitClientTests(UnitTests):
         verify(git.path).isdir('.git')
 
     def test_should_return_value_of_check(self):
-        when(git).check_if_is_executable(ANY_ARGUMENTS, ANY_ARGUMENTS).then_return('value from check')
+        when(git).check_if_is_executable(ANY_ARGUMENTS).then_return('value from check')
 
         actual_return_value = self.git_client.is_executable()
 
@@ -85,7 +85,7 @@ class GitClientTests(UnitTests):
         verify(git).check_if_is_executable('git', '--version')
 
     def test_should_execute_git_using_arguments(self):
-        when(git).execute_command(ANY_ARGUMENTS, ANY_ARGUMENTS, ANY_ARGUMENTS, ANY_ARGUMENTS).then_return(None)
+        when(git).execute_command(ANY_ARGUMENTS).then_return(None)
 
         self.git_client._git('arg1', 'arg2', 'arg3')
 
@@ -94,7 +94,7 @@ class GitClientTests(UnitTests):
     def test_should_return_stdout_and_stderr_from_execution(self):
         stdout = 'stdout'
         stderr = 'stderr'
-        when(git).execute_command(ANY_ARGUMENTS, ANY_ARGUMENTS, ANY_ARGUMENTS, ANY_ARGUMENTS).then_return((stdout, stderr))
+        when(git).execute_command(ANY_ARGUMENTS).then_return((stdout, stderr))
 
         actual_stdout, actual_stderr = self.git_client._git('arg1', 'arg2', 'arg3')
 

@@ -65,8 +65,7 @@ class ExecuteCommandTests(UnitTests):
 
     def test_should_log_stdout_when_stdout_is_not_empty_string(self):
         stdout = 'stdout'
-        stderr = 'stderr'
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return((stdout, 'stderr'))
         when(execution).Popen(ANY_ARGUMENTS).then_return(self.process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -75,8 +74,7 @@ class ExecuteCommandTests(UnitTests):
 
     def test_should_not_log_stdout_when_stdout_is_empty_string(self):
         stdout = ''
-        stderr = 'stderr'
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return((stdout, 'stderr'))
         when(execution).Popen(ANY_ARGUMENTS).then_return(self.process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -84,9 +82,9 @@ class ExecuteCommandTests(UnitTests):
         verify(execution.LOGGER, NEVER).info(stdout)
 
     def test_should_log_stderr_when_stderr_is_not_empty_string(self):
-        stdout = 'stdout'
+
         stderr = 'stderr'
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return(('stdout', stderr))
         when(execution).Popen(ANY_ARGUMENTS).then_return(self.process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -95,9 +93,8 @@ class ExecuteCommandTests(UnitTests):
 
     def test_should_not_log_stderr_when_stderr_is_empty_string(self):
 
-        stdout = 'stdout'
         stderr = ''
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return(('stdout', stderr))
         when(execution).Popen(ANY_ARGUMENTS).then_return(self.process_mock)
 
         execute_command('command', '1', '2', '3')
@@ -106,10 +103,8 @@ class ExecuteCommandTests(UnitTests):
 
     def test_should_exit_when_execution_of_command_failed(self):
 
-        stdout = 'stdout'
-        stderr = ''
         self.process_mock.returncode = 123
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return(('stdout', ''))
         when(execution).Popen(ANY_ARGUMENTS).then_return(self.process_mock)
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 
@@ -118,10 +113,8 @@ class ExecuteCommandTests(UnitTests):
         verify(execution).exit(1)
 
     def test_should_catch_os_error_and_exit_when_popen_raises_exception(self):
-        stdout = 'stdout'
-        stderr = ''
         self.process_mock.returncode = 123
-        when(self.process_mock).communicate().then_return((stdout, stderr))
+        when(self.process_mock).communicate().then_return(('stdout', ''))
         when(execution).Popen(ANY_ARGUMENTS).then_raise(OSError("[Errno 2] No such file or directory"))
         when(execution).exit(ANY_ARGUMENTS).then_return(None)
 

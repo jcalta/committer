@@ -7,7 +7,7 @@ python:
   - "pypy"
 
 install:
-  - pip install pybuilder coveralls
+  - pip install pybuilder
 
 script:
   - pyb install_dependencies analyze publish --verbose
